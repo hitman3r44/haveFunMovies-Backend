@@ -59,7 +59,14 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin' => \App\Http\Middleware\AuthenticateAdmin::class,
+        'moderator' => \App\Http\Middleware\AuthenticateModerator::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'guestadmin' => \App\Http\Middleware\RedirectIfAuthenticatedAdmin::class,
+        'guestmoderator' => \App\Http\Middleware\RedirectIfAuthenticatedModerator::class,
+        'UserApiVal' => \App\Http\Middleware\UserApiValidation::class,
+        'cors' => \App\Http\Middleware\CORS::class,
+        'PaypalCheck' => \App\Http\Middleware\PaypalCheckMiddleware::class,
     ];
 
     /**
