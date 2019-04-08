@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'moderator' => [
+            'driver' => 'session',
+            'provider' => 'moderators',
+        ],
     ],
 
     /*
@@ -69,6 +79,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Model\Admin::class,
+        ],
+
+        'moderators' => [
+            'driver' => 'eloquent',
+            'model' => App\Model\Moderator::class,
         ],
 
         // 'users' => [
@@ -95,6 +115,19 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'email' => 'admin.auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'moderators' => [
+            'provider' => 'moderators',
+            'email' => 'moderator.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
