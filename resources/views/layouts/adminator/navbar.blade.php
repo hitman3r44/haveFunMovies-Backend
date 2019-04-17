@@ -6,7 +6,8 @@
                     <a class="sidebar-link td-n" href="{{route('admin.dashboard')}}" class="td-n">
                         <div class="peers ai-c fxw-nw">
                             <div class="peer">
-                                <div class="logo"><img
+                                <div class="logo">
+                                    <img
                                             src="https://colorlib.com/polygon/adminator/assets/static/images/logo.png"
                                             alt=""></div>
                             </div>
