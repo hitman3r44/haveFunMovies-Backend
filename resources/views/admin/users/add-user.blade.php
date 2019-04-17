@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-
+{{--@extends('layouts.admin')--}}
+@extends('layouts.adminator.master')
 @section('title', tr('add_user'))
 
 @section('content-header', tr('add_user'))

@@ -294,5 +294,24 @@ class SampleController extends Controller
             return "http://placehold.it/{$width}x{$height}";
         }
     }
+
+    public function newDashboard(){
+        return view('newTemplate.new_dashboard');
+    }
+    public function newForm(){
+        return view('newTemplate.new_form');
+    }
+    public function newChart(){
+        return view('newTemplate.new_chartjs');
+    }
+    public function uiElement(){
+        return view('newTemplate.new_uiElement');
+    }
+    public function datatable(){
+        return view('newTemplate.new_datatable');
+    }
+    public function signin(){
+        return view('newTemplate.new_signin');
+    }
 	
 }

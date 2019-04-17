@@ -38,6 +38,13 @@ Route::post('/compress/image' , 'SampleController@getImageThumbnail');
 
 Route::get('/sendpush' , 'SampleController@send_push_notification');
 
+Route::get('new/dashboard' , 'SampleController@newDashboard');
+Route::get('new/form' , 'SampleController@newForm');
+Route::get('new/chart' , 'SampleController@newChart');
+Route::get('new/ui-element' , 'SampleController@uiElement');
+Route::get('new/data-table' , 'SampleController@datatable');
+Route::get('new/signin' , 'SampleController@signin');
+
 /*********************** TEST ROUTES *********************/
 
 

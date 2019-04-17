@@ -24,6 +24,24 @@
               
             </li>
 
+
+            <li class="treeview" id="new_template">
+
+                <a href="#">
+                    <i class="fa fa-user"></i> <span>New Template</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li id="add-user"><a href="{{url('new/dashboard')}}"><i class="fa fa-circle-o"></i>DashBoard</a></li>
+                    <li id="add-user"><a href="{{url('new/form')}}"><i class="fa fa-circle-o"></i>Form</a></li>
+                    <li id="add-user"><a href="{{url('new/chart')}}"><i class="fa fa-circle-o"></i>Chart Js</a></li>
+                    <li id="add-user"><a href="{{url('new/ui-element')}}"><i class="fa fa-circle-o"></i>UI Elements</a></li>
+                    <li id="add-user"><a href="{{url('new/data-table')}}"><i class="fa fa-circle-o"></i>Datatable</a></li>
+                    <li id="add-user"><a href="{{url('new/signin')}}"><i class="fa fa-circle-o"></i>Sign in</a></li>
+                </ul>
+
+            </li>
+
             <li class="treeview" id="users">
 
                 <a href="#">
