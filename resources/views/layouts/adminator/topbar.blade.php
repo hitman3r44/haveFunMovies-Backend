@@ -20,7 +20,7 @@
                             <li>
                                 <a href="#" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="../../../randomuser.me/api/portraits/men/1.jpg"
+                                                                 src="https://randomuser.me/api/portraits/men/1.jpg"
                                                                  alt=""></div>
                                     <div class="peer peer-greed">
                                                 <span><span class="fw-500">John Doe</span> <span class="c-grey-600">liked your <span
@@ -34,7 +34,7 @@
                             <li>
                                 <a href="#" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="../../../randomuser.me/api/portraits/men/2.jpg"
+                                                                 src="https://randomuser.me/api/portraits/men/2.jpg"
                                                                  alt=""></div>
                                     <div class="peer peer-greed">
                                                 <span><span class="fw-500">Moo Doe</span> <span class="c-grey-600">liked your <span
@@ -48,7 +48,7 @@
                             <li>
                                 <a href="#" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="../../../randomuser.me/api/portraits/men/3.jpg"
+                                                                 src="https://randomuser.me/api/portraits/men/3.jpg"
                                                                  alt=""></div>
                                     <div class="peer peer-greed">
                                                 <span><span class="fw-500">Lee Doe</span> <span class="c-grey-600">commented on your <span
@@ -76,7 +76,7 @@
                             <li>
                                 <a href="#" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="../../../randomuser.me/api/portraits/men/1.jpg"
+                                                                 src="https://randomuser.me/api/portraits/men/1.jpg"
                                                                  alt=""></div>
                                     <div class="peer peer-greed">
                                         <div>
@@ -96,7 +96,7 @@
                             <li>
                                 <a href="#" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="../../../randomuser.me/api/portraits/men/2.jpg"
+                                                                 src="https://randomuser.me/api/portraits/men/2.jpg"
                                                                  alt=""></div>
                                     <div class="peer peer-greed">
                                         <div>
@@ -116,7 +116,7 @@
                             <li>
                                 <a href="#" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
                                     <div class="peer mR-15"><img class="w-3r bdrs-50p"
-                                                                 src="../../../randomuser.me/api/portraits/men/3.jpg"
+                                                                 src="https://randomuser.me/api/portraits/men/3.jpg"
                                                                  alt=""></div>
                                     <div class="peer peer-greed">
                                         <div>
@@ -142,7 +142,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10"><img class="w-2r bdrs-50p"
-                                                 src="../../../randomuser.me/api/portraits/men/10.jpg" alt="">
+                                                 src="https://randomuser.me/api/portraits/men/10.jpg" alt="">
                     </div>
                     <div class="peer"><span class="fsz-sm c-grey-900">John Doe</span></div>
                 </a>

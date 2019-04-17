@@ -296,7 +296,7 @@ class SampleController extends Controller
     }
 
     public function newDashboard(){
-        return view('newTemplate.new_dashboard');
+        return view('newTemplate.delete');
     }
     public function newForm(){
         return view('newTemplate.new_form');

@@ -32,7 +32,7 @@
         }
     </style>
     @yield('styles')
-    <link href="https://colorlib.com/polygon/adminator/style.css" rel="stylesheet">
+    <link href="{{ asset('adminator/css/style.css') }}" rel="stylesheet">
 </head>
 <body class="app">
 <div id="loader">
@@ -61,9 +61,8 @@
         @include('layouts.adminator.footer')
     </div>
 </div>
-<script type="text/javascript" src="https://colorlib.com/polygon/adminator/vendor.js"></script>
-<script type="text/javascript" src="https://colorlib.com/polygon/adminator/bundle.js"></script>
-<script src="ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="|49"
-        defer=""></script>
+<script type="text/javascript" src="{{ asset('adminator/js/vendor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('adminator/js/bundle.js') }}"></script>
+{{--<script src="ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="|49" defer=""></script>--}}
 </body>
 </html>

@@ -179,7 +179,9 @@ class AdminController extends Controller
 
         }
 
-        return view('admin.dashboard.dashboard')->withPage('dashboard')
+//        return view('admin.dashboard.dashboard')
+        return view('newTemplate.new_dashboard')
+                    ->with('page','dashboard')
                     ->with('sub_page','')
                     ->with('user_count' , $user_count)
                     ->with('video_count' , $video_count)
@@ -368,7 +370,8 @@ class AdminController extends Controller
 
     public function users_create() {
 
-        return view('admin.users.add-user')->with('page' , 'users')->with('sub_page','add-user');
+//        return view('admin.users.add-user')->with('page' , 'users')->with('sub_page','add-user');
+        return view('newTemplate.delete')->with('page' , 'users')->with('sub_page','add-user');
     }
 
     /**
