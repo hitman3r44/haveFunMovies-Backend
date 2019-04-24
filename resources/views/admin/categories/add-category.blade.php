@@ -1,45 +1,46 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('add_category'))
 
-@section('content-header', tr('add_category'))
-
-@section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.categories')}}"><i class="fa fa-suitcase"></i> {{tr('categories')}}</a></li>
-    <li class="active">{{tr('add_category')}}</li>
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_category') }}</h4>
 @endsection
 
-@section('styles')
-
-    <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
-
+@section('breadcrumb')
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a> >
+    </li>
+    <li class="list-inline-item"><a href="{{route('admin.categories')}}"><i
+                    class="fa fa-suitcase"></i> {{tr('categories')}}</a> >
+    </li>
+    <li class="list-inline-item active">{{tr('add_category')}}</li>
 @endsection
 
 @section('content')
 
-@include('notification.notify')
-
-    <div class="row">
-
+    <div class="row gap-20">
         <div class="col-md-10">
-
-            <div class="box box-primary">
-
-                <div class="box-header label-primary">
-                    <b style="font-size:18px;">{{tr('add_category')}}</b>
-                    <a href="{{route('admin.categories')}}" class="btn btn-default pull-right">{{tr('categories')}}</a>
+            <div class="bgc-white p-20 bd">
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{tr('add_category')}}</b></h6>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{route('admin.categories')}}"
+                           class="btn btn-default pull-right">{{tr('categories')}}</a>
+                    </div>
                 </div>
-
-                <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST" enctype="multipart/form-data" role="form">
+                <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
+                      enctype="multipart/form-data" role="form">
 
                     <div class="box-body">
 
                         <div class="form-group">
                             <label for="name" class="col-sm-1 control-label">*{{tr('name')}}</label>
                             <div class="col-sm-10">
-                                <input type="text" required class="form-control" 
-                                  pattern = "[a-zA-Z0-9\s\-\.]{2,100}" title="{{tr('only_alphanumeric')}}" id="name" name="name" placeholder="{{tr('category_name')}}">
+                                <input type="text" required class="form-control"
+                                       pattern="[a-zA-Z0-9\s\-\.]{2,100}" title="{{tr('only_alphanumeric')}}" id="name"
+                                       name="name" placeholder="{{tr('category_name')}}">
                             </div>
                         </div>
 
@@ -50,16 +51,16 @@
 
                                 <img id="image_preview" style="width: 100px;height: 100px;display: none;">
 
-
-                                <input type="file" required accept="image/jpeg,image/png" id="picture" name="picture" placeholder="{{tr('picture')}}" onchange="loadFile(this,'image_preview')">
+                                <input type="file" required accept="image/jpeg,image/png" id="picture" name="picture"
+                                       placeholder="{{tr('picture')}}" onchange="loadFile(this,'image_preview')">
                                 <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
                             </div>
                         </div>
 
-                        <div class="checkbox">
-                            <label for="picture" class="col-sm-1 control-label"></label>
-                            <label>
-                                <input type="checkbox" name="is_series" value="1" class="minimal-red"> {{tr('is_series')}}
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="is_series" value="1"
+                                       class="form-check-input"> {{tr('is_series')}}
                             </label>
                         </div>
 
@@ -74,7 +75,7 @@
                         @endif
                     </div>
                 </form>
-            
+
             </div>
 
         </div>
@@ -85,17 +86,15 @@
 
 @section('scripts')
 
-   <script src="{{asset('admin-css/plugins/iCheck/icheck.min.js')}}"></script>
-
     <script type="text/javascript">
 
-        function loadFile(event,id){
+        function loadFile(event, id) {
 
-            $('#'+id).show();
+            $('#' + id).show();
 
             var reader = new FileReader();
 
-            reader.onload = function(){
+            reader.onload = function () {
 
                 var output = document.getElementById(id);
 
@@ -106,5 +105,7 @@
         }
 
     </script>
+
+
 
 @endsection

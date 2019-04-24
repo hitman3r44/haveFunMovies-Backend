@@ -1248,7 +1248,6 @@ class AdminController extends Controller
 
     public function add_category_process(Request $request)
     {
-
         if ($request->id != '') {
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',

@@ -154,8 +154,9 @@
                     <li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
                                     class="ti-email mR-10"></i> <span>Messages</span></a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
-                                    class="ti-power-off mR-10"></i> <span>Logout</span></a></li>
+                    <li>
+                        <a href="{{route('admin.logout')}}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
+                                    class="ti-power-off mR-10"></i> <span>{{tr('sign_out')}}</span></a></li>
                 </ul>
             </li>
         </ul>

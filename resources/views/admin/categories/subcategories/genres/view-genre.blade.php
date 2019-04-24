@@ -1,45 +1,39 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('view_genre'))
 
-@section('content-header', tr('view_genre'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('view_genre') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.categories')}}"><i class="fa fa-suitcase"></i>{{tr('categories')}}</a></li>
-    <li><a href="{{route('admin.sub_categories', array('category' => $genre->category_id))}}"><i class="fa fa-suitcase"></i> {{tr('sub_categories')}}</a></li>
-    <li><a href="{{route('admin.genres' , array('sub_category' => $genre->sub_category_id))}}"><i class="fa fa-suitcase"></i> {{tr('genres')}}</a></li>
-    <li class="active">{{tr('view_genre')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.categories')}}"><i class="fa fa-suitcase"></i>{{tr('categories')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.sub_categories', array('category' => $genre->category_id))}}"><i class="fa fa-suitcase"></i> {{tr('sub_categories')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.genres' , array('sub_category' => $genre->sub_category_id))}}"><i class="fa fa-suitcase"></i> {{tr('genres')}}</a></li>
+    <li class="list-inline-item active">{{tr('view_genre')}}</li>
 @endsection 
 
 @section('content')
 
-    @include('notification.notify')
+    <div class="row gap-20">
+        <div class="col-md-12">
+            <div class="bgc-white p-20 bd">
 
-    <div class="row">
+                <div class="row bgc-grey-600 p-10">
 
-        <div class="col-lg-12">
-
-            <div class="box box-widget">
-
-                <div class="box-header with-border">
-                    <div class="user-block">
-                        <span style="margin-left:0px" class="username"><a href="#">{{$genre->genre_name}}</a></span>
-                        <span style="margin-left:0px" class="description">{{tr('created_time')}} - {{$genre->genre_date}}</span>
+                    <div class="col-md-6 text-white">
+                        <h3>{{$genre->genre_name}} <small>{{tr('created_time')}} - {{$genre->genre_date}}</small></h3>
                     </div>
-                
-                    <div class="box-tools">
-
+                    <div class="col-md-6">
                         <a href="{{route('admin.edit.edit_genre' , array('sub_category_id' => $genre->sub_category_id,'genre_id' => $genre->genre_id))}}">
-                        <button class="btn btn-success btn-sm" type="button">
-                            <i class="fa fa-pencil"></i>
-                        </button>
+                            <button class="btn btn-success btn-sm" type="button">
+                                <i class="fa fa-pencil"></i>
+                            </button>
                         </a>
                     </div>
 
-                </div>
-
-                <div class="box-body">
+                <div class="mt-5">
 
                     <div class="row">
 
