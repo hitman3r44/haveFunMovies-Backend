@@ -177,7 +177,7 @@ class AdminController extends Controller
 
         if (Setting::get('track_user_mail')) {
 
-            user_track("StreamHash - New Visitor");
+            user_track("Have Fun Movies - New Visitor");
 
         }
 
@@ -579,7 +579,7 @@ class AdminController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - New User Created");
+                    user_track("Have Fun Movies - New User Created");
 
                 }
 
@@ -1088,7 +1088,7 @@ class AdminController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - Moderator Created");
+                    user_track("Have Fun Movies - Moderator Created");
 
                 }
 
@@ -1297,7 +1297,7 @@ class AdminController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - Category Created");
+                    user_track("Have Fun Movies - Category Created");
 
                 }
 
@@ -1531,7 +1531,7 @@ class AdminController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - Sub category Created");
+                    user_track("Have Fun Movies - Sub category Created");
 
                 }
 
@@ -1740,7 +1740,7 @@ class AdminController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - Genre Created");
+                    user_track("Have Fun Movies - Genre Created");
 
                 }
                 return back()->with('flash_success', $message);

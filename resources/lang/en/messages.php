@@ -365,7 +365,7 @@ return array(
 
 	// Admin Login
 
-	'welcome'	=>	'Welcome to StreamHash. Please sign in to your account',
+	'welcome'	=>	'Welcome to Have Fun Movies. Please sign in to your account',
 	'email_add'	=>	'E-mail Address',
 	
 	'password_reset_msg'	=>	'Enter a new password and log in to your account',
@@ -884,8 +884,8 @@ return array(
 	'help_ques_mark'=>'HELP ?',
 	'any_help'=>'Any Help ?',
 	'enter_streaming_url'=>'Enter Streaming URL',
-	'thanks_for_choosing_streamhash'=>' We would like to thank you for choosing StreamHash. Kudos from our team!!',
-	'any_changes_your_site'=>' If you want to make any changes to your site, drop a mail to contact@streamhash.com or Skype us @ contact@streamhash.com and we will help you out!',
+	'thanks_for_choosing_streamhash'=>' We would like to thank you for choosing Have Fun Movies. Kudos from our team!!',
+	'any_changes_your_site'=>' If you want to make any changes to your site, drop a mail to contact@havefunmovies.com or Skype us @ contact@streamhash.com and we will help you out!',
 	'help_notes_streamhash'=>'We have this team of innate developers and dedicated team of support to sort out the things for your benefits. Tell us what you like about StreamHash and we may suggest you the best solution for you :)',
 	'cheers'=>'Cheers!',
 	'please_enter_plan_month'=>'Please enter the plan months. Max : 12 months',

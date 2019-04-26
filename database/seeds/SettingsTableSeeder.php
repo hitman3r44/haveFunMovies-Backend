@@ -17,7 +17,7 @@ class SettingsTableSeeder extends Seeder
         return [
             [
                 'key' => 'site_name',
-                'value' => 'Sumit Stream',
+                'value' => 'Have Fun Movies',
             ],
 
             [

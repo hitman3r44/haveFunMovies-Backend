@@ -20,7 +20,7 @@ class AdminTableSeeder extends Seeder
         return [
             [
                 'name' => 'Admin',
-                'email' => 'admin@streamview.com',
+                'email' => 'admin@havefunmovies.com',
                 'password' => '$2y$10$/AIImUUtykg/QotsMRiMg.0vmUPhgGfiWzJjTNcdsPxq8UaSTSO/6',
                 'picture' => 'http://adminview.streamhash.com/placeholder.png',
                 'description' => '',
@@ -38,7 +38,7 @@ class AdminTableSeeder extends Seeder
             ],
             [
                 'name' => 'Test',
-                'email' => 'test@streamview.com',
+                'email' => 'test@havefunmovies.com',
                 'password' => '$2y$10$GkZURcRtu7GM0JtwAxJF.O/i/D9bzKWkwtAQYj/D.oXXUrVuCpL6q',
                 'picture' => 'http://adminview.streamhash.com/placeholder.png',
                 'description' => '',
