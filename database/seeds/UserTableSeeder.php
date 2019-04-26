@@ -63,7 +63,7 @@ class UserTableSeeder extends Seeder
             ],
             [
                 'name' => 'Test',
-                'email' => 'test@havefunmovies.com',
+                'email' => 'test@streamview.com',
                 'password' => '$2y$10$3lXNGwoYVCeFDOJEVrxBbOZDdXKeRJX3tilFaaRuT8KAVFtIkTtL6',
                 'picture' => 'http://adminview.streamhash.com/placeholder.png',
                 'token' => '2y10qLbSkXUiOMirj08xa48psubBoVg6lKIoRk5vEASIgDpsgCpRUUm',
