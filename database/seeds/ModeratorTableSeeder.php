@@ -19,7 +19,7 @@ class ModeratorTableSeeder extends Seeder
         return [
             [
                 'name' => 'Moderator',
-                'email' => 'moderator@streamview.com',
+                'email' => 'moderator@havefunmovies.com',
                 'password' => '$2y$10$OTaCczW9Y8/2TsWA6mHeU.Oj/mhTwz9yLezkh4V7PKUowXNwuORSW',
                 'token' => '2y10uc5K476dvJjwoHK5PhDu9xNHuaKySMPyHQTxiexJiELTeAL59O',
                 'token_expiry' => '1545153884',

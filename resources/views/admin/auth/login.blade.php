@@ -1,85 +1,62 @@
-@extends('layouts.admin.focused')
+@extends('layouts.adminator.focused')
 
 @section('title', tr('login'))
 
 <style type="text/css">
-body {
-    background: #000 !important; 
+    body {
+        background: #000 !important;
 
-}
+    }
 </style>
 
 @section('content')
 
-    <div class="login-box-body" style="height:275px;">
+    <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
+    <form role="form" method="POST" action="{{ url('/admin/login') }}">
+        {{ csrf_field() }}
+        <input type="hidden" name="timezone" value="" id="userTimezone">
 
+        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+            <label class="text-normal text-dark">Username</label>
+            <input type="email" class="form-control " value="" name="email" required placeholder="{{tr('email')}}">
 
-        <form class="form-layout" role="form" method="POST" action="{{ url('/admin/login') }}">
-            {{ csrf_field() }}
+            @if ($errors->has('email'))
+                <span class="help-block"> <strong>{{ $errors->first('email') }}</strong> </span>
+            @endif
+        </div>
+        <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
+            <label class="text-normal text-dark">Password</label>
+            <input type="password" class="form-control" value="" required name="password" placeholder="{{tr('password')}}">
 
-            <div class="login-logo">
-               <!-- <a href="{{route('admin.login')}}"><b>{{Setting::get('site_name')}}</b></a> -->
-               <input type="hidden" name="timezone" value="" id="userTimezone">
-            </div>
-
-            <p class="text-center mb30"></p>
-
-            <div class="form-inputs">
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-
-                    <input type="email" class="form-control input-lg" value="{{Setting::get('demo_admin_email')}}" name="email"  required placeholder="{{tr('email')}}">
-
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-
+            @if ($errors->has('password'))
+                <span class="help-block"> <strong>{{ $errors->first('password') }}</strong> </span>
+            @endif
+        </div>
+        <div class="form-group">
+            <div class="peers ai-c jc-sb fxw-nw">
+                <div class="peer">
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </div>
-
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-
-                    <input type="password" class="form-control input-lg" value="{{Setting::get('demo_admin_password')}}" required name="password" placeholder="{{tr('password')}}" >
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-
-                </div>
-
-
             </div>
-
-            <div class="col-md-6 col-md-offset-3">
-                <button class="btn btn-success btn-block mb15" type="submit">
-                    <h5><span><i class="fa fa-btn fa-sign-in"></i> {{tr('login')}}</span></h5>
-                </button>
-            </div>
-
-            <div class="clearfix"></div>
-
-        </form>
-
-    </div>
-
+        </div>
+    </form>
 @endsection
+
 
 @section('scripts')
 
-<script src="{{asset('assets/js/jstz.min.js')}}"></script>
-<script>
-    
-    $(document).ready(function() {
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{{asset('assets/js/jstz.min.js')}}"></script>
+    <script>
 
-        var dMin = new Date().getTimezoneOffset();
-        var dtz = -(dMin/60);
-        // alert(dtz);
-        $("#userTimezone").val(jstz.determine().name());
-    });
+        $(document).ready(function() {
 
-</script>
+            var dMin = new Date().getTimezoneOffset();
+            var dtz = -(dMin/60);
+            // alert(dtz);
+            $("#userTimezone").val(jstz.determine().name());
+        });
 
+    </script>
 @endsection
 

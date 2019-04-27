@@ -301,7 +301,7 @@ return array(
 
 	// Admin Login
 
-	'welcome'	=>	'Welcome to StreamHash. Please sign in to your account +1',
+	'welcome'	=>	'Welcome to Have Fun Movies. Please sign in to your account +1',
 	'email_add'	=>	'E-mail Address +1',
 	
 	'password_reset_msg'	=>	'Enter a new password and log in to your account +1',
