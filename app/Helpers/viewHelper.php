@@ -600,6 +600,13 @@ function get_register_count() {
     return array('total' => $total , 'ios' => $ios_count , 'android' => $android_count , 'web' => $web_count);
 }
 
+function get_percentage($amount, $totalAmount){
+
+    $totalAmount = $totalAmount != 0 ? $totalAmount : 1 ; // otherwise it produce devided by zero exception
+
+    return (100 * $amount) / $totalAmount ;
+}
+
 function last_days($days){
 
   $views = PageCounter::orderBy('created_at','asc')->where('created_at', '>', Carbon::now()->subDays($days))->where('page','home');

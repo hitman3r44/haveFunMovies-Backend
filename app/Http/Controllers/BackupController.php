@@ -385,7 +385,7 @@ class BackupController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - Video Created");
+                    user_track("Have Fun Movies - Video Created");
 
                 }
 
@@ -782,7 +782,7 @@ class BackupController extends Controller
 
                 if (Setting::get('track_user_mail')) {
 
-                    user_track("StreamHash - Updated Video");
+                    user_track("Have Fun Movies - Updated Video");
 
                 }
 
