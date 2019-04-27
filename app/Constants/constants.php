@@ -2,7 +2,7 @@
 
 //Demo User
 
-if(!defined('DEMO_USER')) define('DEMO_USER', 'user@streamview.com');
+if(!defined('DEMO_USER')) define('DEMO_USER', 'user@havefunmovies.com');
 
 if(!defined('NO')) define('NO', 0);
 

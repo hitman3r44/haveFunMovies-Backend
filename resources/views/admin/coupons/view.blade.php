@@ -1,17 +1,19 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title',tr('view_coupon'))
 
-@section('content-header',tr('view_coupon'))
+@section('content-header')
+	<h4 class="c-grey-900 mT-10 mB-30"> {{ tr('view_coupon') }}</h4>
+@endsection
 
 @section('breadcrumb')
 
 
-	<li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+	<li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
 
-	<li><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}}</a></li>
+	<li class="list-inline-item"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}}</a></li>
 
-	<li class="active">{{tr('view_coupon')}}</li>
+	<li class="list-inline-item active">{{tr('view_coupon')}}</li>
 
 @endsection
 

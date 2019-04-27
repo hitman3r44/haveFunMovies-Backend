@@ -47,8 +47,6 @@
     </div>
 </div>
 
-{{--<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>--}}
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 <script>
@@ -104,9 +102,10 @@
     });
 </script>
 
-{{--{!! Setting::get('body_scripts'); !!}--}}
+@yield('scripts')
 
-@yield('script')
+{!! Setting::get('body_scripts'); !!}
+
 </body>
 
 </html>

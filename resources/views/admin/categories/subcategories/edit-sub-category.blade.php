@@ -1,36 +1,40 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('edit_sub_category'))
 
+
 @section('content-header')
-
-    {{tr('edit_sub_category') }} - <span style="color:#1d880c !important">{{$sub_category->name}} </span>
-
-@endsection
+    <h4 class="c-grey-900 mT-10 mB-30">{{tr('edit_sub_category') }} - <span
+                style="color:#1d880c !important">{{$sub_category->name}} </span></h4>
+@endsection class="list-inline-item"
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.categories')}}"><i class="fa fa-suitcase"></i> {{tr('categories')}}</a></li>
-    <li><a href="{{route('admin.sub_categories' , array('category' => $category->id))}}"><i class="fa fa-suitcase"></i> {{tr('sub_categories')}}</a></li>
-    <li class="active"><i class="fa fa-suitcase"></i> {{tr('edit_sub_category')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
+    <li class="list-inline-item"><a href="{{route('admin.categories')}}"><i
+                    class="fa fa-suitcase"></i> {{tr('categories')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.sub_categories' , array('category' => $category->id))}}"><i
+                    class="fa fa-suitcase"></i> {{tr('sub_categories')}}</a></li>
+    <li class="list-inline-item active"><i class="fa fa-suitcase"></i> {{tr('edit_sub_category')}}</li>
 @endsection
 
 @section('content')
 
-@include('notification.notify')
-
-    <div class="row">
-
-        <div class="col-md-8">
-
-            <div class="box box-primary">
-
-                <div class="box-header label-primary">
-                    <b style="font-size:18px;">{{tr('sub_categories')}}</b>
-                    <a href="{{route('admin.add.sub_category' , array('category' => $category->id))}}" class="btn btn-default pull-right">{{tr('add_sub_category')}}</a>
+    <div class="row gap-20">
+        <div class="col-md-10">
+            <div class="bgc-white p-20 bd">
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{tr('sub_categories')}}</b></h6>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{route('admin.add.sub_category' , array('category' => $category->id))}}"
+                           class="btn btn-default pull-right">{{tr('add_sub_category')}}</a>
+                    </div>
                 </div>
 
-                <form class="form-horizontal" action="{{route('admin.save.sub_category')}}" method="POST" enctype="multipart/form-data" role="form">
+                <form class="form-horizontal" action="{{route('admin.save.sub_category')}}" method="POST"
+                      enctype="multipart/form-data" role="form">
 
                     <div class="box-body">
 
@@ -40,14 +44,18 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">*{{tr('name')}}</label>
                             <div class="col-sm-10">
-                                <input type="text" required  pattern = "[a-zA-Z0-9\s\-\.]{2,100}" title="{{tr('only_alphanumeric')}}" class="form-control" value="{{$sub_category->name}}" id="name" name="name" placeholder="{{tr('name')}}">
+                                <input type="text" required pattern="[a-zA-Z0-9\s\-\.]{2,100}"
+                                       title="{{tr('only_alphanumeric')}}" class="form-control"
+                                       value="{{$sub_category->name}}" id="name" name="name"
+                                       placeholder="{{tr('name')}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="description" class="col-sm-2 control-label">*{{tr('description')}}</label>
                             <div class="col-sm-10">
-                                <input type="text" required class="form-control" value="{{$sub_category->description}}" id="description" name="description" placeholder="{{tr('description')}}">
+                                <input type="text" required class="form-control" value="{{$sub_category->description}}"
+                                       id="description" name="description" placeholder="{{tr('description')}}">
                             </div>
                         </div>
 
@@ -55,17 +63,19 @@
 
                             <div class="col-sm-12">
                                 <label for="picture1" class="col-sm-2 control-label"></label>
-                                <img style="height: 90px;margin-bottom: 15px; border-radius:2em;" src="{{$sub_category_images[0]->picture}}" id="image_preview">
+                                <img style="height: 90px;margin-bottom: 15px; border-radius:2em;"
+                                     src="{{$sub_category_images[0]->picture}}" id="image_preview">
                             </div>
                         @endif
 
                         <div class="form-group">
 
-                            <label for="picture1" class="col-sm-2 control-label">{{tr('image')}}</label>                           
+                            <label for="picture1" class="col-sm-2 control-label">{{tr('image')}}</label>
 
                             <div class="col-sm-10">
 
-                                <input type="file" accept="image/png, image/jpeg" id="picture1" name="picture1" placeholder="{{tr('picture1')}}" onchange="loadFile(this,'image_preview')">
+                                <input type="file" accept="image/png, image/jpeg" id="picture1" name="picture1"
+                                       placeholder="{{tr('picture1')}}" onchange="loadFile(this,'image_preview')">
                                 <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
                             </div>
 
@@ -117,81 +127,81 @@
                         @endif
                     </div>
                 </form>
-            
+
             </div>
 
         </div>
 
         <?php /* @if($category->is_series)
 
-            <div class="col-md-4">
+        <div class="col-md-4">
 
-                <div class="box box-warning">
+        <div class="box box-warning">
 
-                    <div class="box-header with-border">
-                        <h3 class="box-title">{{tr('add_genre')}}</h3>
-                    </div>
+        <div class="box-header with-border">
+        <h3 class="box-title">{{tr('add_genre')}}</h3>
+        </div>
 
-                    <form class="form-horizontal" action="{{route('admin.save.genre')}}" method="POST" enctype="multipart/form-data" role="form">
+        <form class="form-horizontal" action="{{route('admin.save.genre')}}" method="POST" enctype="multipart/form-data" role="form">
 
-                        <div class="box-body">
+        <div class="box-body">
 
-                            <input type="hidden" name="category_id" value="{{$category->id}}">
-                            <input type="hidden" name="id" value="{{$sub_category->id}}">
+        <input type="hidden" name="category_id" value="{{$category->id}}">
+        <input type="hidden" name="id" value="{{$sub_category->id}}">
 
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" name="genre" placeholder="{{tr('genre_placeholder')}}">
-                                </div>
-                            </div>
+        <div class="form-group">
+        <div class="col-sm-10">
+        <input type="text" required class="form-control" name="genre" placeholder="{{tr('genre_placeholder')}}">
+        </div>
+        </div>
 
-                        </div>
+        </div>
 
-                        <div class="box-footer">
-                            <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
-                            <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
-                        </div>
-                    </form>
-                
-                </div>
+        <div class="box-footer">
+        <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
+        <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
+        </div>
+        </form>
 
-                @if(count($genres) > 0)
+        </div>
 
-                    @foreach($genres as $genre)
+        @if(count($genres) > 0)
 
-                        <div class="box">
+        @foreach($genres as $genre)
 
-                            <div class="box-header with-border">
-                                <h3 class="box-title">{{$genre->name}}</h3>
+        <div class="box">
 
-                                <a style="margin-left:5px" title="Delete" href="{{route('admin.delete.genre' , $genre->id)}}" class="btn btn-danger pull-right btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                
-                                <!-- @if($genre->is_approved)
+        <div class="box-header with-border">
+        <h3 class="box-title">{{$genre->name}}</h3>
 
-                                    <a title="Decline" href="{{route('admin.genre.approve' , array('id' => $genre->id , 'status' => 0))}}" class="btn btn-warning pull-right btn-sm">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                @else 
-                                    <a title="Approve" href="{{route('admin.genre.approve' , array('id' => $genre->id , 'status' => 1))}}" class="btn btn-success pull-right btn-sm">
-                                        <i class="fa fa-check"></i>
-                                    </a>
-                                @endif -->
+        <a style="margin-left:5px" title="Delete" href="{{route('admin.delete.genre' , $genre->id)}}" class="btn btn-danger pull-right btn-sm">
+        <i class="fa fa-trash"></i>
+        </a>
 
-                                
-                            </div>
-                        </div>
+        <!-- @if($genre->is_approved)
 
-                    @endforeach
+        <a title="Decline" href="{{route('admin.genre.approve' , array('id' => $genre->id , 'status' => 0))}}" class="btn btn-warning pull-right btn-sm">
+        <i class="fa fa-times"></i>
+        </a>
+        @else
+        <a title="Approve" href="{{route('admin.genre.approve' , array('id' => $genre->id , 'status' => 1))}}" class="btn btn-success pull-right btn-sm">
+        <i class="fa fa-check"></i>
+        </a>
+        @endif -->
 
-                @endif
 
-            </div>
+        </div>
+        </div>
+
+        @endforeach
 
         @endif
 
-        */?>
+        </div>
+
+        @endif
+
+         */?>
 
     </div>
 
@@ -201,13 +211,13 @@
 
     <script type="text/javascript">
 
-        function loadFile(event,id){
+        function loadFile(event, id) {
 
-            $('#'+id).show();
+            $('#' + id).show();
 
             var reader = new FileReader();
 
-            reader.onload = function(){
+            reader.onload = function () {
 
                 var output = document.getElementById(id);
 

@@ -1,4 +1,3 @@
-{{--@extends('layouts.admin')--}}
 @extends('layouts.adminator.master')
 
 @section('title', tr('moderators'))
@@ -8,15 +7,11 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
-        </a> >
-    </li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a> > </li>
     <li class="list-inline-item active"><i class="fa fa-users"></i> {{tr('moderators')}}</li>
 @endsection
 
 @section('content')
-
-    @include('notification.notify')
 
     <div class="row gap-20">
         <div class="col-md-12">

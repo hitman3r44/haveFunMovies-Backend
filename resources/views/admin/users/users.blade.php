@@ -1,4 +1,3 @@
-{{--@extends('layouts.admin')--}}
 @extends('layouts.adminator.master')
 
 @section('title', tr('users'))
@@ -23,8 +22,7 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
-        </a> > </li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}} </a> > </li>
     <li class="list-inline-item active"><i class="fa fa-user"></i> {{tr('users')}}</li>
 @endsection
 
@@ -81,14 +79,11 @@
             
 	            <div class="box-body">
 
-	            	<div class="table-responsive" style="padding: 35px 0px"> 
-	            		
 		            	@if(count($users) > 0)
 
 		            		<div class="table table-responsive">
 
-								<table id="dataTable" class="table table-striped table-bordered" cellspacing="0"
-									   width="100%">
+								<table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
 
 									<thead>
 									    <tr>
@@ -252,11 +247,8 @@
 						@else
 							<h3 class="no-result">{{tr('no_user_found')}}</h3>
 						@endif
-					</div>
 	            </div>
           	</div>
         </div>
-    
     </div>
-
 @endsection

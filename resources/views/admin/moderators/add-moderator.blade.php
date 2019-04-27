@@ -1,18 +1,14 @@
-{{--@extends('layouts.admin')--}}
 @extends('layouts.adminator.master')
 
 @section('title', tr('add_moderator'))
-
 
 @section('content-header')
     <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_moderator') }}</h4>
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
-        </a> > </li>
-    <li class="list-inline-item"><a href="{{route('admin.moderators')}}"><i
-                    class="fa fa-users"></i> {{tr('moderators')}}</a> > </li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a> > </li>
+    <li class="list-inline-item"><a href="{{route('admin.moderators')}}"><i class="fa fa-users"></i> {{tr('moderators')}}</a> > </li>
     <li class="list-inline-item active">{{tr('add_moderator')}}</li>
 @endsection
 
