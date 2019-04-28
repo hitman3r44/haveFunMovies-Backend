@@ -57,7 +57,7 @@ class SettingsTableSeeder extends Seeder
 
             [
                 'key' => 'installation_process',
-                'value' => '1',
+                'value' => '3',
             ],
 
             [
