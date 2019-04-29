@@ -1,13 +1,13 @@
-{{--@extends('layouts.admin')--}}
 @extends('layouts.adminator.master')
+
 @section('title', tr('add_user'))
 
 @section('content-header')
     <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_user') }}</h4>
 @endsection
+
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
-        </a></li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
     <li class="list-inline-item"><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> {{tr('users')}}</a></li>
     <li class="list-inline-item"><i class="fa fa-user"></i> {{tr('view_user')}}</li>
 @endsection
@@ -28,7 +28,7 @@
 
                 <form class="form-horizontal" action="{{route('admin.save.user')}}" method="POST"
                       enctype="multipart/form-data" role="form">
-
+                    @csrf
                     <div class="mT-30">
 
                         <div class="form-group row">

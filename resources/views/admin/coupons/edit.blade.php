@@ -8,12 +8,8 @@
 
 @section('breadcrumb')
 
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
-        </a></li>
-
-    <li class="list-inline-item"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}}
-        </a></li>
-
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}} </a></li>
+    <li class="list-inline-item"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}} </a></li>
     <li class="list-inline-item active">{{tr('edit_coupon')}}</li>
 
 @endsection

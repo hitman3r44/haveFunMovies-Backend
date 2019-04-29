@@ -2,7 +2,9 @@
 
 @section('title', tr('edit_subscription'))
 
-@section('content-header', tr('edit_subscription'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('edit_subscription') }}</h4>
+@endsection
 
 @section('breadcrumb')
     <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>

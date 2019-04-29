@@ -65,14 +65,14 @@ Route::get('/email/verification' , 'ApplicationController@email_verify')->name('
 Route::get('/check/token', 'ApplicationController@check_token_expiry')->name('check_token_expiry');
 
 // Installation
-
-Route::get('/configuration', 'InstallationController@install')->name('installTheme');
-
-Route::get('/system/check', 'InstallationController@system_check_process')->name('system-check');
-
-Route::post('/configuration', 'InstallationController@theme_check_process')->name('install.theme');
-
-Route::post('/install/settings', 'InstallationController@settings_process')->name('install.settings');
+//
+//Route::get('/configuration', 'InstallationController@install')->name('installTheme');
+//
+//Route::get('/system/check', 'InstallationController@system_check_process')->name('system-check');
+//
+//Route::post('/configuration', 'InstallationController@theme_check_process')->name('install.theme');
+//
+//Route::post('/install/settings', 'InstallationController@settings_process')->name('install.settings');
 
 
 // CRON

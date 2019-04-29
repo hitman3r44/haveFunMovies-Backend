@@ -1,28 +1,24 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('custom_push'))
 
-@section('content-header', tr('custom_push'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('custom_push') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-send"></i> {{tr('custom_push')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
+    <li class="list-inline-item active"><i class="fa fa-send"></i> {{tr('custom_push')}}</li>
 @endsection
 
 @section('content')
-
-@include('notification.notify')
-
-    <div class="row">
-
+    <div class="row gap-20">
         <div class="col-md-10">
+            <div class="bgc-white p-20 bd">
 
-            <div class="box box-info">
-
-                <div class="box-header">
-                </div>
-
-                <form class="form-horizontal" action="{{route('admin.send.push')}}" method="POST" enctype="multipart/form-data" role="form">
+                <form class="form-horizontal" action="{{route('admin.send.push')}}" method="POST"
+                      enctype="multipart/form-data" role="form">
 
                     <div class="box-body">
 
@@ -30,7 +26,8 @@
                             <label for="message" class="col-sm-1 control-label">{{tr('message')}}</label>
 
                             <div class="col-sm-10">
-                                <input type="text" required name="message" class="form-control" id="message" placeholder="{{tr('enter')}} {{tr('message')}}">
+                                <input type="text" required name="message" class="form-control" id="message"
+                                       placeholder="{{tr('enter')}} {{tr('message')}}">
                             </div>
                         </div>
 
@@ -41,7 +38,7 @@
                         <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
                     </div>
                 </form>
-            
+
             </div>
 
         </div>
