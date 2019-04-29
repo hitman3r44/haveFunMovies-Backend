@@ -42,7 +42,6 @@
                 <div class="widget-user-header bg-gray">
                     <div class="pull-left">
                         <div class="widget-user-image">
-
                             <img class="img-circle"
                                  src=" @if($user->picture) {{$user->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif"
                                  alt="User Avatar">
