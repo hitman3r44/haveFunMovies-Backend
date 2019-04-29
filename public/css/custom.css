@@ -101,3 +101,8 @@
     touch-action: auto;
     -ms-touch-action: auto;
 }
+
+.box-body {
+    padding: 10px;
+    margin-top: 10px;
+}

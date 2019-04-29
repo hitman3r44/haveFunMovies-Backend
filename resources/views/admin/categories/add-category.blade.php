@@ -7,12 +7,8 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
-        </a> >
-    </li>
-    <li class="list-inline-item"><a href="{{route('admin.categories')}}"><i
-                    class="fa fa-suitcase"></i> {{tr('categories')}}</a> >
-    </li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}} </a> > </li>
+    <li class="list-inline-item"><a href="{{route('admin.categories')}}"><i class="fa fa-suitcase"></i> {{tr('categories')}}</a> > </li>
     <li class="list-inline-item active">{{tr('add_category')}}</li>
 @endsection
 

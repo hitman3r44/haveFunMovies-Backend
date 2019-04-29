@@ -1,34 +1,34 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('create_language'))
 
-@section('content-header', tr('create_language'))
+@section('content-header')
+	<h4 class="c-grey-900 mT-10 mB-30"> {{ tr('create_language') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.languages.index')}}"><i class="fa fa-globe"></i>{{tr('languages')}}</a></li>
-    <li class="active"><i class="fa fa-globe"></i>&nbsp; {{tr('create_language')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.languages.index')}}"><i class="fa fa-globe"></i>{{tr('languages')}}</a></li>
+    <li class="list-inline-item active"><i class="fa fa-globe"></i>&nbsp; {{tr('create_language')}}</li>
 @endsection
 
 @section('content')
 
-    @include('notification.notify')
-
-  	<div class="row">
-
-	    <div class="col-md-10">
-
-	        <div class="box box-primary">
-
-	            <div class="box-header label-primary">
-	                <b style="font-size: 18px;">{{tr('create_language')}}</b>
-	                <a href="{{route('admin.languages.index')}}" style="float:right" class="btn btn-default">{{tr('languages')}}</a>
-	            </div>
+	<div class="row gap-20">
+		<div class="col-md-10">
+			<div class="bgc-white p-20 bd">
+				<div class="row bgc-grey-400 p-10">
+					<div class="col-8">
+						<h6 class="c-grey-900"><b>{{tr('create_language')}}</b></h6>
+					</div>
+					<div class="col-4">
+						<a href="{{route('admin.languages.index')}}" style="float:right" class="btn btn-default">{{tr('languages')}}</a>
+					</div>
+				</div>
 
 	            <form  action="{{(Setting::get('admin_language_control')) ? '' :route('admin.languages.save')}}" method="POST" enctype="multipart/form-data" role="form">
 
 	                <div class="box-body">
-
 
 	                    <div class="form-group">
 	                        <label for="name">{{tr('short_name')}}</label>

@@ -71,7 +71,9 @@ class UserController extends Controller {
 
             return redirect()->route('admin.login');
         } else {
-            return redirect()->route('installTheme');
+
+            return redirect()->route('admin.login');
+//            return redirect()->route('installTheme');
         }
         
     }
