@@ -17,7 +17,7 @@ class SettingsTableSeeder extends Seeder
         return [
             [
                 'key' => 'site_name',
-                'value' => 'Sumit Stream',
+                'value' => 'Have Fun Movies',
             ],
 
             [
@@ -57,7 +57,7 @@ class SettingsTableSeeder extends Seeder
 
             [
                 'key' => 'installation_process',
-                'value' => '1',
+                'value' => '3',
             ],
 
             [

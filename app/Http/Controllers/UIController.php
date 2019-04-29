@@ -30,7 +30,7 @@ class UIController extends Controller
 
         $help_id = $admin_video_id = 1;
 
-    	$email_data['name'] = "STREAMHASH";
+    	$email_data['name'] = "Have Fun Movies";
 
         $email_data['help_link'] = Setting::get('ANGULAR_SITE_URL')."page/".$help_id;
 

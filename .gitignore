@@ -6,6 +6,7 @@
 .env
 .idea
 .phpunit.result.cache
+.env.example
 Homestead.json
 Homestead.yaml
 
