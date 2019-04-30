@@ -90,10 +90,10 @@
 											<th>{{tr('id')}}</th>
 											<th>{{tr('username')}}</th>
 											<th>{{tr('email')}}</th>
-											<th>{{tr('upgrade')}}</th>
+{{--											<th>{{tr('upgrade')}}</th>--}}
 											<th>{{tr('validity_days')}}</th>
 											<th>{{tr('active_plan')}}</th>
-											<th>{{tr('sub_profiles')}}</th>
+{{--											<th>{{tr('sub_profiles')}}</th>--}}
 											<th>{{tr('clear_login')}}</th>
 											<th>{{tr('status')}}</th>
 											<th>{{tr('action')}}</th>
@@ -124,14 +124,14 @@
 
 										      	<td>{{$user->email}}</td>
 										      	
-										      	<td>
-										      		@if($user->is_moderator)
-										      			<a onclick="return confirm(&quot;{{tr('disable_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade.disable' , array('id' => $user->id, 'moderator_id' => $user->moderator_id))}}" class="badge badge-warning" title="Do you want to remove the user from Moderator Role?">{{tr('disable')}}</a>
-										      		@else
-										      			<a onclick="return confirm(&quot;{{tr('upgrade_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade' , array('id' => $user->id ))}}" class="badge badge-danger" title="Do you want to change the user as Moderator ?">{{tr('upgrade')}}</a>
-										      		@endif
+{{--										      	<td>--}}
+{{--										      		@if($user->is_moderator)--}}
+{{--										      			<a onclick="return confirm(&quot;{{tr('disable_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade.disable' , array('id' => $user->id, 'moderator_id' => $user->moderator_id))}}" class="badge badge-warning" title="Do you want to remove the user from Moderator Role?">{{tr('disable')}}</a>--}}
+{{--										      		@else--}}
+{{--										      			<a onclick="return confirm(&quot;{{tr('upgrade_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade' , array('id' => $user->id ))}}" class="badge badge-danger" title="Do you want to change the user as Moderator ?">{{tr('upgrade')}}</a>--}}
+{{--										      		@endif--}}
 
-										      	</td>
+{{--										      	</td>--}}
 										      
 										      	<td>
 											      	@if($user->user_type)
@@ -143,11 +143,12 @@
 										      		<?php echo active_plan($user->id);?>
 										      	</td>
 
-										      	<td>
-										      		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}"><span class="badge badge-primary">
-										      			{{count($user->subProfile)}} {{tr('sub_profiles')}}</span>
-										      		</a>
-										      	</td>
+{{--										      	<td>--}}
+{{--										      		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}"><span class="badge badge-primary">--}}
+{{--										      			{{count($user->subProfile)}} {{tr('sub_profiles')}}</span>--}}
+{{--										      		</a>--}}
+{{--										      	</td>--}}
+
 										      	<td class="text-center">
 						      		
 										      		<a href="{{route('admin.users.clear-login', ['id'=>$user->id])}}"><span class="badge badge-warning">{{tr('clear')}}</span></a>
@@ -195,9 +196,9 @@
 
 											                  	<li role="presentation" class="divider"></li>
 
-											                  	<li role="presentation">
-											                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}">{{tr('sub_profiles')}}</a>
-											                  	</li>
+{{--											                  	<li role="presentation">--}}
+{{--											                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}">{{tr('sub_profiles')}}</a>--}}
+{{--											                  	</li>--}}
 
 											                  	<li role="presentation">
 											                  	 	@if(Setting::get('admin_delete_control'))
