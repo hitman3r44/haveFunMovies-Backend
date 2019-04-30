@@ -1,5 +1,5 @@
 <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
-    <span>Copyright © 2017 Designed by Wolverine. All rights reserved.</span>
+    <span>Copyright © 2019 Designed by WolverineSolutions. All rights reserved.</span>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
             type="text/javascript"></script>
