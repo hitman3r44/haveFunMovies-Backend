@@ -250,26 +250,26 @@
                         </a>
                     </li>
 
-                    <li id=user-payments" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.user.payments')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('subscription_payments')}}</span>
-                        </a>
-                    </li>
+{{--                    <li id=user-payments" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.user.payments')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('subscription_payments')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    @if(Setting::get('is_payper_view'))
+{{--                    @if(Setting::get('is_payper_view'))--}}
 
-                        <li id=video-subscription" class="nav-item">
-                            <a class="sidebar-link" href="{{route('admin.user.video-payments')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                                <span class="title">{{tr('ppv_payments')}}</span>
-                            </a>
-                        </li>
-                    @endif
+{{--                        <li id=video-subscription" class="nav-item">--}}
+{{--                            <a class="sidebar-link" href="{{route('admin.user.video-payments')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                                <span class="title">{{tr('ppv_payments')}}</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                 </ul>
             </li>
 

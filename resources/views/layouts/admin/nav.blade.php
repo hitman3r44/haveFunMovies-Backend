@@ -142,23 +142,23 @@
 
                     <li id="revenue_system"><a href="{{route('admin.revenue.system')}}"><i class="fa fa-circle-o"></i>{{tr('revenue_system')}}</a></li>
                     
-                    <li id="user-payments">
-                        <a href="{{route('admin.user.payments')}}">
-                            
-                            <i class="fa fa-circle-o"></i> <span>{{tr('subscription_payments')}}</span>
-                        </a>
-                    </li>
+{{--                    <li id="user-payments">--}}
+{{--                        <a href="{{route('admin.user.payments')}}">--}}
+{{--                            --}}
+{{--                            <i class="fa fa-circle-o"></i> <span>{{tr('subscription_payments')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
 
-                    @if(Setting::get('is_payper_view'))
-                    
-                        <li id="video-subscription">
-                            <a href="{{route('admin.user.video-payments')}}">
-                                <i class="fa fa-circle-o"></i> <span>{{tr('ppv_payments')}}</span>
-                            </a>
-                        </li>
+{{--                    @if(Setting::get('is_payper_view'))--}}
+{{--                    --}}
+{{--                        <li id="video-subscription">--}}
+{{--                            <a href="{{route('admin.user.video-payments')}}">--}}
+{{--                                <i class="fa fa-circle-o"></i> <span>{{tr('ppv_payments')}}</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
-                    @endif
+{{--                    @endif--}}
                     
                 </ul>
             </li>
