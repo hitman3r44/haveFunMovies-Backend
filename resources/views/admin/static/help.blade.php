@@ -40,25 +40,25 @@
                                 {{tr('any_changes_your_site')}}
                             </p>
 
-                            <a href="https://www.facebook.com/StreamHash/" target="_blank"><img
+                            <a href="https://www.facebook.com/Havefunmovies/" target="_blank"><img
                                         class="aligncenter size-full wp-image-159 help-image"
                                         src="{{asset('helpsocial/Facebook.png')}}" alt="Facebook-100" width="100"
                                         height="100"/></a>
                             &nbsp;
 
-                            <a href="https://twitter.com/StreamHash" target="_blank"><img
+                            <a href="https://twitter.com/Havefunmovies" target="_blank"><img
                                         class="size-full wp-image-155 alignleft help-image"
                                         src="{{asset('helpsocial/twitter.png')}}" alt="Twitter" width="100"
                                         height="100"/></a>
                             &nbsp;
 
-                            <a href="skype:contact@streamhash.com?chat" target="_blank"> <img
+                            <a href="skype:contact@Havefunmovies.com?chat" target="_blank"> <img
                                         class="wp-image-158 alignleft help-image"
                                         src="{{asset('helpsocial/skype.png')}}" alt="skype" width="100"
                                         height="100"/></a>
                             &nbsp;
 
-                            <a href="mailto:contact@streamhash.com" target="_blank"><img
+                            <a href="mailto:contact@Havefunmovies.com" target="_blank"><img
                                         class="size-full wp-image-153 alignleft help-image"
                                         src="{{asset('helpsocial/mail.png')}}" alt="Message-100" width="100"
                                         height="100"/></a>
