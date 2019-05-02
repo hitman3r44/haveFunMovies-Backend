@@ -63,6 +63,18 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="mobile" class="col-sm-2 control-label">* {{tr('user_type')}}</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="user_type" id="user_type">
+                                    <option value="1">Admin</option>
+                                    <option value="2">Moderator</option>
+                                    <option value="3">Director</option>
+                                    <option value="4">Publisher</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-sm-2 control-label">* {{tr('password')}}</label>
 
                             <div class="col-sm-10">

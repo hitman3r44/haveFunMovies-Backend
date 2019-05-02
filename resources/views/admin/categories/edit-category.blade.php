@@ -39,7 +39,7 @@
 
                             <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
                                   enctype="multipart/form-data" role="form">
-
+                                @csrf
                                 @endif
 
                                 <div class="box-body">

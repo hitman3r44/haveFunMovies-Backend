@@ -9,17 +9,17 @@ class SubCategory extends Model
 {
 	public function subCategoryImage()
     {
-        return $this->hasMany('App\SubCategoryImage');
+        return $this->hasMany('App\Model\SubCategoryImage');
     }
 
     public function genres()
     {
-        return $this->hasMany('App\Genre');
+        return $this->hasMany('App\Model\Genre');
     }
 
     public function adminVideo()
     {
-        return $this->hasMany('App\AdminVideo');
+        return $this->hasMany('App\Model\AdminVideo');
     }
 
     public function category() {

@@ -1280,7 +1280,7 @@ class AdminController extends Controller
                 //Add New User
                 $category = new Category;
                 $category->is_approved = DEFAULT_TRUE;
-                $category->created_by = ADMIN;
+                $category->created_by = 1; // TODO:: need to auth :: id
             }
 
             $category->name = $request->has('name') ? $request->name : '';
@@ -1485,7 +1485,8 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = ADMIN;
+                $sub_category->created_by = 1; // ::TODO : handle this ADMIN constant
+                $sub_category->status = 1;
             }
 
             $sub_category->category_id = $request->has('category_id') ? $request->category_id : '';
@@ -5280,10 +5281,10 @@ class AdminController extends Controller
             ->select('categories.id as id', 'categories.name', 'categories.picture',
                 'categories.is_series', 'categories.status', 'categories.is_approved')
             ->leftJoin('sub_categories', 'categories.id', '=', 'sub_categories.category_id')
-            ->groupBy('sub_categories.category_id')
-            ->where("sub_categories.is_approved", SUB_CATEGORY_APPROVED)
-            ->havingRaw("COUNT(sub_categories.id) > 0")
-            ->orderBy('categories.name', 'asc')
+//            ->where("sub_categories.is_approved", SUB_CATEGORY_APPROVED)
+//            ->havingRaw("COUNT(sub_categories.id) > 0")
+//            ->orderBy('categories.name', 'asc')
+//            ->groupBy('sub_categories.category_id')
             ->get();
 
         $model = new AdminVideo;

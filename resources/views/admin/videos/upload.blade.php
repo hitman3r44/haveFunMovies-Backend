@@ -1,4 +1,4 @@
-@extends('layouts.adminator.master')
+@extends('layouts.adminator.video')
 
 @section('title', tr('add_video'))
 
@@ -69,7 +69,7 @@
 
 @section('content')
 
-    @if(envfile('QUEUE_DRIVER') != 'redis')
+    @if(env('QUEUE_DRIVER') != 'redis')
 
         <div class="alert alert-warning">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -97,7 +97,7 @@
         <div class="col-md-12">
             <div class="bgc-white p-20 bd">
 
-                <div class="main-content">
+                <div class="main-content" style="padding: 15px 10px 10px;">
 
                     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: none"
                             id="error_popup">popup
