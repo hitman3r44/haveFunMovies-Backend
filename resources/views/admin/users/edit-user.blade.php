@@ -63,20 +63,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="mobile" class="col-sm-2 control-label">* {{tr('user_type')}}</label>
-
-                            <div class="col-sm-10">
-                                <select class="form-control" name="user_type" id="user_type" required>
-                                    <option value="">Select User Type</option>
-                                    <option value="1" {{ ($user->user_type  == 1) ? 'selected' : ''}}>Admin</option>
-                                    <option value="2" {{ ($user->user_type  == 2) ? 'selected' : ''}}>Moderator</option>
-                                    <option value="3" {{ ($user->user_type  == 3) ? 'selected' : ''}}>Director</option>
-                                    <option value="4" {{ ($user->user_type  == 4) ? 'selected' : ''}}>Publisher</option>
-                                </select>
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="box-footer">

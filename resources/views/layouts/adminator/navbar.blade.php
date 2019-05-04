@@ -12,7 +12,8 @@
                                             alt=""></div>
                             </div>
                             <div class="peer peer-greed">
-                                <h5 class="lh-1 mB-0 logo-text">Adminator</h5>
+                                <h5 class="lh-1 mB-0 logo-text">{{ ucwords(Auth::guard('admin')->user()->name) }}</h5>
+                                <span class="mt-5 lh-1 mB-0 logo-text">{{ \App\Helpers\Helper::getUserType(Auth::guard('admin')->user()->user_type) }}</span>
                             </div>
                         </div>
                     </a>
@@ -133,7 +134,7 @@
                     <span class="icon-holder">
                         <i class="c-indigo-500 fa fa-users"></i>
                     </span>
-                    <span class="title">{{tr('moderators')}}</span> <span class="arrow">
+                    <span class="title">{{tr('moderators')}}/{{tr('admin')}}</span> <span class="arrow">
                         <i class="ti-angle-right"></i>
                     </span>
                 </a>
@@ -143,7 +144,7 @@
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>
                             </span>
-                            <span class="title">{{tr('add_moderator')}}</span>
+                            <span class="title">{{tr('add_moderator')}}/{{tr('admin')}}</span>
                         </a>
                     </li>
 
@@ -152,7 +153,7 @@
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>
                             </span>
-                            <span class="title">{{tr('view_moderators')}}</span>
+                            <span class="title">{{tr('view_moderators')}}/{{tr('admin')}}</span>
                         </a>
                     </li>
                 </ul>
