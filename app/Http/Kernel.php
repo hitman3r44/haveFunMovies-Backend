@@ -67,6 +67,9 @@ class Kernel extends HttpKernel
         'UserApiVal' => \App\Http\Middleware\UserApiValidation::class,
         'cors' => \App\Http\Middleware\CORS::class,
         'PaypalCheck' => \App\Http\Middleware\PaypalCheckMiddleware::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 
     /**
