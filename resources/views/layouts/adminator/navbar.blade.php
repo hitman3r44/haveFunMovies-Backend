@@ -8,10 +8,11 @@
                             <div class="peer">
                                 <div class="logo">
                                     <img
-                                            src="https://colorlib.com/polygon/adminator/assets/static/images/logo.png"
+                                            src="{{ URL::to('/') }}/images/haveFunMoviesAdminLogo.png"
                                             alt=""></div>
                             </div>
                             <div class="peer peer-greed">
+
                                 <h5 class="lh-1 mB-0 logo-text">{{ ucwords(Auth::guard('admin')->user()->name) }}</h5>
                                 <span class="mt-5 lh-1 mB-0 logo-text">{{ \App\Helpers\Helper::getUserType(Auth::guard('admin')->user()->user_type) }}</span>
                             </div>
@@ -30,73 +31,6 @@
                             class="icon-holder"><i class="c-blue-500 ti-home"></i> </span><span
                             class="title">Dashboard</span></a>
             </li>
-
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder"><i
-                                class="c-indigo-500 ti-layout-list-thumb"></i> </span>
-                    <span class="title">New Template</span> <span class="arrow"><i
-                                class="ti-angle-right"></i></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="sidebar-link" href="">Basic Table</a></li>
-                    <li><a class="sidebar-link" href="{{url('new/data-table')}}">Data Table</a></li>
-
-                    <li class="nav-item"><a class="sidebar-link" href="{{url('new/form')}}"><span class="icon-holder"><i
-                                        class="c-light-blue-500 ti-pencil"></i> </span><span class="title">Forms</span></a>
-                    </li>
-
-                    <li class="nav-item"><a class="sidebar-link" href="{{ url('new/chart') }}"><span
-                                    class="icon-holder"><i
-                                        class="c-indigo-500 ti-bar-chart"></i> </span><span class="title">Charts</span></a>
-                    </li>
-
-                    <li class="nav-item dropdown"><a class="sidebar-link" href="{{url('new/ui-element')}}"><span
-                                    class="icon-holder"><i
-                                        class="c-pink-500 ti-palette"></i> </span><span class="title">UI Elements</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="javascript:void(0);"><span class="icon-holder"><i
-                                        class="c-indigo-500 ti-layout-list-thumb"></i> </span><span
-                                    class="title">Tables</span> <span class="arrow"><i
-                                        class="ti-angle-right"></i></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="sidebar-link" href="">Basic Table</a></li>
-                            <li><a class="sidebar-link" href="{{url('new/data-table')}}">Data Table</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="javascript:void(0);"><span class="icon-holder"><i
-                                        class="c-red-500 ti-files"></i> </span><span class="title">Pages</span> <span
-                                    class="arrow"><i class="ti-angle-right"></i></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="sidebar-link" href="404.html">404</a></li>
-                            <li><a class="sidebar-link" href="">500</a></li>
-                            <li><a class="sidebar-link" href="{{url('new/signin')}}">Sign In</a></li>
-                            <li><a class="sidebar-link" href="">Sign Up</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="javascript:void(0);"><span class="icon-holder"><i
-                                        class="c-teal-500 ti-view-list-alt"></i> </span><span
-                                    class="title">Multiple Levels</span> <span class="arrow"><i
-                                        class="ti-angle-right"></i></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item dropdown"><a href="javascript:void(0);"><span>Menu Item</span></a></li>
-                            <li class="nav-item dropdown">
-                                <a href="javascript:void(0);"><span>Menu Item</span> <span class="arrow"><i
-                                                class="ti-angle-right"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0);">Menu Item</a></li>
-                                    <li><a href="javascript:void(0);">Menu Item</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-
 
             <li class="nav-item dropdown" id="users">
                 <a class="dropdown-toggle" href="javascript:void(0);">
@@ -190,37 +124,6 @@
             </li>
 
 
-            <li class="nav-item dropdown" id="cast-crews">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-male"></i>
-                    </span>
-                    <span class="title">{{tr('cast_crews')}}</span> <span class="arrow">
-                        <i class="ti-angle-right"></i>
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.cast_crews.add')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('add_cast_crew')}}</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.cast_crews.index')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('cast_crews')}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-
             <li class="nav-item dropdown" id="videos">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -300,35 +203,35 @@
                 </ul>
             </li>
 
-            <li class="nav-item dropdown" id="coupons">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-gift"></i>
-                    </span>
-                    <span class="title">{{tr('coupons')}}</span> <span class="arrow">
-                        <i class="ti-angle-right"></i>
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li id="create" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.add.coupons')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('add_coupon')}}</span>
-                        </a>
-                    </li>
+{{--            <li class="nav-item dropdown" id="coupons">--}}
+{{--                <a class="dropdown-toggle" href="javascript:void(0);">--}}
+{{--                    <span class="icon-holder">--}}
+{{--                        <i class="c-indigo-500 fa fa-gift"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="title">{{tr('coupons')}}</span> <span class="arrow">--}}
+{{--                        <i class="ti-angle-right"></i>--}}
+{{--                    </span>--}}
+{{--                </a>--}}
+{{--                <ul class="dropdown-menu">--}}
+{{--                    <li id="create" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.add.coupons')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('add_coupon')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li id=view_coupons" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.coupon.list')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('view_coupon')}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+{{--                    <li id=view_coupons" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.coupon.list')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('view_coupon')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
 
             <li class="nav-item dropdown" id="payments">
                 <a class="dropdown-toggle" href="javascript:void(0);">
@@ -349,39 +252,39 @@
                         </a>
                     </li>
 
-                    <li id=user-payments" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.user.payments')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('subscription_payments')}}</span>
-                        </a>
-                    </li>
+{{--                    <li id=user-payments" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.user.payments')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('subscription_payments')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    @if(Setting::get('is_payper_view'))
+{{--                    @if(Setting::get('is_payper_view'))--}}
 
-                        <li id=video-subscription" class="nav-item">
-                            <a class="sidebar-link" href="{{route('admin.user.video-payments')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                                <span class="title">{{tr('ppv_payments')}}</span>
-                            </a>
-                        </li>
-                    @endif
+{{--                        <li id=video-subscription" class="nav-item">--}}
+{{--                            <a class="sidebar-link" href="{{route('admin.user.video-payments')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                                <span class="title">{{tr('ppv_payments')}}</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                 </ul>
             </li>
 
-            @if(Setting::get('redeem_control'))
-                <li id="redeems" class="nav-item">
-                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-trophy"></i>
-                    </span>
-                        <span class="title">{{tr('redeems')}}</span>
-                    </a>
-                </li>
-            @endif
+{{--            @if(Setting::get('redeem_control'))--}}
+{{--                <li id="redeems" class="nav-item">--}}
+{{--                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">--}}
+{{--                    <span class="icon-holder">--}}
+{{--                        <i class="c-indigo-500 fa fa-trophy"></i>--}}
+{{--                    </span>--}}
+{{--                        <span class="title">{{tr('redeems')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endif--}}
 
             @if(Setting::get('admin_language_control') == 0)
                 <li id="languages" class="nav-item">
@@ -394,44 +297,44 @@
                 </li>
             @endif
 
-            <li class="nav-item dropdown" id="settings">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-gears"></i>
-                    </span>
-                    <span class="title">{{tr('settings')}}</span> <span class="arrow">
-                        <i class="ti-angle-right"></i>
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li id="site_settings" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.settings')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('site_settings')}}</span>
-                        </a>
-                    </li>
+{{--            <li class="nav-item dropdown" id="settings">--}}
+{{--                <a class="dropdown-toggle" href="javascript:void(0);">--}}
+{{--                    <span class="icon-holder">--}}
+{{--                        <i class="c-indigo-500 fa fa-gears"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="title">{{tr('settings')}}</span> <span class="arrow">--}}
+{{--                        <i class="ti-angle-right"></i>--}}
+{{--                    </span>--}}
+{{--                </a>--}}
+{{--                <ul class="dropdown-menu">--}}
+{{--                    <li id="site_settings" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.settings')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('site_settings')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li id=home_page_settings" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('home_page_settings')}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+{{--                    <li id=home_page_settings" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
 
-            <li id="custom-push" class="nav-item">
-                <a class="sidebar-link" href="{{route('admin.push')}}">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-send"></i>
-                    </span>
-                    <span class="title">{{tr('custom_push')}}</span>
-                </a>
-            </li>
+{{--            <li id="custom-push" class="nav-item">--}}
+{{--                <a class="sidebar-link" href="{{route('admin.push')}}">--}}
+{{--                    <span class="icon-holder">--}}
+{{--                        <i class="c-indigo-500 fa fa-send"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="title">{{tr('custom_push')}}</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li id="email_templates" class="nav-item">
                 <a class="sidebar-link" href="{{route('admin.templates')}}">
@@ -491,14 +394,14 @@
                 </a>
             </li>
 
-            <li id="help" class="nav-item">
-                <a class="sidebar-link" href="{{route('admin.help')}}">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-question-circle"></i>
-                    </span>
-                    <span class="title">{{tr('help')}}</span>
-                </a>
-            </li>
+{{--            <li id="help" class="nav-item">--}}
+{{--                <a class="sidebar-link" href="{{route('admin.help')}}">--}}
+{{--                    <span class="icon-holder">--}}
+{{--                        <i class="c-indigo-500 fa fa-question-circle"></i>--}}
+{{--                    </span>--}}
+{{--                    <span class="title">{{tr('help')}}</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-item">
                 <a class="sidebar-link" href="{{route('admin.logout')}}">

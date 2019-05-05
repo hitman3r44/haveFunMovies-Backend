@@ -10,6 +10,9 @@ use Setting;
 
 class User extends Authenticatable
 {
+
+    use HasRoles;
+
     /**
      * The attributes that are mass assignable.
      *

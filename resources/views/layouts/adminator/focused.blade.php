@@ -23,7 +23,8 @@
                 <div class="bgc-white bdrs-50p pos-r" style="width:120px;height:120px">
                     <a href="{{route('admin.login')}}">
                         <img class="pos-a centerXY"
-                             src="@if(Setting::get('site_logo')) {{Setting::get('site_logo')}} @else {{asset('logo.png')}} @endif"/>
+{{--                             src="@if(Setting::get('site_logo')) {{Setting::get('site_logo')}} @else {{asset('logo.png')}} @endif"/>--}}
+                            src="{{ URL::to('/') }}/images/haveFunMoviesAdminLogo.png">
                     </a>
                 </div>
             </div>

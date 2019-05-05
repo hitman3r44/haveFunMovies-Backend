@@ -184,6 +184,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
