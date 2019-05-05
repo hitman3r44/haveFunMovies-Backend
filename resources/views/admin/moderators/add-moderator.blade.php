@@ -3,13 +3,13 @@
 @section('title', tr('add_moderator'))
 
 @section('content-header')
-    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_moderator') }}</h4>
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_moderator') }} | {{tr('admin')}}</h4>
 @endsection
 
 @section('breadcrumb')
     <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a> > </li>
     <li class="list-inline-item"><a href="{{route('admin.moderators')}}"><i class="fa fa-users"></i> {{tr('moderators')}}</a> > </li>
-    <li class="list-inline-item active">{{tr('add_moderator')}}</li>
+    <li class="list-inline-item active">{{tr('add_moderator')}} | {{tr('admin')}}</li>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
             <div class="bgc-white p-20 bd">
                 <div class="row bgc-grey-400 p-10">
                     <div class="col-8">
-                        <h6 class="c-grey-900"><b>{{tr('add_moderator')}}</b></h6>
+                        <h6 class="c-grey-900"><b>{{tr('add_moderator')}} | {{tr('admin')}}</b></h6>
                     </div>
                     <div class="col-4">
                         <a href="{{route('admin.moderators')}}"
@@ -29,7 +29,7 @@
 
                 <form class="form-horizontal" action="{{route('admin.save.moderator')}}" method="POST"
                       enctype="multipart/form-data" role="form">
-
+                    @csrf
                     <div class="mT-30">
 
                         <div class="form-group">
@@ -63,6 +63,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="mobile" class="col-sm-2 control-label">* {{tr('user_type')}}</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="user_type" id="user_type">
+                                    <option value="2">Moderator</option>
+                                    <option value="3">Director</option>
+                                    <option value="4">Publisher</option>
+                                    <option value="1">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="password" class="col-sm-2 control-label">*{{tr('password')}}</label>
 
                             <div class="col-sm-10">
@@ -81,6 +93,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="description" class="col-sm-2 control-label">*{{tr('description')}}</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control"  name="description" id="description" cols="5" rows="2"></textarea>
+                            </div>
+                        </div>
                     </div>
 
                     <input type="hidden" name="timezone" value="" id="userTimezone">

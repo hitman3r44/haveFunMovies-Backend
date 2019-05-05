@@ -118,7 +118,6 @@ class ApplicationController extends Controller {
      */
 
     public function select_genre(Request $request) {
-        
         $sub_category_id = $request->option;
 
         $genres = Genre::where('sub_category_id', '=', $sub_category_id)

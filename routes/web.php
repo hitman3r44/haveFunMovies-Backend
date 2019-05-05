@@ -113,6 +113,7 @@ Route::get('/about', 'ApplicationController@about')->name('user.about');
 Route::post('select/sub_category' , 'ApplicationController@select_sub_category')->name('select.sub_category');
 
 Route::post('select/genre' , 'ApplicationController@select_genre')->name('select.genre');
+Route::get('select/genre' , 'ApplicationController@select_genre')->name('select.genre');
 
 Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin_control');
 
