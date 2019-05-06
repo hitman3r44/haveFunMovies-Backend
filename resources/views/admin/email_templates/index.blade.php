@@ -19,17 +19,16 @@
         <div class="col-md-12">
             <div class="bgc-white p-20 bd">
 
-                <div class="row bgc-grey-600 p-10">
-
-                    <div class="col-md-6 text-white">
-                        <h3>{{tr('email_templates')}}</h3>
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{tr('email_templates')}}</b></h6>
                     </div>
-
-                    <div class="col-md-6">
-                        <a href="{{route('admin.add.category')}}"
-                           class="btn btn-default pull-right">{{tr('add_category')}}</a>
+                    <div class="col-4">
+                        <a href="{{route('admin.create.template')}}"
+                           class="btn btn-default pull-right">{{tr('create_template')}}</a>
                     </div>
                 </div>
+
                 <div class="box-body">
                     <div class="table table-responsive">
 

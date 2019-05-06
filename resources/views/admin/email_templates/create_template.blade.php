@@ -34,30 +34,27 @@
                     @csrf
                     <div class="box-body">
 
-                        <input type="hidden" name="id" value="{{$template->id}}">
-
                         <div class="form-group floating-label">
                             <label for="select2">{{tr('template_type')}}</label>
-                            <input type="hidden" required class="form-control" name="template_type" id="template_type"
-                                   placeholder="{{tr('enter')}} {{tr('template_type')}}"
-                                   value="{{$template->template_type}}">
-
-                            <input type="text" required class="form-control" id="template_type" readonly
-                                   value="{{getTemplateName($template->template_type)}}">
-
+                            <select required class="form-control" name="template_type" id="template_type">
+                                <option value="">{{tr('enter')}} {{tr('template_type')}}</option>
+                                @foreach($template_types as $key=>$value)
+                                    <option value="{{$key}}">{{$value}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="heading">{{tr('heading')}}</label>
                             <input type="text" required class="form-control" name="subject" id="heading"
-                                   placeholder="{{tr('enter')}} {{tr('heading')}}" value="{{$template->subject}}">
+                                   placeholder="{{tr('enter')}} {{tr('heading')}}" value="">
                         </div>
 
                         <div class="form-group">
                             <label for="description">{{tr('description')}}</label>
 
                             <textarea id="ckeditor" required name="description" class="form-control"
-                                      placeholder="{{tr('enter')}} {{tr('description')}}">{{$template->description}}</textarea>
+                                      placeholder="{{tr('enter')}} {{tr('description')}}"></textarea>
 
                         </div>
 
