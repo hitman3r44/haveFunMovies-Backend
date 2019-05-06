@@ -11,7 +11,6 @@
     <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
         </a></li>
     <li class="list-inline-item active">{{tr('email_templates')}}</li>
-
 @endsection
 
 @section('content')

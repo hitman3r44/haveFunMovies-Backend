@@ -28,6 +28,7 @@
                 </div>
 
                 <form class="form-horizontal" action="{{route('admin.subscriptions.save')}}" method="POST" enctype="multipart/form-data" role="form">
+                    @csrf
                     <input type="hidden" name="id" value="{{$data->id}}">
 
                     <div class="box-body">
