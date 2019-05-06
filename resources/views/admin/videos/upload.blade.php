@@ -14,8 +14,6 @@
     <li class="list-inline-item active"> {{tr('add_video')}}</li>
 @endsection
 
-
-
 @section('styles')
 
     <link rel="stylesheet" href="{{asset('assets/css/wizard.css')}}">
@@ -32,10 +30,6 @@
     <link rel="stylesheet" href="{{asset('assets/css/jquery.awesome-cropper.css')}}">
 
     <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
-
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/jquery.Jcrop.css')}}"> -->
-
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/style-example.css')}}"> -->
 
     <style type="text/css">
 
@@ -69,12 +63,14 @@
 
 @section('content')
 
-    @if(env('QUEUE_DRIVER') != 'redis')
+    @if(env('QUEUE_DRIVER') !== 'redis')
 
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{tr('warning_error_queue')}}
-        </div>
+        {{ logger(tr('warning_error_queue')) }}
+
+{{--        <div class="alert alert-warning">--}}
+{{--            <button type="button" class="close" data-dismiss="alert">×</button>--}}
+{{--            {{tr('warning_error_queue')}}--}}
+{{--        </div>--}}
     @endif
 
     @if(checkSize())
