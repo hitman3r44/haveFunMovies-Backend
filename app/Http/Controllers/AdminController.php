@@ -1228,7 +1228,8 @@ class AdminController extends Controller
             'categories.is_series',
             'categories.status',
             'categories.is_approved',
-            'categories.created_by'
+            'categories.created_by',
+            'categories.created_at'
         )
             ->orderBy('categories.created_at', 'desc')
             ->distinct('categories.id')
