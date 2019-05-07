@@ -27,7 +27,7 @@
                         <a href="{{route('admin.add.moderator')}}"
                            class="btn btn-default pull-right">{{tr('moderators')}}</a>
 
-                        @if(count($moderators) > 0 )
+                        @if(count($admins) > 0 )
 
                             <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">
 
@@ -58,7 +58,7 @@
                 </div>
                 <div class="box-body">
 
-                    @if(count($moderators) > 0)
+                    @if(count($admins) > 0)
 
                         <div class="table table-responsive">
 
@@ -81,7 +81,7 @@
 
                                 <tbody>
 
-                                @foreach($moderators as $i => $moderator)
+                                @foreach($admins as $i => $moderator)
 
                                     <tr>
                                         <td>{{showEntries($_GET, $i+1)}}</td>
@@ -181,7 +181,7 @@
                             </table>
 
                         </div>
-                        <div align="right" id="paglink"><?php echo $moderators->links(); ?></div>
+                        <div align="right" id="paglink"><?php echo $admins->links(); ?></div>
                     @else
                         <h3 class="no-result">{{tr('no_result_found')}}</h3>
                     @endif

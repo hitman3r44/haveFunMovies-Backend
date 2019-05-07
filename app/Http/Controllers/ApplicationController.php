@@ -18,6 +18,7 @@ use App\User;
 
 use App\Model\Settings;
 
+use Illuminate\Support\Facades\App;
 use Log;
 
 use DB;
@@ -118,7 +119,6 @@ class ApplicationController extends Controller {
      */
 
     public function select_genre(Request $request) {
-        
         $sub_category_id = $request->option;
 
         $genres = Genre::where('sub_category_id', '=', $sub_category_id)
@@ -771,9 +771,11 @@ class ApplicationController extends Controller {
      * @return JSON RESPONSE
      */
 
-    public function set_session_language($lang) {
+    public function set_session_language($locale) {
 
-        $locale = \Session::put('locale', $lang);
+        App::setLocale($locale);
+
+        Settings::set('default_lang' , $locale);
 
         return back()->with('flash_success' , tr('session_success'));
     }

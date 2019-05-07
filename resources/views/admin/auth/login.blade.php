@@ -13,7 +13,7 @@
 
     <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
     <form role="form" method="POST" action="{{ url('/admin/login') }}">
-        {{ csrf_field() }}
+        @csrf
         <input type="hidden" name="timezone" value="" id="userTimezone">
 
         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
@@ -21,7 +21,7 @@
             <input type="email" class="form-control " value="" name="email" required placeholder="{{tr('email')}}">
 
             @if ($errors->has('email'))
-                <span class="help-block"> <strong>{{ $errors->first('email') }}</strong> </span>
+                <span class="help-block text-danger"> <strong>{{ $errors->first('email') }}</strong> </span>
             @endif
         </div>
         <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
@@ -29,7 +29,7 @@
             <input type="password" class="form-control" value="" required name="password" placeholder="{{tr('password')}}">
 
             @if ($errors->has('password'))
-                <span class="help-block"> <strong>{{ $errors->first('password') }}</strong> </span>
+                <span class="help-block text-danger"> <strong>{{ $errors->first('password') }}</strong> </span>
             @endif
         </div>
         <div class="form-group">

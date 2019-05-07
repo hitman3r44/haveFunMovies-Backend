@@ -1,29 +1,32 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('email_settings'))
 
-@section('content-header', tr('email_settings'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('email_settings') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-gears"></i> {{tr('email_settings')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li  class="list-inline-item active"><i class="fa fa-gears"></i> {{tr('email_settings')}}</li>
 @endsection
 
 @section('content')
-
-@include('notification.notify')
-
-    <div class="row">
+    <div class="row gap-20">
         <div class="col-md-12">
+            <div class="bgc-white p-20 bd">
 
-            <div class="box box-primary">
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{tr('email_settings')}}</b></h6>
+                    </div>
+                    <div class="col-4">
 
-                <div class="box-header label-primary">
-                    <h3 class="box-title">{{tr('email_settings')}}</h3>
+                    </div>
                 </div>
 
                 <form action="{{route('admin.email.settings.save')}}" method="POST" enctype="multipart/form-data" role="form">
-                    
+                    @csrf
                     <div class="box-body">
 
                         <div class="col-md-6">

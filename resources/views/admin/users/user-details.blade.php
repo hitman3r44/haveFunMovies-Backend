@@ -30,7 +30,7 @@
     </style>
 
     <div class="row gap-20">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="bgc-white p-20 bd">
 
                 <div class="row bgc-grey-400 p-10">
@@ -39,150 +39,96 @@
                     </div>
                 </div>
 
-                <div class="widget-user-header bg-gray">
-                    <div class="pull-left">
-                        <div class="widget-user-image">
-                            <img class="img-circle"
-                                 src=" @if($user->picture) {{$user->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif"
-                                 alt="User Avatar">
-                        </div>
-
-                        <h3 class="widget-user-username">{{$user->name}} </h3>
-                        <h5 class="widget-user-desc">{{tr('user')}}</h5>
-                    </div>
-                    <div class="pull-right">
-                        <a href="{{route('admin.users.edit' , array('id' => $user->id))}}"
-                           class="btn btn-sm btn-warning">{{tr('edit')}}</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="box-footer no-padding">
+                <div class="row mt-5">
                     <div class="col-md-6">
-                        <ul class="nav nav-stacked">
+                        <div class="bg-gray">
+                            <div class="pull-left">
+                                <div class="row">
+                                    <div class="widget-user-image col-md-4">
+                                        <img class="rounded"
+                                             src=" @if($user->picture) {{$user->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif"
+                                             alt="User Avatar">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 class="widget-user-username">{{$user->name}} </h3>
+                                        <h5 class="widget-user-desc">{{tr('user')}}</h5>
+                                        <a href="{{route('admin.users.edit' , array('id' => $user->id))}}"
+                                           class="btn btn-sm btn-warning">{{tr('edit')}} {{tr('user')}}</a>
+                                    </div>
+                                </div>
 
-                            <li><a>{{tr('username')}} <span class="pull-right">{{$user->name}}</span></a></li>
-                            <li><a>{{tr('email')}} <span class="pull-right">{{$user->email}}</span></a></li>
-                            <li><a>{{tr('mobile')}} <span class="pull-right">{{$user->mobile}}</span></a></li>
+                            </div>
 
-                            <li>
-                                <a>{{tr('validity_days')}}
-                                    <span class="pull-right">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action">{{tr('username')}} <span
+                                        class="pull-right">{{$user->name}}</span></a>
+                            <a class="list-group-item list-group-item-action">{{tr('email')}} <span
+                                        class="pull-right">{{$user->email}}</span></a>
+                            <a class="list-group-item list-group-item-action">{{tr('mobile')}} <span
+                                        class="pull-right">{{$user->mobile}}</span></a>
+                            <a class="list-group-item list-group-item-action">{{tr('validity_days')}}
+                                <span class="pull-right">
 		            				@if($user->user_type)
-                                            <p style="color:#cc181e">
-		                                	{{tr('no_of_days_expiry')}} 
+                                        <p style="color:#cc181e">
+		                                	{{tr('no_of_days_expiry')}}
 		                                	<b>{{get_expiry_days($user->id)}} days</b>
 		                            	</p>
-                                        @endif
-		                        </span>
-                                </a>
-                            </li>
-
-
-                            <li style="border-left: 20px solid #fff;">
-                                {{tr('is_moderator')}}
+                                    @endif
+		                        </span></a>
+                            <a class="list-group-item list-group-item-action disabled">
+                                {{tr('user_type')}}
 
                                 <span class="pull-right" style="margin-right: 20px;">
-
-	                			@if($user->is_moderator)
-                                        <a href="{{route('admin.moderator.view',$user->moderator->id)}}"><span
-                                                    class="label label-success">{{tr('yes')}}</span></a>
-                                    @else
-                                        <span class="label label-warning">{{tr('no')}}</span>
+                                    @if($user->user_type == 1) Admin
+                                    @elseif($user->user_type == 2) Moderator
+                                    @elseif($user->user_type == 3) Director
+                                    @elseif($user->user_type == 4) Publisher
                                     @endif
 	                		</span>
-                            </li>
-
-                            <li>
-                                <a>{{tr('status')}}
-                                    <span class="pull-right">
-		                			@if($user->is_activated)
-                                            <span class="label label-success">{{tr('approved')}}</span>
-                                        @else
-                                            <span class="label label-warning">{{tr('pending')}}</span>
-                                        @endif
-		                		</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a>
-
-                                    {{tr('user_type')}}
-
-                                    <span class="pull-right">
-
-		                			@if($user->user_type)
-                                            <span class="label label-success">{{tr('paid_user')}}</span>
-                                        @else
-                                            <span class="label label-warning">{{tr('normal_user')}}</span>
-                                        @endif
-		                		</span>
-                                </a>
-                            </li>
-                            <li><a>{{tr('amount_paid')}} <span
-                                            class="pull-right">{{$user->amount_paid ? $user->amount_paid : '0.00'}}</span></a>
-                            </li>
-
-                            <li><a>{{tr('email_notification')}} <span class="pull-right">
+                            </a>
+                            <a class="list-group-item list-group-item-action">{{tr('amount_paid')}} <span
+                                        class="pull-right">{{$user->amount_paid ? $user->amount_paid : '0.00'}}</span></a>
+                            <a class="list-group-item list-group-item-action">
+                                {{tr('email_notification')}} <span class="pull-right">
 				                @if($user->email_notification)
-                                            <span class="label label-success">
+                                        <span class="label label-success">
 				                 	{{tr('yes')}}</span>
-                                        @else
-                                            <span class="label label-warning">
+                                    @else
+                                        <span class="label label-warning">
 				                 {{tr('no')}}</span>
-                                        @endif </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="nav nav-stacked">
+                                    @endif </span>
+                            </a>
+                            <a class="list-group-item list-group-item-action">{{tr('no_of_account')}} <span
+                                        class="pull-right">{{$user->no_of_account}}</span></a>
+                            <a class="list-group-item list-group-item-action">{{tr('device_type')}} <span
+                                        class="pull-right">{{$user->device_type}}</span></a>
 
-                            <li><a>{{tr('no_of_account')}} <span class="pull-right">{{$user->no_of_account}}</span></a>
-                            </li>
+                            <a class="list-group-item list-group-item-action">{{tr('login_by')}} <span
+                                        class="pull-right">{{$user->login_by}}</span></a>
 
-
-                            <?php
-
-                            /* We are not  using Paypal email user paypal mode check payments
-
-                            <li><a>{{tr('paypal_email')}} <span class="pull-right">{{$user->paypal_email ? $user->paypal_email : "-"}}</span></a></li>
-
-                            <li><a>{{tr('payment_mode')}} <span class="pull-right">
-                                {{ $user->payment_mode ? $user->payment_mode : "-" }}
-                            </span></a></li>
-                            /*
-                                We are not receiving moderator address,description field for anywhere
+                            <a class="list-group-item list-group-item-action">{{tr('social_unique_id')}} <span
+                                        class="pull-right">{{$user->social_unique_id ? $user->social_unique_id : "-"}}</span></a>
 
 
-                             /* <li><a>{{tr('address')}} <span class="pull-right">{{$user->address ? $user->address : "-"}}</span></a></li> -->
-
-                                <li><a>{{tr('description')}} <span class="pull-right">{{$user->description ? $user->description : "-"}}</span></a></li> */
-                            ?>
-
-                            <li><a>{{tr('device_type')}} <span class="pull-right">{{$user->device_type}}</span></a></li>
-
-                            <li><a>{{tr('login_by')}} <span class="pull-right">{{$user->login_by}}</span></a></li>
-
-                            <li><a>{{tr('social_unique_id')}} <span
-                                            class="pull-right">{{$user->social_unique_id ? $user->social_unique_id : "-"}}</span></a>
-                            </li>
-
-                            <li><a>{{tr('timezone')}} <span
-                                            class="pull-right">{{$user->timezone ? $user->timezone : "-"}}</span></a>
-                            </li>
-
-                            <li><a>{{tr('created_at')}} <span
-                                            class="pull-right">{{convertTimeToUSERzone($user->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
-                            </li>
-
-                            <li><a>{{tr('updated_at')}} <span
-                                            class="pull-right">{{convertTimeToUSERzone($user->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
-                            </li>
+                            <a class="list-group-item list-group-item-action">{{tr('timezone')}} <span
+                                        class="pull-right">{{$user->timezone ? $user->timezone : "-"}}</span></a>
 
 
-                        </ul>
+                            <a class="list-group-item list-group-item-action">{{tr('created_at')}} <span
+                                        class="pull-right">{{convertTimeToUSERzone($user->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
+
+
+                            <a class="list-group-item list-group-item-action">{{tr('updated_at')}} <span
+                                        class="pull-right">{{convertTimeToUSERzone($user->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
+
+                        </div>
+
                     </div>
                 </div>
             </div>

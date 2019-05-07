@@ -62,6 +62,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group row">
                             <label for="password" class="col-sm-2 control-label">* {{tr('password')}}</label>
 

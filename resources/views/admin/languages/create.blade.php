@@ -27,7 +27,7 @@
 				</div>
 
 	            <form  action="{{(Setting::get('admin_language_control')) ? '' :route('admin.languages.save')}}" method="POST" enctype="multipart/form-data" role="form">
-
+					@csrf
 	                <div class="box-body">
 
 	                    <div class="form-group">

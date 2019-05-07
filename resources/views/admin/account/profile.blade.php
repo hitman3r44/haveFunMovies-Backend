@@ -30,7 +30,7 @@
 
                         <h3 class="profile-username text-center">{{Auth::guard('admin')->user()->name}}</h3>
 
-                        <p class="text-muted text-center">{{tr('admin')}}</p>
+                        <p class="text-muted text-center">{{ \App\Helpers\Helper::getUserType(Auth::guard('admin')->user()->user_type) }}</p>
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">

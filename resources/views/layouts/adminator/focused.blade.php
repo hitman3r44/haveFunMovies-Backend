@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>@yield('title') | {{ config('app.name', 'Have Fun Movies') }}</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
         @yield('styles')
@@ -22,7 +23,8 @@
                 <div class="bgc-white bdrs-50p pos-r" style="width:120px;height:120px">
                     <a href="{{route('admin.login')}}">
                         <img class="pos-a centerXY"
-                             src="@if(Setting::get('site_logo')) {{Setting::get('site_logo')}} @else {{asset('logo.png')}} @endif"/>
+{{--                             src="@if(Setting::get('site_logo')) {{Setting::get('site_logo')}} @else {{asset('logo.png')}} @endif"/>--}}
+                            src="{{ URL::to('/') }}/images/haveFunMoviesAdminLogo.png">
                     </a>
                 </div>
             </div>

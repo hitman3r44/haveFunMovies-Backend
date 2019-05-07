@@ -7,9 +7,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Helpers\Helper;
 
 use Setting;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+
+    use HasRoles;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -31,7 +31,7 @@
 				</div>
 
 				<form action="{{route('admin.save.coupon')}}" method="POST" class="form-horizontal" role="form">
-
+					@csrf
 					<div class="box-body">
 
 						<div class="form-group">

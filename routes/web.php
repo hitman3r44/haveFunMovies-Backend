@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Redis;
 |
 */
 
-
 /***********************  UI Routes *********************/
 
 Route::get('/upload-video' , 'UIController@upload_video');
@@ -113,6 +112,7 @@ Route::get('/about', 'ApplicationController@about')->name('user.about');
 Route::post('select/sub_category' , 'ApplicationController@select_sub_category')->name('select.sub_category');
 
 Route::post('select/genre' , 'ApplicationController@select_genre')->name('select.genre');
+Route::get('select/genre' , 'ApplicationController@select_genre')->name('select.genre');
 
 Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin_control');
 
@@ -545,7 +545,7 @@ Route::post('/social', array('as' => 'SocialLogin' , 'uses' => 'SocialAuthContro
 
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
-Route::get('/user_session_language/{lang}', 'ApplicationController@set_session_language')->name('user_session_language');
+Route::get('/user_session_language/{locale}', 'ApplicationController@set_session_language')->name('user_session_language');
 
 
 Route::group(['middleware' => 'cors'], function(){

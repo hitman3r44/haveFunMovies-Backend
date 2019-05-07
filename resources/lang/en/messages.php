@@ -336,7 +336,6 @@ return array(
 	'copyright'	=>	'Copyright',
 	'copyright_message' => 'All rights reserved',
 	
-	'default'	=>	'Default',
 	'default_lang'	=>	'Default Language',
 	'delete_confirmation'	=> 'Are you sure want to Delete?',
 
@@ -885,8 +884,8 @@ return array(
 	'any_help'=>'Any Help ?',
 	'enter_streaming_url'=>'Enter Streaming URL',
 	'thanks_for_choosing_streamhash'=>' We would like to thank you for choosing Have Fun Movies. Kudos from our team!!',
-	'any_changes_your_site'=>' If you want to make any changes to your site, drop a mail to contact@havefunmovies.com or Skype us @ contact@streamhash.com and we will help you out!',
-	'help_notes_streamhash'=>'We have this team of innate developers and dedicated team of support to sort out the things for your benefits. Tell us what you like about StreamHash and we may suggest you the best solution for you :)',
+	'any_changes_your_site'=>' If you want to make any changes to your site, drop a mail to contact@havefunmovies.com or Skype us @ contact@havefunmovies.com and we will help you out!',
+	'help_notes_streamhash'=>'We have this team of innate developers and dedicated team of support to sort out the things for your benefits. Tell us what you like about Have Fun Movies and we may suggest you the best solution for you :)',
 	'cheers'=>'Cheers!',
 	'please_enter_plan_month'=>'Please enter the plan months. Max : 12 months',
 	'paid_subscribed_users'=>'Paid / Subscribed Users',
@@ -896,7 +895,7 @@ return array(
 	'moderator_earnings'=>'Moderator earnings based on the watch count',
 	'total_watch_count'=>' Total watch count',
 	'admin_moderator_names'=>' Admin/Moderator Names',
-	'welcome_streamview'=>'Welcome to StreamView',
+	'welcome_streamview'=>'Welcome to Have Fun Movies',
 	'your_password'=>'Your Password : 123456',
 	'email_notification'=>'Email Notification',
 	'welcome_email'=>'Welcome Email',

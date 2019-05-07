@@ -1,26 +1,32 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('payment_settings'))
 
-@section('content-header', tr('payment_settings'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('payment_settings') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-gears"></i> {{tr('payment_settings')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li  class="list-inline-item active"><i class="fa fa-gears"></i> {{tr('payment_settings')}}</li>
 @endsection
 
 @section('content')
+    <div class="row gap-20">
+        <div class="col-md-12">
+            <div class="bgc-white p-20 bd">
 
-@include('notification.notify')
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{tr('payment_settings')}}</b></h6>
+                    </div>
+                    <div class="col-4">
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">{{tr('payment_settings')}}</h3>
+                    </div>
                 </div>
 
                 <form action="{{route('admin.save.settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                    @csrf
                     <div class="box-body">
                         <div class="form-group">
                             <label for="paypal_client_id">{{tr('paypal_client_id')}}</label>

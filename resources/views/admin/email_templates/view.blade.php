@@ -20,26 +20,24 @@
         <div class="col-md-12">
             <div class="bgc-white p-20 bd">
 
-                <div class="panel">
+                <div class="card">
 
-                    <div class="panel-body">
-
-                        <div class="post">
-
-                            <div class="user-block">
-
-                                <div class="pull-left">
+                    <div class="card-header">
+                        <div class="pull-left">
                                 <span class="username" style="margin-left: 0px;">
-                                    <a href="">{{getTemplateName($model->template_type)}}</a> 
+                                    <a href="">{{getTemplateName($model->template_type)}}</a>
 
                                 </span>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="{{route('admin.edit.template', array('id'=>$model->id))}}"
-                                       class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> {{tr('edit')}}</a>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <a href="{{route('admin.edit.template', array('id'=>$model->id))}}"
+                               class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> {{tr('edit')}}</a>
+                        </div>
+                    </div>
 
+                    <div class="card-body">
+
+                        <div class="post">
                             <hr>
 
                             <div class="row margin-bottom">

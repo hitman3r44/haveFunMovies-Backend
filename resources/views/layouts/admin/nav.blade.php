@@ -24,24 +24,6 @@
               
             </li>
 
-
-            <li class="treeview" id="new_template">
-
-                <a href="#">
-                    <i class="fa fa-user"></i> <span>New Template</span> <i class="fa fa-angle-left pull-right"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li id="add-user"><a href="{{url('new/dashboard')}}"><i class="fa fa-circle-o"></i>DashBoard</a></li>
-                    <li id="add-user"><a href="{{url('new/form')}}"><i class="fa fa-circle-o"></i>Form</a></li>
-                    <li id="add-user"><a href="{{url('new/chart')}}"><i class="fa fa-circle-o"></i>Chart Js</a></li>
-                    <li id="add-user"><a href="{{url('new/ui-element')}}"><i class="fa fa-circle-o"></i>UI Elements</a></li>
-                    <li id="add-user"><a href="{{url('new/data-table')}}"><i class="fa fa-circle-o"></i>Datatable</a></li>
-                    <li id="add-user"><a href="{{url('new/signin')}}"><i class="fa fa-circle-o"></i>Sign in</a></li>
-                </ul>
-
-            </li>
-
             <li class="treeview" id="users">
 
                 <a href="#">
@@ -78,19 +60,6 @@
                     <li id="view-categories"><a href="{{route('admin.categories')}}"><i class="fa fa-circle-o"></i>{{tr('view_categories')}}</a></li>
                 </ul>
 
-            </li>
-
-            <li class="treeview" id="cast-crews">
-
-                <a href="#">
-                    <i class="fa fa-male"></i><span>{{tr('cast_crews')}}</span><i class="fa fa-angle-left pull-right"></i>
-                </a>
-
-                <ul class="treeview-menu">
-
-                    <li id="cast-crew-add"><a href="{{route('admin.cast_crews.add')}}"><i class="fa fa-circle-o"></i>{{tr('add_cast_crew')}}</a></li>
-                    <li id ="cast-crew-index"><a href="{{route('admin.cast_crews.index')}}"><i class="fa fa-circle-o"></i>{{tr('cast_crews')}}</a></li>
-                </ul>
             </li>
 
             <li class="treeview" id="videos">
@@ -151,18 +120,18 @@
             </li>
             
         <!-- Coupon Section-->
-            <li class="treeview" id="coupons">
+{{--            <li class="treeview" id="coupons">--}}
 
-                <a href="#">
-                    <i class="fa fa-gift"></i><span>{{tr('coupons')}}</span><i class="fa fa-angle-left pull-right"></i>
-                </a>
+{{--                <a href="#">--}}
+{{--                    <i class="fa fa-gift"></i><span>{{tr('coupons')}}</span><i class="fa fa-angle-left pull-right"></i>--}}
+{{--                </a>--}}
 
-                <ul class="treeview-menu">
+{{--                <ul class="treeview-menu">--}}
 
-                    <li id="create"><a href="{{route('admin.add.coupons')}}"><i class="fa fa-circle-o"></i>{{tr('add_coupon')}}</a></li>
-                    <li id = "view_coupons"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-circle-o"></i>{{tr('view_coupon')}}</a></li>
-                </ul>
-            </li>
+{{--                    <li id="create"><a href="{{route('admin.add.coupons')}}"><i class="fa fa-circle-o"></i>{{tr('add_coupon')}}</a></li>--}}
+{{--                    <li id = "view_coupons"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-circle-o"></i>{{tr('view_coupon')}}</a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
 
             <li id="payments">
                 <a href="{{route('admin.user.payments')}}">
@@ -173,34 +142,34 @@
 
                     <li id="revenue_system"><a href="{{route('admin.revenue.system')}}"><i class="fa fa-circle-o"></i>{{tr('revenue_system')}}</a></li>
                     
-                    <li id="user-payments">
-                        <a href="{{route('admin.user.payments')}}">
-                            
-                            <i class="fa fa-circle-o"></i> <span>{{tr('subscription_payments')}}</span>
-                        </a>
-                    </li>
+{{--                    <li id="user-payments">--}}
+{{--                        <a href="{{route('admin.user.payments')}}">--}}
+{{--                            --}}
+{{--                            <i class="fa fa-circle-o"></i> <span>{{tr('subscription_payments')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
 
-                    @if(Setting::get('is_payper_view'))
-                    
-                        <li id="video-subscription">
-                            <a href="{{route('admin.user.video-payments')}}">
-                                <i class="fa fa-circle-o"></i> <span>{{tr('ppv_payments')}}</span>
-                            </a>
-                        </li>
+{{--                    @if(Setting::get('is_payper_view'))--}}
+{{--                    --}}
+{{--                        <li id="video-subscription">--}}
+{{--                            <a href="{{route('admin.user.video-payments')}}">--}}
+{{--                                <i class="fa fa-circle-o"></i> <span>{{tr('ppv_payments')}}</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
-                    @endif
+{{--                    @endif--}}
                     
                 </ul>
             </li>
 
             @if(Setting::get('redeem_control'))
 
-            <li id="redeems">
-                <a href="{{route('admin.moderators.redeems')}}">
-                    <i class="fa fa-trophy"></i> <span>{{tr('redeems')}}</span> 
-                </a>
-            </li>
+{{--            <li id="redeems">--}}
+{{--                <a href="{{route('admin.moderators.redeems')}}">--}}
+{{--                    <i class="fa fa-trophy"></i> <span>{{tr('redeems')}}</span> --}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             @endif
 
@@ -213,18 +182,18 @@
             @endif
 
             <!-- settings Section-->
-            <li class="treeview" id="settings">
+{{--            <li class="treeview" id="settings">--}}
 
-                <a href="#">
-                    <i class="fa fa-gears"></i><span>{{tr('settings')}}</span><i class="fa fa-angle-left pull-right"></i>
-                </a>
+{{--                <a href="#">--}}
+{{--                    <i class="fa fa-gears"></i><span>{{tr('settings')}}</span><i class="fa fa-angle-left pull-right"></i>--}}
+{{--                </a>--}}
 
-                <ul class="treeview-menu">
+{{--                <ul class="treeview-menu">--}}
 
-                    <li id="site_settings"><a href="{{route('admin.settings')}}"><i class="fa fa-circle-o"></i>{{tr('site_settings')}}</a></li>
-                    <li id = "home_page_settings"><a href="{{route('admin.homepage.settings')}}"><i class="fa fa-circle-o"></i>{{tr('home_page_settings')}}</a></li>
-                </ul>
-            </li>
+{{--                    <li id="site_settings"><a href="{{route('admin.settings')}}"><i class="fa fa-circle-o"></i>{{tr('site_settings')}}</a></li>--}}
+{{--                    <li id = "home_page_settings"><a href="{{route('admin.homepage.settings')}}"><i class="fa fa-circle-o"></i>{{tr('home_page_settings')}}</a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
 
 
             {{-- <li id="settings">
@@ -239,11 +208,11 @@
                 </a>
             </li> */?>
 
-            <li id="custom-push">
-                <a href="{{route('admin.push')}}">
-                    <i class="fa fa-send"></i> <span>{{tr('custom_push')}}</span>
-                </a>
-            </li>
+{{--            <li id="custom-push">--}}
+{{--                <a href="{{route('admin.push')}}">--}}
+{{--                    <i class="fa fa-send"></i> <span>{{tr('custom_push')}}</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li id="email_templates">
                 <a href="{{route('admin.templates')}}">
@@ -278,11 +247,11 @@
             </li>
 
 
-            <li id="help">
-                <a href="{{route('admin.help')}}">
-                    <i class="fa fa-question-circle"></i> <span>{{tr('help')}}</span>
-                </a>
-            </li>
+{{--            <li id="help">--}}
+{{--                <a href="{{route('admin.help')}}">--}}
+{{--                    <i class="fa fa-question-circle"></i> <span>{{tr('help')}}</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li>
                 <a href="{{route('admin.logout')}}">

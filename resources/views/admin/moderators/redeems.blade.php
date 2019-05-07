@@ -1,47 +1,41 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('redeems'))
 
-@if($moderator)
-
-	@section('content-header', tr('redeems') . ' - '. $moderator->name)
-
-@else
-
-	@section('content-header', tr('redeems'))
-
-@endif
+@section('content-header')
+	<h4 class="c-grey-900 mT-10 mB-30"> {{ tr('redeems') . ' - '. isset($moderator->name) ? $moderator->name : '' }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.moderators')}}"><i class="fa fa-users"></i> {{tr('moderators')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.moderators')}}"><i class="fa fa-users"></i> {{tr('moderators')}}</a></li>
     @if($moderator)
-    	<li><a href="{{route('admin.moderator.view',$moderator->id)}}"><i class="fa fa-users"></i> {{tr('view_moderator')}}</a></li>
+    	<li class="list-inline-item"><a href="{{route('admin.moderator.view',$moderator->id)}}"><i class="fa fa-users"></i> {{tr('view_moderator')}}</a></li>
     @endif
-    <li class="active"><i class="fa fa-trophy"></i> {{tr('redeems')}}</li>
+    <li  class="list-inline-item active"><i class="fa fa-trophy"></i> {{tr('redeems')}}</li>
 @endsection
 
 @section('content')
+	<div class="row gap-20">
+		<div class="col-md-12">
+			<div class="bgc-white p-20 bd">
 
-	@include('notification.notify')
+				<div class="row bgc-grey-600 p-10">
 
-	<div class="row">
+					<div class="col-md-6 text-white">
+						<h3>{{tr('redeems')}}</h3>
+					</div>
 
-        <div class="col-xs-12">
+					<div class="col-md-6">
+						<a href="{{route('admin.moderators')}}" class="btn btn-default pull-right">{{tr('view_moderators')}}</a>
+					</div>
+				</div>
 
-          	<div class="box box-primary">
-
-	          	<div class="box-header label-primary">
-
-	                <b style="font-size:18px;">{{tr('redeems')}}</b>
-
-	                <a href="{{route('admin.moderators')}}" class="btn btn-default pull-right">{{tr('view_moderators')}}</a>
-
-	            </div>
             	
             	<div class="box-body">
 
-					<table id="example1" class="table table-bordered table-striped">
+					<table id="dataTable" class="table table-striped table-bordered" cellspacing="0"
+						   width="100%">
 
 						<thead>
 						    <tr>

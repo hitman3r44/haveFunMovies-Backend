@@ -54,6 +54,7 @@ use App\Model\Moderator;
 use App\Model\ContinueWatchingVideo;
 
 use App\Model\VideoCastCrew;
+use Illuminate\Support\Facades\App;
 
 function moderator_details($id , $property = "") {
 
@@ -73,25 +74,23 @@ function moderator_details($id , $property = "") {
 *
 */
 function tr($key , $confirmation_content_lang_key = "") {
-
     if(Auth::guard('admin')->check()) {
-        // $locale = config('app.locale');
         $locale = Setting::get('default_lang' , 'en');
-        
     } else {
-        
         if (!\Session::has('locale')) {
-
-            // $locale = \Session::put('locale', config('app.locale'));
             $locale = Setting::get('default_lang' , 'en');
         }else {
             $locale = \Session::get('locale');
         }
-
     }
-    
     return \Lang::choice('messages.'.$key, 0, Array('confirmation_content_lang_key' => $confirmation_content_lang_key), $locale);
 }
+
+//
+//function tr($key , $confirmation_content_lang_key = "") {
+//
+//    return App::getLocale().__('messages.'.$key);
+//}
 
 
 function envfile($key) {

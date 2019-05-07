@@ -20,12 +20,13 @@ class CreateAdminsTable extends Migration
             $table->string('email', 255)->unique();
             $table->string('password');
             $table->string('picture');
+            $table->tinyInteger('user_type');
             $table->string('description');
             $table->integer('is_activated');
             $table->enum('gender', array('male', 'female', 'others'));
-            $table->string('mobile');
-            $table->string('paypal_email');
-            $table->string('address');
+            $table->string('mobile')->nullable();
+            $table->string('paypal_email')->nullable();
+            $table->string('address')->nullable();
             $table->string('token');
             $table->string('token_expiry');
             $table->string('remember_token', 100)->nullable();

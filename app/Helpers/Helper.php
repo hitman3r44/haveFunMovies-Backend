@@ -1954,6 +1954,18 @@ class Helper
 
         return $s3_url;
     }
+
+    public static function getUserType($userType){
+
+        $userTypes  = [
+            1 => 'Admin',
+            2 => 'Moderator',
+            3 => 'Director',
+            4 => 'Publisher',
+        ];
+
+        return isset($userTypes[$userType]) ? $userTypes[$userType] : 'N/A' ;
+    }
 }
 
 

@@ -29,7 +29,7 @@
                 </div>
 
                 <form class="form-horizontal" action="{{route('admin.save.sub_category')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                    @csrf
                     <div class="box-body">
 
                         <input type="hidden" name="category_id" value="{{$category->id}}">

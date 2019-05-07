@@ -1,4 +1,4 @@
-@extends('layouts.adminator.master')
+@extends('layouts.adminator.video')
 
 @section('title', tr('add_video'))
 
@@ -33,10 +33,6 @@
 
     <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
 
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/jquery.Jcrop.css')}}"> -->
-
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/style-example.css')}}"> -->
-
     <style type="text/css">
 
         .container-narrow {
@@ -69,35 +65,40 @@
 
 @section('content')
 
-    @if(envfile('QUEUE_DRIVER') != 'redis')
+   <div class="row">
+       <div class="col-md-12">
+           @if(env('QUEUE_DRIVER') != 'redis')
 
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{tr('warning_error_queue')}}
-        </div>
-    @endif
+               {{ logger(tr('warning_error_queue')) }}
 
-    @if(checkSize())
+               {{--<div class="alert alert-warning">--}}
+                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                   {{--{{tr('warning_error_queue')}}--}}
+               {{--</div>--}}
+           @endif
 
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}
-            <b>{{ini_get('post_max_size')}}</b>
-        </div>
-    @endif
+           @if(checkSize())
+               <div class="alert alert-warning">
+                   <button type="button" class="close" data-dismiss="alert">×</button>
+                   {{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}
+                   <b>{{ini_get('post_max_size')}}</b>
+               </div>
+           @endif
 
-    @if(Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED)
+           @if(Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED)
+               <div class="alert alert-warning">
+                   <button type="button" class="close" data-dismiss="alert">×</button>
+                   {{tr('ffmpeg_warning_notes')}}
+               </div>
+           @endif
+       </div>
+   </div>
 
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{tr('ffmpeg_warning_notes')}}
-        </div>
-    @endif
-    <div class="row gap-20">
+    <div class="row">
         <div class="col-md-12">
-            <div class="bgc-white p-20 bd">
+            <div class="bgc-white bd">
 
-                <div class="main-content">
+                <div class="main-content" style="padding: 15px 10px 10px;">
 
                     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: none"
                             id="error_popup">popup
@@ -293,19 +294,19 @@
 
                                                     </li>
 
-                                                    <li style="width: 98%" class="cast-list">
+{{--                                                    <li style="width: 98%" class="cast-list">--}}
 
-                                                        <label for="details">{{tr('cast_crews')}} </label>
+{{--                                                        <label for="details">{{tr('cast_crews')}} </label>--}}
 
-                                                        <select id="cast_crews" name="cast_crew_ids[]" class="select2"
-                                                                multiple>
+{{--                                                        <select id="cast_crews" name="cast_crew_ids[]" class="select2"--}}
+{{--                                                                multiple>--}}
 
-                                                            @foreach($cast_crews as $cast_crew)
-                                                                <option value="{{$cast_crew->id}}"
-                                                                        @if(in_array($cast_crew->id, $video_cast_crews)) selected @endif>{{$cast_crew->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </li>
+{{--                                                            @foreach($cast_crews as $cast_crew)--}}
+{{--                                                                <option value="{{$cast_crew->id}}"--}}
+{{--                                                                        @if(in_array($cast_crew->id, $video_cast_crews)) selected @endif>{{$cast_crew->name}}</option>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </select>--}}
+{{--                                                    </li>--}}
 
                                                 </ul>
 

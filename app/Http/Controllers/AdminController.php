@@ -64,6 +64,7 @@ use App\Model\Flag;
 
 use App\Model\Coupon;
 
+use Illuminate\Support\Facades\App;
 use Validator;
 
 use Hash;
@@ -942,9 +943,9 @@ class AdminController extends Controller
     public function moderators()
     {
 
-        $moderators = Moderator::orderBy('created_at', 'desc')->paginate(10);
+        $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('admin.moderators.moderators')->with('moderators', $moderators)->withPage('moderators')->with('sub_page', 'view-moderator');
+        return view('admin.moderators.moderators')->with('admins', $admins)->withPage('moderators')->with('sub_page', 'view-moderator');
     }
 
     public function add_moderator()
@@ -955,148 +956,152 @@ class AdminController extends Controller
     public function edit_moderator($id)
     {
 
-        $moderator = Moderator::find($id);
+        $admin = Admin::find($id);
 
-        return view('admin.moderators.edit-moderator')->with('moderator', $moderator)->with('page', 'moderators')->with('sub_page', 'edit-moderator');
+        return view('admin.moderators.edit-moderator')->with('admin', $admin)->with('page', 'moderators')->with('sub_page', 'edit-moderator');
     }
 
     public function add_moderator_process(Request $request)
     {
-
-        if ($request->id != '') {
-
-            $validator = Validator::make($request->all(), array(
-                    'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
-                    'email' => 'required|email|max:255|unique:moderators,email,' . $request->id,
-                    'mobile' => 'required|digits_between:4,16',
-                )
-            );
-        } else {
-
-            $validator = Validator::make($request->all(), array(
-                    'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
-                    'email' => 'required|email|max:255|unique:moderators,email,NULL',
-                    'mobile' => 'required|digits_between:4,16',
-                    'password' => 'required|min:6|confirmed',
-                )
-            );
-
-        }
-
-        if ($validator->fails()) {
-
-            $error_messages = implode(',', $validator->messages()->all());
-            return back()->with('flash_error', $error_messages);
-
-        } else {
-
-            $changed_email = DEFAULT_FALSE;
-
-            $email = "";
-
+        try {
             if ($request->id != '') {
-                $moderator = Moderator::find($request->id);
-                $message = tr('admin_not_moderator');
 
-                if ($moderator->email != $request->email) {
+                $validator = Validator::make($request->all(), array(
+                        'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
+                        'email' => 'required|email|max:255|unique:moderators,email,' . $request->id,
+                        'mobile' => 'required|digits_between:4,16',
+                    )
+                );
+            } else {
 
-                    $changed_email = DEFAULT_TRUE;
+                $validator = Validator::make($request->all(), array(
+                        'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
+                        'email' => 'required|email|max:255|unique:moderators,email,NULL',
+                        'mobile' => 'required|digits_between:4,16',
+                        'password' => 'required|min:6|confirmed',
+                    )
+                );
 
-                    $email = $moderator->email;
+            }
 
-                }
+            if ($validator->fails()) {
+
+                $error_messages = implode(',', $validator->messages()->all());
+                return back()->with('flash_error', $error_messages);
 
             } else {
-                $message = tr('admin_add_moderator');
-                //Add New moderator
-                $moderator = new Moderator;
-                /*$new_password = time();
-                $new_password .= rand();
-                $new_password = sha1($new_password);
-                $new_password = substr($new_password, 0, 8);*/
-                $new_password = $request->password;
 
-                // print_r(Hash::make($new_password));
+                $changed_email = DEFAULT_FALSE;
 
+                $email = "";
 
-                $moderator->password = Hash::make($new_password);
+                if ($request->id != '') {
+                    $admin = Admin::find($request->id);
+                    $message = tr('admin_not_moderator');
 
+                    if ($admin->email != $request->email) {
 
-                $moderator->is_activated = 1;
+                        $changed_email = DEFAULT_TRUE;
 
-            }
+                        $email = $admin->email;
 
-            $moderator->picture = asset('placeholder.png');
-
-            $moderator->timezone = $request->has('timezone') ? $request->timezone : '';
-            $moderator->name = $request->has('name') ? $request->name : '';
-            $moderator->email = $request->has('email') ? $request->email : '';
-            $moderator->mobile = $request->has('mobile') ? $request->mobile : '';
-
-            $moderator->token = Helper::generate_token();
-            $moderator->token_expiry = Helper::generate_token_expiry();
-
-
-            if ($request->id == '') {
-                $email_data['name'] = $moderator->name;
-                $email_data['password'] = $new_password;
-                $email_data['email'] = $moderator->email;
-                $email_data['template_type'] = MODERATOR_WELCOME;
-                // $subject = tr('moderator_welcome_title').Setting::get('site_name');
-                $page = "emails.moderator_welcome";
-                $email = $moderator->email;
-                Helper::send_email($page, $subject = null, $email, $email_data);
-
-            }
-
-            $moderator->save();
-
-            if ($moderator) {
-
-                $user = User::where('email', $moderator->email)->first();
-
-                // if the moderator already exists in user table, the status will change automatically
-                if ($moderator && $user) {
-
-                    $user->is_moderator = DEFAULT_TRUE;
-                    $user->moderator_id = $moderator->id;
-                    $user->save();
-
-                    $moderator->is_activated = DEFAULT_TRUE;
-                    $moderator->is_user = DEFAULT_TRUE;
-                    $moderator->save();
-
-                }
-
-                if ($changed_email) {
-
-                    if ($email) {
-
-                        $email_data = array();
-
-                        //  $subject = tr('user_welcome_title').' '.Setting::get('site_name');
-                        $page = "emails.moderator_update_profile";
-                        $email_data['template_type'] = MODERATOR_UPDATE_MAIL;
-                        $email_data['name'] = $moderator->name;
-                        $email_data['email'] = $moderator->email;
-
-                        Helper::send_email($page, $subject = null, $email, $email_data);
                     }
 
+                } else {
+                    $message = tr('admin_add_moderator');
+                    //Add New moderator
+                    $admin = new Admin;
+                    /*$new_password = time();
+                    $new_password .= rand();
+                    $new_password = sha1($new_password);
+                    $new_password = substr($new_password, 0, 8);*/
+                    $new_password = $request->password;
+
+                    // print_r(Hash::make($new_password));
+
+
+                    $admin->password = Hash::make($new_password);
+
+
+                    $admin->is_activated = 1;
+
                 }
 
 
-                if (Setting::get('track_user_mail')) {
+                $admin->picture = asset('placeholder.png');
 
-                    user_track("Have Fun Movies - Moderator Created");
+                $admin->timezone = $request->has('timezone') ? $request->timezone : '';
+                $admin->name = $request->has('name') ? $request->name : '';
+                $admin->email = $request->has('email') ? $request->email : '';
+                $admin->mobile = $request->has('mobile') ? $request->mobile : '';
+                $admin->user_type = $request->has('user_type') ? $request->user_type : '';
+                $admin->description = $request->has('description') ? $request->description : '';
+
+                $admin->token = Helper::generate_token();
+                $admin->token_expiry = Helper::generate_token_expiry();
+
+
+                if ($request->id == '') {
+                    $email_data['name'] = $admin->name;
+                    $email_data['password'] = $new_password;
+                    $email_data['email'] = $admin->email;
+                    $email_data['template_type'] = MODERATOR_WELCOME;
+                    // $subject = tr('moderator_welcome_title').Setting::get('site_name');
+                    $page = "emails.moderator_welcome";
+                    $email = $admin->email;
+                    Helper::send_email($page, $subject = null, $email, $email_data);
 
                 }
+                $admin->save();
 
-                return redirect('/admin/view/moderator/' . $moderator->id)->with('flash_success', $message);
-            } else {
-                return back()->with('flash_error', tr('admin_not_error'));
+                if ($admin) {
+
+                    $user = User::where('email', $admin->email)->first();
+                    // if the moderator already exists in user table, the status will change automatically
+                    if ($admin && $user) {
+
+                        $user->is_moderator = DEFAULT_TRUE;
+                        $user->moderator_id = $admin->id;
+                        $user->save();
+
+                        $admin->is_activated = DEFAULT_TRUE;
+                        $admin->is_user = DEFAULT_TRUE;
+                        $admin->save();
+
+                    }
+
+                    if ($changed_email) {
+
+                        if ($email) {
+                            $email_data = array();
+
+                            //  $subject = tr('user_welcome_title').' '.Setting::get('site_name');
+                            $page = "emails.moderator_update_profile";
+                            $email_data['template_type'] = MODERATOR_UPDATE_MAIL;
+                            $email_data['name'] = $admin->name;
+                            $email_data['email'] = $admin->email;
+
+                            Helper::send_email($page, $subject = null, $email, $email_data);
+                        }
+                    }
+
+
+                    if (Setting::get('track_user_mail')) {
+
+                        user_track("Have Fun Movies - Moderator Created");
+
+                    }
+                    $request->session()->flash('flash_success', $message);
+
+                    return redirect('/admin/view/moderator/' . $admin->id);
+
+                } else {
+                    return back()->with('flash_error', tr('admin_not_error'));
+                }
+
             }
-
+        } catch (\Exception $e) {
+            return back()->with('flash_error', $e->getMessage());
         }
 
     }
@@ -1104,7 +1109,7 @@ class AdminController extends Controller
     public function delete_moderator(Request $request)
     {
 
-        if ($moderator = Moderator::find($request->id)) {
+        if ($moderator = Admin::find($request->id)) {
 
             if ($moderator->picture) {
 
@@ -1149,7 +1154,7 @@ class AdminController extends Controller
     public function moderator_approve(Request $request)
     {
 
-        $moderator = Moderator::find($request->id);
+        $moderator = Admin::find($request->id);
 
         $moderator->is_activated = 1;
 
@@ -1170,7 +1175,7 @@ class AdminController extends Controller
     public function moderator_decline(Request $request)
     {
 
-        if ($moderator = Moderator::find($request->id)) {
+        if ($moderator = Admin::find($request->id)) {
 
             $moderator->is_activated = 0;
 
@@ -1188,7 +1193,7 @@ class AdminController extends Controller
     public function moderator_view_details($id)
     {
 
-        if ($moderator = Moderator::find($id)) {
+        if ($moderator = Admin::find($id)) {
 
             return view('admin.moderators.moderator-details')
                 ->with('moderator', $moderator)
@@ -1280,7 +1285,7 @@ class AdminController extends Controller
                 //Add New User
                 $category = new Category;
                 $category->is_approved = DEFAULT_TRUE;
-                $category->created_by = ADMIN;
+                $category->created_by = 1; // TODO:: need to auth :: id
             }
 
             $category->name = $request->has('name') ? $request->name : '';
@@ -1485,7 +1490,8 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = ADMIN;
+                $sub_category->created_by = 1; // ::TODO : handle this ADMIN constant
+                $sub_category->status = 1;
             }
 
             $sub_category->category_id = $request->has('category_id') ? $request->category_id : '';
@@ -3967,11 +3973,18 @@ class AdminController extends Controller
                 $model->update($request->all());
 
             } else {
-                $model = Subscription::create($request->all());
+                $model = new Subscription();
+                $model->title = $request->title;
+                $model->description = $request->description;
+                $model->plan = $request->plan;
+                $model->no_of_account = $request->no_of_account;
+                $model->amount = $request->amount;
                 $model->status = 1;
                 $model->popular_status = $request->popular_status ? 1 : 0;
                 $model->unique_id = $model->title;
                 $model->no_of_account = $request->no_of_account;
+                $model->subscription_type = 'month';
+                $model->total_subscription = 0;
                 $model->save();
             }
 
@@ -4156,7 +4169,7 @@ class AdminController extends Controller
 
             $base_query = $base_query->where('moderator_id', $request->id);
 
-            $moderator = Moderator::find($request->id);
+            $moderator = Admin::find($request->id);
         }
 
         $data = $base_query->get();
@@ -4564,6 +4577,26 @@ class AdminController extends Controller
             ->with('templates', $templates)
             ->with('page', 'email_templates')
             ->with('sub_page', 'email_templates');
+
+    }
+
+
+    public function create_template(Request $request)
+    {
+        $template_types = [USER_WELCOME => tr('user_welcome_email'),
+            ADMIN_USER_WELCOME => tr('admin_created_user_welcome_mail'),
+            FORGOT_PASSWORD => tr('forgot_password'),
+            MODERATOR_WELCOME => tr('moderator_welcome'),
+            PAYMENT_EXPIRED => tr('payment_expired'),
+            PAYMENT_GOING_TO_EXPIRY => tr('payment_going_to_expiry'),
+            NEW_VIDEO => tr('new_video'),
+            EDIT_VIDEO => tr('edit_video')];
+
+
+        return view('admin.email_templates.create_template')
+            ->with('template_types', $template_types)
+            ->with('page', 'email_templates')
+            ->with('sub_page', 'create_template');
 
     }
 
@@ -5020,7 +5053,7 @@ class AdminController extends Controller
 
         $users_list = User::select('users.id', 'users.name', 'users.email', 'users.is_activated', 'users.is_verified', 'users.amount_paid')->where('is_activated', 1)->where('email_notification', 1)->where('is_verified', 1)->get();
 
-        $moderator_list = Moderator::select('moderators.id', 'moderators.name', 'moderators.email', 'moderators.is_activated')->where('is_activated', 1)->get();
+        $moderator_list = Admin::select('admins.id', 'admins.name', 'admins.email', 'admins.is_activated')->where('is_activated', 1)->get();
 
         return view('admin.mail_camp')
             ->with('users_list', $users_list)
@@ -5280,10 +5313,10 @@ class AdminController extends Controller
             ->select('categories.id as id', 'categories.name', 'categories.picture',
                 'categories.is_series', 'categories.status', 'categories.is_approved')
             ->leftJoin('sub_categories', 'categories.id', '=', 'sub_categories.category_id')
-            ->groupBy('sub_categories.category_id')
-            ->where("sub_categories.is_approved", SUB_CATEGORY_APPROVED)
-            ->havingRaw("COUNT(sub_categories.id) > 0")
-            ->orderBy('categories.name', 'asc')
+//            ->where("sub_categories.is_approved", SUB_CATEGORY_APPROVED)
+//            ->havingRaw("COUNT(sub_categories.id) > 0")
+//            ->orderBy('categories.name', 'asc')
+//            ->groupBy('sub_categories.category_id')
             ->get();
 
         $model = new AdminVideo;

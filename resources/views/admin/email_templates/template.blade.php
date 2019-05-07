@@ -4,7 +4,6 @@
 @section('content-header')
     <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('edit_template') }}</h4>
 @endsection
-class="list-inline-item"
 @section('breadcrumb')
     <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
         </a></li>
@@ -32,7 +31,7 @@ class="list-inline-item"
                 </div>
 
                 <form action="{{route('admin.save.template')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                    @csrf
                     <div class="box-body">
 
                         <input type="hidden" name="id" value="{{$template->id}}">

@@ -10,7 +10,7 @@
                 </div>
             </div>
             <form class="form-horizontal" action="{{route('admin.cast_crews.save')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                @csrf
                 <div class="box-body">
 
                     <div class="form-group">
