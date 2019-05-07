@@ -336,7 +336,6 @@ return array(
 	'copyright'	=>	'Copyright',
 	'copyright_message' => 'All rights reserved',
 	
-	'default'	=>	'Default',
 	'default_lang'	=>	'Default Language',
 	'delete_confirmation'	=> 'Are you sure want to Delete?',
 
