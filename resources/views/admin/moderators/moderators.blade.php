@@ -71,6 +71,7 @@
                                     <th>{{tr('username')}}</th>
                                     <th>{{tr('email')}}</th>
                                     <th>{{tr('mobile')}}</th>
+                                    <th>{{tr('user_type')}}</th>
                                     <th>{{tr('address')}}</th>
                                     <th>{{tr('total_videos')}}</th>
                                     <th>{{tr('total')}}</th>
@@ -90,6 +91,7 @@
                                         </td>
                                         <td>{{$moderator->email}}</td>
                                         <td>{{$moderator->mobile}}</td>
+                                        <td>{{\App\Helpers\Helper::getUserType($moderator->user_type)}}</td>
                                         <td>{{$moderator->address}}</td>
                                         <td>
                                             <a href="{{route('admin.moderator.videos.list',$moderator->id)}}">{{$moderator->moderatorVideos ? $moderator->moderatorVideos->count() : "0.00"}}</a>
