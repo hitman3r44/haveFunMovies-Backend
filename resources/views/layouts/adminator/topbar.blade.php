@@ -139,12 +139,54 @@
                                         {{--class="fs-xs ti-angle-right mL-10"></i></a></span></li>--}}
                 {{--</ul>--}}
             {{--</li>--}}
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle no-after"
+                   data-toggle="dropdown"><i class="fa fa-language" aria-hidden="true"></i> &nbsp;Lang</a>
+                <ul class="dropdown-menu">
+                        <ul class="ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">
+                            <li>
+                                <a href="{{url('/user_session_language/en')}}" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
+                                    <div class="peer mR-15">
+                                        <img class="w-3r bdrs-50p" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi6QUKztbC0Iorr2Q6Ccz-xorhWbIy3R8WOP0gvD0n9zx643OW" alt="">
+                                    </div>
+                                    <div class="peer peer-greed">
+                                        <div>
+                                            <div class="peers jc-sb fxw-nw mB-5">
+                                                <div class="peer">
+                                                    <p class="fw-500 mB-0">English</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{url('/user_session_language/es')}}" class="peers fxw-nw td-n p-20 bdB c-grey-800 cH-blue bgcH-grey-100">
+                                    <div class="peer mR-15">
+                                        <img class="w-3r bdrs-50p" src="https://i.pinimg.com/originals/d6/c6/0b/d6c60be5e028eb83d10d4cd916000ef5.png" alt="">
+                                    </div>
+                                    <div class="peer peer-greed">
+                                        <div>
+                                            <div class="peers jc-sb fxw-nw mB-5">
+                                                <div class="peer">
+                                                    <p class="fw-500 mB-0">Spanish</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10">
                         <img class="w-2r bdrs-50p" src=""@if(Auth::guard('admin')->user()->picture){{Auth::guard('admin')->user()->picture}} @else {{asset('placeholder.png')}} @endif" alt="">
                     </div>
-                    <div class="peer"><span class="fsz-sm c-grey-900">{{Auth::guard('admin')->user()->name}}</span></div>
+                    <div class="peer"><span class="fsz-sm c-grey-900" style="font-size:14px;">{{Auth::guard('admin')->user()->name}}</span></div>
                 </a>
                 <ul class="dropdown-menu fsz-sm">
                     {{--<li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i--}}
