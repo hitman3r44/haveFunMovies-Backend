@@ -33,10 +33,6 @@
 
     <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
 
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/jquery.Jcrop.css')}}"> -->
-
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/style-example.css')}}"> -->
-
     <style type="text/css">
 
         .container-narrow {

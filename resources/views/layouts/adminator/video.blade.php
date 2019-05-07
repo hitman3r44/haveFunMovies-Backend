@@ -16,6 +16,11 @@
 
     @yield('mid-styles')
 
+    <style>
+        ul.nav-right > li.dropdown.show.open > ul > li > a{
+            font-size:14px !important;
+        }
+    </style>
     @yield('styles')
 
     <?php echo Setting::get('header_scripts'); ?>
