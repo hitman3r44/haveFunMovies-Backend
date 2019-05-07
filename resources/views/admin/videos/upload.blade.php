@@ -428,23 +428,23 @@
                                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                         <div class="mb-30">
                                                             <div>
-                                                                <label class="label-cls">{{tr('compress_video')}}<span
-                                                                            class="asterisk"><i
-                                                                                class="fa fa-asterisk"></i></span>
-                                                                </label>
+                                                                {{--<label class="label-cls">{{tr('compress_video')}}<span--}}
+                                                                            {{--class="asterisk"><i--}}
+                                                                                {{--class="fa fa-asterisk"></i></span>--}}
+                                                                {{--</label>--}}
                                                             </div>
-                                                            <div class="radio radio-primary radio-inline">
-                                                                <input type="radio" id="COMPRESS_ENABLED"
-                                                                       name="compress_video"
-                                                                       value="{{COMPRESS_ENABLED}}">
-                                                                <label for="COMPRESS_ENABLED"> {{tr('yes')}} </label>
-                                                            </div>
-                                                            <div class="radio radio-inline radio-primary">
-                                                                <input type="radio" id="COMPRESS_DISABLED"
-                                                                       name="compress_video"
-                                                                       value="{{COMPRESS_DISABLED}}" checked>
-                                                                <label for="COMPRESS_DISABLED"> {{tr('no')}} </label>
-                                                            </div>
+                                                            {{--<div class="radio radio-primary radio-inline">--}}
+                                                                {{--<input type="radio" id="COMPRESS_ENABLED"--}}
+                                                                       {{--name="compress_video"--}}
+                                                                       {{--value="{{COMPRESS_ENABLED}}">--}}
+                                                                {{--<label for="COMPRESS_ENABLED"> {{tr('yes')}} </label>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="radio radio-inline radio-primary">--}}
+                                                                {{--<input type="radio" id="COMPRESS_DISABLED"--}}
+                                                                       {{--name="compress_video"--}}
+                                                                       {{--value="{{COMPRESS_DISABLED}}" checked>--}}
+                                                                {{--<label for="COMPRESS_DISABLED"> {{tr('no')}} </label>--}}
+                                                            {{--</div>--}}
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">

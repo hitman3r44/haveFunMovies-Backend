@@ -233,7 +233,7 @@ class VideoRepository {
 	 				'other_image1'=>$request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
 	 				'other_image2'=>$request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
 	 				'video_type'=>'required|in:'.VIDEO_TYPE_UPLOAD.','.VIDEO_TYPE_YOUTUBE.','.VIDEO_TYPE_OTHER,
-	 				'compress_video'=>'required|in:'.COMPRESS_ENABLED.','.COMPRESS_DISABLED,
+//	 				'compress_video'=>'required|in:'.COMPRESS_ENABLED.','.COMPRESS_DISABLED,
 	 				'video_upload_type'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? 'required|in:'.VIDEO_UPLOAD_TYPE_s3.','.VIDEO_UPLOAD_TYPE_DIRECT : '',
 	 				'video'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255',
 	 				'trailer_video'=>$request->hasFile('trailer_subtitle') ? ($request->video_type == VIDEO_TYPE_UPLOAD ?  'mimes:mp4' : 'required|max:255') : ($request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|max:255'), // If trailer subtitle uploading by admin without trailer video it will throw an error
@@ -541,7 +541,7 @@ class VideoRepository {
 
 		                if (Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED) {
 
-		                	$request->compress_video = DO_NOT_COMPRESS;
+//		                	$request->compress_video = DO_NOT_COMPRESS;
 		                }
 
                     	/****** ORIGINAL VIDEO UPLOAD START *****/
@@ -564,7 +564,7 @@ class VideoRepository {
 
 		                	}
 
-			                $main_video_details = Helper::video_upload($request->file('video'), $request->compress_video);
+			                $main_video_details = Helper::video_upload($request->file('video'));
 
 	                    	$video_model->video = $main_video_details['db_url'];
 
@@ -588,7 +588,7 @@ class VideoRepository {
 
 		                	}
 
-	                        $trailer_video_details = Helper::video_upload($request->file('trailer_video'), $request->compress_video);
+	                        $trailer_video_details = Helper::video_upload($request->file('trailer_video'));
 
 	                        $video_model->trailer_video = $trailer_video_details['db_url'];  
 
@@ -974,7 +974,7 @@ class VideoRepository {
 
 	                    		$video_model->save();
 
-                                dispatch(new StreamviewCompressVideo($inputFile, $local_url, TRAILER_VIDEO, $video_model->id,$file_name,$request->send_notification, $video_status , $request->admin_video_id));
+//                                dispatch(new StreamviewCompressVideo($inputFile, $local_url, TRAILER_VIDEO, $video_model->id,$file_name,$request->send_notification, $video_status , $request->admin_video_id));
                             }
 	                        
 	                    }
@@ -1009,7 +1009,7 @@ class VideoRepository {
 
 	                        	Log::info($inputFile);
 
-	                            dispatch(new StreamviewCompressVideo($inputFile, $local_url, MAIN_VIDEO, $video_model->id, $file_name, $request->send_notification , $video_status , $request->admin_video_id));
+//	                            dispatch(new StreamviewCompressVideo($inputFile, $local_url, MAIN_VIDEO, $video_model->id, $file_name, $request->send_notification , $video_status , $request->admin_video_id));
 	                       
 	                        }
 

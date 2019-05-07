@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-12 text-center">
 
         @if (Session::has('errors'))
             <div class="alert alert-danger" role="alert">
