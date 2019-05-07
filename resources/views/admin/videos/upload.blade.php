@@ -73,6 +73,8 @@
        <div class="col-md-12">
            @if(env('QUEUE_DRIVER') != 'redis')
 
+               {{ logger(tr('warning_error_queue')) }}
+
                {{--<div class="alert alert-warning">--}}
                    {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
                    {{--{{tr('warning_error_queue')}}--}}
