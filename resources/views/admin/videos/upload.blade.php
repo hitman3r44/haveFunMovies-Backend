@@ -80,23 +80,22 @@
            @endif
 
            @if(checkSize())
-
-               {{--<div class="alert alert-warning">--}}
-                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
-                   {{--{{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}--}}
-                   {{--<b>{{ini_get('post_max_size')}}</b>--}}
-               {{--</div>--}}
+               <div class="alert alert-warning">
+                   <button type="button" class="close" data-dismiss="alert">×</button>
+                   {{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}
+                   <b>{{ini_get('post_max_size')}}</b>
+               </div>
            @endif
 
            @if(Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED)
-
-               {{--<div class="alert alert-warning">--}}
-                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
-                   {{--{{tr('ffmpeg_warning_notes')}}--}}
-               {{--</div>--}}
+               <div class="alert alert-warning">
+                   <button type="button" class="close" data-dismiss="alert">×</button>
+                   {{tr('ffmpeg_warning_notes')}}
+               </div>
            @endif
        </div>
    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="bgc-white bd">
@@ -297,19 +296,19 @@
 
                                                     </li>
 
-                                                    <li style="width: 98%" class="cast-list">
+{{--                                                    <li style="width: 98%" class="cast-list">--}}
 
-                                                        <label for="details">{{tr('cast_crews')}} </label>
+{{--                                                        <label for="details">{{tr('cast_crews')}} </label>--}}
 
-                                                        <select id="cast_crews" name="cast_crew_ids[]" class="select2"
-                                                                multiple>
+{{--                                                        <select id="cast_crews" name="cast_crew_ids[]" class="select2"--}}
+{{--                                                                multiple>--}}
 
-                                                            @foreach($cast_crews as $cast_crew)
-                                                                <option value="{{$cast_crew->id}}"
-                                                                        @if(in_array($cast_crew->id, $video_cast_crews)) selected @endif>{{$cast_crew->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </li>
+{{--                                                            @foreach($cast_crews as $cast_crew)--}}
+{{--                                                                <option value="{{$cast_crew->id}}"--}}
+{{--                                                                        @if(in_array($cast_crew->id, $video_cast_crews)) selected @endif>{{$cast_crew->name}}</option>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </select>--}}
+{{--                                                    </li>--}}
 
                                                 </ul>
 
