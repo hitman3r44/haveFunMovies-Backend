@@ -31,7 +31,7 @@
                 </div>
 
                 <form action="{{route('admin.save.coupon')}}" method="POST" class="form-horizontal" role="form">
-
+                    @csrf
                     <input type="hidden" name="id" value="{{$edit_coupon->id}}">
 
                     <div class="box-body">

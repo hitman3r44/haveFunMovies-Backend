@@ -1108,7 +1108,7 @@ class AdminController extends Controller
     public function delete_moderator(Request $request)
     {
 
-        if ($moderator = Moderator::find($request->id)) {
+        if ($moderator = Admin::find($request->id)) {
 
             if ($moderator->picture) {
 
@@ -1153,7 +1153,7 @@ class AdminController extends Controller
     public function moderator_approve(Request $request)
     {
 
-        $moderator = Moderator::find($request->id);
+        $moderator = Admin::find($request->id);
 
         $moderator->is_activated = 1;
 
@@ -1174,7 +1174,7 @@ class AdminController extends Controller
     public function moderator_decline(Request $request)
     {
 
-        if ($moderator = Moderator::find($request->id)) {
+        if ($moderator = Admin::find($request->id)) {
 
             $moderator->is_activated = 0;
 
@@ -1192,7 +1192,7 @@ class AdminController extends Controller
     public function moderator_view_details($id)
     {
 
-        if ($moderator = Moderator::find($id)) {
+        if ($moderator = Admin::find($id)) {
 
             return view('admin.moderators.moderator-details')
                 ->with('moderator', $moderator)
@@ -1228,8 +1228,7 @@ class AdminController extends Controller
             'categories.is_series',
             'categories.status',
             'categories.is_approved',
-            'categories.created_by',
-            'categories.created_at'
+            'categories.created_by'
         )
             ->orderBy('categories.created_at', 'desc')
             ->distinct('categories.id')
@@ -3973,11 +3972,18 @@ class AdminController extends Controller
                 $model->update($request->all());
 
             } else {
-                $model = Subscription::create($request->all());
+                $model = new Subscription();
+                $model->title = $request->title;
+                $model->description = $request->description;
+                $model->plan = $request->plan;
+                $model->no_of_account = $request->no_of_account;
+                $model->amount = $request->amount;
                 $model->status = 1;
                 $model->popular_status = $request->popular_status ? 1 : 0;
                 $model->unique_id = $model->title;
                 $model->no_of_account = $request->no_of_account;
+                $model->subscription_type = 'month';
+                $model->total_subscription = 0;
                 $model->save();
             }
 
@@ -4162,7 +4168,7 @@ class AdminController extends Controller
 
             $base_query = $base_query->where('moderator_id', $request->id);
 
-            $moderator = Moderator::find($request->id);
+            $moderator = Admin::find($request->id);
         }
 
         $data = $base_query->get();
@@ -4570,6 +4576,26 @@ class AdminController extends Controller
             ->with('templates', $templates)
             ->with('page', 'email_templates')
             ->with('sub_page', 'email_templates');
+
+    }
+
+
+    public function create_template(Request $request)
+    {
+        $template_types = [USER_WELCOME => tr('user_welcome_email'),
+            ADMIN_USER_WELCOME => tr('admin_created_user_welcome_mail'),
+            FORGOT_PASSWORD => tr('forgot_password'),
+            MODERATOR_WELCOME => tr('moderator_welcome'),
+            PAYMENT_EXPIRED => tr('payment_expired'),
+            PAYMENT_GOING_TO_EXPIRY => tr('payment_going_to_expiry'),
+            NEW_VIDEO => tr('new_video'),
+            EDIT_VIDEO => tr('edit_video')];
+
+
+        return view('admin.email_templates.create_template')
+            ->with('template_types', $template_types)
+            ->with('page', 'email_templates')
+            ->with('sub_page', 'create_template');
 
     }
 
@@ -5026,7 +5052,7 @@ class AdminController extends Controller
 
         $users_list = User::select('users.id', 'users.name', 'users.email', 'users.is_activated', 'users.is_verified', 'users.amount_paid')->where('is_activated', 1)->where('email_notification', 1)->where('is_verified', 1)->get();
 
-        $moderator_list = Moderator::select('moderators.id', 'moderators.name', 'moderators.email', 'moderators.is_activated')->where('is_activated', 1)->get();
+        $moderator_list = Admin::select('admins.id', 'admins.name', 'admins.email', 'admins.is_activated')->where('is_activated', 1)->get();
 
         return view('admin.mail_camp')
             ->with('users_list', $users_list)

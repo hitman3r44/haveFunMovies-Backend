@@ -129,8 +129,8 @@
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-gears"></i> {{tr('settings')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li  class="list-inline-item active"><i class="fa fa-gears"></i> {{tr('settings')}}</li>
 @endsection
 
 @section('content')

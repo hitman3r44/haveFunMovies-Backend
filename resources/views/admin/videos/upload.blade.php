@@ -14,6 +14,8 @@
     <li class="list-inline-item active"> {{tr('add_video')}}</li>
 @endsection
 
+
+
 @section('styles')
 
     <link rel="stylesheet" href="{{asset('assets/css/wizard.css')}}">
@@ -30,6 +32,10 @@
     <link rel="stylesheet" href="{{asset('assets/css/jquery.awesome-cropper.css')}}">
 
     <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
+
+    <!-- <link rel="stylesheet" href="{{asset('assets/css/jquery.Jcrop.css')}}"> -->
+
+    <!-- <link rel="stylesheet" href="{{asset('assets/css/style-example.css')}}"> -->
 
     <style type="text/css">
 
@@ -63,35 +69,37 @@
 
 @section('content')
 
-    @if(env('QUEUE_DRIVER') !== 'redis')
+   <div class="row">
+       <div class="col-md-12">
+           @if(env('QUEUE_DRIVER') != 'redis')
 
-        {{ logger(tr('warning_error_queue')) }}
+               {{--<div class="alert alert-warning">--}}
+                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                   {{--{{tr('warning_error_queue')}}--}}
+               {{--</div>--}}
+           @endif
 
-{{--        <div class="alert alert-warning">--}}
-{{--            <button type="button" class="close" data-dismiss="alert">×</button>--}}
-{{--            {{tr('warning_error_queue')}}--}}
-{{--        </div>--}}
-    @endif
+           @if(checkSize())
 
-    @if(checkSize())
+               {{--<div class="alert alert-warning">--}}
+                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                   {{--{{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}--}}
+                   {{--<b>{{ini_get('post_max_size')}}</b>--}}
+               {{--</div>--}}
+           @endif
 
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}
-            <b>{{ini_get('post_max_size')}}</b>
-        </div>
-    @endif
+           @if(Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED)
 
-    @if(Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED)
-
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{tr('ffmpeg_warning_notes')}}
-        </div>
-    @endif
-    <div class="row gap-20">
+               {{--<div class="alert alert-warning">--}}
+                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                   {{--{{tr('ffmpeg_warning_notes')}}--}}
+               {{--</div>--}}
+           @endif
+       </div>
+   </div>
+    <div class="row">
         <div class="col-md-12">
-            <div class="bgc-white p-20 bd">
+            <div class="bgc-white bd">
 
                 <div class="main-content" style="padding: 15px 10px 10px;">
 

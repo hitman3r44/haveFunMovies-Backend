@@ -27,7 +27,7 @@
 
                             <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
                                   method="POST" enctype="multipart/form-data" role="form">
-
+                                @csrf
                                 <div class="box-body">
                                     <div class="col-md-6">
                                         <div class="form-group">

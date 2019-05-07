@@ -5,7 +5,6 @@
 @section('content-header')
     <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_banner_videos') }}</h4>
 @endsection
-class="list-inline-item"
 @section('styles')
 
     <link rel="stylesheet" href="{{asset('assets/css/wizard.css')}}">
@@ -90,6 +89,7 @@ class="list-inline-item"
                             <form id="video-upload"
                                   action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.video')}}"
                                   method="POST" enctype="multipart/form-data" role="form">
+                                @csrf
                                 <div class="tab-content">
                                     <div class="tab-pane active" role="tabpanel" id="step1">
                                         <!-- <h3>Video Details</h3> -->

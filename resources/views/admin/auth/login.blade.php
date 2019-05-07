@@ -13,7 +13,7 @@
 
     <h4 class="fw-300 c-grey-900 mB-40">Login</h4>
     <form role="form" method="POST" action="{{ url('/admin/login') }}">
-        {{ csrf_field() }}
+        @csrf
         <input type="hidden" name="timezone" value="" id="userTimezone">
 
         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">

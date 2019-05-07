@@ -35,7 +35,7 @@
 
                     @if(count($model) > 0)
 
-                        <table id="datatable-withoutpagination" class="table table-bordered table-striped">
+                        <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
 
                             <thead>
                             <tr>
