@@ -779,7 +779,7 @@ class Helper
     }
 
 
-    public static function video_upload($picture, $compress_type)
+    public static function video_upload($picture, $compress_type = false)
     {
 
         $s3_url = "";

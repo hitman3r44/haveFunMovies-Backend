@@ -14,4 +14,10 @@ class Settings extends Model
     protected $fillable = [
         'key', 'value'
     ];
+
+
+    public static function set($key, $value)
+    {
+        return self::where('key', $key)->update(['value' => $value]);
+    }
 }

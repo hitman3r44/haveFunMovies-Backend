@@ -33,10 +33,6 @@
 
     <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
 
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/jquery.Jcrop.css')}}"> -->
-
-    <!-- <link rel="stylesheet" href="{{asset('assets/css/style-example.css')}}"> -->
-
     <style type="text/css">
 
         .container-narrow {
@@ -73,6 +69,8 @@
        <div class="col-md-12">
            @if(env('QUEUE_DRIVER') != 'redis')
 
+               {{ logger(tr('warning_error_queue')) }}
+
                {{--<div class="alert alert-warning">--}}
                    {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
                    {{--{{tr('warning_error_queue')}}--}}
@@ -80,23 +78,22 @@
            @endif
 
            @if(checkSize())
-
-               {{--<div class="alert alert-warning">--}}
-                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
-                   {{--{{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}--}}
-                   {{--<b>{{ini_get('post_max_size')}}</b>--}}
-               {{--</div>--}}
+               <div class="alert alert-warning">
+                   <button type="button" class="close" data-dismiss="alert">×</button>
+                   {{tr('max_upload_size')}} <b>{{ini_get('upload_max_filesize')}}</b>&nbsp;&amp;&nbsp;{{tr('post_max_size')}}
+                   <b>{{ini_get('post_max_size')}}</b>
+               </div>
            @endif
 
            @if(Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED)
-
-               {{--<div class="alert alert-warning">--}}
-                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
-                   {{--{{tr('ffmpeg_warning_notes')}}--}}
-               {{--</div>--}}
+               <div class="alert alert-warning">
+                   <button type="button" class="close" data-dismiss="alert">×</button>
+                   {{tr('ffmpeg_warning_notes')}}
+               </div>
            @endif
        </div>
    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="bgc-white bd">
@@ -297,19 +294,19 @@
 
                                                     </li>
 
-                                                    <li style="width: 98%" class="cast-list">
+{{--                                                    <li style="width: 98%" class="cast-list">--}}
 
-                                                        <label for="details">{{tr('cast_crews')}} </label>
+{{--                                                        <label for="details">{{tr('cast_crews')}} </label>--}}
 
-                                                        <select id="cast_crews" name="cast_crew_ids[]" class="select2"
-                                                                multiple>
+{{--                                                        <select id="cast_crews" name="cast_crew_ids[]" class="select2"--}}
+{{--                                                                multiple>--}}
 
-                                                            @foreach($cast_crews as $cast_crew)
-                                                                <option value="{{$cast_crew->id}}"
-                                                                        @if(in_array($cast_crew->id, $video_cast_crews)) selected @endif>{{$cast_crew->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </li>
+{{--                                                            @foreach($cast_crews as $cast_crew)--}}
+{{--                                                                <option value="{{$cast_crew->id}}"--}}
+{{--                                                                        @if(in_array($cast_crew->id, $video_cast_crews)) selected @endif>{{$cast_crew->name}}</option>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </select>--}}
+{{--                                                    </li>--}}
 
                                                 </ul>
 
@@ -431,23 +428,23 @@
                                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                         <div class="mb-30">
                                                             <div>
-                                                                <label class="label-cls">{{tr('compress_video')}}<span
-                                                                            class="asterisk"><i
-                                                                                class="fa fa-asterisk"></i></span>
-                                                                </label>
+                                                                {{--<label class="label-cls">{{tr('compress_video')}}<span--}}
+                                                                            {{--class="asterisk"><i--}}
+                                                                                {{--class="fa fa-asterisk"></i></span>--}}
+                                                                {{--</label>--}}
                                                             </div>
-                                                            <div class="radio radio-primary radio-inline">
-                                                                <input type="radio" id="COMPRESS_ENABLED"
-                                                                       name="compress_video"
-                                                                       value="{{COMPRESS_ENABLED}}">
-                                                                <label for="COMPRESS_ENABLED"> {{tr('yes')}} </label>
-                                                            </div>
-                                                            <div class="radio radio-inline radio-primary">
-                                                                <input type="radio" id="COMPRESS_DISABLED"
-                                                                       name="compress_video"
-                                                                       value="{{COMPRESS_DISABLED}}" checked>
-                                                                <label for="COMPRESS_DISABLED"> {{tr('no')}} </label>
-                                                            </div>
+                                                            {{--<div class="radio radio-primary radio-inline">--}}
+                                                                {{--<input type="radio" id="COMPRESS_ENABLED"--}}
+                                                                       {{--name="compress_video"--}}
+                                                                       {{--value="{{COMPRESS_ENABLED}}">--}}
+                                                                {{--<label for="COMPRESS_ENABLED"> {{tr('yes')}} </label>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div class="radio radio-inline radio-primary">--}}
+                                                                {{--<input type="radio" id="COMPRESS_DISABLED"--}}
+                                                                       {{--name="compress_video"--}}
+                                                                       {{--value="{{COMPRESS_DISABLED}}" checked>--}}
+                                                                {{--<label for="COMPRESS_DISABLED"> {{tr('no')}} </label>--}}
+                                                            {{--</div>--}}
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">

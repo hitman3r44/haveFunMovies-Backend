@@ -37,8 +37,5 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
-
-        $user = User::find(1);
-        $user->assignRole('admin');
     }
 }

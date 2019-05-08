@@ -64,6 +64,7 @@ use App\Model\Flag;
 
 use App\Model\Coupon;
 
+use Illuminate\Support\Facades\App;
 use Validator;
 
 use Hash;
