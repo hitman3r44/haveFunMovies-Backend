@@ -217,7 +217,7 @@ class VideoRepository {
 
 	 		$validator = Validator::make($request->all(),
 	 			[
-	 				'admin_video_id'=>'exists:admin_videos,id',
+//	 				'admin_video_id'=>'exists:admin_videos,id',
 	 				'title'=>'required|max:255|min:4',	
 	 				'publish_type'=>'required|in:'.PUBLISH_NOW.','.PUBLISH_LATER,
 	 				'publish_time'=>$request->publish_type == PUBLISH_LATER ? 'required' : '',
