@@ -1232,7 +1232,7 @@ class AdminController extends Controller
             'categories.created_by'
         )
             ->orderBy('categories.created_at', 'desc')
-            ->distinct('categories.id')
+           #  ->distinct('categories.id')
             ->paginate(10);
 
         return view('admin.categories.categories')->with('categories', $categories)->withPage('categories')->with('sub_page', 'view-categories');
