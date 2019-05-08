@@ -495,7 +495,7 @@ $('form').ajaxForm({
         $("#finish_video").attr('disabled', false);
 
         $(".loader-form").hide();
-        console.log("Sumit Error" + xhr);
+        console.log(xhr);
         if (xhr.response.success) {
 
             window.location.href= view_video_url+xhr.response.data.id;
