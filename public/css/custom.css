@@ -1,4 +1,4 @@
-.dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+.dropdown-menu.dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
     top: auto;
     bottom: 100%;
     margin-bottom: 2px;
