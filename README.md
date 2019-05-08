@@ -100,3 +100,4 @@ Please contribute using [Github Flow](https://guides.github.com/introduction/flo
 ## Important Links
 
  - [Docker Compose Cheat Sheet](https://gist.github.com/buonzz/054304b3145323c34ed05cb65f1b174f)
+ - [](https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose)
