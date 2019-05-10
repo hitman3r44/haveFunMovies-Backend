@@ -22,8 +22,8 @@ services:
 
   #Nginx Service
   webserver:
-    image: nginx:alpine
-    container_name: webserver
+    image: ${NGINX_IMAGE}
+    container_name: ${NGINX_CONTAINER_NAME}
     restart: unless-stopped
     tty: true
     ports:
@@ -37,15 +37,15 @@ services:
 
   #MySQL Service
   db:
-    image: mysql:5.7.22
-    container_name: db
+    image: ${MYSQL_IMAGE}
+    container_name: ${MYSQL_CONTAINER_NAME}
     restart: unless-stopped
     tty: true
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DOCKER_DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
