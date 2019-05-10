@@ -426,6 +426,7 @@ $('form').ajaxForm({
         }
 
         if (err) {
+            console.log("Sumit before sent" + xhr);
 
             $("#error_messages_text").html(err);
 
@@ -494,7 +495,7 @@ $('form').ajaxForm({
         $("#finish_video").attr('disabled', false);
 
         $(".loader-form").hide();
-
+        console.log(xhr);
         if (xhr.response.success) {
 
             window.location.href= view_video_url+xhr.response.data.id;
