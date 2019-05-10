@@ -3,10 +3,8 @@
 /public/storage
 /storage/*.key
 /vendor
-
 .idea
 .phpunit.result.cache
-.env.example
 Homestead.json
 Homestead.yaml
 
@@ -22,7 +20,6 @@ public/storage
 public/hot
 public/uploads
 storage/*.key
-.env
 Homestead.yaml
 Homestead.json
 /.vagrant
