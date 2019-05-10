@@ -16,14 +16,14 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
 
   #Nginx Service
   webserver:
-    image: nginx:alpine
-    container_name: webserver
+    image: ${NGINX_IMAGE}
+    container_name: ${NGINX_CONTAINER_NAME}
     restart: unless-stopped
     tty: true
     ports:
@@ -31,26 +31,26 @@ services:
       - "443:443"
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
 
   #MySQL Service
   db:
-    image: mysql:5.7.22
-    container_name: db
+    image: ${MYSQL_IMAGE}
+    container_name: ${MYSQL_CONTAINER_NAME}
     restart: unless-stopped
     tty: true
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DOCKER_DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - dbdata:/var/lib/mysql/
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
 
