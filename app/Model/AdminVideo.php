@@ -12,48 +12,48 @@ class AdminVideo extends Model
 {
 	public function videoImage()
     {
-        return $this->hasMany('App\AdminVideoImage');
+        return $this->hasMany('App\Model\AdminVideoImage');
     }
 
     public function userHistory()
     {
-        return $this->hasMany('App\UserHistory');
+        return $this->hasMany('App\Model\UserHistory');
     }
 
     public function moderator()
     {
-        return $this->hasOne('App\Moderator', 'id', 'uploaded_by');
+        return $this->hasOne('App\Model\Moderator', 'id', 'uploaded_by');
     }
 
 
     public function getScopeLikeCount() {
 
-        return $this->hasMany('App\LikeDislikeVideo', 'admin_video_id', 'video_id')->where('like_status', DEFAULT_TRUE);
+        return $this->hasMany('App\Model\LikeDislikeVideo', 'admin_video_id', 'video_id')->where('like_status', DEFAULT_TRUE);
 
     }
 
     public function getLikeCount() {
 
-        return $this->hasMany('App\LikeDislikeVideo', 'admin_video_id', 'id')->where('like_status', DEFAULT_TRUE);
+        return $this->hasMany('App\Model\LikeDislikeVideo', 'admin_video_id', 'id')->where('like_status', DEFAULT_TRUE);
 
     }
 
     public function getDisLikeCount() {
 
-        return $this->hasMany('App\LikeDislikeVideo', 'admin_video_id', 'id')->where('dislike_status', DEFAULT_TRUE);
+        return $this->hasMany('App\Model\LikeDislikeVideo', 'admin_video_id', 'id')->where('dislike_status', DEFAULT_TRUE);
 
     }
     
 
     public function getScopeDisLikeCount() {
 
-        return $this->hasMany('App\LikeDislikeVideo', 'admin_video_id', 'video_id')->where('dislike_status', DEFAULT_TRUE);
+        return $this->hasMany('App\Model\LikeDislikeVideo', 'admin_video_id', 'video_id')->where('dislike_status', DEFAULT_TRUE);
 
     }
 
     public function userRating()
     {
-        return $this->hasMany('App\UserRating');
+        return $this->hasMany('App\Model\UserRating');
     }
 
     public function userWishlist()
