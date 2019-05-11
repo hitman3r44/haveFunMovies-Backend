@@ -184,9 +184,9 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10">
-                        <img class="w-2r bdrs-50p" src=""@if(Auth::guard('admin')->user()->picture){{Auth::guard('admin')->user()->picture}} @else {{asset('placeholder.png')}} @endif" alt="">
+                        <img class="w-2r bdrs-50p" src=""@if(Auth::user()->picture){{Auth::user()->picture}} @else {{asset('placeholder.png')}} @endif" alt="">
                     </div>
-                    <div class="peer"><span class="fsz-sm c-grey-900" style="font-size:14px;">{{Auth::guard('admin')->user()->name}}</span></div>
+                    <div class="peer"><span class="fsz-sm c-grey-900" style="font-size:14px;">{{Auth::user()->name}}</span></div>
                 </a>
                 <ul class="dropdown-menu fsz-sm">
                     {{--<li><a href="#" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i--}}
@@ -197,8 +197,15 @@
                     <li><a href="{{route('admin.profile')}}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="ti-user mR-10"></i>
                             <span>Profile</span></a></li>
                     <li>
-                        <a href="{{route('admin.logout')}}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i
-                                    class="ti-power-off mR-10"></i> <span>{{tr('sign_out')}}</span></a></li>
+
+                        <a class="d-b td-n pY-5 bgcH-grey-100 c-grey-700" href="{{ route('admin.logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ti-power-off mR-10"></i> <span>{{tr('sign_out')}}</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>

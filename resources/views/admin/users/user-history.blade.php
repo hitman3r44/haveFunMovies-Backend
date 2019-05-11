@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>{{showEntries($_GET, $i+1)}}</td>
                                         <td>{{$history->title}}</td>
-                                        <td>{{convertTimeToUSERzone($history->date, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</td>
+                                        <td>{{convertTimeToUSERzone($history->date, Auth::user()->timezone, 'd-m-Y H:i a')}}</td>
                                         <td>
                                             <ul class="admin-action btn btn-default">
                                                 <li class="dropup">

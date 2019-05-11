@@ -413,6 +413,11 @@ return array(
 	'normal' => 'Normal',
 	'genre_not_found'=>'The selected genre doesn’t exists',
 
+    'permission'	=>	'Permission',
+
+    'edit_role'	=>	'Edit Role',
+    'role'	=>	'Role',
+
 	'no_user_found' => 'No users found',
 	'no_user_detail_found'=>'No user found in given Email Id',
 	'user_details_not_save'=>'User Details not saving, please try again later',

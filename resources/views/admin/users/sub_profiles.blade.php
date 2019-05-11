@@ -57,8 +57,8 @@
                                         <td>{{showEntries($_GET, $i+1)}}</td>
                                         <td>{{$sub_profile_details->name}}</td>
                                         <td><img src="{{$sub_profile_details->picture}}" style="height: 30px;"/></td>
-                                        <td>{{convertTimeToUSERzone($sub_profile_details->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</td>
-                                        <td>{{convertTimeToUSERzone($sub_profile_details->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</td>
+                                        <td>{{convertTimeToUSERzone($sub_profile_details->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</td>
+                                        <td>{{convertTimeToUSERzone($sub_profile_details->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</td>
                                         <td>
 
 

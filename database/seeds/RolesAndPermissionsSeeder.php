@@ -13,29 +13,35 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // create permissions
+        // create Permission
         Permission::create(['name' => 'admin']);
         Permission::create(['name' => 'moderator']);
         Permission::create(['name' => 'director']);
         Permission::create(['name' => 'publisher']);
+        Permission::create(['name' => 'role']);
+        Permission::create(['name' => 'permission']);
 
-        // create roles and assign created permissions
 
-        // this can be done as separate statements
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo('admin');
+        // create Role
 
-        // or may be done by chaining
-        $role = Role::create(['name' => 'moderator'])
-            ->givePermissionTo(['moderator', 'director', 'publisher']);
+        Role::create(['name' => 'super-admin'])->givePermissionTo(Permission::all());
 
-        $role = Role::create(['name' => 'director']);
-        $role->givePermissionTo('director');
 
-        $role = Role::create(['name' => 'publisher']);
-        $role->givePermissionTo('publisher');
+        Role::create(['name' => 'admin'])->givePermissionTo([
+            'admin', 'role', 'permission'
+        ]);
 
-        $role = Role::create(['name' => 'super-admin']);
-        $role->givePermissionTo(Permission::all());
+        Role::create(['name' => 'moderator'])->givePermissionTo([
+            'moderator', 'director', 'publisher'
+        ]);
+
+        Role::create(['name' => 'director'])->givePermissionTo([
+            'director'
+        ]);
+
+        Role::create(['name' => 'publisher'])->givePermissionTo([
+            'publisher'
+        ]);
+
     }
 }

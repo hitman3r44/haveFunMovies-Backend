@@ -32,7 +32,7 @@ class AdminExportController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     /**
@@ -50,10 +50,7 @@ class AdminExportController extends Controller
      */
     public function users_export(Request $request)
     {
-
         try {
-
-            // Get the admin selected format for download
 
 //    		$format = $request->format ? $request->format : 'xls';
             $format = 'xls';
@@ -106,6 +103,7 @@ class AdminExportController extends Controller
 
         } catch (\Exception $e) {
 
+            dd($e);
             $error = $e->getMessage();
 
             return redirect()->route('admin.users')->with('flash_error', $error);
