@@ -122,6 +122,7 @@
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
+                @csrf
               <h3 class="control-sidebar-heading">General Settings</h3>
 
               <div class="form-group">

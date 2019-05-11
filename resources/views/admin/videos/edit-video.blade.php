@@ -89,9 +89,8 @@
                             </ul>
                         </div>
 
-                        <form id="video-upload"
-                              action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.edit.video')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form id="video-upload" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.edit.video')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="step1">
                                     <!-- <h3>Video Details</h3> -->

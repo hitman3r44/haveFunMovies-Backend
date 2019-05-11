@@ -151,6 +151,7 @@
 								    <div id="{{$video->video_id}}" class="modal fade" role="dialog">
 									  	<div class="modal-dialog">
 										  	<form action="{{route('moderator.save.video-payment', $video->video_id)}}" method="POST">
+                                            @csrf
 											    <!-- Modal content-->
 											   	<div class="modal-content">
 											      	

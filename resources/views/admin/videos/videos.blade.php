@@ -377,6 +377,7 @@
 
                                                 <form action="{{route('admin.save.video-payment', $video->video_id)}}"
                                                       method="POST">
+                                                @csrf
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
@@ -525,6 +526,7 @@
 
                                                     <form action="{{route('admin.banner.set', ['admin_video_id'=>$video->video_id])}}"
                                                           method="POST" enctype="multipart/form-data">
+                                                    @csrf
 
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
@@ -631,6 +633,7 @@
                                                 <div class="modal-dialog">
                                                     <form action="{{route('admin.save.video.position',['video_id'=>$video->video_id])}}"
                                                           method="POST">
+                                                    @csrf
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
                                                             <div class="modal-header">

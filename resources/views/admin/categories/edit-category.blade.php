@@ -34,11 +34,11 @@
                 @if(Setting::get('admin_delete_control'))
 
                     <form class="form-horizontal" role="form">
+                        @csrf
 
                         @else
 
-                            <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
-                                  enctype="multipart/form-data" role="form">
+                            <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST" enctype="multipart/form-data" role="form">
                                 @csrf
                                 @endif
 

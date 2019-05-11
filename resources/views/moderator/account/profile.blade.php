@@ -65,6 +65,7 @@
                     <div class="active tab-pane" id="profile_name">
 
                         <form class="form-horizontal" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.save.profile')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
 
                             <input type="hidden" name="id" value="{{Auth::guard('moderator')->user()->id}}">
 
@@ -118,7 +119,7 @@
                     <div class="tab-pane" id="image">
 
                         <form class="form-horizontal" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.save.profile')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                            @csrf
                             <input type="hidden" name="id" value="{{Auth::guard('moderator')->user()->id}}">
 
                             @if(Auth::guard('moderator')->user()->picture)
@@ -152,7 +153,7 @@
                     <div class="tab-pane" id="password">
 
                         <form class="form-horizontal" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.change.password')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                            @csrf
                             <input type="hidden" name="id" value="{{Auth::guard('moderator')->user()->id}}">
 
                             <div class="form-group">

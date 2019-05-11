@@ -207,9 +207,8 @@
 
                     <div class="streamview-tab-content active">
 
-                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-
+                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -308,9 +307,8 @@
                     <!-- train section -->
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -459,9 +457,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -551,8 +548,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -676,9 +673,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -770,9 +766,8 @@
                     <!-- Email settings -->
 
                     <div class="streamview-tab-content">
-                        <form action="{{route('admin.email.settings.save')}}" method="POST"
-                              enctype="multipart/form-data" role="form">
-
+                        <form action="{{route('admin.email.settings.save')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -883,9 +878,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
                                 <div class="row">
 
@@ -973,8 +967,8 @@
                     <!-- APP Url Settings -->
 
                     <div class="streamview-tab-content">
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.mobile.settings.save')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.mobile.settings.save')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -1071,9 +1065,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="box-body">
 
                                 <div class="row">
@@ -1152,9 +1145,9 @@
                     <!-- OTHER Settings -->
 
                     <div class="streamview-tab-content">
-                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.other.settings.save')}}"
-                              method="POST" enctype="multipart/form-data" r ole="form">
+                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.other.settings.save')}}" method="POST" enctype="multipart/form-data" r ole="form">
 
+                            @csrf
                             <div class="box-body">
                                 <div class="row">
 

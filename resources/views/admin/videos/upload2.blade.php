@@ -81,8 +81,8 @@
                                                data-toggle="tab">{{tr('upload_video_image')}}</a>
                                         </li>
                                     </ul>
-                                    <form method="post" enctype="multipart/form-data" id="upload_video_form"
-                                          action="{{route('admin.videos.save')}}">
+                                    <form method="post" enctype="multipart/form-data" id="upload_video_form" action="{{route('admin.videos.save')}}">
+                                        @csrf
                                         <div class="tab-content">
                                             <!-- tab1 -->
                                             <div role="tabpanel" class="tab-pane fade in active" id="first">
@@ -714,6 +714,7 @@
    </div>
 
    <form id="example-advanced-form" action="#">
+       @csrf
        <h3>{{tr('video_details')}}</h3>
        <fieldset>
            <legend>Account Information</legend>

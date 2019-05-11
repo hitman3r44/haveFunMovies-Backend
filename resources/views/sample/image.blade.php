@@ -26,6 +26,7 @@
         <h1>Upload cropped image to server</h1>
 
         <form action="{{route('sample')}}" method="POST" enctype="multipart/form-data">
+            @csrf
 
         <label class="label" data-toggle="tooltip" title="Change your avatar">
 

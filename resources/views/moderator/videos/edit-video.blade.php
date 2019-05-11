@@ -75,6 +75,7 @@
             </div>
 
             <form id="video-upload" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.save.edit.video')}}" method="POST" enctype="multipart/form-data" role="form">
+                @csrf
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="step1">
                         <input type="hidden" value="1" name="ajax_key">

@@ -23,6 +23,7 @@
 
                 <form class="form-horizontal" action="{{route('admin.email.success')}}" method="POST"
                       enctype="multipart/form-data" role="form">
+                    @csrf
 
                     <div class="box-body">
 
@@ -39,12 +40,14 @@
                                 <!-- Moderators-->
                                 <label for="moderators">
                                     <input type="radio" name="to" id="moderators"
-                                           value="{{MODERATORS}}">&nbsp;{{tr('moderators')}} </label>
-
-                                <label for="custom_users">
-                                    <input type="radio" name="to" id="custom_user" value="{{CUSTOM_USERS}}">
-                                    &nbsp; {{tr('custom_users')}}
+                                           value="{{MODERATORS}}">&nbsp;{{tr('moderators')}}
                                 </label>
+
+{{--                                <label for="custom_users">--}}
+{{--                                    <input type="radio" name="to" id="custom_user" value="{{CUSTOM_USERS}}">--}}
+{{--                                    &nbsp; {{tr('custom_users')}}--}}
+{{--                                </label>--}}
+
                                 <br><br>
                                 <!-- Users -->
                                 <div id="preview" style="display: none">
