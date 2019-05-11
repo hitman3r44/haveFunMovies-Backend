@@ -7,7 +7,8 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
     <li class="list-inline-item"><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> {{tr('users')}}</a></li>
     <li class="list-inline-item"><i class="fa fa-user"></i> {{tr('view_user')}}</li>
 @endsection
@@ -62,7 +63,19 @@
                             </div>
                         </div>
 
-
+                        @if ($user->hasRole('super-admin') || $user->hasRole('admin'))
+                            <div class="form-group row">
+                                <label for="mobile" class="col-sm-2 control-label">* {{tr('role')}}</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="role" id="role" required>
+                                        <option value="}">Select Role</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->name}}">{{ucwords($role->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="form-group row">
                             <label for="password" class="col-sm-2 control-label">* {{tr('password')}}</label>

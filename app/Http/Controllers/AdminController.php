@@ -65,6 +65,7 @@ use App\Model\Flag;
 use App\Model\Coupon;
 
 use Illuminate\Support\Facades\App;
+use Spatie\Permission\Models\Role;
 use Validator;
 
 use Hash;
@@ -152,7 +153,7 @@ class AdminController extends Controller
 
         $id = Auth::guard('admin')->user()->id;
 
-        $admin = Admin::find($id);
+        $admin = User::find($id);
 
         $admin->token = Helper::generate_token();
 
@@ -217,7 +218,7 @@ class AdminController extends Controller
 
         $id = Auth::guard('admin')->user()->id;
 
-        $admin = Admin::find($id);
+        $admin = User::find($id);
 
         return view('admin.account.profile')->with('admin', $admin)->withPage('profile')->with('sub_page', '');
     }
@@ -254,7 +255,7 @@ class AdminController extends Controller
             return back()->with('flash_error', $error_messages);
         } else {
 
-            $admin = Admin::find($request->id);
+            $admin = User::find($request->id);
 
             $admin->name = $request->has('name') ? $request->name : $admin->name;
 
@@ -317,7 +318,7 @@ class AdminController extends Controller
 
         } else {
 
-            $admin = Admin::find($request->id);
+            $admin = User::find($request->id);
 
             if (Hash::check($old_password, $admin->password)) {
                 $admin->password = Hash::make($new_password);
@@ -376,8 +377,12 @@ class AdminController extends Controller
 
     public function users_create()
     {
+        $roles = Role::all();
 
-        return view('admin.users.add-user')->with('page', 'users')->with('sub_page', 'add-user');
+        return view('admin.users.add-user')
+            ->with('roles', $roles)
+            ->with('page', 'users')
+            ->with('sub_page', 'add-user');
     }
 
     /**
@@ -399,12 +404,18 @@ class AdminController extends Controller
 
         $user = User::find($request->id);
 
-        if (count($user) == 0) {
+        $roles = Role::all();
+
+        if (!$user) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
 
-        return view('admin.users.edit-user')->withUser($user)->with('sub_page', 'view-user')->with('page', 'users');
+        return view('admin.users.edit-user')
+            ->withUser($user)
+            ->with('roles', $roles)
+            ->with('sub_page', 'view-user')
+            ->with('page', 'users');
     }
 
     /**
@@ -512,6 +523,16 @@ class AdminController extends Controller
 
             $user->save();
 
+            if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
+                if ($request->id != '') {
+                    $user->assignRole($request->role);
+                } else {
+                    $user->syncRoles($request->role);
+                }
+            }
+
+
+
             if ($new_user) {
 
                 $sub_profile = new SubProfile;
@@ -559,36 +580,8 @@ class AdminController extends Controller
 
             }
 
-            if ($user) {
+            return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
 
-                $moderator = Moderator::where('email', $user->email)->first();
-
-                // If the user already registered as moderator, atuomatically the status will update.
-                if ($moderator && $user) {
-
-                    $user->is_moderator = DEFAULT_TRUE;
-                    $user->moderator_id = $moderator->id;
-                    $user->save();
-
-                    $moderator->is_activated = DEFAULT_TRUE;
-                    $moderator->is_user = DEFAULT_TRUE;
-                    $moderator->save();
-
-                }
-
-                register_mobile('web');
-
-                if (Setting::get('track_user_mail')) {
-
-                    user_track("Have Fun Movies - New User Created");
-
-                }
-
-                return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
-
-            } else {
-                return back()->with('flash_error', tr('admin_not_error'));
-            }
 
         }
 
@@ -943,7 +936,7 @@ class AdminController extends Controller
     public function moderators()
     {
 
-        $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
+        $admins = User::orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.moderators.moderators')->with('admins', $admins)->withPage('moderators')->with('sub_page', 'view-moderator');
     }
@@ -956,7 +949,7 @@ class AdminController extends Controller
     public function edit_moderator($id)
     {
 
-        $admin = Admin::find($id);
+        $admin = User::find($id);
 
         return view('admin.moderators.edit-moderator')->with('admin', $admin)->with('page', 'moderators')->with('sub_page', 'edit-moderator');
     }
@@ -996,7 +989,7 @@ class AdminController extends Controller
                 $email = "";
 
                 if ($request->id != '') {
-                    $admin = Admin::find($request->id);
+                    $admin = User::find($request->id);
                     $message = tr('admin_not_moderator');
 
                     if ($admin->email != $request->email) {
@@ -1109,7 +1102,7 @@ class AdminController extends Controller
     public function delete_moderator(Request $request)
     {
 
-        if ($moderator = Admin::find($request->id)) {
+        if ($moderator = User::find($request->id)) {
 
             if ($moderator->picture) {
 
@@ -1154,7 +1147,7 @@ class AdminController extends Controller
     public function moderator_approve(Request $request)
     {
 
-        $moderator = Admin::find($request->id);
+        $moderator = User::find($request->id);
 
         $moderator->is_activated = 1;
 
@@ -1175,7 +1168,7 @@ class AdminController extends Controller
     public function moderator_decline(Request $request)
     {
 
-        if ($moderator = Admin::find($request->id)) {
+        if ($moderator = User::find($request->id)) {
 
             $moderator->is_activated = 0;
 
@@ -1193,7 +1186,7 @@ class AdminController extends Controller
     public function moderator_view_details($id)
     {
 
-        if ($moderator = Admin::find($id)) {
+        if ($moderator = User::find($id)) {
 
             return view('admin.moderators.moderator-details')
                 ->with('moderator', $moderator)
@@ -1230,7 +1223,7 @@ class AdminController extends Controller
             'categories.status',
             'categories.is_approved',
             'categories.created_by',
-	    'categories.created_at'
+            'categories.created_at'
         )
             ->orderBy('categories.created_at', 'desc')
             ->distinct('categories.id')
@@ -4170,7 +4163,7 @@ class AdminController extends Controller
 
             $base_query = $base_query->where('moderator_id', $request->id);
 
-            $moderator = Admin::find($request->id);
+            $moderator = User::find($request->id);
         }
 
         $data = $base_query->get();
@@ -5054,7 +5047,7 @@ class AdminController extends Controller
 
         $users_list = User::select('users.id', 'users.name', 'users.email', 'users.is_activated', 'users.is_verified', 'users.amount_paid')->where('is_activated', 1)->where('email_notification', 1)->where('is_verified', 1)->get();
 
-        $moderator_list = Admin::select('admins.id', 'admins.name', 'admins.email', 'admins.is_activated')->where('is_activated', 1)->get();
+        $moderator_list = User::select('id', 'name', 'email', 'is_activated')->where('is_activated', 1)->get();
 
         return view('admin.mail_camp')
             ->with('users_list', $users_list)

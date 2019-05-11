@@ -512,7 +512,20 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::get('videos/banner/remove', 'AdminController@videos_remove_banner')->name('banner.remove');
 
+
+    Route::resource('role', 'RoleController');
 });
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/embed', 'UserController@embed_video')->name('embed_video');
 

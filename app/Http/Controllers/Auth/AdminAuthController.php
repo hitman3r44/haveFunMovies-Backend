@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Model\Admin;
+use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -95,16 +96,16 @@ class AdminAuthController extends Controller
      */
     protected function create(array $data)
     {
-        return Admin::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
-    protected function authenticated(Request $request, Admin $admin){
+    protected function authenticated(Request $request, User $admin){
         if(\Auth::guard('admin')->check()) {
-            if($admin = Admin::find(\Auth::guard('admin')->user()->id)) {
+            if($admin = User::find(\Auth::guard('admin')->user()->id)) {
                 $admin->timezone = $request->has('timezone') ? $request->timezone : '';
                 $admin->save();
             }   

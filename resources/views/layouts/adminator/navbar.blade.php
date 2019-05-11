@@ -61,36 +61,13 @@
                     </li>
                 </ul>
             </li>
-
-
-            <li class="nav-item dropdown" id="moderators">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-users"></i>
-                    </span>
-                    <span class="title">{{tr('moderators')}}/{{tr('admin')}}</span> <span class="arrow">
-                        <i class="ti-angle-right"></i>
-                    </span>
+            <li class="nav-item">
+                <a class="sidebar-link" href="{{url('admin/role')}}">
+                            <span class="icon-holder">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                    <span class="title">{{tr('role')}}</span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.add.moderator')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('add_moderator')}}/{{tr('admin')}}</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.moderators')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('view_moderators')}}/{{tr('admin')}}</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
 
             <li class="nav-item dropdown" id="categories">
