@@ -20,7 +20,7 @@
                 <div class="row bgc-grey-600 p-10">
 
                     <div class="col-md-6 text-white">
-                        <h3>{{tr('add_moderator')}}</h3>
+                        <h3>{{tr('moderators')}}</h3>
                     </div>
 
                     <div class="col-md-6">
@@ -37,17 +37,17 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1"
-                                               href="{{route('admin.moderators.export' , ['format' => 'xls'])}}">
-                                                <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>
-                                            </a>
+                                            {{--<a role="menuitem" tabindex="-1"--}}
+                                               {{--href="{{route('admin.moderators.export' , ['format' => 'xls'])}}">--}}
+                                                {{--<span class="text-red"><b>{{tr('excel_sheet')}}</b></span>--}}
+                                            {{--</a>--}}
                                         </li>
 
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1"
-                                               href="{{route('admin.moderators.export' , ['format' => 'csv'])}}">
-                                                <span class="text-blue"><b>{{tr('csv')}}</b></span>
-                                            </a>
+                                            {{--<a role="menuitem" tabindex="-1"--}}
+                                               {{--href="{{route('admin.moderators.export' , ['format' => 'csv'])}}">--}}
+                                                {{--<span class="text-blue"><b>{{tr('csv')}}</b></span>--}}
+                                            {{--</a>--}}
                                         </li>
                                     </ul>
                                 </li>
