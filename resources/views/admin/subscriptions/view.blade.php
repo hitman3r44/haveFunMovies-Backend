@@ -157,12 +157,12 @@
                         <hr>
                         <strong><i class="fa fa-calendar margin-r-5"></i> {{tr('created_at')}}</strong>
 
-                        <p class="text-muted">{{convertTimeToUSERzone($data->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</p>
+                        <p class="text-muted">{{convertTimeToUSERzone($data->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</p>
 
                         <hr>
                         <strong><i class="fa fa-calendar margin-r-5"></i> {{tr('updated_at')}}</strong>
 
-                        <p class="text-muted">{{convertTimeToUSERzone($data->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</p>
+                        <p class="text-muted">{{convertTimeToUSERzone($data->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</p>
 
                         <hr>
 

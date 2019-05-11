@@ -171,9 +171,9 @@
 
                 <td>{{$user_details->timezone}}</td>
 
-                <td>{{convertTimeToUSERzone($user_details->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</td>
+                <td>{{convertTimeToUSERzone($user_details->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</td>
 
-                <td>{{convertTimeToUSERzone($user_details->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</td>
+                <td>{{convertTimeToUSERzone($user_details->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</td>
             </tr>
 
         @endforeach

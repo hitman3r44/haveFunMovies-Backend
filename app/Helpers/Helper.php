@@ -1968,7 +1968,7 @@ class Helper
 
     public static function permissionCheck($permission){
 
-        if(Auth::guard('admin')->user()->hasPermissionTo($permission))
+        if(Auth::user()->hasPermissionTo($permission))
         {
             return true;
         }

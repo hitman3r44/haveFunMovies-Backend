@@ -62,7 +62,7 @@
                                        placeholder="{{tr('mobile')}}">
                             </div>
                         </div>
-                        @if ($user->hasRole('super-admin') || $user->hasRole('admin'))
+                        @if ($authUser->hasRole('super-admin') || $authUser->hasRole('admin'))
                             <div class="form-group">
                                 <label for="mobile" class="col-sm-2 control-label">* {{tr('role')}}</label>
                                 <div class="col-sm-10">

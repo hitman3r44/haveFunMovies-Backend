@@ -28,8 +28,6 @@ use App\Model\Redeem;
 
 use App\Model\SubProfile;
 
-use App\Model\Notification;
-
 use App\Model\Category;
 
 use App\Model\RedeemRequest;
@@ -64,7 +62,7 @@ use App\Model\Flag;
 
 use App\Model\Coupon;
 
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Validator;
 
@@ -76,8 +74,6 @@ use DB;
 
 use DateTime;
 
-use Auth;
-
 use Exception;
 
 use Redirect;
@@ -85,10 +81,6 @@ use Redirect;
 use Setting;
 
 use Log;
-
-use App\Jobs\StreamviewCompressVideo;
-
-use App\Jobs\SendVideoMail;
 
 use App\Model\EmailTemplate;
 
@@ -111,7 +103,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     /**
@@ -151,7 +143,7 @@ class AdminController extends Controller
     public function dashboard()
     {
 
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::user()->id;
 
         $admin = User::find($id);
 
@@ -216,7 +208,7 @@ class AdminController extends Controller
     public function profile()
     {
 
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::user()->id;
 
         $admin = User::find($id);
 
@@ -378,9 +370,11 @@ class AdminController extends Controller
     public function users_create()
     {
         $roles = Role::all();
+        $authUser = Auth::user();
 
         return view('admin.users.add-user')
             ->with('roles', $roles)
+            ->with('authUser', $authUser)
             ->with('page', 'users')
             ->with('sub_page', 'add-user');
     }
@@ -403,6 +397,7 @@ class AdminController extends Controller
     {
 
         $user = User::find($request->id);
+        $authUser = Auth::user();
 
         $roles = Role::all();
 
@@ -413,6 +408,7 @@ class AdminController extends Controller
 
         return view('admin.users.edit-user')
             ->withUser($user)
+            ->with('authUser', $authUser)
             ->with('roles', $roles)
             ->with('sub_page', 'view-user')
             ->with('page', 'users');
@@ -2821,7 +2817,7 @@ class AdminController extends Controller
     public function email_settings()
     {
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         $result = EnvEditorHelper::getEnvValues();
 
@@ -2836,7 +2832,7 @@ class AdminController extends Controller
 
         $email_settings = ['MAIL_DRIVER', 'MAIL_HOST', 'MAIL_PORT', 'MAIL_USERNAME', 'MAIL_PASSWORD', 'MAIL_ENCRYPTION', 'MAILGUN_DOMAIN', 'MAILGUN_SECRET'];
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         if ($email_settings) {
 
@@ -2879,7 +2875,7 @@ class AdminController extends Controller
 
         $mobile_settings = ['FCM_SENDER_ID', 'FCM_SERVER_KEY', 'FCM_PROTOCOL'];
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         if ($mobile_settings) {
 
@@ -3668,7 +3664,7 @@ class AdminController extends Controller
     public function save_common_settings(Request $request)
     {
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         foreach ($request->all() as $key => $data) {
 

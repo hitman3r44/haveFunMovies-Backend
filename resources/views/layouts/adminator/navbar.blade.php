@@ -13,8 +13,8 @@
                             </div>
                             <div class="peer peer-greed">
 
-                                <h5 class="lh-1 mB-0 logo-text">{{ ucwords(Auth::guard('admin')->user()->name) }}</h5>
-                                <span class="mt-5 lh-1 mB-0 logo-text">{{ \App\Helpers\Helper::getUserType(Auth::guard('admin')->user()->user_type) }}</span>
+                                <h5 class="lh-1 mB-0 logo-text">{{ ucwords(Auth::user()->name) }}</h5>
+                                <span class="mt-5 lh-1 mB-0 logo-text">{{ \App\Helpers\Helper::getUserType(Auth::user()->user_type) }}</span>
                             </div>
                         </div>
                     </a>
@@ -61,6 +61,7 @@
                     </li>
                 </ul>
             </li>
+            @can('role')
             <li class="nav-item">
                 <a class="sidebar-link" href="{{url('admin/role')}}">
                             <span class="icon-holder">
@@ -69,6 +70,7 @@
                     <span class="title">{{tr('role')}}</span>
                 </a>
             </li>
+            @endcan
 
             <li class="nav-item dropdown" id="categories">
                 <a class="dropdown-toggle" href="javascript:void(0);">

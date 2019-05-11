@@ -85,7 +85,7 @@
                                     </h3>
 
                                     <span style="margin-left:0px" class="description text-uppercase">
-                                        {{tr('created_at')}} : {{convertTimeToUSERzone($video->video_date, Auth::guard('admin')->user()->timezone, 'd-m-Y h:i A')}}
+                                        {{tr('created_at')}} : {{convertTimeToUSERzone($video->video_date, Auth::user()->timezone, 'd-m-Y h:i A')}}
                                     </span>
 
                                 </div>

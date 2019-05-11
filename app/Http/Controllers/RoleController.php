@@ -16,7 +16,7 @@ class RoleController extends Controller
     {
         if(!Helper::permissionCheck('role'))
         {
-            return back()->with('error',Helper::getPermissionMsg());
+            return back()->with('flash_error',Helper::getPermissionMsg());
         }
 
         $roles = Role::all();
@@ -94,7 +94,7 @@ class RoleController extends Controller
     {
         if(!Helper::permissionCheck('role'))
         {
-            return back()->with('error',Helper::getPermissionMsg());
+            return back()->with('flash_error',Helper::getPermissionMsg());
         }
 
 
@@ -118,7 +118,7 @@ class RoleController extends Controller
 
         if(!Helper::permissionCheck('role'))
         {
-            return back()->with('error',Helper::getPermissionMsg());
+            return back()->with('flash_error',Helper::getPermissionMsg());
         }
 
         $permissions = Permission::all();
@@ -131,7 +131,7 @@ class RoleController extends Controller
     {
         if(!Helper::permissionCheck('role'))
         {
-            return back()->with('error',Helper::getPermissionMsg());
+            return back()->with('flash_error',Helper::getPermissionMsg());
         }
 
         $this->validate($request, [
