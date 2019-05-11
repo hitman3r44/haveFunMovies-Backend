@@ -428,7 +428,7 @@ class UserApiController extends Controller
 
                         $moderator->is_activated = DEFAULT_TRUE;
 
-                        $moderator->is_user = DEFAULT_TRUE;
+//                        $moderator->is_user = DEFAULT_TRUE;
 
                         $moderator->save();
 

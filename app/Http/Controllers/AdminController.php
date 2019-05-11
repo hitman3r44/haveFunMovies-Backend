@@ -399,7 +399,7 @@ class AdminController extends Controller
 
         $user = User::find($request->id);
 
-        if (count($user) == 0) {
+        if (is_array($user) ? count($user) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
@@ -571,7 +571,7 @@ class AdminController extends Controller
                     $user->save();
 
                     $moderator->is_activated = DEFAULT_TRUE;
-                    $moderator->is_user = DEFAULT_TRUE;
+//                    $moderator->is_user = DEFAULT_TRUE;
                     $moderator->save();
 
                 }
@@ -636,7 +636,7 @@ class AdminController extends Controller
 
                     if ($moderator) {
 
-                        $moderator->is_user = 0;
+//                        $moderator->is_user = 0;
 
                         $moderator->save();
                     }
@@ -674,7 +674,7 @@ class AdminController extends Controller
 
         $user_details = User::find($request->id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
@@ -802,7 +802,7 @@ class AdminController extends Controller
                 $user->save();
 
                 $moderator->is_activated = 1;
-                $moderator->is_user = 1;
+//                $moderator->is_user = 1;
                 $moderator->save();
 
                 return back()->with('flash_success', tr('admin_user_upgrade'));
@@ -1065,7 +1065,7 @@ class AdminController extends Controller
                         $user->save();
 
                         $admin->is_activated = DEFAULT_TRUE;
-                        $admin->is_user = DEFAULT_TRUE;
+//                        $admin->is_user = DEFAULT_TRUE;
                         $admin->save();
 
                     }
@@ -1117,18 +1117,18 @@ class AdminController extends Controller
 
             }
 
-            if ($moderator->is_user) {
-
-                $user = User::where('email', $moderator->email)->first();
-
-                if ($user) {
-
-                    $user->is_moderator = 0;
-
-                    $user->save();
-                }
-
-            }
+//            if ($moderator->is_user) {
+//
+//                $user = User::where('email', $moderator->email)->first();
+//
+//                if ($user) {
+//
+//                    $user->is_moderator = 0;
+//
+//                    $user->save();
+//                }
+//
+//            }
 
             $moderator->delete();
 
@@ -4142,7 +4142,7 @@ class AdminController extends Controller
 
         $user_details = User::find($id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
 

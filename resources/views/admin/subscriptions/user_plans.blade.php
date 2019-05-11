@@ -222,7 +222,8 @@
                                               style="cursor: default;">{{ Setting::get('currency')}} {{$subscription->amount}} / {{$subscription->plan}} M</span>
 
                                                 <a href="{{route('admin.subscription.save' , ['s_id' => $subscription->id, 'u_is'=>$id])}}"
-                                                   class="btn btn-success pull-right">{{tr('choose')}}</a>
+{{--                                                   class="btn btn-success pull-right">{{tr('choose')}}--}}
+                                                </a>
 
                                             </p>
                                             <br>
