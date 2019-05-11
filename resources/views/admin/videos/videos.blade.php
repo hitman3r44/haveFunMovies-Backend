@@ -64,7 +64,7 @@
 
                         @if(count($videos) > 0 )
 
-                            <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">
+{{--                            <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">--}}
 
 {{--                                <li class="dropdown">--}}
 {{--                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
@@ -86,7 +86,7 @@
 {{--                                        </li>--}}
 {{--                                    </ul>--}}
 {{--                                </li>--}}
-                            </ul>
+{{--                            </ul>--}}
 
                     @endif
 
