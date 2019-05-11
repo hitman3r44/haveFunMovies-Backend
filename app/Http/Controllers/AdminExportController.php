@@ -55,8 +55,8 @@ class AdminExportController extends Controller
 
             // Get the admin selected format for download
 
-//    		$format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+   		$format = $request->format ? $request->format : 'xlsx';
+
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -64,7 +64,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (!$result) {
 
                 return redirect()->route('admin.users')->with('flash_error', tr('no_user_found'));
 
@@ -135,7 +135,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //    		$format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -212,7 +212,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //            $format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -289,7 +289,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //            $format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -366,7 +366,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //            $format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 

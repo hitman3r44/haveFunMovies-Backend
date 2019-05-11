@@ -63,10 +63,9 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li role="presentation">
-                                            {{--<a role="menuitem" tabindex="-1"--}}
-                                               {{--href="{{route('admin.users.export' , ['format' => 'xls'])}}">--}}
-                                                {{--<span class="text-red"><b>{{tr('excel_sheet')}}</b></span>--}}
-                                            {{--</a>--}}
+                                            <a role="menuitem" tabindex="-1" href="{{route('admin.users.export' , ['format' => 'xlsx'])}}">
+                                            <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>
+                                            </a>
                                         </li>
 
                                         <li role="presentation">
@@ -87,22 +86,19 @@
 
                 <div class="box-body">
 
-                    @if(count($users) > 0)
+                    @if($users)
 
                         <div class="table table-responsive">
 
-                            <table id="dataTable-export" class="table table-striped table-bordered" cellspacing="0"
+                            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0"
                                    width="100%">
-
                                 <thead>
                                 <tr>
                                     <th>{{tr('id')}}</th>
                                     <th>{{tr('username')}}</th>
                                     <th>{{tr('email')}}</th>
-                                    {{--											<th>{{tr('upgrade')}}</th>--}}
                                     <th>{{tr('validity_days')}}</th>
                                     <th>{{tr('active_plan')}}</th>
-                                    {{--											<th>{{tr('sub_profiles')}}</th>--}}
                                     <th>{{tr('clear_login')}}</th>
                                     <th>{{tr('status')}}</th>
                                     <th>{{tr('action')}}</th>
@@ -133,16 +129,6 @@
                                         </td>
 
                                         <td>{{$user->email}}</td>
-
-                                        {{--										      	<td>--}}
-                                        {{--										      		@if($user->is_moderator)--}}
-                                        {{--										      			<a onclick="return confirm(&quot;{{tr('disable_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade.disable' , array('id' => $user->id, 'moderator_id' => $user->moderator_id))}}" class="badge badge-warning" title="Do you want to remove the user from Moderator Role?">{{tr('disable')}}</a>--}}
-                                        {{--										      		@else--}}
-                                        {{--										      			<a onclick="return confirm(&quot;{{tr('upgrade_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade' , array('id' => $user->id ))}}" class="badge badge-danger" title="Do you want to change the user as Moderator ?">{{tr('upgrade')}}</a>--}}
-                                        {{--										      		@endif--}}
-
-                                        {{--										      	</td>--}}
-
                                         <td>
                                             @if($user->user_type)
                                                 {{get_expiry_days($user->id)}}
@@ -152,13 +138,6 @@
                                         <td>
                                             <?php echo active_plan($user->id);?>
                                         </td>
-
-                                        {{--										      	<td>--}}
-                                        {{--										      		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}"><span class="badge badge-primary">--}}
-                                        {{--										      			{{count($user->subProfile)}} {{tr('sub_profiles')}}</span>--}}
-                                        {{--										      		</a>--}}
-                                        {{--										      	</td>--}}
-
                                         <td class="text-center">
 
                                             <a href="{{route('admin.users.clear-login', ['id'=>$user->id])}}"><span
@@ -280,34 +259,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-
-
-
-
-
-
-@section('scripts')
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#dataTable-export').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            });
-        });
-    </script>
 @endsection
