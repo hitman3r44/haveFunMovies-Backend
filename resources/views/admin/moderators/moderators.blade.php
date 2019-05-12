@@ -37,10 +37,10 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li role="presentation">
-                                            {{--<a role="menuitem" tabindex="-1"--}}
-                                               {{--href="{{route('admin.moderators.export' , ['format' => 'xls'])}}">--}}
-                                                {{--<span class="text-red"><b>{{tr('excel_sheet')}}</b></span>--}}
-                                            {{--</a>--}}
+                                            <a role="menuitem" tabindex="-1"
+                                               href="{{route('admin.moderators.export' , ['format' => 'xls'])}}">
+                                                <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>
+                                            </a>
                                         </li>
 
                                         <li role="presentation">

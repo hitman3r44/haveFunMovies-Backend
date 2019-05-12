@@ -55,7 +55,7 @@ class AdminExportController extends Controller
 
             // Get the admin selected format for download
 
-   		$format = $request->format ? $request-> format : 'xlsx';
+            $format = $request->get('format') ? $request->get('format') : 'xlsx';
 
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
@@ -92,7 +92,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('users_management');
 
@@ -169,7 +169,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('moderator_management');
 
@@ -246,7 +246,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('video_management');
 
@@ -323,7 +323,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('subscription_management');
 
@@ -400,7 +400,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('payperview_management');
 
