@@ -1,105 +1,99 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('users'))
 
-@section('content-header') 
+@section('content-header')
 
-	{{tr('users')}} 
+	{{tr('users')}}
 
 	<a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600" title="{{tr('any_help')}}">{{tr('help_ques_mark')}}</a>
 
 	<div id="help-content" style="display: none">
 
-	    <ul class="popover-list">
-	        <li><span class="text-green"><i class="fa fa-check-circle"></i></span> - {{tr('paid_subscribed_users')}}</li>
-	        <li><span class="text-red"><i class="fa fa-times"></i></span> -{{tr('unpaid_unsubscribed_user')}}</li>
-	        <li><b>{{tr('validity_days')}} - </b>{{tr('expiry_days_subscription_user')}}</li>
-	        <li><b>{{tr('upgrade')}} - </b>{{tr('admin_moderator_upgrade_option')}}</li>
-	    </ul>
-	    
+		<ul class="popover-list">
+			<li><span class="text-green"><i class="fa fa-check-circle"></i></span> - {{tr('paid_subscribed_users')}}</li>
+			<li><span class="text-red"><i class="fa fa-times"></i></span> -{{tr('unpaid_unsubscribed_user')}}</li>
+			<li><b>{{tr('validity_days')}} - </b>{{tr('expiry_days_subscription_user')}}</li>
+			<li><b>{{tr('upgrade')}} - </b>{{tr('admin_moderator_upgrade_option')}}</li>
+		</ul>
+
 	</div>
 
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-user"></i> {{tr('users')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}} </a> > </li>
+    <li class="list-inline-item active"><i class="fa fa-user"></i> {{tr('users')}}</li>
 @endsection
 
 @section('content')
 
-	@include('notification.notify')
+    <div class="row gap-20">
+        <div class="col-md-12">
+            <div class="bgc-white p-20 bd">
 
-	<div class="row">
-        <div class="col-xs-12">
-          	
-          	<div class="box box-primary">
-          	
-	          	<div class="box-header label-primary">
+                <div class="row bgc-grey-600 p-10">
 	                
-	          		<b style="font-size:18px;">
-	          			{{tr('users')}} @if(isset($subscription))- 
-	          			<a style="color: white;text-decoration: underline;" href="{{route('admin.subscriptions.view' , $subscription->unique_id)}}"> 
-	          				{{ $subscription->title }}
-	          			</a>@endif
-	          		</b>
-	              
+	          		<div class="col-md-6 text-white">
+                        <h3>{{tr('users')}}</h3>
+                    </div>
+                    <div class="col-md-6">
+                        @if(isset($subscription))-
+                        <a style="color: white;text-decoration: underline;" href="{{route('admin.subscriptions.view' , $subscription->unique_id)}}">
+                            {{ $subscription->title }}
+                        </a>@endif
 
-	               
-	                <a href="{{route('admin.users.create')}}" class="btn btn-default pull-right">{{tr('add_user')}}</a>
+                        <a href="{{route('admin.users.create')}}" class="btn btn-default pull-right">{{tr('add_user')}}</a>
 
-	                <!-- EXPORT OPTION START -->
+                        <!-- EXPORT OPTION START -->
 
-					@if(count($users) > 0 )
-	                
-		                <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">
-		                 	
-							<li class="dropdown">
-				                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				                  {{tr('export')}} <span class="caret"></span>
-				                </a>
-				                <ul class="dropdown-menu">
-				                  	<li role="presentation">
-				                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.export' , ['format' => 'xls'])}}">
-				                  			<span class="text-red"><b>{{tr('excel_sheet')}}</b></span>
-				                  		</a>
-				                  	</li>
+                        @if(count($users) > 0 )
 
-				                  	<li role="presentation">
-				                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.export' , ['format' => 'csv'])}}">
-				                  			<span class="text-blue"><b>{{tr('csv')}}</b></span>
-				                  		</a>
-				                  	</li>
-				                </ul>
-							</li>
-						</ul>
+                            <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">
 
-					@endif
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        {{tr('export')}} <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="{{route('admin.users.export' , ['format' => 'xls'])}}">
+                                                <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>
+                                            </a>
+                                        </li>
 
-	                <!-- EXPORT OPTION END -->
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="{{route('admin.users.export' , ['format' => 'csv'])}}">
+                                                <span class="text-blue"><b>{{tr('csv')}}</b></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        @endif
+                    </div>
 
 	            </div>
 
             
 	            <div class="box-body">
 
-	            	<div class="table-responsive" style="padding: 35px 0px"> 
-	            		
 		            	@if(count($users) > 0)
 
 		            		<div class="table table-responsive">
-				              	
-				              	<table id="datatable-withoutpagination" class="table table-bordered table-striped ">
+
+								<table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
 
 									<thead>
 									    <tr>
 											<th>{{tr('id')}}</th>
 											<th>{{tr('username')}}</th>
 											<th>{{tr('email')}}</th>
-											<th>{{tr('upgrade')}}</th>
+{{--											<th>{{tr('upgrade')}}</th>--}}
 											<th>{{tr('validity_days')}}</th>
 											<th>{{tr('active_plan')}}</th>
-											<th>{{tr('sub_profiles')}}</th>
+{{--											<th>{{tr('sub_profiles')}}</th>--}}
 											<th>{{tr('clear_login')}}</th>
 											<th>{{tr('status')}}</th>
 											<th>{{tr('action')}}</th>
@@ -130,14 +124,14 @@
 
 										      	<td>{{$user->email}}</td>
 										      	
-										      	<td>
-										      		@if($user->is_moderator)
-										      			<a onclick="return confirm(&quot;{{tr('disable_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade.disable' , array('id' => $user->id, 'moderator_id' => $user->moderator_id))}}" class="label label-warning" title="Do you want to remove the user from Moderator Role?">{{tr('disable')}}</a>
-										      		@else
-										      			<a onclick="return confirm(&quot;{{tr('upgrade_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade' , array('id' => $user->id ))}}" class="label label-danger" title="Do you want to change the user as Moderator ?">{{tr('upgrade')}}</a>
-										      		@endif
+{{--										      	<td>--}}
+{{--										      		@if($user->is_moderator)--}}
+{{--										      			<a onclick="return confirm(&quot;{{tr('disable_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade.disable' , array('id' => $user->id, 'moderator_id' => $user->moderator_id))}}" class="badge badge-warning" title="Do you want to remove the user from Moderator Role?">{{tr('disable')}}</a>--}}
+{{--										      		@else--}}
+{{--										      			<a onclick="return confirm(&quot;{{tr('upgrade_user_to_moderator',$user->name)}}&quot;);" href="{{route('admin.users.upgrade' , array('id' => $user->id ))}}" class="badge badge-danger" title="Do you want to change the user as Moderator ?">{{tr('upgrade')}}</a>--}}
+{{--										      		@endif--}}
 
-										      	</td>
+{{--										      	</td>--}}
 										      
 										      	<td>
 											      	@if($user->user_type)
@@ -149,25 +143,26 @@
 										      		<?php echo active_plan($user->id);?>
 										      	</td>
 
-										      	<td>
-										      		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}"><span class="label label-primary">
-										      			{{count($user->subProfile)}} {{tr('sub_profiles')}}</span>
-										      		</a>
-										      	</td>
+{{--										      	<td>--}}
+{{--										      		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}"><span class="badge badge-primary">--}}
+{{--										      			{{count($user->subProfile)}} {{tr('sub_profiles')}}</span>--}}
+{{--										      		</a>--}}
+{{--										      	</td>--}}
+
 										      	<td class="text-center">
 						      		
-										      		<a href="{{route('admin.users.clear-login', ['id'=>$user->id])}}"><span class="label label-warning">{{tr('clear')}}</span></a>
+										      		<a href="{{route('admin.users.clear-login', ['id'=>$user->id])}}"><span class="badge badge-warning">{{tr('clear')}}</span></a>
 
 										      	</td>
 
 										      	<td>
 											      	@if($user->is_activated)
 
-											      		<span class="label label-success">{{tr('approve')}}</span>
+											      		<span class="badge badge-success">{{tr('approve')}}</span>
 
 											      	@else
 
-											      		<span class="label label-warning">{{tr('pending')}}</span>
+											      		<span class="badge badge-warning">{{tr('pending')}}</span>
 
 											      	@endif
 
@@ -201,9 +196,9 @@
 
 											                  	<li role="presentation" class="divider"></li>
 
-											                  	<li role="presentation">
-											                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}">{{tr('sub_profiles')}}</a>
-											                  	</li>
+{{--											                  	<li role="presentation">--}}
+{{--											                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}">{{tr('sub_profiles')}}</a>--}}
+{{--											                  	</li>--}}
 
 											                  	<li role="presentation">
 											                  	 	@if(Setting::get('admin_delete_control'))
@@ -253,11 +248,8 @@
 						@else
 							<h3 class="no-result">{{tr('no_user_found')}}</h3>
 						@endif
-					</div>
 	            </div>
           	</div>
         </div>
-    
     </div>
-
 @endsection

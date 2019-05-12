@@ -1,16 +1,16 @@
-<div class="row">
-
+<div class="row gap-20">
     <div class="col-md-10">
-
-        <div class="box box-primary">
-
-            <div class="box-header label-primary">
-                <b style="font-size:18px;">@yield('title')</b>
-                <a href="{{route('admin.cast_crews.index')}}" class="btn btn-default pull-right">{{tr('cast_crews')}}</a>
+        <div class="bgc-white p-20 bd">
+            <div class="row bgc-grey-400 p-10">
+                <div class="col-8">
+                    <h6 class="c-grey-900"><b style="font-size:18px;">@yield('title')</b></h6>
+                </div>
+                <div class="col-4">
+                    <a href="{{route('admin.cast_crews.index')}}" class="btn btn-default pull-right">{{tr('cast_crews')}}</a>
+                </div>
             </div>
-
             <form class="form-horizontal" action="{{route('admin.cast_crews.save')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                @csrf
                 <div class="box-body">
 
                     <div class="form-group">
@@ -70,10 +70,7 @@
                     @endif
                 </div>
             </form>
-        
         </div>
-
     </div>
-
 </div>
 

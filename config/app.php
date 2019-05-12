@@ -171,7 +171,6 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -181,9 +180,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+//        Maatwebsite\Excel\ExcelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

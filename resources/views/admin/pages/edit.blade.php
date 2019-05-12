@@ -1,27 +1,22 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('edit_page'))
 
-@section('content-header', tr('edit_page'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('edit_page') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.pages.index')}}"><i class="fa fa-book"></i> {{tr('pages')}}</a></li>
-    <li class="active"> {{tr('edit_page')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.pages.index')}}"><i class="fa fa-book"></i> {{tr('pages')}}</a></li>
+    <li class="list-inline-item active"> {{tr('edit_page')}}</li>
 @endsection
 
 @section('content')
 
-@include('notification.notify')
-
-<div class="row">
-
+<div class="row gap-20">
     <div class="col-md-10">
-
-        <div class="box box-info">
-
-            <div class="box-header">
-            </div>
+        <div class="bgc-white p-20 bd">
 
             <form  action="{{route('admin.pages.save')}}" method="POST" enctype="multipart/form-data" role="form">
 
@@ -32,11 +27,6 @@
                         <label for="title">*{{tr('page_type')}}</label>
                         <input type="text" class="form-control" name="type" id="title" value="{{ $data->type  }}" placeholder="{{tr('enter_type')}}" disabled="true">
                     </div>
-<!-- 
-                    <div class="form-group">
-                        <label for="title">{{tr('title')}}</label>
-                        <input type="text" class="form-control" name="title" id="title" value="{{ $data->title  }}" placeholder="{{tr('enter_title')}}" disabled="true">
-                    </div> -->
 
                     <div class="form-group">
                         <label for="heading">*{{tr('heading')}}</label>
@@ -64,7 +54,7 @@
     </div>
 
 </div>
-   
+
 @endsection
 
 @section('scripts')

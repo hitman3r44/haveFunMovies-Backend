@@ -7,7 +7,7 @@
     <div class="login-box-body" style="height:300px">
 
         <form class="form-layout" role="form" method="POST" action="{{ url('/admin/password/email') }}">
-            {{ csrf_field() }}
+            @csrf
 
             <div class="login-logo">
                <a href="{{route('admin.login')}}"><b>{{Setting::get('site_name')}}</b></a>

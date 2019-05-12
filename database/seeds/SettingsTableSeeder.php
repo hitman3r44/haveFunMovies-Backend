@@ -17,7 +17,7 @@ class SettingsTableSeeder extends Seeder
         return [
             [
                 'key' => 'site_name',
-                'value' => 'Sumit Stream',
+                'value' => 'Have Fun Movies',
             ],
 
             [
@@ -57,7 +57,7 @@ class SettingsTableSeeder extends Seeder
 
             [
                 'key' => 'installation_process',
-                'value' => '1',
+                'value' => '3',
             ],
 
             [
@@ -422,12 +422,12 @@ class SettingsTableSeeder extends Seeder
 
             [
                 'key' => 'home_about_site',
-                'value' => 'Streamview is programmed to start subscription based on-demand video streaming sites like Netflix and Amazon Prime. Any business idea with this core concept can be easily developed using Streamview. From admin uploading a video to users making payment to users watching the videos, it’s all automated by a dynamic and responsive admin panel with multiple monetization channels.',
+                'value' => 'Have Fun Movies is programmed to start subscription based on-demand video streaming sites like Netflix and Amazon Prime. Any business idea with this core concept can be easily developed using Have Fun Movies. From admin uploading a video to users making payment to users watching the videos, it’s all automated by a dynamic and responsive admin panel with multiple monetization channels.',
             ],
 
             [
                 'key' => 'home_cancel_content',
-                'value' => 'If you decide Streamview isn\'t for you - no problem. No commitment. Cancel online at anytime.',
+                'value' => 'If you decide Have Fun Movies isn\'t for you - no problem. No commitment. Cancel online at anytime.',
             ],
 
             [
@@ -452,22 +452,22 @@ class SettingsTableSeeder extends Seeder
 
             [
                 'key' => 'meta_title',
-                'value' => 'STREAMVIEW',
+                'value' => 'HaveFunMovies',
             ],
 
             [
                 'key' => 'meta_description',
-                'value' => 'STREAMVIEW',
+                'value' => 'HaveFunMovies',
             ],
 
             [
                 'key' => 'meta_author',
-                'value' => 'STREAMVIEW',
+                'value' => 'HaveFunMovies',
             ],
 
             [
                 'key' => 'meta_keywords',
-                'value' => 'STREAMVIEW',
+                'value' => 'HaveFunMovies',
             ],
 
             [

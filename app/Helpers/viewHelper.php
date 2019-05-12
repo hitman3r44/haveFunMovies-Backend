@@ -54,6 +54,7 @@ use App\Model\Moderator;
 use App\Model\ContinueWatchingVideo;
 
 use App\Model\VideoCastCrew;
+use Illuminate\Support\Facades\App;
 
 function moderator_details($id , $property = "") {
 
@@ -73,25 +74,23 @@ function moderator_details($id , $property = "") {
 *
 */
 function tr($key , $confirmation_content_lang_key = "") {
-
     if(Auth::guard('admin')->check()) {
-        // $locale = config('app.locale');
         $locale = Setting::get('default_lang' , 'en');
-        
     } else {
-        
         if (!\Session::has('locale')) {
-
-            // $locale = \Session::put('locale', config('app.locale'));
             $locale = Setting::get('default_lang' , 'en');
         }else {
             $locale = \Session::get('locale');
         }
-
     }
-    
     return \Lang::choice('messages.'.$key, 0, Array('confirmation_content_lang_key' => $confirmation_content_lang_key), $locale);
 }
+
+//
+//function tr($key , $confirmation_content_lang_key = "") {
+//
+//    return App::getLocale().__('messages.'.$key);
+//}
 
 
 function envfile($key) {
@@ -598,6 +597,13 @@ function get_register_count() {
     $total = $ios_count + $android_count + $web_count;
 
     return array('total' => $total , 'ios' => $ios_count , 'android' => $android_count , 'web' => $web_count);
+}
+
+function get_percentage($amount, $totalAmount){
+
+    $totalAmount = $totalAmount != 0 ? $totalAmount : 1 ; // otherwise it produce devided by zero exception
+
+    return (100 * $amount) / $totalAmount ;
 }
 
 function last_days($days){

@@ -1,141 +1,133 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('revenue_system'))
 
-@section('content-header',tr('revenue_system'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('revenue_system') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-money"></i> {{tr('revenue_system')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
+    <li class="list-inline-item active"><i class="fa fa-money"></i> {{tr('revenue_system')}}</li>
 @endsection
 
 @section('content')
 
-@include('notification.notify')
 
-<div class="row">
+    <div class="row gap-20">
+        <div class="col-md-6">
+            <div class="bgc-white p-20 bd">
+                <div class="row bgc-grey-400 p-10">
+                    <h6 class="c-grey-900"><b>{{tr('subscription_payments')}}</b></h6>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                    </button>
+                </div>
 
-	<div class="col-md-6">
-	    <div class="box">
+                <div class="box-body">
+                    <div class="row">
 
-	        <div class="box-header with-border">
-	            
-	            <h3 class="box-title">{{tr('subscription_payments')}}</h3>
+                        <div class="col-md-12">
+                            <p class="text-center">
+                                <strong></strong>
+                            </p>
 
-	            <div class="box-tools pull-right">
-	                
-	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	                </button>
+                            <div class="chart-responsive">
+                                <canvas id="subscribe_payments" height="200px"></canvas>
+                            </div>
+                        </div>
+                    </div>
 
-	            </div>
-	        </div>
+                </div>
 
-	        <!-- /.box-header -->
-
-	        <div class="box-body">
-	            <div class="row">
-
-	                <div class="col-md-12">
-	                    <p class="text-center">
-	                        <strong></strong>
-	                    </p>
-	                    
-	                    <div class="chart-responsive">
-	                        <canvas id="subscribe_payments" height="200px"></canvas>
-	                    </div>
-	                </div>
-	            </div>
-	        
-	        </div>
-
-	        <div class="box-footer no-padding">
-	            <ul class="nav nav-pills nav-stacked">
-	                <li>
-	                    <a>
-	                        <strong class="text-red">{{tr('total_amount')}}</strong>
-	                        <span class="pull-right text-red">
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a>
+                                <strong class="text-red">{{tr('total_amount')}}</strong>
+                                <span class="pull-right text-red">
 	                            <i class="fa fa-angle-right"></i> ${{$total_revenue}}
 	                        </span>
-	                    </a>
-	                </li>
-	          </ul>
-	        </div>
-	    </div>                          
-	                
-	    
-	</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
 
-	<div class="col-md-6">
-	    <div class="box">
+        <div class="col-md-6">
+            <div class="box">
 
-	        <div class="box-header with-border">
-	            
-	            <h3 class="box-title">{{tr('video_subscribe_payments')}}</h3>
+                <div class="box-header with-border">
 
-	            <div class="box-tools pull-right">
-	                
-	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	                </button>
-	                
-	                <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
-	            </div>
-	        </div>
+                    <h3 class="box-title">{{tr('video_subscribe_payments')}}</h3>
 
-	        <!-- /.box-header -->
+                    <div class="box-tools pull-right">
 
-	        <div class="box-body">
-	            <div class="row">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                        </button>
 
-	                <div class="col-md-12">
-	                    <p class="text-center">
-	                        <strong></strong>
-	                    </p>
-	                    
-	                    <div class="chart-responsive">
-	                        <canvas id="video_subscribe_payments" height="200px"></canvas>
-	                    </div>
-	                </div>
-	            </div>
-	        
-	        </div>
+                        <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
+                    </div>
+                </div>
 
-	        <div class="box-footer no-padding">
-	            <ul class="nav nav-pills nav-stacked">
-	                <li>
-	                    <a>
-	                        <strong class="text-red">{{tr('total_amount')}}</strong>
-	                        <span class="pull-right text-red">
+                <!-- /.box-header -->
+
+                <div class="box-body">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <p class="text-center">
+                                <strong></strong>
+                            </p>
+
+                            <div class="chart-responsive">
+                                <canvas id="video_subscribe_payments" height="200px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a>
+                                <strong class="text-red">{{tr('total_amount')}}</strong>
+                                <span class="pull-right text-red">
 	                            <i class="fa fa-angle-right"></i> ${{$video_amount}}
 	                        </span>
-	                    </a>
-	                </li>
+                            </a>
+                        </li>
 
-	                <li>
-	                    <a>
-	                        <strong class="text-green">{{tr('total_admin_amount')}} </strong>
-	                        <span class="pull-right text-green">
+                        <li>
+                            <a>
+                                <strong class="text-green">{{tr('total_admin_amount')}} </strong>
+                                <span class="pull-right text-green">
 	                            <i class="fa fa-angle-right"></i> ${{$admin_amount}}
 	                        </span>
-	                    </a>
-	                </li>
+                            </a>
+                        </li>
 
-	                <li>
-	                    <a>
-	                        <strong class="text-yellow">{{tr('total_user_amount')}}</strong>
-	                        <span class="pull-right text-yellow">
+                        <li>
+                            <a>
+                                <strong class="text-yellow">{{tr('total_user_amount')}}</strong>
+                                <span class="pull-right text-yellow">
 	                            <i class="fa fa-angle-right"></i> ${{$user_amount}}
 	                        </span>
-	                    </a>
-	                </li>
-	          </ul>
-	        </div>
-	    </div>                          
-	                
-	    
-	</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-</div>
+
+        </div>
+
+    </div>
 @endsection
 
 
@@ -143,46 +135,46 @@
 
 
 
-<script type="text/javascript">
-    
+    <script type="text/javascript">
 
-//-------------
-  //- PIE CHART -
-  //-------------
-  // Get context with jQuery - using jQuery's .get() method.
-  var pieChartCanvas = $("#subscribe_payments").get(0).getContext("2d");
-  var pieChart = new Chart(pieChartCanvas);
-  var PieData = [
-    {
-      value: {{$total_revenue}},
-      color: "#00a65a",
-      highlight: "#00a65a",
-      label: "Total Subscription Amount"
-    },
-  ];
-  var pieOptions = {
-    //Boolean - Whether we should show a stroke on each segment
-    segmentShowStroke: true,
-    //String - The colour of each segment stroke
-    segmentStrokeColor: "#fff",
-    //Number - The width of each segment stroke
-    segmentStrokeWidth: 1,
-    //Number - The percentage of the chart that we cut out of the middle
-    percentageInnerCutout: 50, // This is 0 for Pie charts
-    //Number - Amount of animation steps
-    animationSteps: 100,
-    //String - Animation easing effect
-    animationEasing: "easeOutBounce",
-    //Boolean - Whether we animate the rotation of the Doughnut
-    animateRotate: true,
-    //Boolean - Whether we animate scaling the Doughnut from the centre
-    animateScale: false,
-    //Boolean - whether to make the chart responsive to window resizing
-    responsive: true,
-    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-    maintainAspectRatio: false,
-    //String - A legend template
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
+
+        //-------------
+        //- PIE CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var pieChartCanvas = $("#subscribe_payments").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas);
+        var PieData = [
+            {
+                value: {{$total_revenue}},
+                color: "#00a65a",
+                highlight: "#00a65a",
+                label: "Total Subscription Amount"
+            },
+        ];
+        var pieOptions = {
+            //Boolean - Whether we should show a stroke on each segment
+            segmentShowStroke: true,
+            //String - The colour of each segment stroke
+            segmentStrokeColor: "#fff",
+            //Number - The width of each segment stroke
+            segmentStrokeWidth: 1,
+            //Number - The percentage of the chart that we cut out of the middle
+            percentageInnerCutout: 50, // This is 0 for Pie charts
+            //Number - Amount of animation steps
+            animationSteps: 100,
+            //String - Animation easing effect
+            animationEasing: "easeOutBounce",
+            //Boolean - Whether we animate the rotation of the Doughnut
+            animateRotate: true,
+            //Boolean - Whether we animate scaling the Doughnut from the centre
+            animateScale: false,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive: true,
+            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: false,
+            //String - A legend template
+            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
     //String - A tooltip template
     tooltipTemplate: "<%=label%> - $<%=value %>"
   };

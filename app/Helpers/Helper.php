@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Auth;
 use Image;
 
 use Hash;
@@ -31,8 +32,6 @@ use App\Model\UserPayment;
 use App\Model\LikeDislikeVideo;
 
 use Exception;
-
-use Auth;
 
 use AWS;
 
@@ -779,7 +778,7 @@ class Helper
     }
 
 
-    public static function video_upload($picture, $compress_type)
+    public static function video_upload($picture, $compress_type = false)
     {
 
         $s3_url = "";
@@ -1953,6 +1952,33 @@ class Helper
         }
 
         return $s3_url;
+    }
+
+    public static function getUserType($userType){
+
+        $userTypes  = [
+            1 => 'Admin',
+            2 => 'Moderator',
+            3 => 'Director',
+            4 => 'Publisher',
+        ];
+
+        return isset($userTypes[$userType]) ? $userTypes[$userType] : 'N/A' ;
+    }
+
+    public static function permissionCheck($permission){
+
+        if(Auth::user()->hasPermissionTo($permission))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getPermissionMsg(){
+
+        return 'Sorry ! Access Denied for Permission Issue';
     }
 }
 

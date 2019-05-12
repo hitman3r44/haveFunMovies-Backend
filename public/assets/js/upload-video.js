@@ -203,8 +203,12 @@ function saveSubCategory(sub_category_id, step) {
 
     $("#sub_category_"+sub_category_id).addClass('active');
 
-    $("#"+step).click();   
-    // console.log(sub_cat_url);
+    $("#"+step).click();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax ({
         type : 'post',
         url : sub_cat_url,
@@ -254,7 +258,11 @@ function saveSubCategory(sub_category_id, step) {
 function loadGenre() {
     var subCategoryId = $("#sub_category_id").val();
     // var genre_id = $("#genre").val();
-    console.log(subCategoryId);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax ({
         type : 'post',
         url : sub_cat_url,
@@ -290,6 +298,11 @@ var percent = $('.percent');
 
 var error = false;
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $('form').ajaxForm({
 
     beforeSend: function(xhr,opts) {
@@ -413,6 +426,7 @@ $('form').ajaxForm({
         }
 
         if (err) {
+            console.log("Sumit before sent" + xhr);
 
             $("#error_messages_text").html(err);
 
@@ -481,7 +495,7 @@ $('form').ajaxForm({
         $("#finish_video").attr('disabled', false);
 
         $(".loader-form").hide();
-
+        console.log(xhr);
         if (xhr.response.success) {
 
             window.location.href= view_video_url+xhr.response.data.id;

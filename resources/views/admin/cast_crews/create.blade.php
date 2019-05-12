@@ -1,19 +1,19 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('add_cast_crew'))
 
-@section('content-header', tr('add_cast_crew'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_cast_crew') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.cast_crews.index')}}"><i class="fa fa-users"></i> {{tr('cast_crews')}}</a></li>
-    <li class="active">{{tr('add_cast_crew')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.cast_crews.index')}}"><i class="fa fa-users"></i> {{tr('cast_crews')}}</a></li>
+    <li class="list-inline-item active">{{tr('add_cast_crew')}}</li>
 @endsection
 
 
 @section('content')
-
-@include('notification.notify')
 
 @include('admin.cast_crews._form')
 

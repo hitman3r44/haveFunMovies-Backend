@@ -30,7 +30,7 @@ class Moderator extends Authenticatable
      */
 
     public function moderatorRedeem() {
-        return $this->hasOne('App\Redeem' , 'moderator_id' , 'id');
+        return $this->hasOne('App\Model\Redeem' , 'moderator_id' , 'id');
     }
 
     /**

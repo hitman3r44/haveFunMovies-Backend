@@ -56,7 +56,7 @@
 						<div class="col-sm-6 col-xs-12">
 							<div class="form-group">
 							    <label for="streaming_url">{{tr('streaming_url')}}</label>
-					    		<input type="url" class="form-control" id="streaming_url" name="streaming_url" placeholder="Ex: rtmp://streamhash.com/vod2/" aria-describedby="fileHelp">
+					    		<input type="url" class="form-control" id="streaming_url" name="streaming_url" placeholder="Ex: rtmp://havefunmovies.com/vod2/" aria-describedby="fileHelp">
 							</div><!--end of form-group-->
 						</div><!--end of column-->
 					</div><!--end of row-->

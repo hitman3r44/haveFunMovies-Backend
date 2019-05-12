@@ -25,6 +25,6 @@ class Subscription extends Model
 	}
 
 	public function userSubscription() {
-		return $this->hasMany('App\UserPayment', 'subscription_id');
+		return $this->hasMany('App\Model\UserPayment', 'subscription_id');
 	}
 }

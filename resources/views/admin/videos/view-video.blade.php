@@ -1,110 +1,113 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('view_video'))
 
+@section('content-header')
+    <div class="col-md-4">
+        <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('view_video') }}</h4>
+    </div>
+    <div class="col-md-8">
 
-@section('content-header') 
+        <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"
+           title="Any Help ?">HELP ?</a>
 
-{{tr('view_video')}} 
+        <div id="help-content" style="display: none">
 
-<a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600" title="Any Help ?">HELP ?</a>
+            <ul class="popover-list">
+                <li><b>{{tr('redeems')}} - </b>{{tr('moderator_earnings')}}</li>
+                <li><b>{{tr('viewers_cnt')}} - </b>{{tr('total_watch_count')}} </li>
+                <li><b>{{tr('ppv_created_by')}} - </b>{{tr('admin_moderator_names')}} </li>
+            </ul>
 
-<div id="help-content" style="display: none">
-
-    <ul class="popover-list">
-        <li><b>{{tr('redeems')}} - </b>{{tr('moderator_earnings')}}</li>
-        <li><b>{{tr('viewers_cnt')}} - </b>{{tr('total_watch_count')}} </li>
-        <li><b>{{tr('ppv_created_by')}} - </b>{{tr('admin_moderator_names')}} </li>
-    </ul>
-    
-</div>
-
+        </div>
+    </div>
 @endsection
 
 @section('styles')
 
-<style>
+    <style>
 
-    hr {
-        margin-bottom: 10px;
-        margin-top: 10px;
-    }
+        hr {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
 
-    .box-title {
-        line-height: 1.5;
-    }
+        .box-title {
+            line-height: 1.5;
+        }
 
-    .ppv-amount-label  {
+        .ppv-amount-label {
 
-        font-size: 16px; 
+            font-size: 16px;
 
-    }
-    .ppv-amount-label label {
-        padding: 8px 15px;
-    }
+        }
 
-    .info-box {
-        box-shadow: 1px 0px 3px 3px rgba(0,0,0,0.1);
-    }
+        .ppv-amount-label label {
+            padding: 8px 15px;
+        }
 
-    #revenue-section {
-        margin-top: 20px !important;
-    }
+        .info-box {
+            box-shadow: 1px 0px 3px 3px rgba(0, 0, 0, 0.1);
+        }
 
-</style>
+        #revenue-section {
+            margin-top: 20px !important;
+        }
+
+    </style>
 
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.videos')}}"><i class="fa fa-video-camera"></i> {{tr('videos')}}</a></li>
-    <li class="active">{{tr('video')}}</li>
-@endsection 
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
+    <li class="list-inline-item"><a href="{{route('admin.videos')}}"><i class="fa fa-video-camera"></i> {{tr('videos')}}
+        </a></li>
+    <li class="list-inline-item active">{{tr('video')}}</li>
+@endsection
 
 @section('content')
 
     <?php $url = $trailer_url = ""; ?>
 
-    <div class="row">
+    <div class="row gap-20">
+        <div class="col-md-12">
+            <div class="bgc-white p-20 bd">
 
-        @include('notification.notify')
+                <div class="row bgc-grey-400 p-10">
+                    <div class="box-header with-border bg-blue">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class='pull-left'>
 
-        <div class="col-lg-12">
+                                    <h3 class="box-title">
+                                        <b>{{$video->title}}</b>
+                                    </h3>
 
-            <div class="box">
+                                    <span style="margin-left:0px" class="description text-uppercase">
+                                        {{tr('created_at')}} : {{convertTimeToUSERzone($video->video_date, Auth::user()->timezone, 'd-m-Y h:i A')}}
+                                    </span>
 
-                <div class="box-header with-border bg-blue">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class='pull-right'>
+                                    @if ($video->compress_status <   OVERALL_COMPRESS_COMPLETED)
+                                        <span class="label label-danger">{{tr('compress')}}</span>
+                                    @else
+                                        <a href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}"
+                                           class="btn bg-orange text-uppercase">
+                                            <i class="fa fa-pencil"></i>
+                                            <b>{{tr('edit')}}</b>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class='pull-left'>
-
-                        <h3 class="box-title">
-                            <b>{{$video->title}}</b>
-                        </h3>
-
-                        <br>
-
-                        <span style="margin-left:0px" class="description text-uppercase">
-                           
-                            {{tr('created_at')}} :
-
-                            {{convertTimeToUSERzone($video->video_date, Auth::guard('admin')->user()->timezone, 'd-m-Y h:i A')}}
-                        </span>
-
+                        <div class="clearfix"></div>
                     </div>
-                    <div class='pull-right'>
-                        @if ($video->compress_status <   OVERALL_COMPRESS_COMPLETED) 
-                            <span class="label label-danger">{{tr('compress')}}</span>
-                        @else
-                            <a href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}" class="btn bg-orange text-uppercase">
-                                <i class="fa fa-pencil"></i> 
-                                <b>{{tr('edit')}}</b>
-                            </a>
-                        @endif
-                    </div>
-
-                    <div class="clearfix"></div>
                 </div>
-                <!-- /.box-header -->
 
                 <div class="box-body">
 
@@ -164,7 +167,7 @@
                                     <!-- /.info-box -->
                                 </div>
                                 <!-- /.col -->
-                            
+
                             </div>
 
                             <hr>
@@ -207,12 +210,12 @@
                     <!-- VIDEO STATUS -->
 
                     @if ($video->compress_status < OVERALL_COMPRESS_COMPLETED)
-                        
+
                         <a class="btn bg-warning btn-flat margin text-uppercase">
                             {{tr('compress')}}
 
                         </a>
-                    
+
                     @else
 
                         @if($video->is_approved == VIDEO_APPROVED)
@@ -228,14 +231,14 @@
                         @endif
                     @endif
 
-                    <!-- VIDEO STATUS -->
+                <!-- VIDEO STATUS -->
 
                     @if($video->status == VIDEO_PUBLISHED)
 
                         <a class="btn bg-blue btn-flat margin text-uppercase">
 
                             {{tr('published')}}
-                            
+
                         </a>
 
                     @else
@@ -243,7 +246,7 @@
                         <a class="btn bg-blue btn-flat margin text-uppercase">
 
                             {{tr('not_yet_published')}}
-                            
+
                         </a>
 
                     @endif
@@ -254,325 +257,342 @@
 
                         <div class="row">
 
-                          <div class="col-lg-12 row">
+                            <div class="col-lg-12 row">
 
-                            <div class="col-lg-6">
+                                <div class="col-lg-6">
 
-                                <h4 class="text-uppercase"><b>{{tr('details')}}</b></h4>
+                                    <h4 class="text-uppercase"><b>{{tr('details')}}</b></h4>
 
-                                <!-- start -->
+                                    <!-- start -->
 
-                                <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('category')}}</strong>
-
-                                <p class="text-muted">
-                                    {{$video->category_name}}
-                                </p>
-
-                                <hr>
-
-                                <!-- end -->
-
-                                <!-- start -->
-
-                                <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('sub_category')}}</strong>
-
-                                <p class="text-muted">
-                                    {{$video->sub_category_name}}
-                                </p>
-
-                                <hr>
-
-                                <!-- end -->
-
-                                <!-- start -->
-
-                                <strong><i class="fa fa-video-camera margin-r-5"></i> {{tr('video_type')}}</strong>
-
-                                <p class="text-muted">
-                                    
-                                    @if($video->video_type == 1)
-                                        {{tr('video_upload_link')}}
-                                    @endif
-
-                                    @if($video->video_type == 2)
-                                        {{tr('youtube')}}
-                                    @endif
-
-                                    @if($video->video_type == 3)
-                                        {{tr('other_link')}}
-                                    @endif
-                                
-                                </p>
-
-                                <hr>
-
-                                <!-- end -->
-
-                                <!-- start -->
-
-                                @if ($video->video_upload_type == 1 || $video->video_upload_type == 2)
-
-                                    <strong><i class="fa fa-video-camera margin-r-5"></i> {{tr('video_upload_type')}}</strong>
+                                    <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('category')}}</strong>
 
                                     <p class="text-muted">
-                                        @if($video->video_upload_type == 1)
-                                            {{tr('s3')}}
-                                        @endif
-
-                                        @if($video->video_upload_type == 2)
-                                            {{tr('direct')}}
-                                        @endif 
+                                        {{$video->category_name}}
                                     </p>
 
                                     <hr>
 
-                                @endif
+                                    <!-- end -->
+
+                                    <!-- start -->
+
+                                    <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('sub_category')}}</strong>
+
+                                    <p class="text-muted">
+                                        {{$video->sub_category_name}}
+                                    </p>
+
+                                    <hr>
+
+                                    <!-- end -->
+
+                                    <!-- start -->
+
+                                    <strong><i class="fa fa-video-camera margin-r-5"></i> {{tr('video_type')}}</strong>
+
+                                    <p class="text-muted">
+
+                                        @if($video->video_type == 1)
+                                            {{tr('video_upload_link')}}
+                                        @endif
+
+                                        @if($video->video_type == 2)
+                                            {{tr('youtube')}}
+                                        @endif
+
+                                        @if($video->video_type == 3)
+                                            {{tr('other_link')}}
+                                        @endif
+
+                                    </p>
+
+                                    <hr>
+
+                                    <!-- end -->
+
+                                    <!-- start -->
+
+                                    @if ($video->video_upload_type == 1 || $video->video_upload_type == 2)
+
+                                        <strong><i class="fa fa-video-camera margin-r-5"></i> {{tr('video_upload_type')}}
+                                        </strong>
+
+                                        <p class="text-muted">
+                                            @if($video->video_upload_type == 1)
+                                                {{tr('s3')}}
+                                            @endif
+
+                                            @if($video->video_upload_type == 2)
+                                                {{tr('direct')}}
+                                            @endif
+                                        </p>
+
+                                        <hr>
+
+                                    @endif
 
                                 <!-- end -->
 
-                                <!-- start -->
+                                    <!-- start -->
 
-                                <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('trailer_duration')}}</strong>
+                                    <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('trailer_duration')}}
+                                    </strong>
 
-                                <p class="text-muted">
-                                    {{$video->trailer_duration}}
-                                </p>
+                                    <p class="text-muted">
+                                        {{$video->trailer_duration}}
+                                    </p>
 
-                                <hr>
+                                    <hr>
 
-                                <!-- end -->
+                                    <!-- end -->
 
-                                <!-- start -->
+                                    <!-- start -->
 
-                                <strong><i class="fa fa-clock-o margin-r-5"></i> {{tr('duration')}}</strong>
+                                    <strong><i class="fa fa-clock-o margin-r-5"></i> {{tr('duration')}}</strong>
 
-                                <p class="text-muted">
-                                    {{$video->duration}}
-                                </p>
+                                    <p class="text-muted">
+                                        {{$video->duration}}
+                                    </p>
 
-                                <hr>
+                                    <hr>
 
-                                <!-- end -->
+                                    <!-- end -->
 
-                                <!-- start -->
+                                    <!-- start -->
 
-                                <strong><i class="fa fa-clock-o margin-r-5"></i> {{tr('publish_time')}}</strong>
+                                    <strong><i class="fa fa-clock-o margin-r-5"></i> {{tr('publish_time')}}</strong>
 
-                                <p class="text-muted">
-                                    {{$video->publish_time}}
-                                </p>
+                                    <p class="text-muted">
+                                        {{$video->publish_time}}
+                                    </p>
 
-                                <hr>
+                                    <hr>
 
-                                <!-- end -->
+                                    <!-- end -->
 
-                                <strong><i class="fa fa-star margin-r-5"></i> {{tr('ratings')}}</strong>
+                                    <strong><i class="fa fa-star margin-r-5"></i> {{tr('ratings')}}</strong>
 
-                                <p class="text-muted">
+                                    <p class="text-muted">
                                     <span class="starRating-view">
-                                        <input id="rating5" type="radio" name="ratings" value="5" @if($video->ratings == 5) checked @endif>
+                                        <input id="rating5" type="radio" name="ratings" value="5"
+                                               @if($video->ratings == 5) checked @endif>
                                         <label for="rating5">5</label>
 
-                                        <input id="rating4" type="radio" name="ratings" value="4" @if($video->ratings == 4) checked @endif>
+                                        <input id="rating4" type="radio" name="ratings" value="4"
+                                               @if($video->ratings == 4) checked @endif>
                                         <label for="rating4">4</label>
 
-                                        <input id="rating3" type="radio" name="ratings" value="3" @if($video->ratings == 3) checked @endif>
+                                        <input id="rating3" type="radio" name="ratings" value="3"
+                                               @if($video->ratings == 3) checked @endif>
                                         <label for="rating3">3</label>
 
-                                        <input id="rating2" type="radio" name="ratings" value="2" @if($video->ratings == 2) checked @endif>
+                                        <input id="rating2" type="radio" name="ratings" value="2"
+                                               @if($video->ratings == 2) checked @endif>
                                         <label for="rating2">2</label>
 
-                                        <input id="rating1" type="radio" name="ratings" value="1" @if($video->ratings == 1) checked @endif>
+                                        <input id="rating1" type="radio" name="ratings" value="1"
+                                               @if($video->ratings == 1) checked @endif>
                                         <label for="rating1">1</label>
                                     </span>
-                                
-                                </p>
 
-                                <hr>
+                                    </p>
 
-                                <strong><i class="fa fa-upload margin-r-5"></i> {{tr('uploaded_by')}}</strong>
+                                    <hr>
 
-                                <p class="text-muted">
-                                    @if(is_numeric($video->uploaded_by))
-
-                                        <a href="{{route('admin.moderator.view',$video->uploaded_by)}}">{{$video->moderator ? $video->moderator->name : ''}}</a>
-
-                                    @else 
-
-                                        {{$video->uploaded_by}}
-
-                                    @endif
-                                </p>
-
-                                <hr>
-
-                                <strong><i class="fa fa-upload margin-r-5"></i> {{tr('ppv_created_by')}}</strong>
-
-                                <p class="text-muted">
-                                    @if(is_numeric($video->ppv_created_by))
-
-                                        <a href="{{route('admin.moderator.view',$video->ppv_created_by)}}">{{$video->moderator ? $video->moderator->name : ''}}</a>
-
-                                    @else 
-
-                                        {{$video->ppv_created_by}}
-
-                                    @endif
-                                </p>
-
-                                <hr>
-
-                                <!-- start -->
-
-                                <strong><i class="fa fa-male margin-r-5"></i> {{tr('cast_crews')}}</strong>
-
-                                <p class="text-muted">
-                                    {{$video_cast_crews ? implode(', ', $video_cast_crews) : '-'}}
-                                </p>
-
-                                <hr>
-                                <!-- end -->
-
-                                @if(Setting::get('is_payper_view') && $video->amount > 0)
-
-                                <h4 class="text-uppercase text-red"><b>{{tr('pay_per_view')}} {{tr('details')}}</b></h4>
-
-                                <hr>
-
-                                    <!-- start -->
-
-                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('type_of_user')}}</strong>
+                                    <strong><i class="fa fa-upload margin-r-5"></i> {{tr('uploaded_by')}}</strong>
 
                                     <p class="text-muted">
-                                        @if($video->type_of_user == NORMAL_USER)
-                                            {{tr('normal_user')}}
-                                        @elseif($video->type_of_user == PAID_USER)
-                                            {{tr('paid_user')}}
-                                        @elseif($video->type_of_user == BOTH_USERS) 
-                                            {{tr('both_user')}}
+                                        @if(is_numeric($video->uploaded_by))
+
+                                            <a href="{{route('admin.moderator.view',$video->uploaded_by)}}">{{$video->moderator ? $video->moderator->name : ''}}</a>
+
                                         @else
-                                            -
+
+                                            {{$video->uploaded_by}}
+
                                         @endif
                                     </p>
 
                                     <hr>
 
-                                    <!-- end -->
-
-                                    <!-- start -->
-
-                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('type_of_subscription')}}</strong>
+                                    <strong><i class="fa fa-upload margin-r-5"></i> {{tr('ppv_created_by')}}</strong>
 
                                     <p class="text-muted">
-                                        @if($video->type_of_subscription == ONE_TIME_PAYMENT)
-                                            {{tr('one_time_payment')}}
-                                        @elseif($video->type_of_subscription == RECURRING_PAYMENT)
-                                            {{tr('recurring_payment')}}
+                                        @if(is_numeric($video->ppv_created_by))
+
+                                            <a href="{{route('admin.moderator.view',$video->ppv_created_by)}}">{{$video->moderator ? $video->moderator->name : ''}}</a>
+
                                         @else
-                                            -
+
+                                            {{$video->ppv_created_by}}
+
                                         @endif
                                     </p>
 
                                     <hr>
 
-                                    <!-- end -->
-
                                     <!-- start -->
 
-                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('amount')}}</strong>
+                                    <strong><i class="fa fa-male margin-r-5"></i> {{tr('cast_crews')}}</strong>
 
                                     <p class="text-muted">
-                                       {{Setting::get('currency')}} {{$video->amount}}
+                                        {{$video_cast_crews ? implode(', ', $video_cast_crews) : '-'}}
                                     </p>
 
                                     <hr>
-
                                     <!-- end -->
 
-                                @endif
-                            
-                            </div>
+                                    @if(Setting::get('is_payper_view') && $video->amount > 0)
 
-                            <!-- Images start -->
+                                        <h4 class="text-uppercase text-red">
+                                            <b>{{tr('pay_per_view')}} {{tr('details')}}</b></h4>
 
-                            <div class="col-lg-6">
+                                        <hr>
 
-                                <h4 class="text-uppercase"><i class="fa fa-file-picture-o margin-r-5"></i> {{tr('images')}}</h4>
+                                        <!-- start -->
 
+                                        <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('type_of_user')}}
+                                        </strong>
 
-                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                    
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                                    </ol>
+                                        <p class="text-muted">
+                                            @if($video->type_of_user == NORMAL_USER)
+                                                {{tr('normal_user')}}
+                                            @elseif($video->type_of_user == PAID_USER)
+                                                {{tr('paid_user')}}
+                                            @elseif($video->type_of_user == BOTH_USERS)
+                                                {{tr('both_user')}}
+                                            @else
+                                                -
+                                            @endif
+                                        </p>
 
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <img src="{{isset($video->default_image) ? $video->default_image : ''}}" alt="{{tr('default_image')}}">
+                                        <hr>
 
-                                            <div class="carousel-caption">
-                                                {{tr('default_image')}}
-                                            </div>
-                                        </div>
+                                        <!-- end -->
 
-                                        @foreach($video_images as $i => $image)
+                                        <!-- start -->
 
-                                            <div class="item">
-                                                <img src="{{$image->image}}" alt="">
+                                        <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('type_of_subscription')}}
+                                        </strong>
 
-                                                <div class="carousel-caption">
-                                                  Other Image {{$i+2}}
-                                                </div>
-                                              </div>
+                                        <p class="text-muted">
+                                            @if($video->type_of_subscription == ONE_TIME_PAYMENT)
+                                                {{tr('one_time_payment')}}
+                                            @elseif($video->type_of_subscription == RECURRING_PAYMENT)
+                                                {{tr('recurring_payment')}}
+                                            @else
+                                                -
+                                            @endif
+                                        </p>
 
-                                        @endforeach                                      
-                                    
-                                    </div>
+                                        <hr>
 
-                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                      <span class="fa fa-angle-left"></span>
-                                    </a>
-                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                      <span class="fa fa-angle-right"></span>
-                                    </a>
+                                        <!-- end -->
+
+                                        <!-- start -->
+
+                                        <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('amount')}}</strong>
+
+                                        <p class="text-muted">
+                                            {{Setting::get('currency')}} {{$video->amount}}
+                                        </p>
+
+                                        <hr>
+
+                                        <!-- end -->
+
+                                    @endif
 
                                 </div>
 
-                                @if($video->is_banner) 
+                                <!-- Images start -->
+
+                                <div class="col-lg-6">
+
+                                    <h4 class="text-uppercase"><i
+                                                class="fa fa-file-picture-o margin-r-5"></i> {{tr('images')}}</h4>
+
+
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carousel-example-generic" data-slide-to="0"
+                                                class="active"></li>
+                                            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                        </ol>
+
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <img src="{{isset($video->default_image) ? $video->default_image : ''}}"
+                                                     alt="{{tr('default_image')}}">
+
+                                                <div class="carousel-caption">
+                                                    {{tr('default_image')}}
+                                                </div>
+                                            </div>
+
+                                            @foreach($video_images as $i => $image)
+
+                                                <div class="item">
+                                                    <img src="{{$image->image}}" alt="">
+
+                                                    <div class="carousel-caption">
+                                                        Other Image {{$i+2}}
+                                                    </div>
+                                                </div>
+
+                                            @endforeach
+
+                                        </div>
+
+                                        <a class="left carousel-control" href="#carousel-example-generic"
+                                           data-slide="prev">
+                                            <span class="fa fa-angle-left"></span>
+                                        </a>
+                                        <a class="right carousel-control" href="#carousel-example-generic"
+                                           data-slide="next">
+                                            <span class="fa fa-angle-right"></span>
+                                        </a>
+
+                                    </div>
+
+                                    @if($video->is_banner)
+
+                                        <div class="row margin-bottom" style="margin-top: 10px;">
+
+                                            <div class="col-md-12">
+
+                                                <p class="text-uppercase">{{tr('banner_image')}}</p>
+
+
+                                                <img alt="Photo" src="{{$video->banner_image}}"
+                                                     class="img img-thumbnail" width="470" style="height: 250px">
+
+                                            </div>
+
+                                        </div>
+
+                                    @endif
+
+                                    <hr>
 
                                     <div class="row margin-bottom" style="margin-top: 10px;">
 
-                                        <div class="col-md-12">
+                                        <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('description')}}
+                                        </strong>
 
-                                            <p class="text-uppercase">{{tr('banner_image')}}</p>
-                                        
-                                            
-                                            <img alt="Photo" src="{{$video->banner_image}}" class="img img-thumbnail" width="470" style="height: 250px">
+                                        <p style="margin-top: 10px;">{{$video->description}}.</p>
 
-                                        </div>
-                                            
                                     </div>
 
-                                @endif
-
-                                <hr>
-
-                                <div class="row margin-bottom" style="margin-top: 10px;">
-
-                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('description')}}</strong>
-
-                                    <p style="margin-top: 10px;">{{$video->description}}.</p>
 
                                 </div>
 
+                                <!-- Images End -->
 
                             </div>
-
-                            <!-- Images End -->
-                            
-                          </div>
 
                         </div>
 
@@ -580,7 +600,7 @@
 
                     </section>
 
-                    <!-- <section id="description-and-reviews">
+                <!-- <section id="description-and-reviews">
 
                         <div class="row">
                             <div class="col-lg-12">
@@ -600,469 +620,484 @@
 
                         @if($video->details)
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-lg-12">
+                                <div class="col-lg-12">
 
-                                <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('details')}}</strong>
+                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> {{tr('details')}}</strong>
 
-                                <p style="margin-top: 10px;"><?= $video->details ?></p>
+                                    <p style="margin-top: 10px;"><?= $video->details ?></p>
+                                </div>
                             </div>
-                        </div>
 
-                        <hr>
+                            <hr>
 
                         @endif
 
                     </section>
 
                     <section id="video-player-section">
-                  
+
                         <div class="row">
-                            
+
                             <!-- <div class="col-lg-12"> -->
 
-                                @if($video->trailer_video)
-                                    
-                                    <div class="col-lg-6">
+                            @if($video->trailer_video)
 
-                                        <h5 class="text-uppercase"><i class="fa fa-video-camera margin-r-5"></i> {{tr('trailer_video')}}</h5>
-
-                                        <div class="image" id="trailer_video_setup_error" style="display:none">
-                                            <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}" style="width: 100%">
-                                        </div>
-
-                                          
-                                        <div class="">
-                                            @if($video->video_upload_type == 1)
-                                            <?php $trailer_url = $video->trailer_video; ?>
-                                                <div id="trailer-video-player"></div>
-                                            @else
-
-                                                @if(check_valid_url($video->trailer_video))
-
-                                                    <?php $trailer_url = (Setting::get('streaming_url')) ? Setting::get('streaming_url').get_video_end($video->trailer_video) : $video->trailer_video; ?>
-
-                                                    <div id="trailer-video-player"></div>
-
-                                                @else
-                                                    <div class="image">
-                                                        <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}" style="width: 100%">
-                                                    </div>
-                                                @endif
-
-                                            @endif
-                                        </div>
-                                        <div class="embed-responsive embed-responsive-16by9" id="flash_error_display_trailer" style="display: none;">
-                                           <div style="width: 100%;background: black; color:#fff;height:350px;">
-                                                 <div style="text-align: center;padding-top:25%">{{tr('flash_miss_error')}} <a target="_blank" href="https://get.adobe.com/flashplayer/" class="underline">{{tr('adobe')}}</a>.</div>
-                                           </div>
-                                        </div>
-                                    
-                                    </div>
-
-                                @endif
-                                
                                 <div class="col-lg-6">
 
-                                    <h5 class="text-uppercase"><i class="fa fa-video-camera margin-r-5"></i> {{tr('full_video')}}</h5>
+                                    <h5 class="text-uppercase"><i
+                                                class="fa fa-video-camera margin-r-5"></i> {{tr('trailer_video')}}</h5>
 
-                                    <div class="image" id="main_video_setup_error" style="display:none">
-                                        <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}" style="width: 100%">
+                                    <div class="image" id="trailer_video_setup_error" style="display:none">
+                                        <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}"
+                                             style="width: 100%">
                                     </div>
 
-                                    <div class="">
-                                            @if($video->video_upload_type == 1)
-                                            <?php $url = $video->video; ?>
-                                            <div id="main-video-player"></div>
-                                        @else
-                                            @if(check_valid_url($video->video))
 
-                                                <?php $url = (Setting::get('streaming_url')) ? Setting::get('streaming_url').get_video_end($video->video) : $video->video; ?>
-                                                <div id="main-video-player"></div>
+                                    <div class="">
+                                        @if($video->video_upload_type == 1)
+                                            <?php $trailer_url = $video->trailer_video; ?>
+                                            <div id="trailer-video-player"></div>
+                                        @else
+
+                                            @if(check_valid_url($video->trailer_video))
+
+                                                <?php $trailer_url = (Setting::get('streaming_url')) ? Setting::get('streaming_url') . get_video_end($video->trailer_video) : $video->trailer_video; ?>
+
+                                                <div id="trailer-video-player"></div>
+
                                             @else
                                                 <div class="image">
-                                                    <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}" style="width: 100%">
+                                                    <img src="{{asset('error.jpg')}}"
+                                                         alt="{{Setting::get('site_name')}}" style="width: 100%">
                                                 </div>
                                             @endif
 
                                         @endif
                                     </div>
-                                    <div class="embed-responsive embed-responsive-16by9" id="flash_error_display_main" style="display: none;">
-                                       <div style="width: 100%;background: black; color:#fff;height:350px;">
-                                             <div style="text-align: center;padding-top:25%">{{tr('flash_miss_error')}} <a target="_blank" href="https://get.adobe.com/flashplayer/" class="underline">{{tr('adobe')}}</a>.</div>
-                                       </div>
+                                    <div class="embed-responsive embed-responsive-16by9"
+                                         id="flash_error_display_trailer" style="display: none;">
+                                        <div style="width: 100%;background: black; color:#fff;height:350px;">
+                                            <div style="text-align: center;padding-top:25%">{{tr('flash_miss_error')}}
+                                                <a target="_blank" href="https://get.adobe.com/flashplayer/"
+                                                   class="underline">{{tr('adobe')}}</a>.
+                                            </div>
+                                        </div>
                                     </div>
-                                
+
                                 </div>
-                            
+
+                            @endif
+
+                            <div class="col-lg-6">
+
+                                <h5 class="text-uppercase"><i
+                                            class="fa fa-video-camera margin-r-5"></i> {{tr('full_video')}}</h5>
+
+                                <div class="image" id="main_video_setup_error" style="display:none">
+                                    <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}"
+                                         style="width: 100%">
+                                </div>
+
+                                <div class="">
+                                    @if($video->video_upload_type == 1)
+                                        <?php $url = $video->video; ?>
+                                        <div id="main-video-player"></div>
+                                    @else
+                                        @if(check_valid_url($video->video))
+
+                                            <?php $url = (Setting::get('streaming_url')) ? Setting::get('streaming_url') . get_video_end($video->video) : $video->video; ?>
+                                            <div id="main-video-player"></div>
+                                        @else
+                                            <div class="image">
+                                                <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}"
+                                                     style="width: 100%">
+                                            </div>
+                                        @endif
+
+                                    @endif
+                                </div>
+                                <div class="embed-responsive embed-responsive-16by9" id="flash_error_display_main"
+                                     style="display: none;">
+                                    <div style="width: 100%;background: black; color:#fff;height:350px;">
+                                        <div style="text-align: center;padding-top:25%">{{tr('flash_miss_error')}} <a
+                                                    target="_blank" href="https://get.adobe.com/flashplayer/"
+                                                    class="underline">{{tr('adobe')}}</a>.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                             <!-- </div> -->
-                        
+
                         </div>
 
                     </section>
 
-                <!-- /.box-body -->
+                    <!-- /.box-body -->
                 </div>
             </div>
         </div>
-    
+
     </div>
 
 
 @endsection
 
 @section('scripts')
-    
+
     <script src="{{asset('jwplayer/jwplayer.js')}}"></script>
 
-    <script>jwplayer.key="{{Setting::get('JWPLAYER_KEY')}}";</script>
+    <script>jwplayer.key = "{{Setting::get('JWPLAYER_KEY')}}";</script>
 
     <script type="text/javascript">
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#help-popover').popover({
-                html : true, 
-                content: function() {
+                html: true,
+                content: function () {
                     return $('#help-content').html();
-                } 
-            });  
+                }
+            });
         });
-        
-        jQuery(document).ready(function(){
 
-                  var is_mobile = false;
+        jQuery(document).ready(function () {
 
-                  var isMobile = {
-                      Android: function() {
-                          return navigator.userAgent.match(/Android/i);
-                      },
-                      BlackBerry: function() {
-                          return navigator.userAgent.match(/BlackBerry/i);
-                      },
-                      iOS: function() {
-                          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-                      },
-                      Opera: function() {
-                          return navigator.userAgent.match(/Opera Mini/i);
-                      },
-                      Windows: function() {
-                          return navigator.userAgent.match(/IEMobile/i);
-                      },
-                      any: function() {
-                          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-                      }
-                  };
+            var is_mobile = false;
 
+            var isMobile = {
+                Android: function () {
+                    return navigator.userAgent.match(/Android/i);
+                },
+                BlackBerry: function () {
+                    return navigator.userAgent.match(/BlackBerry/i);
+                },
+                iOS: function () {
+                    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                },
+                Opera: function () {
+                    return navigator.userAgent.match(/Opera Mini/i);
+                },
+                Windows: function () {
+                    return navigator.userAgent.match(/IEMobile/i);
+                },
+                any: function () {
+                    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+                }
+            };
 
-                  function getBrowser() {
 
-                      // Opera 8.0+
-                      var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+            function getBrowser() {
 
-                      // Firefox 1.0+
-                      var isFirefox = typeof InstallTrigger !== 'undefined';
+                // Opera 8.0+
+                var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
-                      // Safari 3.0+ "[object HTMLElementConstructor]" 
-                      var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+                // Firefox 1.0+
+                var isFirefox = typeof InstallTrigger !== 'undefined';
 
-                      // Internet Explorer 6-11
-                      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+                // Safari 3.0+ "[object HTMLElementConstructor]"
+                var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+                    return p.toString() === "[object SafariRemoteNotification]";
+                })(!window['safari'] || safari.pushNotification);
 
-                      // Edge 20+
-                      var isEdge = !isIE && !!window.StyleMedia;
+                // Internet Explorer 6-11
+                var isIE = /*@cc_on!@*/false || !!document.documentMode;
 
-                      // Chrome 1+
-                      var isChrome = !!window.chrome && !!window.chrome.webstore;
+                // Edge 20+
+                var isEdge = !isIE && !!window.StyleMedia;
 
-                      // Blink engine detection
-                      var isBlink = (isChrome || isOpera) && !!window.CSS;
+                // Chrome 1+
+                var isChrome = !!window.chrome && !!window.chrome.webstore;
 
-                      var b_n = '';
+                // Blink engine detection
+                var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-                      switch(true) {
+                var b_n = '';
 
-                          case isFirefox :
+                switch (true) {
 
-                                  b_n = "Firefox";
+                    case isFirefox :
 
-                                  break;
-                          case isChrome :
+                        b_n = "Firefox";
 
-                                  b_n = "Chrome";
+                        break;
+                    case isChrome :
 
-                                  break;
+                        b_n = "Chrome";
 
-                          case isSafari :
+                        break;
 
-                                  b_n = "Safari";
+                    case isSafari :
 
-                                  break;
-                          case isOpera :
+                        b_n = "Safari";
 
-                                  b_n = "Opera";
+                        break;
+                    case isOpera :
 
-                                  break;
+                        b_n = "Opera";
 
-                          case isIE :
+                        break;
 
-                                  b_n = "IE";
+                    case isIE :
 
-                                  break;
+                        b_n = "IE";
 
-                          case isEdge : 
+                        break;
 
-                                  b_n = "Edge";
+                    case isEdge :
 
-                                  break;
+                        b_n = "Edge";
 
-                          case isBlink : 
+                        break;
 
-                                  b_n = "Blink";
+                    case isBlink :
 
-                                  break;
+                        b_n = "Blink";
 
-                          default :
+                        break;
 
-                                  b_n = "Unknown";
+                    default :
 
-                                  break;
+                        b_n = "Unknown";
 
-                      }
+                        break;
 
-                      return b_n;
+                }
 
-                  }
+                return b_n;
 
+            }
 
-                  if(isMobile.any()) {
 
-                      var is_mobile = true;
+            if (isMobile.any()) {
 
-                  }
+                var is_mobile = true;
 
+            }
 
-                  var browser = getBrowser();
 
+            var browser = getBrowser();
 
-                  if ((browser == 'Safari') || (browser == 'Opera') || is_mobile) {
 
-                    var video = "{{$ios_video}}";
+            if ((browser == 'Safari') || (browser == 'Opera') || is_mobile) {
 
-                    var trailer_video = "{{$ios_trailer_video}}";
+                var video = "{{$ios_video}}";
 
-                  } else {
+                var trailer_video = "{{$ios_trailer_video}}";
 
-                    var video = "{{$videoStreamUrl}}";
+            } else {
 
-                    var trailer_video = "{{$trailerstreamUrl}}";
+                var video = "{{$videoStreamUrl}}";
 
-                  }
+                var trailer_video = "{{$trailerstreamUrl}}";
 
-                console.log("Video " +video);
-                    
-                console.log("Trailer "+trailer_video);
+            }
 
-                @if($url)
+            console.log("Video " + video);
 
-                    var playerInstance = jwplayer("main-video-player");
+            console.log("Trailer " + trailer_video);
 
+                    @if($url)
 
-                    @if($videoPath) 
+            var playerInstance = jwplayer("main-video-player");
 
-                        var videoPath = "{{$videoPath}}";
-                        var videoPixels = "{{$video_pixels}}";
 
-                        var path = [];
+                    @if($videoPath)
 
-                        var splitVideo = videoPath.split(',');
+            var videoPath = "{{$videoPath}}";
+            var videoPixels = "{{$video_pixels}}";
 
-                        var splitVideoPixel = videoPixels.split(',');
+            var path = [];
 
+            var splitVideo = videoPath.split(',');
 
-                        for (var i = 0 ; i < splitVideo.length; i++) {
-                            path.push({file : splitVideo[i], label : splitVideoPixel[i]});
-                        }
-                        playerInstance.setup({
-                            sources: path,
-                            image: "{{$video->default_image}}",
-                            width: "100%",
-                            aspectratio: "16:9",
-                            primary: "flash",
-                            controls : true,
-                            "controlbar.idlehide" : false,
-                            controlBarMode:'floating',
-                            "controls": {
-                              "enableFullscreen": false,
-                              "enablePlay": false,
-                              "enablePause": false,
-                              "enableMute": true,
-                              "enableVolume": true
-                            },
-                            // autostart : true,
-                            "sharing": {
-                                "sites": ["reddit","facebook","twitter"]
-                              },
+            var splitVideoPixel = videoPixels.split(',');
 
-                              tracks : [{
-                              file : "{{$video->video_subtitle}}",
-                              kind : "captions",
-                              default : true,
-                            }]
-                        });
 
-                    @else 
-                        
-                        
-                         playerInstance.setup({
-                            file: video,
-                            image: "{{$video->default_image}}",
-                            width: "100%",
-                            aspectratio: "16:9",
-                            primary: "flash",
-                            controls : true,
-                            "controlbar.idlehide" : false,
-                            controlBarMode:'floating',
-                            "controls": {
-                              "enableFullscreen": false,
-                              "enablePlay": false,
-                              "enablePause": false,
-                              "enableMute": true,
-                              "enableVolume": true
-                            },
-                            // autostart : true,
-                            "sharing": {
-                                "sites": ["reddit","facebook","twitter"]
-                              },
+            for (var i = 0; i < splitVideo.length; i++) {
+                path.push({file: splitVideo[i], label: splitVideoPixel[i]});
+            }
+            playerInstance.setup({
+                sources: path,
+                image: "{{$video->default_image}}",
+                width: "100%",
+                aspectratio: "16:9",
+                primary: "flash",
+                controls: true,
+                "controlbar.idlehide": false,
+                controlBarMode: 'floating',
+                "controls": {
+                    "enableFullscreen": false,
+                    "enablePlay": false,
+                    "enablePause": false,
+                    "enableMute": true,
+                    "enableVolume": true
+                },
+                // autostart : true,
+                "sharing": {
+                    "sites": ["reddit", "facebook", "twitter"]
+                },
 
-                           tracks : [{
-                              file : "{{$video->video_subtitle}}",
-                              kind : "captions",
-                              default : true,
-                            }]
-                        });
+                tracks: [{
+                    file: "{{$video->video_subtitle}}",
+                    kind: "captions",
+                    default: true,
+                }]
+            });
+
+            @else
+
+
+            playerInstance.setup({
+                file: video,
+                image: "{{$video->default_image}}",
+                width: "100%",
+                aspectratio: "16:9",
+                primary: "flash",
+                controls: true,
+                "controlbar.idlehide": false,
+                controlBarMode: 'floating',
+                "controls": {
+                    "enableFullscreen": false,
+                    "enablePlay": false,
+                    "enablePause": false,
+                    "enableMute": true,
+                    "enableVolume": true
+                },
+                // autostart : true,
+                "sharing": {
+                    "sites": ["reddit", "facebook", "twitter"]
+                },
+
+                tracks: [{
+                    file: "{{$video->video_subtitle}}",
+                    kind: "captions",
+                    default: true,
+                }]
+            });
+
+            @endif
+
+            playerInstance.on('setupError', function () {
+
+                jQuery("#main-video-player").css("display", "none");
+                // jQuery('#trailer_video_setup_error').hide();
+
+
+                var hasFlash = false;
+                try {
+                    var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+                    if (fo) {
+                        hasFlash = true;
+                    }
+                } catch (e) {
+                    if (navigator.mimeTypes
+                        && navigator.mimeTypes['application/x-shockwave-flash'] != undefined
+                        && navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
+                        hasFlash = true;
+                    }
+                }
+
+                if (hasFlash == false) {
+                    jQuery('#flash_error_display_main').show();
+                    return false;
+                }
+
+                jQuery('#main_video_setup_error').css("display", "block");
+
+                // confirm('The video format is not supported in this browser. Please option some other browser.');
+
+            });
 
                     @endif
 
-                    playerInstance.on('setupError', function() {
+                    @if($trailer_url)
 
-                                jQuery("#main-video-player").css("display", "none");
-                               // jQuery('#trailer_video_setup_error').hide();
-                               
-
-                                var hasFlash = false;
-                                try {
-                                    var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-                                    if (fo) {
-                                        hasFlash = true;
-                                    }
-                                } catch (e) {
-                                    if (navigator.mimeTypes
-                                            && navigator.mimeTypes['application/x-shockwave-flash'] != undefined
-                                            && navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
-                                        hasFlash = true;
-                                    }
-                                }
-
-                                if (hasFlash == false) {
-                                    jQuery('#flash_error_display_main').show();
-                                    return false;
-                                }
-
-                                jQuery('#main_video_setup_error').css("display", "block");
-
-                               // confirm('The video format is not supported in this browser. Please option some other browser.');
-
-                            });
-
-                @endif
-
-                @if($trailer_url)
-
-                    var playerInstance = jwplayer("trailer-video-player");
+            var playerInstance = jwplayer("trailer-video-player");
 
                     @if($trailer_video_path)
 
-                           var trailerVideoPath = "{{$trailer_video_path}}";
-                            var trailerVideoPixels = "{{$trailer_pixels}}";
+            var trailerVideoPath = "{{$trailer_video_path}}";
+            var trailerVideoPixels = "{{$trailer_pixels}}";
 
-                            var trailerPath = [];
+            var trailerPath = [];
 
-                            var splitTrailer = trailerVideoPath.split(',');
+            var splitTrailer = trailerVideoPath.split(',');
 
-                            var splitTrailerPixel = trailerVideoPixels.split(',');
+            var splitTrailerPixel = trailerVideoPixels.split(',');
 
 
-                            for (var i = 0 ; i < splitTrailer.length; i++) {
+            for (var i = 0; i < splitTrailer.length; i++) {
 
-                                trailerPath.push({file : splitTrailer[i], label : splitTrailerPixel[i]});
-                            }
+                trailerPath.push({file: splitTrailer[i], label: splitTrailerPixel[i]});
+            }
 
-                            playerInstance.setup({
-                                sources : trailerPath,
-                                image: "{{$video->default_image}}",
-                                width: "100%",
+            playerInstance.setup({
+                sources: trailerPath,
+                image: "{{$video->default_image}}",
+                width: "100%",
 
-                                aspectratio: "16:9",
-                                primary: "flash",
-                                 tracks : [{
-                                  file : "{{$video->trailer_subtitle}}",
-                                  kind : "captions",
-                                  default : true,
-                                }]
-                            }); 
+                aspectratio: "16:9",
+                primary: "flash",
+                tracks: [{
+                    file: "{{$video->trailer_subtitle}}",
+                    kind: "captions",
+                    default: true,
+                }]
+            });
 
-                    @else
+            @else
 
-                        playerInstance.setup({
-                                file : trailer_video,
-                                image: "{{$video->default_image}}",
-                                width: "100%",
+            playerInstance.setup({
+                file: trailer_video,
+                image: "{{$video->default_image}}",
+                width: "100%",
 
-                                aspectratio: "16:9",
-                                primary: "flash",
-                                 tracks : [{
-                                file : "{{$video->trailer_subtitle}}",
-                                kind : "captions",
-                                default : true,
-                              }]
-                            });
+                aspectratio: "16:9",
+                primary: "flash",
+                tracks: [{
+                    file: "{{$video->trailer_subtitle}}",
+                    kind: "captions",
+                    default: true,
+                }]
+            });
 
-                            
 
-                    @endif
+            @endif
 
-                    playerInstance.on('setupError', function() {
+            playerInstance.on('setupError', function () {
 
-                                jQuery("#trailer-video-player").css("display", "none");
-                               // jQuery('#trailer_video_setup_error').hide();
-                               
+                jQuery("#trailer-video-player").css("display", "none");
+                // jQuery('#trailer_video_setup_error').hide();
 
-                                var hasFlash = false;
-                                try {
-                                    var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
-                                    if (fo) {
-                                        hasFlash = true;
-                                    }
-                                } catch (e) {
-                                    if (navigator.mimeTypes
-                                            && navigator.mimeTypes['application/x-shockwave-flash'] != undefined
-                                            && navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
-                                        hasFlash = true;
-                                    }
-                                }
 
-                                if (hasFlash == false) {
-                                    jQuery('#flash_error_display_trailer').show();
-                                    return false;
-                                }
+                var hasFlash = false;
+                try {
+                    var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+                    if (fo) {
+                        hasFlash = true;
+                    }
+                } catch (e) {
+                    if (navigator.mimeTypes
+                        && navigator.mimeTypes['application/x-shockwave-flash'] != undefined
+                        && navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
+                        hasFlash = true;
+                    }
+                }
 
-                                jQuery('#trailer_video_setup_error').css("display", "block");
+                if (hasFlash == false) {
+                    jQuery('#flash_error_display_trailer').show();
+                    return false;
+                }
 
-                               // confirm('The video format is not supported in this browser. Please option some other browser.');
-                            
-                            });
-                @endif
+                jQuery('#trailer_video_setup_error').css("display", "block");
+
+                // confirm('The video format is not supported in this browser. Please option some other browser.');
+
+            });
+            @endif
         });
 
     </script>

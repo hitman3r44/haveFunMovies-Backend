@@ -1,39 +1,37 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title',tr('add_coupon'))
-
-@section('content-header',tr('add_coupon'))
+@section('content-header')
+	<h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_coupon') }}</h4>
+@endsection
 
 @section('breadcrumb')
 
-	<li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+	<li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
 
-	<li><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}}</a></li>
+	<li class="list-inline-item"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}}</a></li>
 
-	<li class="active">{{tr('add_coupon')}}</li>
+	<li class="list-inline-item active">{{tr('add_coupon')}}</li>
 
 @endsection
 
 @section('content')
 
-	@include('notification.notify')
-
-	<div class="row">
-
+	<div class="row gap-20">
 		<div class="col-md-10">
-
-			<div class="box box-primary">
-
-				<div class="box-header label-primary">
-
-					<b style="font-size: 18px">{{tr('add_coupon')}}</b>
-
-					<a href="{{route('admin.coupon.list')}}" class="btn btn-default pull-right">{{tr('coupons')}}</a>
+			<div class="bgc-white p-20 bd">
+				<div class="row bgc-grey-400 p-10">
+					<div class="col-8">
+						<h6 class="c-grey-900"><b style="font-size: 18px">{{tr('add_coupon')}}</b></h6>
+					</div>
+					<div class="col-4">
+						<a href="{{route('admin.coupon.list')}}" class="btn btn-default pull-right">{{tr('coupons')}}</a>
+					</div>
 
 				</div>
 
 				<form action="{{route('admin.save.coupon')}}" method="POST" class="form-horizontal" role="form">
-
+					@csrf
 					<div class="box-body">
 
 						<div class="form-group">
@@ -111,6 +109,6 @@
 			</div>
 		</div>
 	</div>
-	
+
 @endsection
 

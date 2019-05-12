@@ -1,35 +1,29 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('view_page'))
 
-@section('content-header', tr('view_page'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('view_page') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li><a href="{{route('admin.pages.index')}}"><i class="fa fa-book"></i> {{tr('pages')}}</a></li>
-    <li class="active"> {{tr('view_page')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.pages.index')}}"><i class="fa fa-book"></i> {{tr('pages')}}</a></li>
+    <li class="list-inline-item active"> {{tr('view_page')}}</li>
 @endsection
 
 @section('content')
 
-    @include('notification.notify')
-    
-    <div class="row">
-
-        <div class="col-md-12">
-
-            <div class="box box-primary">
-
-                <div class="box-header btn btn-primary with-border">
-                    <div class="pull-left">
-                        <h3 class="box-title" style="color: white"><b>{{$data->heading}}</b></h3>
+    <div class="row gap-20">
+        <div class="col-md-10">
+            <div class="bgc-white p-20 bd">
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{$data->heading}}</b></h6>
                     </div>
-
-                        <div class="pull-right">
-                           
-                            <a href="{{route('admin.pages.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> {{tr('edit')}}</a>
-                        </div>
-                    <div class="clearfix"></div>
+                    <div class="col-4">
+                        <a href="{{route('admin.pages.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> {{tr('edit')}}</a>
+                    </div>
                 </div>
 
                 <div class="box-body">

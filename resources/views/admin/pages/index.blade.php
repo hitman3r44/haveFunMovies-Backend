@@ -1,31 +1,33 @@
-@extends('layouts.admin')
+@extends('layouts.adminator.master')
 
 @section('title', tr('pages'))
 
-@section('content-header', tr('pages'))
+@section('content-header')
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('pages') }}</h4>
+@endsection
 
 @section('breadcrumb')
-    <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li class="active"><i class="fa fa-book"></i> {{tr('pages')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item active"><i class="fa fa-book"></i> {{tr('pages')}}</li>
 @endsection
 
 @section('content')
 
-    @include('notification.notify')
+    <div class="row gap-20">
+        <div class="col-md-10">
+            <div class="bgc-white p-20 bd">
+                <div class="row bgc-grey-400 p-10">
+                    <div class="col-8">
+                        <h6 class="c-grey-900"><b>{{tr('pages')}}</b></h6>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{route('admin.pages.create')}}" style="float:right" class="btn btn-default">{{tr('add_page')}}</a>
+                    </div>
+                </div>
 
-    <div class="row">
-        <div class="col-xs-12">
+            <div class="box-body table table-responsive">
 
-          <div class="box box-primary">
-
-            <div class="box-header label-primary">
-                <b>{{tr('pages')}}</b>
-                <a href="{{route('admin.pages.create')}}" style="float:right" class="btn btn-default">{{tr('add_page')}}</a>
-            </div>
-
-            <div class="box-body table-responsive">
-
-                <table id="datatable-withoutpagination" class="table table-bordered table-striped">
+                <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
 
                     <thead>
                         <tr>

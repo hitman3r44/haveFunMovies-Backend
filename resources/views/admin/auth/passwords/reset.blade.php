@@ -7,7 +7,7 @@
     <div class="login-box-body" style="height:400px">
 
         <form class="form-layout" role="form" method="POST" action="{{ url('/admin/password/reset') }}">
-            {{ csrf_field() }}
+            @csrf
 
             <input type="hidden" name="token" value="{{ $token }}">
 

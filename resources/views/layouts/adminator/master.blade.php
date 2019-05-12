@@ -1,52 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
-    <title>@yield('title')</title>
-    <style>#loader {
-            transition: all .3s ease-in-out;
-            opacity: 1;
-            visibility: visible;
-            position: fixed;
-            height: 100vh;
-            width: 100%;
-            background: #fff;
-            z-index: 90000
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@yield('title') | {{ config('app.name', 'Have Fun Movies') }}</title>
 
-        #loader.fadeOut {
-            opacity: 0;
-            visibility: hidden
-        }
+    <link rel="shortcut icon" href=" @if(Setting::get('site_icon')) {{ Setting::get('site_icon') }} @else {{asset('favicon.png') }} @endif">
 
-        .spinner {
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            top: calc(50% - 20px);
-            left: calc(50% - 20px);
-            background-color: #333;
-            border-radius: 100%;
-            -webkit-animation: sk-scaleout 1s infinite ease-in-out;
-            animation: sk-scaleout 1s infinite ease-in-out
-        }
-    </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
     @yield('styles')
-    <link href="https://colorlib.com/polygon/adminator/style.css" rel="stylesheet">
 </head>
 <body class="app">
-<div id="loader">
-    <div class="spinner"></div>
-</div>
-<script type="text/javascript">window.addEventListener('load', () => {
-        const loader = document.getElementById('loader');
-        setTimeout(() => {
-            loader.classList.add('fadeOut');
-        }, 300);
-    });
-</script>
-<div>
 
+@include('layouts.adminator.spinner')
+<div>
     @include('layouts.adminator.navbar')
 
     <div class="page-container">
@@ -55,15 +26,90 @@
 
         <main class="main-content bgc-grey-100">
             <div id="mainContent">
-                @yield('content')
+                <div class="container-fluid">
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @yield('content-header')
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <ul class="list-inline c-grey-900 pull-right mr-2">
+                                @yield('breadcrumb')
+                            </ul>
+                        </div>
+                    </div>
+
+                    @include('layouts.adminator.message')
+
+                    @yield('content')
+
+                </div>
             </div>
         </main>
         @include('layouts.adminator.footer')
     </div>
 </div>
-<script type="text/javascript" src="https://colorlib.com/polygon/adminator/vendor.js"></script>
-<script type="text/javascript" src="https://colorlib.com/polygon/adminator/bundle.js"></script>
-<script src="ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="|49"
-        defer=""></script>
+
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#help-popover').popover({
+            html: true,
+            content: function () {
+                return $('#help-content').html();
+            }
+        });
+
+        // $('#datepicker').datepicker({
+        //     autoclose: true,
+        //     format: 'dd-mm-yyyy',
+        //     startDate: 'today',
+        // });
+    });
+
+    @if(isset($page)) $("#{{$page}}").addClass("active"); @endif
+
+    @if(isset($sub_page)) $("#{{$sub_page}}").addClass("active"); @endif
+
+</script>
+
+<script type="text/javascript">
+
+    // $(function () {
+        // $(".select2").select2();
+        //
+        // $("#datemask").inputmask("dd:mm:yyyy", {"placeholder": "hh:mm:ss"});
+        // $("[data-mask]").inputmask();
+        // $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+        //     checkboxClass: 'icheckbox_minimal-blue',
+        //     radioClass: 'iradio_minimal-blue',
+        //     increaseArea: '20%'
+        // });
+        // $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+        //     checkboxClass: 'icheckbox_minimal-red',
+        //     radioClass: 'iradio_minimal-red',
+        //     increaseArea: '20%'
+        // });
+        // $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        //     checkboxClass: 'icheckbox_flat-green',
+        //     radioClass: 'iradio_flat-green',
+        //     increaseArea: '20%'
+        //
+        // });
+        // $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        //     checkboxClass: 'icheckbox_flat-green',
+        //     radioClass: 'iradio_flat-green'
+        // });
+    // });
+</script>
+
+@yield('scripts')
+
+{{--{!! Setting::get('body_scripts'); !!}--}}
+
 </body>
+
 </html>
