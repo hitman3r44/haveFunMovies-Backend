@@ -1491,7 +1491,7 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = 1; // ::TODO : handle this ADMIN constant
+                $sub_category->created_by = Auth::guard('admin')->user()->id;
                 $sub_category->status = 1;
             }
 
@@ -1657,8 +1657,7 @@ class AdminController extends Controller
 
         } else {
 
-
-            $genre = $request->id ? Genre::find($request->id) : new Genre;
+            $genre = $request->id ? Genre::find($request->id) : new Genre();
 
             if ($genre->id) {
 
@@ -1682,7 +1681,8 @@ class AdminController extends Controller
             $genre->position = $position;
             $genre->status = DEFAULT_TRUE;
             $genre->is_approved = DEFAULT_TRUE;
-            $genre->created_by = ADMIN;
+            $genre->unique_id = uniqid();
+            $genre->created_by = Auth::guard('admin')->user()->id;
 
 
             if ($request->hasFile('video')) {
@@ -1716,6 +1716,7 @@ class AdminController extends Controller
                 $genre->image = Helper::normal_upload_picture($request->file('image'), '/uploads/images/');
             }
 
+            $genre->subtitle = '';
 
             if ($request->hasFile('subtitle')) {
 

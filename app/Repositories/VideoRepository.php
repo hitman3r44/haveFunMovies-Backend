@@ -491,6 +491,21 @@ class VideoRepository {
 
 	            $no_need_compression = DEFAULT_TRUE;
 
+
+                $video_model->default_image = '';
+                $video_model->video_gif_image = '';
+                $video_model->video_image_mobile = '';
+                $video_model->banner_image = '';
+                $video_model->is_banner = 0;
+                $video_model->ppv_created_by = '';
+                $video_model->watch_count = 0;
+                $video_model->is_pay_per_view = 0;
+                $video_model->redeem_amount = 0;
+                $video_model->admin_amount = 0;
+                $video_model->user_amount = 0;
+                $video_model->trailer_subtitle = '';
+                $video_model->video_subtitle = '';
+
 	            // If the video type is manual upload then below code will excute
 
 		        if($request->video_type == VIDEO_TYPE_UPLOAD) {
@@ -684,6 +699,7 @@ class VideoRepository {
 
 	            }
 
+
 	            if($request->hasFile('video_subtitle')) {
 
 	                if ($video_model->id) {
@@ -816,9 +832,10 @@ class VideoRepository {
 	                $video_model->trailer_compress_status = COMPRESSION_NOT_HAPPEN;
 
 	                $video_model->compress_status = COMPRESSION_NOT_HAPPEN;
+
                 }
 
-	            if ($video_model->save()) {
+                if ($video_model->save()) {
 
 	            	if($request->hasFile('default_image')) {
 

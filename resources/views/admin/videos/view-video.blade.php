@@ -211,10 +211,10 @@
 
                     @if ($video->compress_status < OVERALL_COMPRESS_COMPLETED)
 
-                        <a class="btn bg-warning btn-flat margin text-uppercase">
-                            {{tr('compress')}}
+                        {{--<a class="btn bg-warning btn-flat margin text-uppercase">--}}
+                            {{--{{tr('compress')}}--}}
 
-                        </a>
+                        {{--</a>--}}
 
                     @else
 
