@@ -55,7 +55,7 @@ class AdminExportController extends Controller
 
             // Get the admin selected format for download
 
-   		$format = $request->format ? $request->format : 'xlsx';
+   		$format = $request->format ? $request-> format : 'xlsx';
 
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
@@ -143,7 +143,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.moderators')->with('flash_error', tr('no_user_found'));
 
@@ -220,7 +220,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.videos')->with('flash_error', tr('no_user_found'));
 
@@ -297,7 +297,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.user.payments')->with('flash_error', tr('no_user_found'));
 
@@ -374,7 +374,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.user.video-payments')->with('flash_error', tr('no_user_found'));
 
