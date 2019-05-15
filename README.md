@@ -62,8 +62,8 @@ php artisan config:clear
 php artisan clear-compiled 
 php artisan config:publish
 
-php artisan view: publish
-php artisan view: clear
+php artisan view:publish
+php artisan view:clear
 
 php artisan controller:make ControllerName
 
