@@ -11,9 +11,8 @@
                 </div>
             </div>
 
-            <form class="form-horizontal" action="{{route('admin.save.genre')}}" method="POST"
-                  enctype="multipart/form-data" role="form">
-
+            <form class="form-horizontal" action="{{route('admin.save.genre')}}" method="POST" enctype="multipart/form-data" role="form">
+                @csrf
                 <div class="box-body">
 
                     <input type="hidden" name="sub_category_id" value="{{$subcategory->id}}">

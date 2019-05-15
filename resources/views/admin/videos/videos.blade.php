@@ -64,29 +64,29 @@
 
                         @if(count($videos) > 0 )
 
-                            <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">
+{{--                            <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">--}}
 
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        {{tr('export')}} <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1"
-                                               href="{{route('admin.videos.export' , ['format' => 'xls'])}}">
-                                                <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>
-                                            </a>
-                                        </li>
+{{--                                <li class="dropdown">--}}
+{{--                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
+{{--                                        {{tr('export')}} <span class="caret"></span>--}}
+{{--                                    </a>--}}
+{{--                                    <ul class="dropdown-menu">--}}
+{{--                                        <li role="presentation">--}}
+{{--                                            <a role="menuitem" tabindex="-1"--}}
+{{--                                               href="{{route('admin.videos.export' , ['format' => 'xls'])}}">--}}
+{{--                                                <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
 
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1"
-                                               href="{{route('admin.videos.export' , ['format' => 'csv'])}}">
-                                                <span class="text-blue"><b>{{tr('csv')}}</b></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+{{--                                        <li role="presentation">--}}
+{{--                                            <a role="menuitem" tabindex="-1"--}}
+{{--                                               href="{{route('admin.videos.export' , ['format' => 'csv'])}}">--}}
+{{--                                                <span class="text-blue"><b>{{tr('csv')}}</b></span>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
 
                     @endif
 
@@ -377,6 +377,7 @@
 
                                                 <form action="{{route('admin.save.video-payment', $video->video_id)}}"
                                                       method="POST">
+                                                @csrf
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
 
@@ -525,6 +526,7 @@
 
                                                     <form action="{{route('admin.banner.set', ['admin_video_id'=>$video->video_id])}}"
                                                           method="POST" enctype="multipart/form-data">
+                                                    @csrf
 
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
@@ -631,6 +633,7 @@
                                                 <div class="modal-dialog">
                                                     <form action="{{route('admin.save.video.position',['video_id'=>$video->video_id])}}"
                                                           method="POST">
+                                                    @csrf
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
                                                             <div class="modal-header">

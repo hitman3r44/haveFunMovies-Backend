@@ -145,6 +145,7 @@
                                 </li>
                             </ul>
                             <form method="post" enctype="multipart/form-data" id="upload_video_form" action="{{route('moderator.videos.save')}}">
+                                @csrf
                                 <div class="tab-content">
                                     <!-- tab1 -->
                                     <div role="tabpanel" class="tab-pane fade in active" id="first">

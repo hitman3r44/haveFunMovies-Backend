@@ -31,6 +31,7 @@
                             @include('layouts.user.notification')
 
                                 <form action="{{ route('user.profile.save') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
 
                                     <div class="setting-form-inner">
 

@@ -52,8 +52,12 @@ class AdminExportController extends Controller
     {
         try {
 
-//    		$format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+
+            // Get the admin selected format for download
+
+            $format = $request->get('format') ? $request->get('format') : 'xlsx';
+
+
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -61,7 +65,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (!$result) {
 
                 return redirect()->route('admin.users')->with('flash_error', tr('no_user_found'));
 
@@ -89,7 +93,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('users_management');
 
@@ -133,7 +137,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //    		$format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -141,7 +145,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.moderators')->with('flash_error', tr('no_user_found'));
 
@@ -167,7 +171,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('moderator_management');
 
@@ -210,7 +214,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //            $format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -218,7 +222,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.videos')->with('flash_error', tr('no_user_found'));
 
@@ -244,7 +248,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('video_management');
 
@@ -287,7 +291,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //            $format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -295,7 +299,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.user.payments')->with('flash_error', tr('no_user_found'));
 
@@ -321,7 +325,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('subscription_management');
 
@@ -364,7 +368,7 @@ class AdminExportController extends Controller
             // Get the admin selected format for download
 
 //            $format = $request->format ? $request->format : 'xls';
-            $format = 'xls';
+            $format = 'xlsx';
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
 
@@ -372,7 +376,7 @@ class AdminExportController extends Controller
 
             // Check the result is not empty
 
-            if (count($result) == 0) {
+            if (is_array($result) ? count($result) : 0) {
 
                 return redirect()->route('admin.user.video-payments')->with('flash_error', tr('no_user_found'));
 
@@ -398,7 +402,7 @@ class AdminExportController extends Controller
 
                     // Set height for a single row
 
-                    $sheet->setAutoFilter();
+//                    $sheet->setAutoFilter();
 
                     $title = tr('payperview_management');
 

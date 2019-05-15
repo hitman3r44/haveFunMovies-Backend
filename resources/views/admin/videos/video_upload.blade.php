@@ -95,6 +95,7 @@
                         </div>
 
                         <form id="video-upload" method="POST" enctype="multipart/form-data" role="form">
+                            @csrf
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="step1">
                                     <!-- <h3>Video Details</h3> -->

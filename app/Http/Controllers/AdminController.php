@@ -399,10 +399,7 @@ class AdminController extends Controller
         $user = User::find($request->id);
         $authUser = Auth::user();
 
-        $roles = Role::all();
-
-        if (!$user) {
-
+        if (is_array($user) ? count($user) : 0) {
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
 
@@ -578,7 +575,29 @@ class AdminController extends Controller
 
             return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
 
+                    $user->is_moderator = DEFAULT_TRUE;
+                    $user->moderator_id = $moderator->id;
+                    $user->save();
 
+                    $moderator->is_activated = DEFAULT_TRUE;
+//                    $moderator->is_user = DEFAULT_TRUE;
+                    $moderator->save();
+
+                }
+
+                register_mobile('web');
+
+                if (Setting::get('track_user_mail')) {
+
+                    user_track("Have Fun Movies - New User Created");
+
+                }
+
+                return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
+
+            } else {
+                return back()->with('flash_error', tr('admin_not_error'));
+            }
         }
 
     }
@@ -625,7 +644,7 @@ class AdminController extends Controller
 
                     if ($moderator) {
 
-                        $moderator->is_user = 0;
+//                        $moderator->is_user = 0;
 
                         $moderator->save();
                     }
@@ -663,7 +682,7 @@ class AdminController extends Controller
 
         $user_details = User::find($request->id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
@@ -791,7 +810,7 @@ class AdminController extends Controller
                 $user->save();
 
                 $moderator->is_activated = 1;
-                $moderator->is_user = 1;
+//                $moderator->is_user = 1;
                 $moderator->save();
 
                 return back()->with('flash_success', tr('admin_user_upgrade'));
@@ -1054,7 +1073,7 @@ class AdminController extends Controller
                         $user->save();
 
                         $admin->is_activated = DEFAULT_TRUE;
-                        $admin->is_user = DEFAULT_TRUE;
+//                        $admin->is_user = DEFAULT_TRUE;
                         $admin->save();
 
                     }
@@ -1106,18 +1125,18 @@ class AdminController extends Controller
 
             }
 
-            if ($moderator->is_user) {
-
-                $user = User::where('email', $moderator->email)->first();
-
-                if ($user) {
-
-                    $user->is_moderator = 0;
-
-                    $user->save();
-                }
-
-            }
+//            if ($moderator->is_user) {
+//
+//                $user = User::where('email', $moderator->email)->first();
+//
+//                if ($user) {
+//
+//                    $user->is_moderator = 0;
+//
+//                    $user->save();
+//                }
+//
+//            }
 
             $moderator->delete();
 
@@ -1480,7 +1499,7 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = 1; // ::TODO : handle this ADMIN constant
+                $sub_category->created_by = Auth::guard('admin')->user()->id;
                 $sub_category->status = 1;
             }
 
@@ -1646,8 +1665,7 @@ class AdminController extends Controller
 
         } else {
 
-
-            $genre = $request->id ? Genre::find($request->id) : new Genre;
+            $genre = $request->id ? Genre::find($request->id) : new Genre();
 
             if ($genre->id) {
 
@@ -1671,7 +1689,8 @@ class AdminController extends Controller
             $genre->position = $position;
             $genre->status = DEFAULT_TRUE;
             $genre->is_approved = DEFAULT_TRUE;
-            $genre->created_by = ADMIN;
+            $genre->unique_id = uniqid();
+            $genre->created_by = Auth::guard('admin')->user()->id;
 
 
             if ($request->hasFile('video')) {
@@ -1705,6 +1724,7 @@ class AdminController extends Controller
                 $genre->image = Helper::normal_upload_picture($request->file('image'), '/uploads/images/');
             }
 
+            $genre->subtitle = '';
 
             if ($request->hasFile('subtitle')) {
 
@@ -4131,7 +4151,7 @@ class AdminController extends Controller
 
         $user_details = User::find($id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
 
