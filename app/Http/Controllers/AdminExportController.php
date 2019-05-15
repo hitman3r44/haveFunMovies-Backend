@@ -32,7 +32,7 @@ class AdminExportController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     /**
@@ -50,12 +50,13 @@ class AdminExportController extends Controller
      */
     public function users_export(Request $request)
     {
-
         try {
+
 
             // Get the admin selected format for download
 
             $format = $request->get('format') ? $request->get('format') : 'xlsx';
+
 
 
             $download_filename = routefreestring(Setting::get('site_name')) . "-" . date('Y-m-d-h-i-s') . "-" . uniqid();
@@ -106,6 +107,7 @@ class AdminExportController extends Controller
 
         } catch (\Exception $e) {
 
+            dd($e);
             $error = $e->getMessage();
 
             return redirect()->route('admin.users')->with('flash_error', $error);

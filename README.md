@@ -9,6 +9,7 @@ Have Fun Movies is a VOD (Video On demand) application.
 - [Docker Commands](#docker-commands)
 - [Useful Artisan Commands](#useful-artisan-commands)
 - [Useful Docker Commands](#useful-docker-commands)
+- [Useful Commands](#useful-commands)
 - [Server Information](#server-information)
 - [Project Managment](#project-managment)
 - [Contributing](#contributing)
@@ -52,18 +53,26 @@ docker-compose exec app bash
 ## Useful Artisan Commands
 ```bash
 php artisan migrate
-php artisan config:clear
 php artisan migrate:refresh --seed
+
 php artisan db:seed
 php artisan db:seed --class=SeederClassName
+
+php artisan config:clear
+php artisan clear-compiled 
+php artisan config:publish
+
+php artisan view: publish
+php artisan view: clear
+
 php artisan controller:make ControllerName
+
 php artisan list
 php artisan routes
 php artisan down
 php artisan up 
-php artisan test 
-php artisan view: publish
-php artisan config:publish
+php artisan test
+php artisan optimize
 ```
 
 ## Useful Docker Commands
@@ -78,8 +87,13 @@ docker stop $(docker ps -a -q)  - stops all running containers
 docker kill $(docker ps -q) - kill all running containers
 docker rm $(docker ps -a -q) - delete all stopped containers
 docker rmi $(docker images -q) - delete all images with 
-docker logs -f <CONTAINER> // The -f or --follow option will show live log output.
+docker logs -f <CONTAINER> // The -f or --follow option will show live log output
 ```
+## Useful Commands
+```bash
+composer dump-autoload
+```
+
 
 ## Server Information
 
@@ -100,3 +114,5 @@ Please contribute using [Github Flow](https://guides.github.com/introduction/flo
 ## Important Links
 
  - [Docker Compose Cheat Sheet](https://gist.github.com/buonzz/054304b3145323c34ed05cb65f1b174f)
+ - [Docker-mysql-nginx](https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose)
+ - [Enable remote login via ssh](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu)

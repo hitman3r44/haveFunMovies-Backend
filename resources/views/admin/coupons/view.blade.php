@@ -100,11 +100,11 @@
 
                     <hr>
                     <strong>{{tr('created_at')}}</strong>
-                    <h5 class="pull-right"> {{convertTimeToUSERzone($view_coupon->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}} </h5>
+                    <h5 class="pull-right"> {{convertTimeToUSERzone($view_coupon->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}} </h5>
 
                     <hr>
                     <strong>{{tr('updated_at')}}</strong>
-                    <h5 class="pull-right">{{convertTimeToUSERzone($view_coupon->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</h5>
+                    <h5 class="pull-right">{{convertTimeToUSERzone($view_coupon->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</h5>
 
                     @if($view_coupon->description == '')
 

@@ -406,7 +406,7 @@
 
                                                                 <input type="hidden" name="ppv_created_by"
                                                                        id="ppv_created_by"
-                                                                       value="{{Auth::guard('admin')->user()->name}}">
+                                                                       value="{{Auth::user()->name}}">
 
                                                                 <div class="col-lg-12">
                                                                     <label class="text-uppercase">{{tr('video')}}</label>

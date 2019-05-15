@@ -44,17 +44,11 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
         ],
 
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
-        ],
-
-        'moderator' => [
-            'driver' => 'session',
-            'provider' => 'moderators',
+            'provider' => 'users',
         ],
     ],
 
@@ -83,12 +77,7 @@ return [
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Model\Admin::class,
-        ],
-
-        'moderators' => [
-            'driver' => 'eloquent',
-            'model' => App\Model\Moderator::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [
@@ -121,13 +110,6 @@ return [
         'admins' => [
             'provider' => 'admins',
             'email' => 'admin.auth.emails.password',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-
-        'moderators' => [
-            'provider' => 'moderators',
-            'email' => 'moderator.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

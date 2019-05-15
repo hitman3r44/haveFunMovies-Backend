@@ -88,10 +88,10 @@
                         <li class="list-group-item"><a href="#">{{tr('timezone')}} <span
                                         class="pull-right">{{$moderator->timezone}}</span></a></li>
                         <li class="list-group-item"><a href="#">{{tr('created_at')}} <span
-                                        class="pull-right">{{convertTimeToUSERzone($moderator->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
+                                        class="pull-right">{{convertTimeToUSERzone($moderator->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</span></a>
                         </li>
                         <li class="list-group-item"><a href="#">{{tr('updated_at')}} <span
-                                        class="pull-right">{{convertTimeToUSERzone($moderator->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
+                                        class="pull-right">{{convertTimeToUSERzone($moderator->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</span></a>
                         </li>
                     </ul>
                 </div>

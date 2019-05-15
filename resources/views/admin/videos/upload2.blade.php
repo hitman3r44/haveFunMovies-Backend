@@ -655,7 +655,7 @@
                                             <!-- tab4 -->
                                         </div>
                                         <input type="hidden" name="timezone"
-                                               value="{{ Auth::guard('admin')->user()->timezone }}">
+                                               value="{{ Auth::user()->timezone }}">
                                     </form>
                                 </div>
                                 <!-- Example Wizard END -->

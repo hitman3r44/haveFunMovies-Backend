@@ -70,7 +70,7 @@
         // });
     });
 
-    $("#{{$page}}").addClass("active");
+    @if(isset($page)) $("#{{$page}}").addClass("active"); @endif
 
     @if(isset($sub_page)) $("#{{$sub_page}}").addClass("active"); @endif
 

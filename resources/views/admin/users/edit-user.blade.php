@@ -62,6 +62,19 @@
                                        placeholder="{{tr('mobile')}}">
                             </div>
                         </div>
+                        @if ($authUser->hasRole('super-admin') || $authUser->hasRole('admin'))
+                            <div class="form-group">
+                                <label for="mobile" class="col-sm-2 control-label">* {{tr('role')}}</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="role" id="role" required>
+                                        <option value="}">Select Role</option>
+                                        @foreach($roles as $role)
+                                            <option @if(isset($user)) {{ (in_array($role->name, $user->getRoleNames()->toArray())) ? 'selected' : '' }} @endif value="{{$role->id}}">{{ ucfirst($role->name) }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
 
                     </div>
 

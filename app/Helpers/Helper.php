@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Auth;
 use Image;
 
 use Hash;
@@ -31,8 +32,6 @@ use App\Model\UserPayment;
 use App\Model\LikeDislikeVideo;
 
 use Exception;
-
-use Auth;
 
 use AWS;
 
@@ -1965,6 +1964,21 @@ class Helper
         ];
 
         return isset($userTypes[$userType]) ? $userTypes[$userType] : 'N/A' ;
+    }
+
+    public static function permissionCheck($permission){
+
+        if(Auth::user()->hasPermissionTo($permission))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getPermissionMsg(){
+
+        return 'Sorry ! Access Denied for Permission Issue';
     }
 }
 
