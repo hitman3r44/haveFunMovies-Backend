@@ -590,17 +590,13 @@ class AdminController extends Controller
                 if (Setting::get('track_user_mail')) {
 
                     user_track("Have Fun Movies - New User Created");
-
+                }
+                else {
+                    return back()->with('flash_error', tr('admin_not_error'));
                 }
 
                 return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
-
-            } else {
-                return back()->with('flash_error', tr('admin_not_error'));
             }
-        }
-
-    }
 
     /**
      * Function: users_delete()
