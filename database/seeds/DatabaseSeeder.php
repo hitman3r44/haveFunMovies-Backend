@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
+            TmdbGenersSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -52,5 +53,22 @@ class DatabaseSeeder extends Seeder
         $moderator->assignRole(Role::findByName('moderator'));
         $director->assignRole(Role::findByName('director'));
         $publisher->assignRole(Role::findByName('publisher'));
+
+
+
+
+        $categories = factory(App\Model\Category::class, 3)->create();
+
+        $categories->each(function ($category) {
+
+            $subCategories = factory(App\Model\SubCategory::class, rand(1, 3))->create(['category_id' => $category->id]);
+
+            $subCategories->each(function ($subCategory) {
+
+                factory(App\Model\SubCategoryImage::class)->create(['sub_category_id' => $subCategory->id]);
+
+            });
+        });
+
     }
 }

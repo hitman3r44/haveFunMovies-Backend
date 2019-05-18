@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redis;
 
 /***********************  UI Routes *********************/
 
+
 Route::get('/upload-video' , 'UIController@upload_video');
 
 Route::get('/video-notification' , 'UIController@video_notification');
@@ -118,19 +119,11 @@ Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin
 
 Route::post('save_admin_control', 'ApplicationController@save_admin_control')->name('save_admin_control');
 
+Route::get('login', function () {
+    return redirect()->route('admin.login');
+});
 
-
-
-
-
-
-
-
-
-
-
-
-Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
+Route::group([ 'middleware' => ['web'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Auth::routes();
     Route::get('register', function () {
@@ -289,6 +282,14 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
     // New Video Upload Code
 
     Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
+
+    Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
+
+    Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
+
+    Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+
+    Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
 
     Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
 

@@ -123,6 +123,15 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.videos.search.tmdb')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('search_videos')}} In TMDB</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.videos')}}">
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>

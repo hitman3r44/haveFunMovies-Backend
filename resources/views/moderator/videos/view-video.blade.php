@@ -75,7 +75,7 @@
                     <div class='pull-left'>
                         <h3 class="box-title"> <b>{{$video->title}}</b></h3>
                         <br>
-                        <span style="margin-left:0px" class="description">{{tr('created_time')}}- {{convertTimeToUSERzone($video->video_date, Auth::guard('moderator')->user()->timezone, 'd-m-Y h:i a')}}</span>
+                        <span style="margin-left:0px" class="description">{{tr('created_time')}}- {{convertTimeToUSERzone($video->video_date, Auth::user()->timezone, 'd-m-Y h:i a')}}</span>
                     </div>
                     <div class='pull-right'>
                         @if ($video->compress_status <   OVERALL_COMPRESS_COMPLETED) <span class="label label-danger">{{tr('compress')}}</span>

@@ -693,7 +693,7 @@ class ApplicationController extends Controller {
 
     public function admin_control() {
 
-        if (Auth::guard('admin')->check()) {
+        if (Auth::check()) {
 
             return view('admin.settings.control')->with('page', tr('admin_control'));
 

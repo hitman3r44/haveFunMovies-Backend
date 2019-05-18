@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d010fa48d70fcc7cfd2cc548d1bd6b0",
+    "content-hash": "3da535b12ea7db6ab9653494c4367b48",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -935,6 +935,46 @@
                 "tokenizer"
             ],
             "time": "2018-03-21T22:21:57+00:00"
+        },
+        {
+            "name": "kryptonit3/tmdb-laravel",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kryptonit3/TMDB-Laravel.git",
+                "reference": "4710975d69e5dd34080eec09ab7f260cd94782e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kryptonit3/TMDB-Laravel/zipball/4710975d69e5dd34080eec09ab7f260cd94782e7",
+                "reference": "4710975d69e5dd34080eec09ab7f260cd94782e7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kryptonit3\\TMDBLaravel\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse Szypulski",
+                    "email": "jesse.szypulski@gmail.com"
+                }
+            ],
+            "description": "TMDB Wrapper for Laravel",
+            "time": "2016-01-24T04:51:56+00:00"
         },
         {
             "name": "laravel/framework",
