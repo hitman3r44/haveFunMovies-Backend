@@ -171,16 +171,17 @@
                                     </ul>
                                     <form method="post" enctype="multipart/form-data" id="upload_video_form" action="{{route('admin.videos.save')}}">
                                         @csrf
+
+                                        @if($tmdbVideo->hasData()) <input type="hidden" name="tmdb_video_id" id="tmdb_video_id" value="{{$tmdbVideo->getID()}}"> @endif
+                                        <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
+
                                         <div class="tab-content">
                                             <!-- tab1 -->
                                             <div role="tabpanel" class="tab-pane fade in active" id="first">
-                                                <p class="note-sec">{{tr('note')}}: <span class="asterisk"><i
-                                                                class="fa fa-asterisk"></i></span> {{tr('mandatory_field_notes')}}
-
-                                                    <input type="hidden" name="admin_video_id" id="admin_video_id"
-                                                           value="{{$model->id}}">
-
-                                                    <!--  <a href="#" data-toggle="tooltip" title="Hooray!" data-placement="right">Note</a> -->
+                                                <p class="note-sec">{{tr('note')}}:
+                                                    <span class="asterisk">
+                                                        <i  class="fa fa-asterisk"></i>
+                                                    </span> {{tr('mandatory_field_notes')}}
                                                 </p>
                                                 <ul class="form-style-7">
                                                     <li>
@@ -317,7 +318,7 @@
                                                     @foreach($categories as $category)
                                                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                                             <a class="category"
-                                                               onclick="saveCategory({{$category->id}}, {{REQUEST_STEP_2}})"
+                                                               onclick="saveCategory('{{$category->id}}', {{REQUEST_STEP_2}})"
                                                                style="cursor: pointer;">
                                                                 <div class="category-sec select-box category_list {{($category->id == $model->category_id) ? 'active' : ''}}"
                                                                      id="category_{{$category->id}}">
@@ -345,7 +346,7 @@
                                                         @foreach($sub_categories as $sub_category)
                                                             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                                                 <a class="category"
-                                                                   onclick="saveSubCategory({{$sub_category->id}}, {{REQUEST_STEP_3}})"
+                                                                   onclick="saveSubCategory('{{$sub_category->id}}', {{REQUEST_STEP_3}})"
                                                                    style="cursor: pointer;">
                                                                     <div class="category-sec select-box sub_category_list {{($sub_category->id == $model->sub_category_id) ? 'active' : ''}}"
                                                                          id="sub_category_{{$sub_category->id}}">
@@ -420,28 +421,7 @@
                                                 <div class="clearfix"></div>
                                                 <!-- radio and checkbox -->
                                                 <div class="row manual_video_upload">
-                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="mb-30">
-                                                            <div>
-                                                                {{--<label class="label-cls">{{tr('compress_video')}}<span--}}
-                                                                            {{--class="asterisk"><i--}}
-                                                                                {{--class="fa fa-asterisk"></i></span>--}}
-                                                                {{--</label>--}}
-                                                            </div>
-                                                            {{--<div class="radio radio-primary radio-inline">--}}
-                                                                {{--<input type="radio" id="COMPRESS_ENABLED"--}}
-                                                                       {{--name="compress_video"--}}
-                                                                       {{--value="{{COMPRESS_ENABLED}}">--}}
-                                                                {{--<label for="COMPRESS_ENABLED"> {{tr('yes')}} </label>--}}
-                                                            {{--</div>--}}
-                                                            {{--<div class="radio radio-inline radio-primary">--}}
-                                                                {{--<input type="radio" id="COMPRESS_DISABLED"--}}
-                                                                       {{--name="compress_video"--}}
-                                                                       {{--value="{{COMPRESS_DISABLED}}" checked>--}}
-                                                                {{--<label for="COMPRESS_DISABLED"> {{tr('no')}} </label>--}}
-                                                            {{--</div>--}}
-                                                        </div>
-                                                    </div>
+
                                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                         <div class="mb-30">
                                                             <div>
@@ -549,10 +529,10 @@
                                                         <div class="">
                                                             <div class="">
                                                                 <label class="">
-                                                                <!-- <div class="btn btn-primary btn-sm">{{tr('browse')}}</div> -->
                                                                     <input type="file" name="trailer_video"
                                                                            accept="video/mp4,video/x-matroska"
                                                                            id="trailer_video"/>
+                                                                    <small>Current Trailer : <a class="" href="{{$model->trailer_video}}">{{$model->trailer_video}}</a></small>
                                                                 </label>
                                                             </div>
                                                             <!--  <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
@@ -617,7 +597,7 @@
                                                             <span class="asterisk"><i class="fa fa-asterisk"></i></span>
                                                         </label>
                                                         <input type="url" name="trailer_video" maxlength="256"
-                                                               id="other_trailer_video">
+                                                               id="other_trailer_video" >
                                                     </li>
 
                                                     <li>
@@ -776,28 +756,6 @@
 
     <script>
         $(document).ready(function () {
-            // $('#default_image').awesomeCropper(         
-            //     { width:2000, height: 1000, debug: true, default_image: 1}
-            // );
-            // $('#other_image1').awesomeCropper(         
-            //     { width:2000, height: 1000, debug: true, other_image1:1 }
-            // );
-            // $('#other_image2').awesomeCropper(         
-            //     { width:2000, height: 1000, debug: true, other_image2:1  }
-            // );
-        });
-    </script>
-
-    <!-- <script src="{{asset('assets/js/jquery.Jcrop.js')}}"></script>
-
-    <script src="{{asset('assets/js/jquery.SimpleCropper.js')}}"></script>
-
-    <script>
-         $('.cropme').simpleCropper();
-    </script> -->
-
-    <script>
-        $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
@@ -905,8 +863,6 @@
 
                 $("#video").attr('required', true);
 
-                $("#trailer_video").attr('required', true);
-
             }
 
             $(".manual_video_upload").hide();
@@ -916,6 +872,8 @@
             $("#other_trailer_video").val("{{$model->trailer_video}}");
 
             if (value == "{{VIDEO_TYPE_UPLOAD}}") {
+
+                console.log('VIDEO_TYPE_UPLOAD');
 
                 $("#other_video").val("");
 
@@ -935,14 +893,12 @@
 
                 $("#video").attr('required', false);
 
-                $("#trailer_video").attr('required', false);
-
                 @endif
 
             }
 
-            if ((value == "{{VIDEO_TYPE_OTHER}}" || value == "{{VIDEO_TYPE_YOUTUBE}}") && autoload_status == 0) {
-
+            if (value == "{{VIDEO_TYPE_OTHER}}" && autoload_status == 0) {
+                console.log('VIDEO_TYPE_OTHER');
                 $("#other_video").val("");
 
                 $("#other_trailer_video").val("");
@@ -956,71 +912,34 @@
                 }
 
                 $("#video").attr('required', false);
-
-                $("#trailer_video").attr('required', false);
             }
 
-            if ((value == "{{VIDEO_TYPE_OTHER}}" || value == "{{VIDEO_TYPE_YOUTUBE}}") && autoload_status == 0) {
+            if (value == "{{VIDEO_TYPE_YOUTUBE}}" && autoload_status == 0) {
+                console.log('VIDEO_TYPE_YOUTUBE');
+                $("#other_video").val("");
+
+                $("#other_trailer_video").val("{{$model->trailer_video}}");
+
+                if (("{{$model->video_type}}" == value) || ("{{$model->video_type}}" == value)) {
+
+                    $("#other_video").val("{{$model->video}}");
+
+                    $("#other_trailer_video").val("{{$model->trailer_video}}");
+
+                }
+
+                $("#video").attr('required', false);
+            }
+
+            if ((value == "{{VIDEO_TYPE_OTHER}}" || value == "{{VIDEO_TYPE_UPLOAD}}") && autoload_status == 0) {
+                console.log('VIDEO_TYPE_OTHER + VIDEO_TYPE_UPLOAD');
 
                 $("#other_video").val("");
 
-                $("#other_trailer_video").val("");
             }
 
         }
 
-
-        /* function saveVideo() {
-
-             var formData = new FormData($('#upload_video_form')[0]);
-
-             $.ajax({
-
-                 type : 'post',
-
-                 url : "{{route('admin.videos.save')}}",
-
-                data : formData,
-
-                contentType :false,
-
-                processData:false,
-
-                beforeSend : function(data) {
-
-                    $("#finish_video").attr('disabled', true);
-
-                },
-                success : function(data) {
-
-                    if (data.response.success) {
-
-                        window.location.href= ""+data.response.data.id;
-
-                    } else {
-
-                        $("#error_messages_text").html(data.response.error_messages);
-
-                        $("#error_popup").click();
-
-                    }
-
-                },
-
-                error : function(data) {
-
-
-                },
-
-                complete : function(data) {
-
-                    $("#finish_video").attr('disabled', false);
-
-                }
-
-            });
-
-        }*/
         @if($model->id && !$model->status)
 
         checkPublishType("{{PUBLISH_LATER}}");

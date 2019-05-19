@@ -48,9 +48,13 @@ class TmdbVideoController extends Controller
 
     public function tmdbVideosCreate(Request $request, $videoId)
     {
+
         try {
 
             $tmdbVideo = $this->tmdbApi->getMovieDetails($videoId);
+
+            $imageUrl = $this->tmdbApi->getImageURL('w300');
+
 
             $categories = Category::where('categories.is_approved', DEFAULT_TRUE)
                 ->get([
@@ -63,17 +67,26 @@ class TmdbVideoController extends Controller
                 ]);
 
             $model = new AdminVideo;
-            $model->title = $tmdbVideo->getTitle();
-            $model->description = $tmdbVideo->getOverview();
-            $model->details = $tmdbVideo->getOverview();
-            $model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
-            $model->ratings = round($tmdbVideo->getVoteAverage()/ 2);
-
-            $model->trailer_video_resolutions = [];
-
-            $model->video_resolutions = [];
 
             $videoimages = [];
+            $model->trailer_video_resolutions = [];
+            $model->video_resolutions = [];
+
+            if($tmdbVideo->hasData()){
+                $model->title = $tmdbVideo->getTitle();
+                $model->description = $tmdbVideo->getOverview();
+                $model->details = $tmdbVideo->getOverview();
+                $model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
+                $model->ratings = round($tmdbVideo->getVoteAverage()/ 2);
+                $model->default_image = $imageUrl . $tmdbVideo->getPoster();
+
+                $videoimages[0] = new \stdClass();
+                $videoimages[1] = new \stdClass();
+
+                $videoimages[0]->image = isset($tmdbVideo->getPostersWithUrl($imageUrl, 1, 1)[0]) ? $tmdbVideo->getPostersWithUrl($imageUrl, 1, 1)[0] : asset('images/default.png');
+                $videoimages[1]->image = isset($tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0]) ? $tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0] : asset('images/default.png');
+
+            }
 
             $video_cast_crews = [];
 

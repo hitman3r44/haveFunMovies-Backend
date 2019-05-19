@@ -16,6 +16,16 @@ class TmdbMovie extends Movie
         parent::__construct($this->_data);
     }
 
+
+
+
+    public function hasData() {
+
+        return (isset($this->_data['id']) && !empty($this->_data['id']));
+    }
+
+
+
     public function getOverview() {
 
         return isset($this->_data['overview']) ? $this->_data['overview'] : '';
@@ -37,4 +47,26 @@ class TmdbMovie extends Movie
             return null;
         }
     }
+
+    public function getPostersWithUrl($imageUrl, $limit = 1, $offset = 1) {
+        $posters =  isset($this->_data['images']['posters']) ? $this->_data['images']['posters'] : [];
+
+        $posters = array_slice($posters, $offset, $limit);
+        $postersPaths = [];
+        $posterCount = 1;
+
+        foreach($posters as $poster){
+            $postersPaths[] = $imageUrl.$poster['file_path'];
+
+        }
+
+        return $postersPaths;
+
+    }
+
+    public function hasTrailler(){
+
+        return isset($this->_data['trailers']) && !empty($this->_data['trailers']);
+    }
+
 }

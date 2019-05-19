@@ -12,6 +12,7 @@
 
 namespace App\Repositories;
 
+use App\Libraries\TMDB\TmdbApi;
 use Illuminate\Http\Request;
 
 use App\Jobs\StreamviewCompressVideo;
@@ -218,7 +219,7 @@ class VideoRepository {
 	 		$validator = Validator::make($request->all(),
 	 			[
 //	 				'admin_video_id'=>'exists:admin_videos,id',
-	 				'title'=>'required|max:255|min:4',	
+	 				'title'=>'required|max:255|min:4',
 	 				'publish_type'=>'required|in:'.PUBLISH_NOW.','.PUBLISH_LATER,
 	 				'publish_time'=>$request->publish_type == PUBLISH_LATER ? 'required' : '',
 	 				'age'=>'required|min:2|max:3',
@@ -236,7 +237,7 @@ class VideoRepository {
 //	 				'compress_video'=>'required|in:'.COMPRESS_ENABLED.','.COMPRESS_DISABLED,
 	 				'video_upload_type'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? 'required|in:'.VIDEO_UPLOAD_TYPE_s3.','.VIDEO_UPLOAD_TYPE_DIRECT : '',
 	 				'video'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255',
-	 				'trailer_video'=>$request->hasFile('trailer_subtitle') ? ($request->video_type == VIDEO_TYPE_UPLOAD ?  'mimes:mp4' : 'required|max:255') : ($request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|max:255'), // If trailer subtitle uploading by admin without trailer video it will throw an error
+	 				'trailer_video'=>$request->hasFile('trailer_subtitle') ? ($request->video_type == VIDEO_TYPE_UPLOAD ?  'mimes:mp4' : 'required|max:255') : ($request->video_type == VIDEO_TYPE_UPLOAD ? ($request->has('tmdb_video_id') ? '' : 'mimes:mp4') : 'required|max:255'), // If trailer subtitle uploading by admin without trailer video it will throw an error
 	 				'duration'=>'required',
 	 				'trailer_duration'=>'required',
 	 				// |date_format:hh:mm:ss
@@ -258,8 +259,16 @@ class VideoRepository {
 
 	 		} else {
 
-	 			// Check the category having genre or not
+                $tmdbApi = new TmdbApi();
+                $tmdbVideo = null;
 
+                if(!$request->has('tmdb_video_id') || empty($request->tmdb_video_id)){
+
+                    $tmdbVideo = $tmdbApi->getMovieDetails($request->tmdb_video_id);
+
+                }
+
+	 			// Check the category having genre or not
 	 			$load_category = Category::find($request->category_id);
 
 	 			if ($load_category) {
@@ -292,35 +301,25 @@ class VideoRepository {
 
 	 			// Check Genre present or not
 
-	 			if($request->genre_id <= 0) {
 
-	 				// If Genre not present, trailer video should be required
 
-	 				$genre_validator = Validator::make($request->all(),[
+	 			if(!$request->has('tmdb_video_id') ||  $tmdbVideo == null){
 
-	 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255'
+                    if($request->genre_id <= 0) { // If Genre not present, trailer video should be required
+                        $genre_validator = Validator::make($request->all(),[
+                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255'
+                        ]);
+                    } else { // If Genre present, trailer video Optional
+                        $genre_validator = Validator::make($request->all(),[
+                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'mimes:mp4') : 'required|max:255'
+                        ]);
+                    }
 
-	 				]);
-
-	 			} else {
-
-	 				// If Genre present, trailer video Optional
-
-	 				$genre_validator = Validator::make($request->all(),[
-
-	 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'mimes:mp4') : 'required|max:255'
-
-	 				]);
-
-	 			}
-
-	 			if ($genre_validator->fails()) {
-
-		 			$errors = implode(',', $genre_validator->messages()->all());
-
-		 			throw new Exception($errors);
-
-		 		}
+                    if ($genre_validator->fails()) {
+                        $errors = implode(',', $genre_validator->messages()->all());
+                        throw new Exception($errors);
+                    }
+                }
 
 		 		$videopath = '/uploads/videos/original/';
 
@@ -339,7 +338,7 @@ class VideoRepository {
 
 		 					'video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|url|max:255',
 
-		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|max:255',
+		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? (( $request->has('tmdb_video_id') && $tmdbVideo != null ) ? '' : 'mimes:mp4') : 'required|max:255',
 
 		 				]);
 
@@ -351,7 +350,7 @@ class VideoRepository {
 
 		 					'video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'required|mimes:mp4' : 'required|url|max:255',
 
-		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'required|mimes:mp4' : 'required|max:255',
+		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? (( $request->has('tmdb_video_id') && $tmdbVideo != null ) ? '' : 'required|mimes:mp4') : 'required|max:255',
 
 		 				]);
 
@@ -505,6 +504,7 @@ class VideoRepository {
                 $video_model->user_amount = 0;
                 $video_model->trailer_subtitle = '';
                 $video_model->video_subtitle = '';
+                $video_model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
 
 	            // If the video type is manual upload then below code will excute
 
@@ -584,6 +584,7 @@ class VideoRepository {
 	                    	$video_model->video = $main_video_details['db_url'];
 
 	                    }
+
 
                     	if($request->hasFile('trailer_video')) {
 
@@ -867,8 +868,7 @@ class VideoRepository {
 
 			                $FFmpeg = new \FFmpeg;
 
-				            $FFmpeg
-				                ->input($default_image_input_path)
+				            $FFmpeg->input($default_image_input_path)
 				                ->imageScale("385:225")
 				                ->output($default_image_output_path)
 				                ->ready();
