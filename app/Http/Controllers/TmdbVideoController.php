@@ -53,7 +53,7 @@ class TmdbVideoController extends Controller
 
             $tmdbVideo = $this->tmdbApi->getMovieDetails($videoId);
 
-            $imageUrl = $this->tmdbApi->getImageURL('w300');
+            $imageUrl = $this->tmdbApi->getImageURL('w200');
 
 
             $categories = Category::where('categories.is_approved', DEFAULT_TRUE)
@@ -85,7 +85,6 @@ class TmdbVideoController extends Controller
 
                 $videoimages[0]->image = isset($tmdbVideo->getPostersWithUrl($imageUrl, 1, 1)[0]) ? $tmdbVideo->getPostersWithUrl($imageUrl, 1, 1)[0] : asset('images/default.png');
                 $videoimages[1]->image = isset($tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0]) ? $tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0] : asset('images/default.png');
-
             }
 
             $video_cast_crews = [];

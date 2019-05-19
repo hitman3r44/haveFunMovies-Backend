@@ -13,6 +13,7 @@
 namespace App\Repositories;
 
 use App\Libraries\TMDB\TmdbApi;
+use App\Model\AdminVideoImage;
 use Illuminate\Http\Request;
 
 use App\Jobs\StreamviewCompressVideo;
@@ -230,9 +231,9 @@ class VideoRepository {
 	 				'category_id'=>'required|exists:categories,id,is_approved,'.DEFAULT_TRUE,
 	 				'sub_category_id'=>'required|exists:sub_categories,id,is_approved,'.DEFAULT_TRUE,
 	 				'genre_id'=>'exists:genres,id,is_approved,'.DEFAULT_TRUE,
-	 				'default_image'=> $request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
-	 				'other_image1'=>$request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
-	 				'other_image2'=>$request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
+	 				'default_image'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
+	 				'other_image1'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
+	 				'other_image2'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
 	 				'video_type'=>'required|in:'.VIDEO_TYPE_UPLOAD.','.VIDEO_TYPE_YOUTUBE.','.VIDEO_TYPE_OTHER,
 //	 				'compress_video'=>'required|in:'.COMPRESS_ENABLED.','.COMPRESS_DISABLED,
 	 				'video_upload_type'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? 'required|in:'.VIDEO_UPLOAD_TYPE_s3.','.VIDEO_UPLOAD_TYPE_DIRECT : '',
@@ -504,7 +505,11 @@ class VideoRepository {
                 $video_model->user_amount = 0;
                 $video_model->trailer_subtitle = '';
                 $video_model->video_subtitle = '';
-                $video_model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
+                if($request->has('tmdb_video_id') &&  $tmdbVideo != null){
+
+                    $video_model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
+                    $video_model->default_image = $tmdbApi->getImageURL('w300').$tmdbVideo->getPoster();
+                }
 
 	            // If the video type is manual upload then below code will excute
 
@@ -837,6 +842,21 @@ class VideoRepository {
                 }
 
                 if ($video_model->save()) {
+
+                    if($request->has('tmdb_video_id') &&  $tmdbVideo != null){
+                        AdminVideoImage::firstOrCreate([ // other image one
+                            'admin_video_id' => $video_model->id,
+                            'position' => 2,
+                            'image' => isset($tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 1)[0]) ? $tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 1)[0] : asset('images/default.png'),
+                            'is_default' => 0,
+                        ]);
+                        AdminVideoImage::firstOrCreate([ // other image two
+                            'admin_video_id' => $video_model->id,
+                            'position' => 3,
+                            'image' => isset($tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 2)[0]) ? $tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 2)[0] : asset('images/default.png'),
+                            'is_default' => 0,
+                        ]);
+                    }
 
 	            	if($request->hasFile('default_image')) {
 

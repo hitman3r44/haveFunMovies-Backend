@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Helpers\Helper;
 
+use Illuminate\Support\Facades\Auth;
 use Setting;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -213,6 +214,14 @@ class User extends Authenticatable
 
             $model->attributes['push_status'] = ON;
 
+            $model->created_by = Auth::user()->id;
+            $model->updated_by = Auth::user()->id;
+
+        });
+
+        static::updating(function($model)
+        {
+            $model->updated_by = Auth::user()->id;
         });
     }
 

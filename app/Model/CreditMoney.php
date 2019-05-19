@@ -5,8 +5,10 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class TmdbGenre extends Model
+class CreditMoney extends Model
 {
+
+    protected $guarded=[];
 
     public static function boot() {
         parent::boot();

@@ -123,7 +123,7 @@ Route::get('login', function () {
     return redirect()->route('admin.login');
 });
 
-Route::group([ 'middleware' => ['web'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Auth::routes();
     Route::get('register', function () {
@@ -132,7 +132,9 @@ Route::group([ 'middleware' => ['web'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('register', function () {
         return abort(404);
     })->name('register');
+});
 
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Route::get('/', 'AdminController@dashboard')->name('dashboard');
 
@@ -325,6 +327,7 @@ Route::group([ 'middleware' => ['web'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     // User Payment details
     Route::get('user/payments' , 'AdminController@user_payments')->name('user.payments');
+    Route::get('credit-money/add' , 'CreditMoneyController@create')->name('credit.create');
 
     // Ajax User payments
 
