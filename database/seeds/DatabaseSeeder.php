@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
+            CountriesTableSeeder::class,
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
