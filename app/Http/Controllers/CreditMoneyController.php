@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\CreditMoney;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,8 @@ class CreditMoneyController extends Controller
      */
     public function create()
     {
-        return view('admin.credit-money.create');
+        $retailers = User::role('retailer')->get(['id','name']);
+        return view('admin.credit-money.create', compact('retailers'));
     }
 
     /**
@@ -57,7 +59,9 @@ class CreditMoneyController extends Controller
     public function edit($id)
     {
         $creditmoney = CreditMoney::find($id);
-        return view('admin.credit-money.edit', compact('creditmoney'));
+        $retailers = User::role('retailer')->get(['id','name']);
+
+        return view('admin.credit-money.edit', compact('creditmoney', 'retailers'));
     }
 
     /**

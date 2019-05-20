@@ -2,8 +2,9 @@
     <label for="retailer_id" class="col-md-3 col-form-label">{{ 'Retailer Id' }}</label>
     <div class="col-md-9">
         <div class="form-group">
-            <input class="form-control" name="retailer_id" type="number" id="retailer_id"
-                   value="{{ $creditmoney->retailer_id ?? ''}}" required>
+            @foreach($retailers as $retailer)
+                <option value="{{ $retailer->id }}" {{ (isset($creditmoney->retailer_id) ? ($creditmoney->retailer_id == $retailer->id ? 'selected' : '') : '' ) }}>{{ $retailer->name }}</option>
+            @endforeach
             {!! $errors->first('retailer_id', '<small class="text-danger">:message</small>') !!}
         </div>
     </div>
