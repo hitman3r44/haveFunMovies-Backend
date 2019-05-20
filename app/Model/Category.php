@@ -67,8 +67,7 @@ class Category extends Model
                     
                     Helper::delete_picture($genre->subtitle, "/uploads/subtitles/");
 
-                }  
-  
+                }
 
                 $genre->delete();
             } 

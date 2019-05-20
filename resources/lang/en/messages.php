@@ -36,7 +36,7 @@ return array(
 
 	'video_viewer_count_size_label_note' => 'Usage : View count limit. Once the view count reaches the limit set by the admin, the moderator gets paid for each view.',
 	'amount_per_video_note' => "Usage : The amount set for each view once the count crosses the view limit.",
-	// Mobile Home 
+	// Mobile Home
 	'my_commission'=>'My Commission',
 	'admin_commission'=>'Admin Commission (in %)',
 	'sub_title'=>'Subtitle',
@@ -70,7 +70,7 @@ return array(
 	'post_max_size'=>'Post Max Size : ',
 		'post_max_size_label'=>'Post Max Size',
 	'max_upload_size_label'=>'Upload Max Size',
-	'uploaded_by'=>'Uploaded By',	
+	'uploaded_by'=>'Uploaded By',
 	'site_name' => 'Stream Hash',
 	'visit_website' => 'Visit Website',
 	'failed_to_upload'=>'Failed To Upload, Your File length is different from original File Length',
@@ -180,7 +180,7 @@ return array(
 	'view_all' => 'View All',
 	'see_all' => 'See All',
 	'clear_all' => 'Clear All',
-	
+
 	'yes' => 'Yes',
 	'no' => 'No',
 	'from'	=>	'From',
@@ -335,7 +335,7 @@ return array(
 	'view_history'	=>	'View History',
 	'copyright'	=>	'Copyright',
 	'copyright_message' => 'All rights reserved',
-	
+
 	'default_lang'	=>	'Default Language',
 	'delete_confirmation'	=> 'Are you sure want to Delete?',
 
@@ -366,7 +366,7 @@ return array(
 
 	'welcome'	=>	'Welcome to Have Fun Movies. Please sign in to your account',
 	'email_add'	=>	'E-mail Address',
-	
+
 	'password_reset_msg'	=>	'Enter a new password and log in to your account',
 	'password_reset_email'	=>	'Lost your password? Please enter your email address. You will receive a link to create a new password.',
 	'password_reset_button'	=>	'Reset Password',
@@ -503,7 +503,7 @@ return array(
 	'admin_not_genre_approve' => 'Genre Approved Successfully',
 	'admin_not_genre_decline' => 'Genre Unapproved Successfully',
 	'admin_not_genre_del' =>'Genre deleted Successfully',
-	
+
 
 	//Admin Videos
 
@@ -522,7 +522,7 @@ return array(
 	'view_images_video_note' => 'Note : Check the view video for video images',
 	'videos_posted' => 'Videos posted',
 	'search_videos' => 'Search Videos',
-	
+
 	'ratings' => 'Ratings',
 	'reviews' => 'Reviews',
 	'default_image' => 'Default image',
@@ -597,7 +597,7 @@ return array(
 
 	'payment_notification' => 'Payment Notification',
 	'payment_content' => 'Please Pay to see the full video',
-	
+
 	// Admin Custom Push
 
 	'custom_push' => 'Custom Push',
@@ -639,7 +639,7 @@ return array(
 	'HLS_STREAMING_URL' => 'HLS Streaming URL',
 	'google_analytics' => 'Google Analytics',
 	'expiry_date' => 'Expiry Date',
-	
+
 	'settings_success' => 'Settings Updated Successfully',
 	'email_settings_success' => 'Email Configuration Updated successfully',
 	'common_settings_success' => 'Common Configuration Updated successfully',
@@ -677,7 +677,7 @@ return array(
 	'admin_theme_control'=> 'Theme Control',
 	'admin_delete_control'=>'Do you want Disable the Delete/Update Control ?',
 	'admin_control'=>'Admin Control',
-	
+
 	// Notes
 
 	'warning_error_queue'=>'Redis Queue Driver not Configured. Kindly configure and upload the videos to compress queue videos',
@@ -685,7 +685,7 @@ return array(
 	'mobile_note' => 'Note : The mobile must be between 4 and 16 digits.',
 
 	'image_square' => 'Upload Square images 2:2 Ratio Ex: 300 * 300',
-	'rectangle_image' => 'Upload Rectangle images 4:3 Ratio Ex: 400 * 300',	
+	'rectangle_image' => 'Upload Rectangle images 4:3 Ratio Ex: 400 * 300',
 	'upload_message'	=>	'Upload only .png, .jpg or .jpeg image files only',
 	'streamtube_signin_nav_content' => 'Sign in now to see Full Video',
 
@@ -759,11 +759,11 @@ return array(
 	'subscription_decline_success'=>'Subscription has been successfully declined',
 	'add_card_success'=>'Successfully, added the card into your account',
 	'subscription_unapproved_error'=>'SubScription is unapproved',
-		// Common Success 
+		// Common Success
 	'subscribers' => 'Subscribers',
 
 	'no_of_months' => 'No of months',
-	
+
 	'subscription_plans'=>'Plans',
 
 	'subscription_applied_success'=>'Subscription applied successfully',
@@ -783,7 +783,7 @@ return array(
 	'redeem_pay_confirm' => 'Are You Sure ?',
 
 	'action_success' => 'Successfully Done!!',
-	
+
 	// REDEEM MESSAGES START
 
 	'redeem_disabled_by_admin' => 'Redeem option is disabled by admin',
@@ -945,7 +945,7 @@ return array(
 	'token_expiry'=>'Token Expiry No',
 	'verification_code_expired'=>'Verification Code Expired',
 	'user_record_deleted_contact_admin'=>'User record deleted. Please contact administrator!!!',
-	
+
 	'invalid_input'=>'Invalid input.',
 	'email_address_already_use'=>'Email address is already in use.',
 	'token_expiry'=>'Token expired.',
@@ -1050,7 +1050,7 @@ return array(
 	'genre_name'=>'Genre Name',
 	'video_delete_failure'=>'Video not deleted, please try again later',
 
-	
+
 	'age'=>'Age',
 	'example_format'=>'18+',
 	'email_notification'=>'Email Notification',
@@ -1069,7 +1069,43 @@ return array(
 	'template_not_saved'=>'Template not saved properly, please try again later',
 	'template_update_success'=>'Template has been updated successfully',
 	'template_create_success'=>'Template has been created successfully',
-	//Coupons
+
+	//Advertisement
+    'advertisement'=>'Advertisement',
+    'advertisements'=>'Advertisements',
+    'add_advertisement'=>'Add Advertisement',
+    'view_advertisement'=>'View Advertisement',
+    'edit_advertisement'=>'Edit Advertisement',
+    'advertisement_code'=>'Advertisement Code',
+    'enter_advertisement_title'=>'Enter Advertisement Title',
+    'advertisement_result_not_found_error'=>'Oops ! Seems you haven’t created advertisement.',
+    'advertisement_update_success'=> 'Advertisement Updated Successfully',
+    'advertisement_add_success'=>'Advertisement Added Successfully',
+    'advertisement_not_found_error'=>'Advertisement Details  Not Found',
+    'advertisement_id_not_found_error'=>'Advertisement Id doesn’t Exists',
+    'advertisement_delete_success'=>'Advertisement Deleted Successfully',
+    'advertisement_approve_success'=>'Advertisement Approved Successfully',
+    'advertisement_decline_success'=>'Advertisement Declined Successfully',
+    'min_play_time'=>'Minimum Play Time',
+    'max_play_time'=>'Maximum Play Time',
+    'already_played_time'=>'Already Played',
+    'start_playing_date'=>'When Ads start DD-MM-YYYY',
+    'start_playing_date_label'=>'Start Date of Add',
+    'start_playing_date_table_header'=>'Start Time',
+    'end_playing_date'=>'When Ads stop DD-MM-YYYY',
+    'end_playing_date_label'=>'Stop Date of Add',
+    'end_playing_date_table_header'=>'End Time',
+    'per_view_cost'=>'Per View Cost',
+    'unpublish'=>'Unpublish',
+    'is_published'=>'Published Status',
+    'make_expired'=>'Make Expire',
+    'decline_expired'=>'Decline Expire',
+    'is_expired'=>'Expiration Status',
+    'n/a'=>'N/A',
+
+
+
+    //Coupons
 	'coupon'=>'Coupon',
 	'coupons'=>'Coupons',
 	'add_coupon'=>'Add Coupon',
@@ -1103,7 +1139,7 @@ return array(
 	'coupon_code_note'=>'If Your giving lowercase and tab space means we will remove this things and giving Uppercase promo code format without space.',
 	'video_not_found_error'=>'Video Details Not Found',
 	'ppv_not_found_error'=>'PPV Amount is Not Found you watch free video.',
-	
+
 	'coupon_not_found'=>'Coupon not found, please try again later',
 	'coupon_inactive_status'=>'Coupon is inactive status',
 	'subscription_inactive_status'=>'Subscription is inactive status',
@@ -1263,7 +1299,7 @@ return array(
 	'subscription_autorenewal_already_cancelled' => 'The SubScription is already paused.',
 	'email_change_notification'=>'Email Change Notification',
 
-	//Export 
+	//Export
 	'created'=>'Joined',
 	'updated'=>'Updated',
 	'excel_sheet'=>'Excel Sheet',
@@ -1308,7 +1344,7 @@ return array(
 	'meta_author'=>'Meta Author',
 	'meta_description'=>'Meta Description',
 
-	// Home Page settings 
+	// Home Page settings
 	'home_page_settings'=>'Home Page Settings',
 	'banner_heading'=>'Banner Heading',
 	'banner_description'=>'Banner Description',
@@ -1334,9 +1370,9 @@ return array(
 	'gif_generate_success'=>'Gif has been generated successfully..!',
 	'generate_gif_image'=>'Generate Gif Image',
 	'my_redeems'=>'My Redeems',
-	
+
 	'per_users_limit'=>'Per Users Limit',
-	
+
 	'no_of_users_limit'=>'No of Users Limit',
 
 	'no_of_users_limit_notes'=>'Enter minimum 1 to maximum 4 digits',
@@ -1427,9 +1463,3 @@ return array(
 	'notification_will_update'=>'You will receive notifications about Video Sections',
 	'notification_will_not_update'=>'Your Notifications will be blocked, based on your concern',
 );
-
-
-
-
-
-

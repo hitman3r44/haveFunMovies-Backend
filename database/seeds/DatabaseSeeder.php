@@ -42,6 +42,12 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
         ]);
 
+        $customer = factory(App\User::class)->create([
+            'name' => 'Customer',
+            'email' => 'customer@havefunmovies.com',
+            'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
+        ]);
+
         $this->call([
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
@@ -52,5 +58,6 @@ class DatabaseSeeder extends Seeder
         $moderator->assignRole(Role::findByName('moderator'));
         $director->assignRole(Role::findByName('director'));
         $publisher->assignRole(Role::findByName('publisher'));
+        $customer->assignRole(Role::findByName('customer'));
     }
 }

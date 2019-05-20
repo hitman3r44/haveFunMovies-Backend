@@ -455,6 +455,29 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::post('/email/form/action','AdminController@email_send_process')->name('email.success');
 
+    // Advertisement
+
+    // Get the add advertisement forms
+    Route::get('/advertisement/add','AdminController@advertisement_create')->name('add.advertisement');
+
+    // Get the edit advertisement forms
+    Route::get('/advertisement/edit/{id}','AdminController@advertisement_edit')->name('edit.advertisement');
+
+    // Get the list of advertisement details
+    Route::get('/advertisement/list','AdminController@advertisement_index')->name('advertisement.list');
+
+    // Save the advertisement details
+    Route::post('/advertisement/save','AdminController@advertisement_save')->name('save.advertisement');
+
+    //Get the particular advertisement details
+    Route::get('/advertisement/view/{id}','AdminController@advertisement_view')->name('advertisement.view');
+
+    // Delete the advertisement details
+    Route::get('/advertisement/delete/{id}','AdminController@advertisement_delete')->name('delete.advertisement');
+
+    //Advertisement approve and decline status
+    Route::get('/advertisement/status','AdminController@advertisement_status_change')->name('advertisement.status');
+
 
     // Email Templates,
 

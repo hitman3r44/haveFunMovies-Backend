@@ -2,14 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Repositories\UserRepository as UserRepo;
-use App\Repositories\ProviderRepository as ProviderRepo;
-use App\Repositories\ModeratorRepository as ModeratorRepo;
-use App\Repositories\CommonRepository as CommonRepo;
 use App\Helpers\Helper;
 use Validator;
 use App\Language;
-use App\User;
 use Hash;
 use Log;
 
