@@ -2,9 +2,12 @@
     <label for="retailer_id" class="col-md-3 col-form-label">{{ 'Retailer Id' }}</label>
     <div class="col-md-9">
         <div class="form-group">
-            @foreach($retailers as $retailer)
-                <option value="{{ $retailer->id }}" {{ (isset($creditmoney->retailer_id) ? ($creditmoney->retailer_id == $retailer->id ? 'selected' : '') : '' ) }}>{{ $retailer->name }}</option>
-            @endforeach
+            <select name="retailer_id" id="retailer_id" class="form-control">
+                <option value=""></option>
+                @foreach($retailers as $retailer)
+                    <option value="{{ $retailer->id }}" {{ (isset($creditmoney->retailer_id) ? ($creditmoney->retailer_id == $retailer->id ? 'selected' : '') : '' ) }}>{{ $retailer->name }}</option>
+                @endforeach
+            </select>
             {!! $errors->first('retailer_id', '<small class="text-danger">:message</small>') !!}
         </div>
     </div>
