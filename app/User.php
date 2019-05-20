@@ -214,15 +214,8 @@ class User extends Authenticatable
 
             $model->attributes['push_status'] = ON;
 
-            $model->created_by = Auth::user()->id;
-            $model->updated_by = Auth::user()->id;
-
         });
 
-        static::updating(function($model)
-        {
-            $model->updated_by = Auth::user()->id;
-        });
     }
 
 

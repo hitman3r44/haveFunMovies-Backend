@@ -12,14 +12,14 @@ class TmdbGenre extends Model
         parent::boot();
         // Before update
         static::creating(function($post)
-        {
-            $post->created_by = Auth::user()->id;
-            $post->updated_by = Auth::user()->id;
+        {   // auth::check for seeding. cause while seeding there is no auth
+            $post->created_by = Auth::check() ?  Auth::user()->id : 1;
+            $post->updated_by = Auth::check() ?  Auth::user()->id : 1;
         });
 
         static::updating(function($post)
         {
-            $post->updated_by = Auth::user()->id;
+            $post->updated_by = Auth::check() ?  Auth::user()->id : 1;
         });
     }
 }

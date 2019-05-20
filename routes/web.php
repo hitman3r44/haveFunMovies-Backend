@@ -327,7 +327,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     // User Payment details
     Route::get('user/payments' , 'AdminController@user_payments')->name('user.payments');
-    Route::get('credit-money/add' , 'CreditMoneyController@create')->name('credit.create');
+
+    Route::resource('credit-money', 'CreditMoneyController');
+    Route::resource('prepaid-code', 'PrepaidCodeController');
+    Route::resource('gift-card', 'GiftCardController');
 
     // Ajax User payments
 

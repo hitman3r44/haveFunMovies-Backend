@@ -1,12 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-class CreateCardsTable extends Migration
+class CreateCreditMoneysTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,20 +13,17 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('credit_moneys', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('customer_id');
-            $table->string('last_four');
-            $table->string('card_token');
-            $table->integer('is_default');
+            $table->integer('retailer_id');
+            $table->decimal('amount');
+            $table->integer('given_by');
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->softDeletes();
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -36,7 +32,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cards');
+        Schema::drop('credit_moneys');
     }
-
 }
