@@ -91,14 +91,14 @@
                                                     <li role="presentation">
                                                         <a>
                                                             <form role="menuitem" method="POST"
-                                                                  action="{{ url('/admin/.gift-card' . '/' . $item->id) }}"
+                                                                  action="{{ url('/admin/gift-card' . '/' . $item->id) }}"
                                                                   accept-charset="UTF-8" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <input type="submit" class="deleteGiftCard"
                                                                        title="Delete GiftCard"
                                                                        onclick="return confirm('&quot;Confirm GiftCard delete?&quot;')"
-                                                                       value="{{tr('delete')}}"">
+                                                                       value="{{tr('delete')}}">
                                                             </form>
                                                         </a>
                                                     </li>

@@ -23,7 +23,7 @@
         <div class="bgc-white p-20 bd">
             <div class="row bgc-grey-400 p-10">
                 <div class="col-8">
-                    <h6 class="c-grey-900"><b>{{tr('edit_gift_card')}}</b></h6>
+                    <h6 class="c-grey-900"><b>{{tr('edit_gift_card')}} of {{$giftcard->code}}</b></h6>
                 </div>
                 <div class="col-4">
                     <a href="{{route('admin.gift-card.create')}}" class="btn btn-default pull-right">{{tr('add_gift_card')}}</a>
@@ -33,7 +33,40 @@
                 @method('PUT')
                 @csrf
                 <div class="box-body">
-                    @include ('admin.gift-card.form', ['submitButtonText' => 'Update'])
+
+                    <div class="form-group row">
+                        <label for="price" class="col-md-3 col-form-label">Price</label>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input class="form-control" name="price" type="number" id="price" value="{{ $giftcard->price ?? ''}}" required>
+                                {!! $errors->first('price', '<small class="text-danger">:message</small>') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="price" class="col-md-3 col-form-label">Use</label>
+                        <div class="col-md-9">
+                            <div class="form-group">
+
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="is_used" value="1" {{ $giftcard->is_used == 1 ? 'checked="checked"' : '' }}> Used
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="is_used" value="0" {{ $giftcard->is_used == 0 ? 'checked="checked"' : '' }}> Not Used
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="box-footer text-center">
+                        <input class="btn btn-fill btn-primary" type="submit" value="Update">
+                    </div>
+
                 </div>
             </form>
         </div>

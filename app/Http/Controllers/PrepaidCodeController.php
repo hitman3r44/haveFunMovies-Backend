@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libraries\Utility;
 use App\Model\PrepaidCode;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class PrepaidCodeController extends Controller
      */
     public function create()
     {
-        $uniqueId = $this->generateUUI();
+        $uniqueId = $uniqueId = Utility::generateUUI();;
         return view('admin.prepaid-code.create', compact('uniqueId'));
     }
 
@@ -44,12 +45,16 @@ class PrepaidCodeController extends Controller
 			'code' => 'required',
 			'price' => 'required',
 		]);
-        $requestData = $request->all();
-        
-        PrepaidCode::create($requestData);
 
+        $prepaidCode = new PrepaidCode();
 
-        return redirect()->route('admin/.prepaid-code.create')->with('success', 'PrepaidCode added!');
+        $prepaidCode->price = $request->price;
+        $prepaidCode->code = $request->code;
+        $prepaidCode->is_used = 0;
+        $prepaidCode->is_paid = 0;
+        $prepaidCode->save();
+
+        return redirect()->route('admin.prepaid-code.create')->with('success', 'Prepaid Code added!');
     }
 
     /**
@@ -65,19 +70,20 @@ class PrepaidCodeController extends Controller
      * Update the specified resource in storage.
      *
      */
-    public function update(Request $request, PrepaidCode $id)
+    public function update(Request $request, $id)
     {
-        $prepaidcode = PrepaidCode::find($id);
-        $this->validate($request, [
-			'retailer_id' => 'required',
-			'amount' => 'required',
-			'given_by' => 'required'
-		]);
-        $requestData = $request->all();
-        
-        $prepaidcode->update($requestData);
+        $prepaidCode = PrepaidCode::find($id);
 
-        return redirect()->route('admin/.prepaid-code.edit', $prepaidcode->id)->with('success', 'PrepaidCode updated!');
+        $this->validate($request, [
+            'price' => 'required',
+            'is_used' => 'required',
+        ]);
+
+        $prepaidCode->price = $request->price;
+        $prepaidCode->is_used = $request->is_used;
+        $prepaidCode->save();
+
+        return redirect()->route('admin.prepaid-code.edit', $prepaidCode->id)->with('success', 'Prepaid Code updated!');
     }
 
     /**
@@ -89,18 +95,9 @@ class PrepaidCodeController extends Controller
         $prepaidcode = PrepaidCode::find($id);
         $prepaidcode->delete();
 
-        return ' Deleted successfully';
+        return redirect()->route('admin.prepaid-code.index')->with('success', 'Prepaid Code Deleted successfully !');
 
     }
 
-    public function generateUUI($length = 10){
-        if (function_exists("random_bytes")) {
-            $bytes = random_bytes(ceil($length / 2));
-        } elseif (function_exists("openssl_random_pseudo_bytes")) {
-            $bytes = openssl_random_pseudo_bytes(ceil($length / 2));
-        } else {
-            throw new Exception("no cryptographically secure random function available");
-        }
-        return substr(bin2hex($bytes), 0, $length);
-    }
+
 }

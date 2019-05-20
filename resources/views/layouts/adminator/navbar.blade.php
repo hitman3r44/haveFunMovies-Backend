@@ -296,7 +296,7 @@
             <li class="nav-item dropdown" id="prepaid-code">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-credit-card"></i>
+                        <i class="c-indigo-500 fa fa-barcode"></i>
                     </span>
                     <span class="title">{{tr('prepaid_code')}}</span> <span class="arrow">
                         <i class="ti-angle-right"></i>
@@ -325,7 +325,7 @@
             <li class="nav-item dropdown" id="gift_card">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-credit-card"></i>
+                        <i class="c-indigo-500 fa fa-gift"></i>
                     </span>
                     <span class="title">{{tr('gift_card')}}</span> <span class="arrow">
                         <i class="ti-angle-right"></i>

@@ -20,11 +20,11 @@ use App\Jobs\StreamviewCompressVideo;
 
 use App\Helpers\Helper;
 
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 use Hash;
 
-use Log;
 
 use Setting;
 
@@ -212,7 +212,6 @@ class VideoRepository {
  	public static function video_save(Request $request) {
 
  		try {
-
  			DB::beginTransaction();
 
 	 		// Basic validations of video save form
@@ -252,6 +251,7 @@ class VideoRepository {
 	 			]
 	 		);
 
+
 	 		if ($validator->fails()) {
 
 	 			$errors = implode(',', $validator->messages()->all());
@@ -260,10 +260,11 @@ class VideoRepository {
 
 	 		} else {
 
+
                 $tmdbApi = new TmdbApi();
                 $tmdbVideo = null;
 
-                if(!$request->has('tmdb_video_id') || empty($request->tmdb_video_id)){
+                if($request->has('tmdb_video_id') && !empty($request->tmdb_video_id)){
 
                     $tmdbVideo = $tmdbApi->getMovieDetails($request->tmdb_video_id);
 
@@ -301,18 +302,15 @@ class VideoRepository {
 	 			}
 
 	 			// Check Genre present or not
-
-
-
 	 			if(!$request->has('tmdb_video_id') ||  $tmdbVideo == null){
 
-                    if($request->genre_id <= 0) { // If Genre not present, trailer video should be required
+                    if($request->genre_id && $request->genre_id <= 0) { // If Genre not present, trailer video should be required
                         $genre_validator = Validator::make($request->all(),[
-                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255'
+                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : ($request->has('tmdb_video_id') && $tmdbVideo != null) ? '' : 'required|mimes:mp4')  : 'required|max:255' ,
                         ]);
                     } else { // If Genre present, trailer video Optional
                         $genre_validator = Validator::make($request->all(),[
-                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'mimes:mp4') : 'required|max:255'
+                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : ($request->has('tmdb_video_id') && $tmdbVideo != null) ? '' : 'required|mimes:mp4') : 'required|max:255' ,
                         ]);
                     }
 
@@ -325,6 +323,7 @@ class VideoRepository {
 		 		$videopath = '/uploads/videos/original/';
 
 		 		// If video id present, load video and check whether the user changed the video type or not
+
 	 			if ($request->admin_video_id) {
 
 	 				$video_model = AdminVideo::find($request->admin_video_id);
@@ -358,12 +357,12 @@ class VideoRepository {
 	 				}
 
 	 				if ($video_validator->fails()) {
-
-			 			$errors = implode(',', $video_validator->messages()->all());
+	 				    $errors = implode(',', $video_validator->messages()->all());
 
 			 			throw new Exception($errors);
 
 			 		}
+
 
 			 		$video_model->edited_by = $request->edited_by ? $request->edited_by : ADMIN;
 
@@ -775,9 +774,9 @@ class VideoRepository {
 
 	            // Incase of queue and ffmpeg not configured properly, compress will not work so by default we will approve the videos
 
-	            if (envfile('QUEUE_DRIVER') != 'redis' || Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED || $no_need_compression) {
+	            if (env('QUEUE_DRIVER') != 'redis' || Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED || $no_need_compression) {
 
-                    \Log::info("Queue Driver : ".envfile('QUEUE_DRIVER'));
+                    \Log::info("Queue Driver : ".env('QUEUE_DRIVER'));
 
                     // On update check the video & trailer video having resolutions
 

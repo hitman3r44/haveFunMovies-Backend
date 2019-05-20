@@ -1,9 +1,9 @@
 @extends('layouts.adminator.master')
 
-@section('title', tr('prepaidcode'))
+@section('title', tr('prepaid_code'))
 
 @section('content-header')
-    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('prepaidcode') }}</h4>
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('prepaid_code') }}</h4>
 @endsection
 
 @section('breadcrumb')
@@ -11,9 +11,9 @@
             <i class="fa fa-dashboard"></i>{{tr('home')}} </a> >
     </li>
     <li class="list-inline-item"><a href="{{route('admin.prepaid-code.index')}}">
-            <i class="fa fa-suitcase"></i> {{tr('prepaidcode')}}</a> >
+            <i class="fa fa-suitcase"></i> {{tr('prepaid_code')}}</a> >
     </li>
-    <li class="list-inline-item active">{{tr('prepaidcode')}}</li>
+    <li class="list-inline-item active">{{tr('prepaid_code')}}</li>
 @endsection
 
 @section('styles')
@@ -36,7 +36,7 @@
                 <div class="row bgc-grey-600 p-10">
 
                     <div class="col-md-6 text-white">
-                        <h3>{{ tr('prepaidcode') }}</h3>
+                        <h3>{{ tr('prepaid_code') }}</h3>
                     </div>
 
                     <div class="col-md-6">
@@ -93,14 +93,14 @@
                                                     <li role="presentation">
                                                         <a>
                                                             <form role="menuitem" method="POST"
-                                                                  action="{{ url('/admin/.prepaid-code' . '/' . $item->id) }}"
+                                                                  action="{{ url('/admin/prepaid-code' . '/' . $item->id) }}"
                                                                   accept-charset="UTF-8" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <input type="submit" class="deletePrepaidCode"
                                                                        title="Delete PrepaidCode"
                                                                        onclick="return confirm('&quot;Confirm PrepaidCode delete?&quot;')"
-                                                                       value="{{tr('delete')}}"">
+                                                                       value="{{tr('delete')}}">
                                                             </form>
                                                         </a>
                                                     </li>

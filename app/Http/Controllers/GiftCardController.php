@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libraries\Utility;
 use App\Model\GiftCard;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class GiftCardController extends Controller
      */
     public function create()
     {
-        $uniqueId = $this->generateUUI();
+        $uniqueId = Utility::generateUUI();
         return view('admin.gift-card.create', compact('uniqueId'));
     }
 
@@ -44,12 +45,15 @@ class GiftCardController extends Controller
 			'price' => 'required',
 			'code' => 'required'
 		]);
-        $requestData = $request->all();
-        
-        GiftCard::create($requestData);
+        $giftData = new GiftCard();
 
+        $giftData->price = $request->price;
+        $giftData->code = $request->code;
+        $giftData->is_used = 0;
+        $giftData->is_paid = 0;
+        $giftData->save();
 
-        return redirect()->route('admin/.gift-card.create')->with('success', 'GiftCard added!');
+        return redirect()->route('admin.gift-card.create')->with('success', 'Gift Card added!');
     }
 
     /**
@@ -65,18 +69,20 @@ class GiftCardController extends Controller
      * Update the specified resource in storage.
      *
      */
-    public function update(Request $request, GiftCard $id)
+    public function update(Request $request, $id)
     {
         $giftcard = GiftCard::find($id);
-        $this->validate($request, [
-			'price' => 'required',
-			'code' => 'required'
-		]);
-        $requestData = $request->all();
-        
-        $giftcard->update($requestData);
 
-        return redirect()->route('admin/.gift-card.edit', $giftcard->id)->with('success', 'GiftCard updated!');
+        $this->validate($request, [
+            'price' => 'required',
+            'is_used' => 'required',
+        ]);
+
+        $giftcard->price = $request->price;
+        $giftcard->is_used = $request->is_used;
+        $giftcard->save();
+
+        return redirect()->route('admin.gift-card.edit', $giftcard->id)->with('success', 'Gift Card updated!');
     }
 
     /**
@@ -88,19 +94,8 @@ class GiftCardController extends Controller
         $giftcard = GiftCard::find($id);
         $giftcard->delete();
 
-        return ' Deleted successfully';
+        return redirect()->route('admin.gift-card.index')->with('success', 'Gift Card Deleted!');
 
     }
 
-
-    public function generateUUI($length = 10){
-        if (function_exists("random_bytes")) {
-            $bytes = random_bytes(ceil($length / 2));
-        } elseif (function_exists("openssl_random_pseudo_bytes")) {
-            $bytes = openssl_random_pseudo_bytes(ceil($length / 2));
-        } else {
-            throw new Exception("no cryptographically secure random function available");
-        }
-        return substr(bin2hex($bytes), 0, $length);
-    }
 }

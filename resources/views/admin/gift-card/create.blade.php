@@ -11,7 +11,7 @@
         <i class="fa fa-dashboard"></i>{{tr('home')}} </a> >
     </li>
     <li class="list-inline-item"><a href="{{route('admin.gift-card.index')}}">
-        <i class="fa fa-suitcase"></i> {{tr('giftcard')}}</a> >
+        <i class="fa fa-suitcase"></i> {{tr('gift_card')}}</a> >
     </li>
     <li class="list-inline-item active">{{tr('add_gift_card')}}</li>
 @endsection
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-4">
                         <a href="{{route('admin.gift-card.index')}}"
-                           class="btn btn-default pull-right">{{tr('giftcard')}}</a>
+                           class="btn btn-default pull-right">{{tr('gift_card')}}</a>
                     </div>
                 </div>
 
@@ -35,7 +35,32 @@
                     enctype="multipart/form-data" role="form">
                         @csrf
                     <div class="box-body">
-                        @include ('admin.gift-card.form')
+                        <div class="form-group row">
+                            <label for="code" class="col-md-3 col-form-label">{{ 'Code' }}</label>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <input class="form-control" name="code" type="text" id="code" value="{{ $uniqueId}}" required>
+                                    {!! $errors->first('code', '<small class="text-danger">:message</small>') !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="price" class="col-md-3 col-form-label">{{ 'Price' }}</label>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <input class="form-control" name="price" type="number" id="price" value=""
+                                           required>
+                                    {!! $errors->first('price', '<small class="text-danger">:message</small>') !!}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <hr>
+                        <div class="box-footer text-center">
+                            <input class="btn btn-fill btn-primary" type="submit" value="Generate">
+                        </div>
+
                     </div>
                 </form>
             </div>
