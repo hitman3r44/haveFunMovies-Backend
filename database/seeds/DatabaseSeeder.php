@@ -71,7 +71,6 @@ class DatabaseSeeder extends Seeder
         $customer->assignRole(Role::findByName('customer'));
         $retailer->assignRole(Role::findByName('retailer'));
 
-
         factory(App\Model\AdminVideo::class, 3)->create()->each(function ($adminVideo) {
 
             factory(App\Model\AdminVideoImage::class, 2)->create(['admin_video_id' => $adminVideo->id]);
@@ -96,6 +95,8 @@ class DatabaseSeeder extends Seeder
 
             });
         });
+
+        $customer->assignRole(Role::findByName('customer'));
 
     }
 }
