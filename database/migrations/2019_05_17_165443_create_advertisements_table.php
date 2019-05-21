@@ -35,39 +35,9 @@ class CreateAdvertisementsTable extends Migration
 
             $table->integer('status');
             $table->string('description')->nullable();
-
+            $table->softDeletes();
             $table->timestamps();
         });
-
-//        Schema::create('adds_has_movies', function (Blueprint $table) {
-//            $table->unsignedInteger('advertisement_id');
-//            $table->unsignedBigInteger('movie_id');
-//
-//            $table->index('advertisement_id');
-//
-//            $table->foreign('movie_id')
-//                ->references('id')
-//                ->on('admin_videos')
-//                ->onDelete('cascade');
-//
-//            $table->primary(['advertisement_id', 'movie_id'],
-//                'adds_has_movies');
-//        });
-
-//        Schema::create('adds_has_countries', function (Blueprint $table) {
-//            $table->unsignedInteger('advertisement_id');
-//            $table->unsignedBigInteger('country_id');
-//
-//            $table->index('advertisement_id');
-//
-//            $table->foreign('country_id')
-//                ->references('id')
-//                ->on('countries')
-//                ->onDelete('cascade');
-//
-//            $table->primary(['advertisement_id', 'country_id'],
-//                'adds_has_countries');
-//        });
     }
 
     /**

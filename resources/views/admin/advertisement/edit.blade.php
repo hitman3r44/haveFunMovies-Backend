@@ -32,12 +32,12 @@
 
                 <form action="{{route('admin.save.advertisement')}}" method="POST" class="form-horizontal" role="form">
                     @csrf
-                    <input type="hidden" name="id" value="{{$edit_advertisement->id}}">
+                    <input type="hidden" name="application_id" value="{{$edit_advertisement->id}}">
 
                     <div class="box-body">
 
                         {{--                        Title--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="title" class="col-sm-2 control-label"> * {{tr('title')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" name="title" role="title" min="5" max="20" class="form-control"
@@ -47,7 +47,7 @@
                         </div>
 
                         {{--                        Minimum Play Time--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="min_play_time" class="col-sm-2 control-label">{{tr('min_play_time')}}</label>
                             <div class="col-sm-10">
                                 <input type="number" name="min_play_time" min="1" max="5000" step="any" class="form-control"
@@ -59,7 +59,7 @@
                         </div>
 
                         {{--                        Maximum Play Time--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="min_play_time" class="col-sm-2 control-label">{{tr('max_play_time')}}</label>
                             <div class="col-sm-10">
                                 <input type="number" name="max_play_time" min="1" max="5000" step="any" class="form-control"
@@ -71,7 +71,7 @@
                         </div>
 
                         {{--                        total_amount--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="total_amount" class="col-sm-2 control-label"> * {{tr('total_amount')}}</label>
                             <div class="col-sm-10">
                                 <input type="number" name="total_amount" min="1" max="5000" step="any" class="form-control"
@@ -83,7 +83,7 @@
                         </div>
 
                         {{--                        Per View Cost--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="per_view_cost" class="col-sm-2 control-label"> * {{tr('per_view_cost')}}</label>
                             <div class="col-sm-10">
                                 <input type="number" name="per_view_cost" max="5000" step="any" class="form-control"
@@ -95,7 +95,7 @@
                         </div>
 
                         {{--                        start_playing_date--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="start_playing_date" class="col-sm-2 control-label">{{tr('start_playing_date_label')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" id="start_playing_date" name="start_playing_date" class="form-control"
@@ -107,7 +107,7 @@
                         </div>
 
                         {{--                        stop_playing_date--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="end_playing_date" class="col-sm-2 control-label">{{tr('end_playing_date_label')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" id="end_playing_date" name="end_playing_date" class="form-control"
@@ -136,7 +136,7 @@
                         </div>
 
                         {{--                        Description--}}
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label for="description" class="col-sm-2 control-label">{{tr('description')}}</label>
                             <div class="col-sm-10">
                                 <textarea name="description" class="form-control" max="255"
@@ -158,7 +158,7 @@
 @section('scripts')
     <script src="{{asset('assets/js/jstz.min.js')}}"></script>
     <script>
-        function populateSelectOptionData(contentType, viewField){
+        function populateSelectOptionData(contentType, viewField, alreadyExistArr){
             $.ajax({
                 type: "GET",
                 url: "{{ route('admin.advertisement.data') }}",
@@ -173,7 +173,7 @@
                     var option = ''; //<option value="">Select '+contentType+'</option>
                     if (response.statusCode == 1) {
                         $.each(response.data, function (id, value) {
-                            if(id == 1){ // ::TODO : make selected while edit
+                            if(alreadyExistArr.indexOf(parseInt(id)) != -1){
                                 option += '<option selected value="' + id + '" >' + value + '</option>';
                             }else{
                                 option += '<option value="' + id + '" >' + value + '</option>';
@@ -196,8 +196,15 @@
             var dtz = -(dMin / 60);
             $("#userTimezone").val(jstz.determine().name());
 
-            populateSelectOptionData('countries', '#countries');
-            populateSelectOptionData('movies', '#movies');
+            var countriesArr = [ {!! implode(',', $edit_advertisement->countries()->pluck('id')->toArray()) !!}]
+            var moviesArr = [ {!! implode(',', $edit_advertisement->movies()->pluck('id')->toArray()) !!}]
+
+            console.log(countriesArr);
+            console.log(moviesArr);
+            console.log(countriesArr.indexOf(1));
+
+            populateSelectOptionData('countries', '#countries', countriesArr);
+            populateSelectOptionData('movies', '#movies', moviesArr);
 
         });
 

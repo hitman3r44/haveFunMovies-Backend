@@ -37,6 +37,6 @@ class CreateAdvertisementHasMoviesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addvertisement_has_movies');
+        Schema::dropIfExists('advertisement_has_movies');
     }
 }

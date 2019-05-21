@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\AdminVideo;
+use App\Model\Country;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -60,5 +62,19 @@ class DatabaseSeeder extends Seeder
         $director->assignRole(Role::findByName('director'));
         $publisher->assignRole(Role::findByName('publisher'));
         $customer->assignRole(Role::findByName('customer'));
+
+
+        factory(App\Model\AdminVideo::class, 3)->create()->each(function ($adminVideo) {
+
+            factory(App\Model\AdminVideoImage::class, 2)->create(['admin_video_id' => $adminVideo->id]);
+        });
+
+
+
+        factory(App\Model\Advertisement::class, 4)->create()->each(function ($advertisement)  {
+            $advertisement->countries()->attach(Country::whereIn('id', [1,2,3])->get());
+            $advertisement->movies()->attach(AdminVideo::whereIn('id', [1,2,3])->get());
+
+        });
     }
 }

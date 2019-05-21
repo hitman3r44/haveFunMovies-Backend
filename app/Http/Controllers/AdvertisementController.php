@@ -7,6 +7,8 @@ use App\Model\Advertisement;
 use App\Model\Country;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdvertisementController extends Controller
 {
@@ -26,7 +28,6 @@ class AdvertisementController extends Controller
      */
     public function advertisement_create()
     {
-
         return view('admin.advertisement.create')
             ->with('page', 'advertisements')
             ->with('sub_page', 'create');
@@ -47,66 +48,96 @@ class AdvertisementController extends Controller
      */
     public function advertisement_save(Request $request)
     {
+        try {
 
-        $this->validate($request, [
-            'id' => 'exists:advertisements,id',
-            'title' => 'required',
-            'total_amount'=>'required|numeric|min:1|max:5000',
-            'per_view_cost'=>'required|numeric',
-            'countries'=>'required',
-            'movies'=>'required',
-        ]);
+            $this->validate($request, [
+                'id' => 'exists:advertisements,id',
+                'title' => 'required',
+                'total_amount' => 'required|numeric|min:1|max:5000',
+                'per_view_cost' => 'required|numeric',
+                'countries' => 'required',
+                'movies' => 'required',
+            ]);
 
-        if ($request->id != '') {
 
-            $advertisement_detail = Advertisement::find($request->id);
+            $requestedCountries = array_map('intval', $request->countries);
+            $countries = Country::whereIn('id', $requestedCountries)->get();
 
-            $advertisement_detail->updated_at = Carbon::now();
+            $requestedMovies = array_map('intval', $request->movies);
+            $movies = AdminVideo::whereIn('id', $requestedMovies)->get();
 
-            $message = tr('advertisement_update_success');
+            DB::beginTransaction();
 
-        } else {
+            if ($request->application_id != '') {
 
-            $advertisement_detail = new Advertisement;
+                $advertisement = Advertisement::find($request->application_id);
 
-            $advertisement_detail->status = DEFAULT_TRUE;
-            $advertisement_detail->is_published = DEFAULT_FALSE;
-            $advertisement_detail->is_deleted = DEFAULT_FALSE;
-            $advertisement_detail->is_expired = DEFAULT_FALSE;
-            $advertisement_detail->already_played_time = 0;
+                $advertisement->updated_at = Carbon::now();
 
-            $advertisement_detail->updated_at = Carbon::now();
-            $advertisement_detail->uploaded_at = Carbon::now();
-            $advertisement_detail->created_by = Auth::user()->id;
+                $message = tr('advertisement_update_success');
 
-            $message = tr('advertisement_add_success');
-        }
 
-        // Put requered fields into the model
-        $advertisement_detail->title = ucfirst($request->title);
-        $advertisement_detail->total_amount = $request->total_amount;
-        $advertisement_detail->per_view_cost = $request->per_view_cost ;
+            } else {
 
-        // Convert date format year,month,date purpose of database storing
-        $advertisement_detail->start_playing_date = $request->has('start_playing_date ') ? date('Y-m-d', strtotime($request->start_playing_date)) : null;
-        $advertisement_detail->end_playing_date = $request->has('end_playing_date ') ? date('Y-m-d', strtotime($request->end_playing_date)) : null;
-        $advertisement_detail->uploaded_at = date('Y-m-d', strtotime($advertisement_detail->uploaded_at));
-        $advertisement_detail->updated_at = date('Y-m-d', strtotime($advertisement_detail->updated_at));
+                $advertisement = new Advertisement;
 
-        // Check Other Fields for null
-        $advertisement_detail->min_play_time = $request->has('min_play_time') ? $request->min_play_time : 0;
-        $advertisement_detail->max_play_time = $request->has('max_play_time') ? $request->max_play_time : 0;
-        $advertisement_detail->description = $request->has('description') ? $request->description : '';
+                $advertisement->status = DEFAULT_TRUE;
+                $advertisement->is_published = DEFAULT_FALSE;
+                $advertisement->is_deleted = DEFAULT_FALSE;
+                $advertisement->is_expired = DEFAULT_FALSE;
+                $advertisement->already_played_time = 0;
 
-        if ($advertisement_detail) {
+                $advertisement->updated_at = Carbon::now();
+                $advertisement->uploaded_at = Carbon::now();
+                $advertisement->created_by = Auth::user()->id;
 
-            $advertisement_detail->save();
+                $message = tr('advertisement_add_success');
+            }
 
-            return back()->with('flash_success', $message);
 
-        } else {
+            // Put requered fields into the model
+            $advertisement->title = ucfirst($request->title);
+            $advertisement->total_amount = $request->total_amount;
+            $advertisement->per_view_cost = $request->per_view_cost;
 
-            return back()->with('flash_error', tr('advertisement_not_found_error'));
+            // Convert date format year,month,date purpose of database storing
+            $advertisement->start_playing_date = !empty($request->start_playing_date) ? date('Y-m-d', strtotime($request->start_playing_date)) : null;
+            $advertisement->end_playing_date = !empty($request->end_playing_date) ? date('Y-m-d', strtotime($request->end_playing_date)) : null;
+
+            // Check Other Fields for null
+            $advertisement->min_play_time = !empty($request->min_play_time) ? $request->min_play_time : 0;
+            $advertisement->max_play_time = !empty($request->max_play_time) ? $request->max_play_time : 0;
+            $advertisement->description = $request->description;
+
+            if ($advertisement->save()) {
+
+                if ($request->application_id != '') { // edit
+
+                    if($countries->isNotEmpty()) $advertisement->countries()->sync($countries);
+
+                    if($movies->isNotEmpty()) $advertisement->movies()->sync($movies);
+
+                }else{
+
+                    if($countries->isNotEmpty()) $advertisement->countries()->attach($countries);
+
+                    if($movies->isNotEmpty()) $advertisement->movies()->attach($movies);
+
+                }
+
+                DB::commit();
+
+                return back()->with('flash_success', $message);
+
+            } else {
+
+                DB::rollback();
+                return back()->with('flash_error', tr('advertisement_not_found_error'));
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('flash_error', $e->getMessage().' Code :[ADV:0001]'.$e->getLine())->withInput();
         }
     }
 
@@ -126,7 +157,7 @@ class AdvertisementController extends Controller
     public function advertisement_index()
     {
 
-        $advertisements = Advertisement::orderBy('updated_at', 'desc')->paginate(10);
+        $advertisements = Advertisement::orderBy('created_at', 'desc')->get();
 
         if ($advertisements) {
 
@@ -159,7 +190,6 @@ class AdvertisementController extends Controller
         if ($id) {
 
             $edit_advertisement = Advertisement::find($id);
-
             if ($edit_advertisement) {
 
                 return view('admin.advertisement.edit')
@@ -232,11 +262,11 @@ class AdvertisementController extends Controller
 
         if ($advertisement_status) {
 
-            if($request->is_expired) {
+            if ($request->is_expired) {
                 $advertisement_status->is_expired = $request->is_expired;
             }
 
-            if($request->is_published) {
+            if ($request->is_published) {
                 $advertisement_status->is_published = $request->is_published;
             }
 
@@ -322,22 +352,22 @@ class AdvertisementController extends Controller
      */
     public function advertisement_get_data(Request $request)
     {
-        try{
+        try {
             $contentType = $request->get('content');
 
-            if($contentType == 'countries'){
+            if ($contentType == 'countries') {
 
                 $countries = Country::all();
 
-                if($countries){
+                if ($countries) {
 
                     $data = $countries->pluck('name', 'id');
                 }
-            }else if($contentType == 'movies'){
+            } else if ($contentType == 'movies') {
 
                 $movies = AdminVideo::all();
 
-                if($movies){
+                if ($movies) {
 
                     $data = $movies->pluck('title', 'id');
                 }
@@ -345,9 +375,9 @@ class AdvertisementController extends Controller
 
             return response()->json(['statusCode' => 1, 'data' => $data]);
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
 
-            return response()->json(['statusCode' => 0, 'data' => [], 'message' => $e->getMessage()] );
+            return response()->json(['statusCode' => 0, 'data' => [], 'message' => $e->getMessage()]);
         }
     }
 }
