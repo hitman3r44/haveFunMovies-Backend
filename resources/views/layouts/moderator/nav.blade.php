@@ -6,10 +6,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="@if(Auth::guard('moderator')->user()->picture){{Auth::guard('moderator')->user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" class="img-circle" alt="User Image">
+                <img src="@if(Auth::user()->picture){{Auth::user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>{{Auth::guard('moderator')->user()->name}}</p>
+                <p>{{Auth::user()->name}}</p>
                 <a href="{{route('moderator.profile')}}">{{tr('moderator')}}</a>
             </div>
         </div>

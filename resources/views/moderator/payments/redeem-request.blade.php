@@ -2,7 +2,7 @@
 
 @section('title', tr('redeem_amount'))
 
-@section('content-header',tr('redeem_amount') . ' ( $ ' . (Auth::guard('moderator')->user()->moderatorRedeem ? Auth::guard('moderator')->user()->moderatorRedeem->remaining : "0.00") . ' ) ' ) 
+@section('content-header',tr('redeem_amount') . ' ( $ ' . (Auth::user()->moderatorRedeem ? Auth::user()->moderatorRedeem->remaining : "0.00") . ' ) ' )
 
 @section('breadcrumb')
     <li><a href="{{route('moderator.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
@@ -107,7 +107,7 @@ thead>tr>th {
                             <div class="circle">
                                 <div class="circle__inner">
                                     <div class="circle__wrapper">
-                                        <div class="circle__content"><b>{{Setting::get('currency')}} {{Auth::guard('moderator')->user()->moderatorRedeem ? Auth::guard('moderator')->user()->moderatorRedeem->remaining : "0.00"}}</b></div>
+                                        <div class="circle__content"><b>{{Setting::get('currency')}} {{Auth::user()->moderatorRedeem ? Auth::user()->moderatorRedeem->remaining : "0.00"}}</b></div>
                                     </div>
                                 </div>
                             
@@ -121,12 +121,12 @@ thead>tr>th {
 
                             <?php 
 
-                                $remaining = Auth::guard('moderator')->user()->moderatorRedeem ? Auth::guard('moderator')->user()->moderatorRedeem->remaining: 0;
+                                $remaining = Auth::user()->moderatorRedeem ? Auth::user()->moderatorRedeem->remaining: 0;
 
                                 $min_status = Setting::get('minimum_redeem') < $remaining;
                             ?>
 
-                            @if(count(Auth::guard('moderator')->user()->moderatorRedeem) > 0 && $min_status)
+                            @if(count(Auth::user()->moderatorRedeem) > 0 && $min_status)
 
                                 <a href="{{route('moderator.redeems.send.request')}}" class="btn btn-success">{{tr('send_redeem')}}</a>
 
@@ -139,7 +139,7 @@ thead>tr>th {
                     
                     </div>
 
-                    @if(count($redeem_requests = Auth::guard('moderator')->user()->moderatorRedeemRequests) > 0)
+                    @if(count($redeem_requests = Auth::user()->moderatorRedeemRequests) > 0)
 
                         <div class="row">
 

@@ -14,9 +14,52 @@
     <li class="list-inline-item active"> {{tr('add_video')}}</li>
 @endsection
 
+
+
 @section('styles')
 
-    <link rel="stylesheet" href="{{asset('assets/plugins/jquery.steps-1.1.0/jquery.steps.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/wizard.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/jquery.jbswizard.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
+    <link rel="stylesheet"
+          href="{{asset('admin-css/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/imgareaselect-default.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/css/jquery.awesome-cropper.css')}}">
+
+    <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
+
+    <style type="text/css">
+
+        .container-narrow {
+            margin: 150px auto 50px auto;
+            max-width: 728px;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+
+        span.select2-container {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            margin-bottom: 10px;
+            width: 30%;
+        }
+
+        .select2-container .select2-search--inline {
+            border: 1px solid #d2d6df !important;
+            width: 30%;
+        }
+
+    </style>
 
 @endsection
 
@@ -28,6 +71,10 @@
 
                {{ logger(tr('warning_error_queue')) }}
 
+               {{--<div class="alert alert-warning">--}}
+                   {{--<button type="button" class="close" data-dismiss="alert">×</button>--}}
+                   {{--{{tr('warning_error_queue')}}--}}
+               {{--</div>--}}
            @endif
 
            @if(checkSize())
@@ -59,6 +106,47 @@
 
                     <!-- popup -->
 
+                    <div class="modal fade error-popup" id="myModal" role="dialog">
+
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+
+                                    <div class="media">
+
+                                        <div class="media-left">
+
+                                            <img src="{{asset('images/warning.jpg')}}" class="media-object"
+                                                 style="width:60px">
+
+                                        </div>
+
+                                        <div class="media-body">
+
+                                            <h4 class="media-heading">Information</h4>
+
+                                            <p id="error_messages_text"></p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="text-right">
+
+                                        <button type="button" class="btn btn-primary top" data-dismiss="modal">Okay
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div id="example">
 
@@ -83,22 +171,23 @@
                                     </ul>
                                     <form method="post" enctype="multipart/form-data" id="upload_video_form" action="{{route('admin.videos.save')}}">
                                         @csrf
+
+                                        @if($tmdbVideo->hasData()) <input type="hidden" name="tmdb_video_id" id="tmdb_video_id" value="{{$tmdbVideo->getID()}}"> @endif
+                                        <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
+
                                         <div class="tab-content">
                                             <!-- tab1 -->
                                             <div role="tabpanel" class="tab-pane fade in active" id="first">
-                                                <p class="note-sec">{{tr('note')}}: <span class="asterisk"><i
-                                                                class="fa fa-asterisk"></i></span> {{tr('mandatory_field_notes')}}
-
-                                                    <input type="hidden" name="admin_video_id" id="admin_video_id"
-                                                           value="{{$model->id}}">
-
-                                                    <!--  <a href="#" data-toggle="tooltip" title="Hooray!" data-placement="right">Note</a> -->
+                                                <p class="note-sec">{{tr('note')}}:
+                                                    <span class="asterisk">
+                                                        <i  class="fa fa-asterisk"></i>
+                                                    </span> {{tr('mandatory_field_notes')}}
                                                 </p>
                                                 <ul class="form-style-7">
                                                     <li>
                                                         <label for="title">{{tr('title')}} <span class="asterisk"><i
                                                                         class="fa fa-asterisk"></i></span> </label>
-                                                        <input type="text" name="title" maxlength="100" maxlength="255" required
+                                                        <input type="text" name="title" maxlength="100" maxlength="255"
                                                                value="{{$model->title}}" id='title'>
                                                     </li>
                                                     <li>
@@ -126,11 +215,6 @@
                                                                value="{{$model->duration}}" id="duration">
                                                     </li>
 
-                                                <!-- <li>
-                                                <label for="description">{{tr('description')}} <span class="asterisk"><i class="fa fa-asterisk"></i></span></label>
-
-                                                <textarea name="description" rows="4" class="height-122" id="description">{{$model->description}}</textarea>
-                                            </li>-->
 
                                                     <li class="height-54">
                                                         <label for="reviews">{{tr('ratings')}} <span class="asterisk"><i
@@ -234,7 +318,7 @@
                                                     @foreach($categories as $category)
                                                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                                             <a class="category"
-                                                               onclick="saveCategory({{$category->id}}, {{REQUEST_STEP_2}})"
+                                                               onclick="saveCategory('{{$category->id}}', {{REQUEST_STEP_2}})"
                                                                style="cursor: pointer;">
                                                                 <div class="category-sec select-box category_list {{($category->id == $model->category_id) ? 'active' : ''}}"
                                                                      id="category_{{$category->id}}">
@@ -262,7 +346,7 @@
                                                         @foreach($sub_categories as $sub_category)
                                                             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                                                                 <a class="category"
-                                                                   onclick="saveSubCategory({{$sub_category->id}}, {{REQUEST_STEP_3}})"
+                                                                   onclick="saveSubCategory('{{$sub_category->id}}', {{REQUEST_STEP_3}})"
                                                                    style="cursor: pointer;">
                                                                     <div class="category-sec select-box sub_category_list {{($sub_category->id == $model->sub_category_id) ? 'active' : ''}}"
                                                                          id="sub_category_{{$sub_category->id}}">
@@ -337,28 +421,7 @@
                                                 <div class="clearfix"></div>
                                                 <!-- radio and checkbox -->
                                                 <div class="row manual_video_upload">
-                                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="mb-30">
-                                                            <div>
-                                                                {{--<label class="label-cls">{{tr('compress_video')}}<span--}}
-                                                                            {{--class="asterisk"><i--}}
-                                                                                {{--class="fa fa-asterisk"></i></span>--}}
-                                                                {{--</label>--}}
-                                                            </div>
-                                                            {{--<div class="radio radio-primary radio-inline">--}}
-                                                                {{--<input type="radio" id="COMPRESS_ENABLED"--}}
-                                                                       {{--name="compress_video"--}}
-                                                                       {{--value="{{COMPRESS_ENABLED}}">--}}
-                                                                {{--<label for="COMPRESS_ENABLED"> {{tr('yes')}} </label>--}}
-                                                            {{--</div>--}}
-                                                            {{--<div class="radio radio-inline radio-primary">--}}
-                                                                {{--<input type="radio" id="COMPRESS_DISABLED"--}}
-                                                                       {{--name="compress_video"--}}
-                                                                       {{--value="{{COMPRESS_DISABLED}}" checked>--}}
-                                                                {{--<label for="COMPRESS_DISABLED"> {{tr('no')}} </label>--}}
-                                                            {{--</div>--}}
-                                                        </div>
-                                                    </div>
+
                                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                         <div class="mb-30">
                                                             <div>
@@ -466,10 +529,10 @@
                                                         <div class="">
                                                             <div class="">
                                                                 <label class="">
-                                                                <!-- <div class="btn btn-primary btn-sm">{{tr('browse')}}</div> -->
                                                                     <input type="file" name="trailer_video"
                                                                            accept="video/mp4,video/x-matroska"
                                                                            id="trailer_video"/>
+                                                                    <small>Current Trailer : <a class="" href="{{$model->trailer_video}}">{{$model->trailer_video}}</a></small>
                                                                 </label>
                                                             </div>
                                                             <!--  <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
@@ -534,7 +597,7 @@
                                                             <span class="asterisk"><i class="fa fa-asterisk"></i></span>
                                                         </label>
                                                         <input type="url" name="trailer_video" maxlength="256"
-                                                               id="other_trailer_video">
+                                                               id="other_trailer_video" >
                                                     </li>
 
                                                     <li>
@@ -671,736 +734,67 @@
         <div id="loading-img"></div>
     </div>
 
-   <div class="modal fade error-popup" id="myModal" role="dialog">
-
-       <div class="modal-dialog">
-
-           <div class="modal-content">
-
-               <div class="modal-body">
-
-                   <div class="media">
-
-                       <div class="media-left">
-
-                           <img src="{{asset('images/warning.jpg')}}" class="media-object"
-                                style="width:60px">
-
-                       </div>
-
-                       <div class="media-body">
-
-                           <h4 class="media-heading">Information</h4>
-
-                           <p id="error_messages_text"></p>
-
-                       </div>
-
-                   </div>
-
-                   <div class="text-right">
-
-                       <button type="button" class="btn btn-primary top" data-dismiss="modal">Okay
-                       </button>
-
-                   </div>
-
-               </div>
-
-           </div>
-
-       </div>
-
-   </div>
-
-   <form id="example-advanced-form" action="#">
-       @csrf
-       <h3>{{tr('video_details')}}</h3>
-       <fieldset>
-           <legend>Account Information</legend>
-
-           <label for="userName-2">User name *</label>
-           <input id="userName-2" name="userName" type="text" class="required">
-           <label for="password-2">Password *</label>
-           <input id="password-2" name="password" type="text" class="required">
-           <label for="confirm-2">Confirm Password *</label>
-           <input id="confirm-2" name="confirm" type="text" class="required">
-           <p>(*) Mandatory</p>
-       </fieldset>
-
-       <h3>Profile</h3>
-       <fieldset>
-           <legend>Profile Information</legend>
-
-           <label for="name-2">First name *</label>
-           <input id="name-2" name="name" type="text" class="required">
-           <label for="surname-2">Last name *</label>
-           <input id="surname-2" name="surname" type="text" class="required">
-           <label for="email-2">Email *</label>
-           <input id="email-2" name="email" type="text" class="required email">
-           <label for="address-2">Address</label>
-           <input id="address-2" name="address" type="text">
-           <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
-           <input id="age-2" name="age" type="text" class="required number">
-           <p>(*) Mandatory</p>
-       </fieldset>
-
-       <h3>Warning</h3>
-       <fieldset>
-           <legend>You are to young</legend>
-
-           <p>Please go away ;-)</p>
-       </fieldset>
-
-       <h3>Finish</h3>
-       <fieldset>
-           <legend>Terms and Conditions</legend>
-
-           <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
-       </fieldset>
-   </form>
-
 @endsection
 
 @section('scripts')
 
     <script src="{{asset('admin-css/plugins/bootstrap-datetimepicker/js/moment.min.js')}}"></script>
+
     <script src="{{asset('admin-css/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
+
+    <script src="{{asset('admin-css/plugins/iCheck/icheck.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/jquery.jbswizard.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/jbswizard.js')}}"></script>
+
     <script src="{{asset('admin-css/plugins/jquery.form.js')}}"></script>
 
-    <script src="{{asset('assets/plugins/jquery.steps-1.1.0/jquery.steps.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/jquery.validate/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.awesome-cropper.js')}}"></script>
 
-
-    <script>
-        var form = $("#example-advanced-form").show();
-
-        form.steps({
-            headerTag: "h3",
-            bodyTag: "fieldset",
-            transitionEffect: "slideLeft",
-            onStepChanging: function (event, currentIndex, newIndex)
-            {
-                // Allways allow previous action even if the current form is not valid!
-                if (currentIndex > newIndex)
-                {
-                    return true;
-                }
-                // Forbid next action on "Warning" step if the user is to young
-                if (newIndex === 3 && Number($("#age-2").val()) < 18)
-                {
-                    return false;
-                }
-                // Needed in some cases if the user went back (clean up)
-                if (currentIndex < newIndex)
-                {
-                    // To remove error styles
-                    form.find(".body:eq(" + newIndex + ") label.error").remove();
-                    form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-                }
-                form.validate().settings.ignore = ":disabled,:hidden";
-                return form.valid();
-            },
-            onStepChanged: function (event, currentIndex, priorIndex)
-            {
-                // Used to skip the "Warning" step if the user is old enough.
-                if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
-                {
-                    form.steps("next");
-                }
-                // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-                if (currentIndex === 2 && priorIndex === 3)
-                {
-                    form.steps("previous");
-                }
-            },
-            onFinishing: function (event, currentIndex)
-            {
-                form.validate().settings.ignore = ":disabled";
-                return form.valid();
-            },
-            onFinished: function (event, currentIndex)
-            {
-                alert("Submitted!");
-            }
-        }).validate({
-            errorPlacement: function errorPlacement(error, element) { element.before(error); },
-            rules: {
-                confirm: {
-                    equalTo: "#password-2"
-                }
-            }
-        });
-    </script>
+    <script src="{{asset('assets/js/jquery.imgareaselect.js')}}"></script>
 
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-
-        $(document).ready(function () {
-            //Initialize tooltips
-            $('.nav-tabs > li a[title]').tooltip();
-
-            //Wizard
-            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-                var $target = $(e.target);
-
-                if ($target.parent().hasClass('disabled')) {
-                    return false;
-                }
-            });
-
-            $(".next-step").click(function (e) {
-
-                var $active = $('.wizard .nav-tabs li.active');
-                $active.next().removeClass('disabled');
-                nextTab($active);
-
-            });
-            $(".prev-step").click(function (e) {
-
-                var $active = $('.wizard .nav-tabs li.active');
-                prevTab($active);
-
-            });
-        });
-
-        function nextTab(elem) {
-            $(elem).next().find('a[data-toggle="tab"]').click();
-        }
-        function prevTab(elem) {
-            $(elem).prev().find('a[data-toggle="tab"]').click();
-        }
-
-        /**
-         * Function Name : saveVideoDetails()
-         * To save first step of the job details
-         *
-         * @var step        Step Position 1
-         *
-         * @return Json response
-         */
-        function saveVideoDetails(step) {
-            var title = $("#title").val();
-            var datepicker = $("#datepicker").val();
-            var duration = $("#duration").val();
-
-            var rating5 = $("#rating5").val();
-            var rating4 = $("#rating4").val();
-            var rating3 = $("#rating3").val();
-            var rating2 = $("#rating2").val();
-            var rating1 = $("#rating1").val();
-
-            var age = $("#age").val();
-
-            var description = $("#description").val();
-            var reviews = $("#reviews").val();
-
-            var is_banner = $("#is_banner").val();
-
-            if (title == '') {
-                alert('Title Should not be blank');
-                return false;
-            }
-            if (datepicker == '') {
-                alert('Publish Time Should not be blank');
-                return false;
-            }
-            if (duration == '') {
-                alert('Duration Should not be blank');
-                return false;
-            }
-
-            if (is_banner == 1) {
-
-            } else {
-
-                if(age == '') {
-
-                    alert('Age Should not be blank');
-                    return false;
-
-                } else {
-
-                    if (/^[0-9 +]+$/.test(age)) {
-
-
-                    } else {
-
-                        $("#age").val("");
-
-                        alert("Age Wrong Format");
-
-                        return false;
-
-                    }
-                }
-
-            }
-
-
-            /* if (rating == '') {
-                  alert('Ratings Should not be blank');
-                  return false;
-             }*/
-            if (description == '') {
-                alert('Description Should not be blank');
-                return false;
-            }
-            if (reviews == '') {
-                alert('Reviews Should not be blank');
-                return false;
-            }
-
-            for (instance in CKEDITOR.instances) {
-                CKEDITOR.instances[instance].updateElement();
-            }
-
-            $("#"+step).click();
-        }
-
-
-        /**
-         * Function Name : saveCategory()
-         * To save second step of the job details
-         *
-         * @var category_id Category Id (Dynamic values)
-         * @var step        Step Position 2
-         *
-         * @return Json response
-         */
-        function saveCategory(category_id, step) {
-            var categoryId = $("#category_id").val(category_id);
-
-            $(".category_list").removeClass('active');
-
-            $("#category_"+category_id).addClass('active');
-            displaySubCategory(category_id, step);
-        }
-
-        /**
-         * Function Name : displaySubCategory()
-         * To Display all sub categories based on category id
-         *
-         * @var category_id    Selected Category id
-         *
-         * @return Json Response
-         */
-        function displaySubCategory(category_id,step) {
-            $("#sub_category").html("<p class='text-center'><i class='fa fa-spinner'></i></p>");
-            $.ajax ({
-                type : 'post',
-                url : cat_url,
-                data : {option: category_id},
-                success : function(data) {
-                    $("#sub_category").html("");
-                    // console.log(data);return false;
-                    if (data == undefined) {
-                        alert("Oops Something went wrong. Kindly contact your administrator.");
-                        return false;
-                    }
-                    if (data.length == 0) {
-                        alert('No sub categories available. Kindly contact support team.');
-                        return false;
-                    }
-                    var subcategory = '';
-                    for(var i=0; i < data.length; i++) {
-                        var value = data[i];
-                        subcategory += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">'+
-                            '<a class="category" onclick="saveSubCategory('+value.id+', '+step3+')">'+
-                            '<div class="category-sec select-box sub_category_list" id="sub_category_'+value.id+'">'+
-                            '  <div class="ribbon"><span><i class="fa fa-check"></i></span></div>'+
-                            '<img src="'+value.picture+'" class="category-sec-img">'+
-                            '</div><h4 class="category-sec-title">'+value.name+'</h4>'+
-                            '</a>'+
-                            '</div>';
-                    }
-                    $("#sub_category").append(subcategory);
-
-                    //$(".j-bs-wizard--action-btn-next").click();
-                },
-                error : function(data) {
-                    alert("Oops Something went wrong. Kindly contact your administrator.");
-                }
-            });
-        }
-
-        /**
-         * Function Name : saveSubCategory()
-         * To save third step of the job details
-         *
-         * @var sub_category_id     Sub Category Id (Dynamic values)
-         * @var step                Step Position 3
-         *
-         * @return Json response
-         */
-        function saveSubCategory(sub_category_id, step) {
-            var subCategoryId = $("#sub_category_id").val(sub_category_id);
-
-            $(".sub_category_list").removeClass('active');
-
-            $("#sub_category_"+sub_category_id).addClass('active');
-
-            $("#"+step).click();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax ({
-                type : 'post',
-                url : sub_cat_url,
-                data : {option: sub_category_id},
-                success : function(data) {
-                    $('#genre').empty();
-
-                    $('#genre').append("<option value=''>Select genre</option>");
-
-                    $("#trailer_video").attr('required', true);
-
-                    if(data.length != 0) {
-
-                        $("#genre_id").show();
-
-                        document.getElementById("genre").disabled=false;
-
-                        $("#genre").attr('required', true);
-
-                        $("#trailer_video").attr('required', false);
-
-                    } else {
-
-                        $("#genre_id").hide();
-
-                        document.getElementById("genre").disabled=true;
-
-
-                        if (video_id) {
-
-                            $("#trailer_video").attr('required', false);
-
-                        }
-                    }
-
-                    $.each(data, function(index, element) {
-                        $('#genre').append("<option value='"+ element.id +"'>" + element.name + "</option>");
-                    });
-                },
-                error : function(data) {
-                    alert("Oops Something went wrong. Kindly contact your administrator.");
-                }
-            });
-        }
-
-
-        function loadGenre() {
-            var subCategoryId = $("#sub_category_id").val();
-            // var genre_id = $("#genre").val();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax ({
-                type : 'post',
-                url : sub_cat_url,
-                data : {option: subCategoryId},
-                success : function(data) {
-                    console.log(data);
-                    $('#genre').empty();
-
-                    $('#genre').append("<option value=''>Select genre</option>");
-
-                    if(data.length != 0) {
-                        $("#genre_id").show();
-                        document.getElementById("genre").disabled=false;
-                    } else {
-                        $("#genre_id").hide();
-                        document.getElementById("genre").disabled=true;
-                    }
-
-                    $.each(data, function(index, element) {
-                        $('#genre').append("<option value='"+ element.id +"'>" + element.name + "</option>");
-                    });
-                    $("#genre").val(genreId);
-                },
-                error : function(data) {
-                    alert("Oops Something went wrong. Kindly contact your administrator.");
-                }
-            });
-        }
-
-
-        var bar = $('.bar');
-        var percent = $('.percent');
-
-        var error = false;
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $('form').ajaxForm({
-
-            beforeSend: function(xhr,opts) {
-
-                var title = $("#title").val();
-                var age = $("#age").val();
-                var trailer_duration = $("#trailer_duration").val();
-                var duration = $("#duration").val();
-                var description = $("#description").val();
-                var ratings = $("input[name='ratings']:checked").val();
-                var publish_type = $("input[name='publish_type']:checked").val();
-                var datepicker = $("#datepicker").val();
-                var details = $("#details").val();
-                var category_id = $("#category_id").val();
-                var sub_category_id = $("#sub_category_id").val();
-
-                var default_image =  document.getElementById("default_image").files.length;
-
-                var other_image1 =  document.getElementById("other_image1").files.length;
-
-                var other_image2 =  document.getElementById("other_image2").files.length;
-
-                var err = '';
-
-                if (title == '') {
-
-                    err = "Title should not be blank";
-
-                }
-
-                if (age == '' && err == '') {
-
-                    err = "Age should not be blank";
-
-                }
-
-                if (age != '' && err == '') {
-
-                    if (/^[0-9 +]+$/.test(age)) {
-
-
-                    } else {
-
-                        $("#age").val("");
-
-                        err = "Age wrong format..!";
-
-                    }
-
-                }
-
-
-                if (trailer_duration == '' && err == '') {
-
-                    err = "Trailer Duration should not be blank";
-
-                }
-
-                if (duration == '' && err == '') {
-
-                    err = "Duration should not be blank";
-
-                }
-
-                if (description == '' && err == '') {
-
-                    err = "Description should not be blank";
-
-                }
-
-                if ((ratings <= 0 || ratings == undefined) && err == '') {
-
-                    err = "Ratings should not be blank";
-
-                }
-
-                if (publish_type == 2 && datepicker == '' && err == '') {
-
-                    err = "Publish Time should not be blank";
-
-                }
-
-                if (details == '' && err == '') {
-
-                    err = "Details should not be blank";
-
-                }
-
-                if (category_id == '' && err == '') {
-
-                    err = "Selete any one of the category from the list.";
-
-                }
-
-                if (sub_category_id == '' && err == '') {
-
-                    err = "Selete any one of the sub category from the list.";
-
-                }
-
-                if (!video_id || video_id <= 0 || video_id == null) {
-
-                    if (default_image <= 0 && err == '') {
-
-                        err = "Please Choose Default Image.";
-
-                    }
-
-                    if (other_image1 <= 0 && err == '') {
-
-                        err = "Please Choose first other Image.";
-
-                    }
-
-                    if (other_image2 <= 0 && err == '') {
-
-                        err = "Please Choose second other Image .";
-
-                    }
-
-                }
-
-                if (err) {
-
-                    $("#error_messages_text").html(err);
-
-                    $("#error_popup").click();
-
-                    xhr.abort();
-
-                    return false;
-                }
-
-                $(".loader-form").show();
-                var percentVal = '0%';
-                bar.width(percentVal)
-                percent.html(percentVal);
-                $("#finish_video").text("Wait Progressing...");
-                $("#finish_video").attr('disabled', true);
-                $("#error_message").html("");
-
-            },
-            uploadProgress: function(event, position, total, percentComplete) {
-                console.log(total);
-                console.log(position);
-                console.log(event);
-                var percentVal = percentComplete + '%';
-                bar.width(percentVal)
-                percent.html(percentVal);
-                if (percentComplete == 100) {
-                    $("#finish_video").text("Video Uploading...");
-                    $(".loader-form").show();
-                    $("#finish_video").attr('disabled', true);
-                }
-            },
-            complete: function(xhr) {
-
-                if(!error)  {
-                    bar.width("100%");
-                    percent.html("100%");
-                    $("#finish_video").text("Redirecting...");
-                    $("#finish_video").attr('disabled', true);
-
-                    console.log(error);
-                    console.log("complete"+xhr);
-                } else {
-                    var percentVal = '0%';
-                    bar.width(percentVal);
-                    percent.html(percentVal);
-                }
-            },
-            error : function(xhr) {
-
-                $(".loader-form").fadeOut();
-                $(".loader-form").css('display', 'none');
-                $("#finish_video").text("Finish");
-                $("#finish_video").attr('disabled', false);
-                $("#error_messages_text").html("While Uploading Video some error occured. Please Try Again. Make sure upload file is meets with server upload limit.");
-                $("#error_popup").click();
-                error = true;
-                return false;
-                // console.log(xhr);
-            },
-            success : function(xhr) {
-
-
-                $("#finish_video").text("Finish");
-
-                $("#finish_video").attr('disabled', false);
-
-                $(".loader-form").hide();
-
-                if (xhr.response.success) {
-
-                    window.location.href= view_video_url+xhr.response.data.id;
-
-                } else {
-
-                    error = true;
-
-                    $("#error_messages_text").html(xhr.response.error_messages);
-
-                    $("#error_popup").click();
-
-                    return false;
-                }
-            }
-        });
-
-        function loadFile(event, id){
-            // alert(event.files[0]);
-            var reader = new FileReader();
-
-            reader.onload = function(){
-                var output = document.getElementById(id);
-                // alert(output);
-                output.src = reader.result;
-                //$("#imagePreview").css("background-image", "url("+this.result+")");
-            };
-            reader.readAsDataURL(event.files[0]);
-        }
-
-        /**
-         * Clear the selected files
-         * @param id
-         */
-        function clearSelectedFiles(id) {
-            e = $('#'+id);
-            e.wrap('<form>').closest('form').get(0).reset();
-            e.unwrap();
-        }
-
-        function checksrt(e,id) {
-
-            console.log(e.files[0].type);
-
-            console.log(e.files[0].type == '');
-
-            if(e.files[0].type == "application/x-subrip" || e.files[0].type == '') {
-
-
-            } else {
-
-                alert("Please select '.srt' files");
-
-                clearSelectedFiles(id);
-
-            }
-
-            return false;
-        }
-
-
     </script>
 
 
+    <script type="text/javascript">
 
-    {{--<script src="{{asset('assets/js/upload-video.js')}}"></script>--}}
+        /** var fileInputTextDiv = document.getElementById('file_input_text_div');
+         var fileInput = document.getElementById('file_input_file');
+         var fileInputText = document.getElementById('file_input_text');
+
+         fileInput.addEventListener('change', changeInputText);
+         fileInput.addEventListener('change', changeState);
+
+         function changeInputText() {
+          var str = fileInput.value;
+          var i;
+          if (str.lastIndexOf('\\')) {
+            i = str.lastIndexOf('\\') + 1;
+          } else if (str.lastIndexOf('/')) {
+            i = str.lastIndexOf('/') + 1;
+          }
+          fileInputText.value = str.slice(i, str.length);
+        }
+
+         function changeState() {
+          if (fileInputText.value.length != 0) {
+            if (!fileInputTextDiv.classList.contains("is-focused")) {
+              fileInputTextDiv.classList.add('is-focused');
+            }
+          } else {
+            if (fileInputTextDiv.classList.contains("is-focused")) {
+              fileInputTextDiv.classList.remove('is-focused');
+            }
+          }
+        } **/
+    </script>
+
+    <script src="{{asset('assets/js/upload-video.js')}}"></script>
 
     <script type="text/javascript">
 
@@ -1469,8 +863,6 @@
 
                 $("#video").attr('required', true);
 
-                $("#trailer_video").attr('required', true);
-
             }
 
             $(".manual_video_upload").hide();
@@ -1480,6 +872,8 @@
             $("#other_trailer_video").val("{{$model->trailer_video}}");
 
             if (value == "{{VIDEO_TYPE_UPLOAD}}") {
+
+                console.log('VIDEO_TYPE_UPLOAD');
 
                 $("#other_video").val("");
 
@@ -1499,14 +893,12 @@
 
                 $("#video").attr('required', false);
 
-                $("#trailer_video").attr('required', false);
-
                 @endif
 
             }
 
-            if ((value == "{{VIDEO_TYPE_OTHER}}" || value == "{{VIDEO_TYPE_YOUTUBE}}") && autoload_status == 0) {
-
+            if (value == "{{VIDEO_TYPE_OTHER}}" && autoload_status == 0) {
+                console.log('VIDEO_TYPE_OTHER');
                 $("#other_video").val("");
 
                 $("#other_trailer_video").val("");
@@ -1520,15 +912,30 @@
                 }
 
                 $("#video").attr('required', false);
-
-                $("#trailer_video").attr('required', false);
             }
 
-            if ((value == "{{VIDEO_TYPE_OTHER}}" || value == "{{VIDEO_TYPE_YOUTUBE}}") && autoload_status == 0) {
+            if (value == "{{VIDEO_TYPE_YOUTUBE}}" && autoload_status == 0) {
+                console.log('VIDEO_TYPE_YOUTUBE');
+                $("#other_video").val("");
+
+                $("#other_trailer_video").val("{{$model->trailer_video}}");
+
+                if (("{{$model->video_type}}" == value) || ("{{$model->video_type}}" == value)) {
+
+                    $("#other_video").val("{{$model->video}}");
+
+                    $("#other_trailer_video").val("{{$model->trailer_video}}");
+
+                }
+
+                $("#video").attr('required', false);
+            }
+
+            if ((value == "{{VIDEO_TYPE_OTHER}}" || value == "{{VIDEO_TYPE_UPLOAD}}") && autoload_status == 0) {
+                console.log('VIDEO_TYPE_OTHER + VIDEO_TYPE_UPLOAD');
 
                 $("#other_video").val("");
 
-                $("#other_trailer_video").val("");
             }
 
         }
@@ -1585,88 +992,6 @@
 
 
     </script>
-
-
-
-
-
-
-
-
-    //*********************************************************************
-    {{--<script>--}}
-        {{--var form = $("#VisaRecommendationForm").show();--}}
-        {{--form.find('#save_as_draft').css('display','none');--}}
-        {{--form.find('#submitForm').css('display', 'none');--}}
-        {{--form.find('.actions').css('top','-15px !important');--}}
-        {{--form.steps({--}}
-            {{--headerTag: "h3",--}}
-            {{--bodyTag: "fieldset",--}}
-            {{--transitionEffect: "slideLeft",--}}
-            {{--onStepChanging: function (event, currentIndex, newIndex) {--}}
-                {{--if(newIndex == 1) {--}}
-                    {{--var visaCategoryIsSelect = $('input[name=app_type_mapping_id]:checked').length;--}}
-                    {{--if(visaCategoryIsSelect != 1){--}}
-                        {{--//$(".visaTypeTab").css({"border": "1px solid red"});--}}
-                        {{--alert('Sorry! You must select any one of the Visa types.');--}}
-                        {{--return false;--}}
-                    {{--}--}}
-                {{--}--}}
-
-                {{--if(newIndex == 2){}--}}
-
-                {{--// Always allow previous action even if the current form is not valid!--}}
-                {{--if (currentIndex > newIndex){--}}
-                    {{--return true;--}}
-                {{--}--}}
-                {{--// Forbid next action on "Warning" step if the user is to young--}}
-                {{--if (newIndex === 3 && Number($("#age-2").val()) < 18)--}}
-                {{--{--}}
-                    {{--return false;--}}
-                {{--}--}}
-                {{--// Needed in some cases if the user went back (clean up)--}}
-                {{--if (currentIndex < newIndex)--}}
-                {{--{--}}
-                    {{--// To remove error styles--}}
-                    {{--form.find(".body:eq(" + newIndex + ") label.error").remove();--}}
-                    {{--form.find(".body:eq(" + newIndex + ") .error").removeClass("error");--}}
-                {{--}--}}
-                {{--form.validate().settings.ignore = ":disabled,:hidden";--}}
-                {{--return form.valid();--}}
-            {{--},--}}
-            {{--onStepChanged: function (event, currentIndex, priorIndex) {--}}
-                {{--if (currentIndex != 0) {--}}
-                    {{--form.find('#save_as_draft').css('display','block');--}}
-                    {{--form.find('.actions').css('top','-42px');--}}
-                {{--} else {--}}
-                    {{--form.find('#save_as_draft').css('display','none');--}}
-                    {{--form.find('.actions').css('top','-15px');--}}
-                {{--}--}}
-
-                {{--if(currentIndex == 5) {--}}
-                    {{--form.find('#submitForm').css('display','block');--}}
-
-                    {{--$('#submitForm').on('click', function (e) {--}}
-                        {{--form.validate().settings.ignore = ":disabled";--}}
-                        {{--//console.log(form.validate().errors()); // show hidden errors in last step--}}
-                        {{--return form.valid();--}}
-                    {{--});--}}
-                {{--} else {--}}
-                    {{--form.find('#submitForm').css('display','none');--}}
-                {{--}--}}
-            {{--},--}}
-            {{--onFinishing: function (event, currentIndex) {--}}
-                {{--form.validate().settings.ignore = ":disabled";--}}
-                {{--//console.log(form.validate().errors()); // show hidden errors in last step--}}
-                {{--return form.valid();--}}
-            {{--},--}}
-            {{--onFinished: function (event, currentIndex) {--}}
-                {{--errorPlacement: function errorPlacement(error, element) {--}}
-                    {{--element.before(error);--}}
-                {{--}--}}
-            {{--}--}}
-        {{--});--}}
-    {{--</script>--}}
 
 
 @endsection

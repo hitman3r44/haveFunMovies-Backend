@@ -21,6 +21,9 @@ class CreateCardsTable extends Migration
             $table->string('last_four');
             $table->string('card_token');
             $table->integer('is_default');
+            $table->integer('created_by');
+            $table->integer('updated_by');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

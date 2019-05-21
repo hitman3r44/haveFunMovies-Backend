@@ -68,7 +68,7 @@ class ModeratorController extends Controller
 
     public function dashboard() {
 
-        $moderator = Moderator::find(\Auth::guard('moderator')->user()->id);
+        $moderator = Moderator::find(\Auth::user()->id);
 
         $moderator->token = Helper::generate_token();
 
@@ -76,13 +76,13 @@ class ModeratorController extends Controller
 
         $moderator->save();
         
-        $today_videos = AdminVideo::where('uploaded_by', \Auth::guard('moderator')->user()->id)->count();
+        $today_videos = AdminVideo::where('uploaded_by', \Auth::user()->id)->count();
 
-        $total = Auth::guard('moderator')->user()->moderatorRedeem ? Auth::guard('moderator')->user()->moderatorRedeem->total_moderator_amount : "0.00";
+        $total = Auth::user()->moderatorRedeem ? Auth::user()->moderatorRedeem->total_moderator_amount : "0.00";
 
-        $redeem_amount = redeem_amount(\Auth::guard('moderator')->user()->id);
+        $redeem_amount = redeem_amount(\Auth::user()->id);
 
-        $video_payment = total_moderator_video_revenue(\Auth::guard('moderator')->user()->id);
+        $video_payment = total_moderator_video_revenue(\Auth::user()->id);
 
 
         return view('moderator.dashboard.dashboard')
@@ -166,7 +166,7 @@ class ModeratorController extends Controller
 
         } else {
 
-            $admin = Moderator::find(Auth::guard('moderator')->user()->id);
+            $admin = Moderator::find(Auth::user()->id);
 
             if(Hash::check($old_password,$admin->password))
             {
@@ -550,7 +550,7 @@ class ModeratorController extends Controller
                              'categories.name as category_name' , 'sub_categories.name as sub_category_name' ,
                              'genres.name as genre_name')
                     ->orderBy('admin_videos.created_at' , 'desc')
-                    ->where('uploaded_by', Auth::guard('moderator')->user()->id)
+                    ->where('uploaded_by', Auth::user()->id)
                     ->get();
 
         return view('moderator.videos.videos')->with('videos' , $videos)
@@ -778,9 +778,9 @@ class ModeratorController extends Controller
             
             $video->is_approved = DEFAULT_FALSE;
             
-           //  $video->uploaded_by = MODERATOR.'-'.Auth::guard('moderator')->user()->name;
+           //  $video->uploaded_by = MODERATOR.'-'.Auth::user()->name;
 
-            $video->uploaded_by = Auth::guard('moderator')->user()->id;
+            $video->uploaded_by = Auth::user()->id;
 
             
             if($request->hasFile('video_subtitle')) {
@@ -1395,8 +1395,8 @@ class ModeratorController extends Controller
         $payments = PayPerView::orderBy('created_at' , 'desc')
             ->select('pay_per_views.*')
             ->leftJoin('admin_videos', 'admin_videos.id', '=', 'video_id')
-            // ->where('admin_videos.ppv_created_by', Auth::guard('moderator')->user()->id)
-            ->where('admin_videos.uploaded_by', Auth::guard('moderator')->user()->id)
+            // ->where('admin_videos.ppv_created_by', Auth::user()->id)
+            ->where('admin_videos.uploaded_by', Auth::user()->id)
             // ->where('pay_per_views.status', DEFAULT_TRUE)
             ->get();
         
@@ -1417,9 +1417,9 @@ class ModeratorController extends Controller
      */
     public function revenues() {
         
-        // $payments = AdminVideo::where('admin_videos.ppv_created_by', Auth::guard('moderator')->user()->id)
+        // $payments = AdminVideo::where('admin_videos.ppv_created_by', Auth::user()->id)
         
-        $payments = AdminVideo::where('admin_videos.uploaded_by', Auth::guard('moderator')->user()->id)
+        $payments = AdminVideo::where('admin_videos.uploaded_by', Auth::user()->id)
                         ->get();
        
         return view('moderator.payments.revenues')->with('data' , $payments)->withPage('revenue')->with('sub_page','revenues'); 
@@ -1470,9 +1470,9 @@ class ModeratorController extends Controller
     public function send_redeem_request(Request $request) {
 
         $request->request->add([ 
-            'id' => \Auth::guard('moderator')->user()->id,
-            'token' => \Auth::guard('moderator')->user()->token,
-            'device_token' => \Auth::guard('moderator')->user()->device_token
+            'id' => \Auth::user()->id,
+            'token' => \Auth::user()->token,
+            'device_token' => \Auth::user()->device_token
         ]);
 
         $response = $this->ModeratorAPI->send_redeem_request($request)->getData();
@@ -1498,9 +1498,9 @@ class ModeratorController extends Controller
     public function redeem_request_cancel($id , Request $request) {
 
         $request->request->add([ 
-            'id' => \Auth::guard('moderator')->user()->id,
-            'token' => \Auth::guard('moderator')->user()->token,
-            'device_token' => \Auth::guard('moderator')->user()->device_token,
+            'id' => \Auth::user()->id,
+            'token' => \Auth::user()->token,
+            'device_token' => \Auth::user()->device_token,
             'redeem_request_id' => $id,
         ]);
 

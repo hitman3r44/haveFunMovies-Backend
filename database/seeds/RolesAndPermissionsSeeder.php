@@ -18,6 +18,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'moderator']);
         Permission::create(['name' => 'director']);
         Permission::create(['name' => 'publisher']);
+        Permission::create(['name' => 'retailer']);
         Permission::create(['name' => 'role']);
         Permission::create(['name' => 'permission']);
 
@@ -41,6 +42,9 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Role::create(['name' => 'publisher'])->givePermissionTo([
             'publisher'
+        ]);
+        Role::create(['name' => 'retailer'])->givePermissionTo([
+            'retailer'
         ]);
 
     }
