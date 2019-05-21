@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redis;
 
 /***********************  UI Routes *********************/
 
+
 Route::get('/upload-video' , 'UIController@upload_video');
 
 Route::get('/video-notification' , 'UIController@video_notification');
@@ -118,19 +119,11 @@ Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin
 
 Route::post('save_admin_control', 'ApplicationController@save_admin_control')->name('save_admin_control');
 
+Route::get('login', function () {
+    return redirect()->route('admin.login');
+});
 
-
-
-
-
-
-
-
-
-
-
-
-Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Auth::routes();
     Route::get('register', function () {
@@ -139,7 +132,9 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
     Route::post('register', function () {
         return abort(404);
     })->name('register');
+});
 
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Route::get('/', 'AdminController@dashboard')->name('dashboard');
 
@@ -290,6 +285,14 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
 
+    Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
+
+    Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
+
+    Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+
+    Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
+
     Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
 
     Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');
@@ -324,6 +327,10 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     // User Payment details
     Route::get('user/payments' , 'AdminController@user_payments')->name('user.payments');
+
+    Route::resource('credit-money', 'CreditMoneyController');
+    Route::resource('prepaid-code', 'PrepaidCodeController');
+    Route::resource('gift-card', 'GiftCardController');
 
     // Ajax User payments
 

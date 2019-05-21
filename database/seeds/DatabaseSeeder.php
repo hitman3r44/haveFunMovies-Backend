@@ -48,10 +48,17 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
         ]);
 
+        $retailer = factory(App\User::class)->create([
+            'name' => 'Retailer',
+            'email' => 'retailer@havefunmovies.com',
+            'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
+        ]);
+
         $this->call([
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
             CountriesTableSeeder::class,
+            TmdbGenersSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -59,6 +66,24 @@ class DatabaseSeeder extends Seeder
         $moderator->assignRole(Role::findByName('moderator'));
         $director->assignRole(Role::findByName('director'));
         $publisher->assignRole(Role::findByName('publisher'));
+        $retailer->assignRole(Role::findByName('retailer'));
+
+
+
+
+        $categories = factory(App\Model\Category::class, 3)->create();
+
+        $categories->each(function ($category) {
+
+            $subCategories = factory(App\Model\SubCategory::class, rand(1, 3))->create(['category_id' => $category->id]);
+
+            $subCategories->each(function ($subCategory) {
+
+                factory(App\Model\SubCategoryImage::class)->create(['sub_category_id' => $subCategory->id]);
+
+            });
+        });
+
         $customer->assignRole(Role::findByName('customer'));
     }
 }

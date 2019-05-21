@@ -4262,51 +4262,6 @@
             "time": "2017-11-27T11:13:29+00:00"
         },
         {
-            "name": "triasrahman/jsonseeder",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/triasrahman/laravel-jsonseeder.git",
-                "reference": "5354da0f313b4ef4003a869159a06e3cfdb806cb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/triasrahman/laravel-jsonseeder/zipball/5354da0f313b4ef4003a869159a06e3cfdb806cb",
-                "reference": "5354da0f313b4ef4003a869159a06e3cfdb806cb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Triasrahman\\JSONSeeder\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Trias Nur Rahman",
-                    "email": "contact@triasrahman.com"
-                }
-            ],
-            "description": "Quick and efficient seeding database from JSON files for Laravel",
-            "keywords": [
-                "database",
-                "import",
-                "json",
-                "laravel",
-                "seed",
-                "seeder"
-            ],
-            "time": "2015-09-05T16:39:43+00:00"
-        },
-        {
             "name": "vidhyar2612/ffmpeg-php-class",
             "version": "v1.0",
             "source": {

@@ -26,10 +26,10 @@
                            class="btn btn-default pull-right">{{tr('categories')}}</a>
                     </div>
                 </div>
-                <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
-                      enctype="multipart/form-data" role="form">
+                    <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
+                          enctype="multipart/form-data" role="form">
 
-                    @csrf
+                        @csrf
                     <div class="box-body">
 
                         <div class="form-group">

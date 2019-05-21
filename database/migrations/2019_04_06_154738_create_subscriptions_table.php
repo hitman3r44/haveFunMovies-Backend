@@ -26,7 +26,6 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('status');
             $table->integer('popular_status')->default(0);
             $table->integer('no_of_account')->default(1);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -74,7 +74,7 @@ function moderator_details($id , $property = "") {
 *
 */
 function tr($key , $confirmation_content_lang_key = "") {
-    if(Auth::guard('admin')->check()) {
+    if(Auth::check()) {
         $locale = Setting::get('default_lang' , 'en');
     } else {
         if (!\Session::has('locale')) {

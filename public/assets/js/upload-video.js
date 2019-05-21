@@ -197,7 +197,8 @@ function displaySubCategory(category_id,step) {
  * @return Json response
  */
 function saveSubCategory(sub_category_id, step) {
-    var subCategoryId = $("#sub_category_id").val(sub_category_id);
+
+    $("#sub_category_id").val(sub_category_id);
 
     $(".sub_category_list").removeClass('active');
 
@@ -218,7 +219,7 @@ function saveSubCategory(sub_category_id, step) {
 
             $('#genre').append("<option value=''>Select genre</option>");
 
-            $("#trailer_video").attr('required', true);
+            // $("#trailer_video").attr('required', true);
 
             if(data.length != 0) {
 
@@ -402,28 +403,28 @@ $('form').ajaxForm({
             err = "Selete any one of the sub category from the list.";
 
         }
-
-        if (!video_id || video_id <= 0 || video_id == null) {
-
-            if (default_image <= 0 && err == '') {
-
-                err = "Please Choose Default Image.";
-
-            }
-
-            if (other_image1 <= 0 && err == '') {
-
-                err = "Please Choose first other Image.";
-
-            }
-
-            if (other_image2 <= 0 && err == '') {
-
-                err = "Please Choose second other Image .";
-
-            }
-
-        }
+        //
+        // if (!video_id || video_id <= 0 || video_id == null) {
+        //
+        //     if (default_image <= 0 && err == '') {
+        //
+        //         err = "Please Choose Default Image.";
+        //
+        //     }
+        //
+        //     if (other_image1 <= 0 && err == '') {
+        //
+        //         err = "Please Choose first other Image.";
+        //
+        //     }
+        //
+        //     if (other_image2 <= 0 && err == '') {
+        //
+        //         err = "Please Choose second other Image .";
+        //
+        //     }
+        //
+        // }
 
         if (err) {
             console.log("Sumit before sent" + xhr);
