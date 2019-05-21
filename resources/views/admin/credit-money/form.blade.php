@@ -22,16 +22,6 @@
         </div>
     </div>
 </div>
-<div class="form-group row">
-    <label for="given_by" class="col-md-3 col-form-label">{{ 'Given By' }}</label>
-    <div class="col-md-9">
-        <div class="form-group">
-            <input class="form-control" name="given_by" type="number" id="given_by"
-                   value="{{ $creditmoney->given_by ?? ''}}" required>
-            {!! $errors->first('given_by', '<small class="text-danger">:message</small>') !!}
-        </div>
-    </div>
-</div>
 
 <hr>
 <div class="box-footer text-center">

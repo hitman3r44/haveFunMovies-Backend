@@ -59,9 +59,9 @@
                             @foreach($creditmoney as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->retailer_id }}</td>
+                                    <td>{{ $item->receiver_name }}</td>
                                     <td>{{ $item->amount }}</td>
-                                    <td>{{ $item->given_by }}</td>
+                                    <td>{{ $item->giver_name }}</td>
                                     <td>
                                         <ul class="admin-action btn btn-default">
                                             <li class="dropup">

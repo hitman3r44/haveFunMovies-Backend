@@ -15,7 +15,13 @@ class CreditMoneyController extends Controller
      */
     public function index()
     {
-        $creditmoney = CreditMoney::all();
+        $creditmoney = CreditMoney::leftJoin('users as receiver', 'receiver.id', '=', 'credit_moneys.retailer_id')
+            ->leftJoin('users as giver', 'giver.id', '=', 'credit_moneys.given_by')
+            ->get([
+                'credit_moneys.*',
+                'receiver.name as receiver_name',
+                'giver.name as giver_name',
+                ]);
         return view('admin.credit-money.index', compact('creditmoney'));
     }
 
@@ -33,9 +39,9 @@ class CreditMoneyController extends Controller
     {
         $retailers = [];
 
-        if(User::role('retailer')){
+        if (User::role('retailer')) {
 
-            $retailers = User::role('retailer')->get(['id','name']);
+            $retailers = User::role('retailer')->get(['id', 'name']);
         }
 
         return view('admin.credit-money.create', compact('retailers'));
@@ -50,13 +56,15 @@ class CreditMoneyController extends Controller
         $this->validate($request, [
             'retailer_id' => 'required',
             'amount' => 'required',
-            'given_by' => 'required'
         ]);
-        $requestData = $request->all();
 
-        CreditMoney::create($requestData);
+        $creditMoney = new CreditMoney();
 
-        return redirect()->route('admin.credit-money.create')->with('flash_success', 'CreditMoney added!');
+        $creditMoney->retailer_id = $request->retailer_id;
+        $creditMoney->amount = $request->amount;
+        $creditMoney->given_by = Auth::user()->id;
+        $creditMoney->save();
+        return redirect()->route('admin.credit-money.create')->with('flash_success', 'Credit Money added!');
     }
 
     /**
@@ -67,9 +75,9 @@ class CreditMoneyController extends Controller
         $creditmoney = CreditMoney::find($id);
         $retailers = [];
 
-        if(User::role('retailer')){
+        if (User::role('retailer')) {
 
-            $retailers = User::role('retailer')->get(['id','name']);
+            $retailers = User::role('retailer')->get(['id', 'name']);
         }
 
         return view('admin.credit-money.edit', compact('creditmoney', 'retailers'));
@@ -82,14 +90,15 @@ class CreditMoneyController extends Controller
     public function update(Request $request, $id)
     {
         $creditmoney = CreditMoney::find($id);
+
         $this->validate($request, [
             'retailer_id' => 'required',
             'amount' => 'required',
-            'given_by' => 'required'
         ]);
-        $requestData = $request->all();
 
-        $creditmoney->update($requestData);
+        $creditmoney->retailer_id = $request->retailer_id;
+        $creditmoney->amount = $request->amount;
+        $creditmoney->save();
 
         return redirect()->route('admin.credit-money.edit', $creditmoney->id)->with('flash_success', 'Credit Money updated!');
     }
