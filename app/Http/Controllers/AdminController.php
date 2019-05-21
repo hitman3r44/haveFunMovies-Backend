@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\AdminRepository as AdminRepo;
-
 use App\Repositories\VideoRepository as VideoRepo;
 
 use App\Repositories\PushNotificationRepository as PushRepo;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Requests;
@@ -61,6 +60,7 @@ use App\Helpers\EnvEditorHelper;
 use App\Model\Flag;
 
 use App\Model\Coupon;
+use App\Model\Advertisement;
 
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -71,8 +71,6 @@ use Hash;
 use Mail;
 
 use DB;
-
-use DateTime;
 
 use Exception;
 
@@ -5040,6 +5038,7 @@ class AdminController extends Controller
             return back()->with('flash_error', tr('coupon_id_not_found_error'));
         }
     }
+
 
     // Mail Camp
 

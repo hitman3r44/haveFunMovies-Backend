@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'picture' => $faker->imageUrl($width = 250, $height = 250),
+        'picture' => 'http://lorempixel.com/400/200/technics/'.$faker->numberBetween($min = 1, $max = 10),
         'is_series' => 0,
         'status' => 1,
         'is_approved' => 1,

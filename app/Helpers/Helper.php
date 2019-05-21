@@ -805,8 +805,7 @@ class Helper
             // Compress the video and save in original folder
             $FFmpeg = new \FFmpeg;
 
-            $FFmpeg
-                ->input($picture->getPathname())
+            $FFmpeg->input($picture->getPathname())
                 ->vcodec('h264')
                 ->constantRateFactor('28')
                 // ->forceFormat( 'mp4' )

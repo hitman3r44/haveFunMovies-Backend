@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3da535b12ea7db6ab9653494c4367b48",
+    "content-hash": "eec74e0476658f1ee37f4eb426a4db38",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -978,16 +978,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.16",
+            "version": "v5.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd"
+                "reference": "9f571be04435883dab6f23ecfadb204273b7f527"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/83d57f9f9162ab476c43b9ec00d463ff12c578fd",
-                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9f571be04435883dab6f23ecfadb204273b7f527",
+                "reference": "9f571be04435883dab6f23ecfadb204273b7f527",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +1121,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-05-07T14:37:11+00:00"
+            "time": "2019-05-21T16:40:34+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -1252,16 +1252,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.51",
+            "version": "1.0.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "755ba7bf3fb9031e6581d091db84d78275874396"
+                "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/755ba7bf3fb9031e6581d091db84d78275874396",
-                "reference": "755ba7bf3fb9031e6581d091db84d78275874396",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/c5a5097156387970e6f0ccfcdf03f752856f3391",
+                "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391",
                 "shasum": ""
             },
             "require": {
@@ -1332,7 +1332,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-03-30T13:22:34+00:00"
+            "time": "2019-05-20T20:21:14+00:00"
         },
         {
             "name": "league/oauth1-client",
@@ -2899,16 +2899,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v6.34.5",
+            "version": "v6.35.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "124fafb57c287cf6e13830bcf329cac160a6afe8"
+                "reference": "f2fefccf3b56b453d65959f44f35b7fb9a8ae9bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/124fafb57c287cf6e13830bcf329cac160a6afe8",
-                "reference": "124fafb57c287cf6e13830bcf329cac160a6afe8",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/f2fefccf3b56b453d65959f44f35b7fb9a8ae9bc",
+                "reference": "f2fefccf3b56b453d65959f44f35b7fb9a8ae9bc",
                 "shasum": ""
             },
             "require": {
@@ -2951,7 +2951,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2019-05-07T00:56:15+00:00"
+            "time": "2019-05-21T05:25:45+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4300,6 +4300,51 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2017-11-27T11:13:29+00:00"
+        },
+        {
+            "name": "triasrahman/jsonseeder",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/triasrahman/laravel-jsonseeder.git",
+                "reference": "5354da0f313b4ef4003a869159a06e3cfdb806cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/triasrahman/laravel-jsonseeder/zipball/5354da0f313b4ef4003a869159a06e3cfdb806cb",
+                "reference": "5354da0f313b4ef4003a869159a06e3cfdb806cb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Triasrahman\\JSONSeeder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trias Nur Rahman",
+                    "email": "contact@triasrahman.com"
+                }
+            ],
+            "description": "Quick and efficient seeding database from JSON files for Laravel",
+            "keywords": [
+                "database",
+                "import",
+                "json",
+                "laravel",
+                "seed",
+                "seeder"
+            ],
+            "time": "2015-09-05T16:39:43+00:00"
         },
         {
             "name": "vidhyar2612/ffmpeg-php-class",

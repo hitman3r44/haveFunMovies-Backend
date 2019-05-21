@@ -462,6 +462,36 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::post('/email/form/action','AdminController@email_send_process')->name('email.success');
 
+    // Advertisement
+
+    // Get the add advertisement forms
+    Route::get('/advertisement/add','AdvertisementController@advertisement_create')->name('add.advertisement');
+
+    // Get the edit advertisement forms
+    Route::get('/advertisement/edit/{id}','AdvertisementController@advertisement_edit')->name('edit.advertisement');
+
+    // Get the list of advertisement details
+    Route::get('/advertisement/list','AdvertisementController@advertisement_index')->name('advertisement.list');
+
+    // Save the advertisement details
+    Route::post('/advertisement/save','AdvertisementController@advertisement_save')->name('save.advertisement');
+
+    //Get the particular advertisement details
+    Route::get('/advertisement/view/{id}','AdvertisementController@advertisement_view')->name('advertisement.view');
+
+    // Delete the advertisement details
+    Route::get('/advertisement/delete/{id}','AdvertisementController@advertisement_delete')->name('delete.advertisement');
+
+    //Advertisement approve and decline status
+    Route::get('/advertisement/status','AdvertisementController@advertisement_status_change')->name('advertisement.status');
+
+    //Advertisement additional data for form, url content Advertisement in ajax blocked by add-blocker
+    Route::get('/advrtise/get-data','AdvertisementController@advertisement_get_data')->name('advertisement.data');
+
+
+    //search countries, url should be countries/search?term=Bangladesh
+    Route::get('/countries/search','CountryController@searchCountries')->name('countries.search');
+
 
     // Email Templates,
 
@@ -519,7 +549,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::get('videos/banner/remove', 'AdminController@videos_remove_banner')->name('banner.remove');
 
-
+    // to edit the permission of these role
     Route::resource('role', 'RoleController');
 });
 

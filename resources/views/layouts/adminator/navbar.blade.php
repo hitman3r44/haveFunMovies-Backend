@@ -221,6 +221,40 @@
             {{--                </ul>--}}
             {{--            </li>--}}
 
+
+            {{--            Advertisement--}}
+
+            <li class="nav-item dropdown" id="advertisements">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                                <span class="icon-holder">
+                                    <i class="c-indigo-500 fa fa-gift"></i>
+                                </span>
+                    <span class="title">{{tr('advertisements')}}</span> <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li id="create" class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.add.advertisement')}}">
+                                        <span class="icon-holder">
+                                            <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                        </span>
+                            <span class="title">{{tr('add_advertisement')}}</span>
+                        </a>
+                    </li>
+
+                    <li id=view_advertisements" class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.advertisement.list')}}">
+                                        <span class="icon-holder">
+                                            <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                        </span>
+                            <span class="title">{{tr('view_advertisement')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item dropdown" id="payments">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
