@@ -31,7 +31,13 @@ class CreditMoneyController extends Controller
      */
     public function create()
     {
-        $retailers = User::role('retailer')->get(['id','name']);
+        $retailers = [];
+
+        if(User::role('retailer')){
+
+            $retailers = User::role('retailer')->get(['id','name']);
+        }
+
         return view('admin.credit-money.create', compact('retailers'));
     }
 
@@ -59,7 +65,12 @@ class CreditMoneyController extends Controller
     public function edit($id)
     {
         $creditmoney = CreditMoney::find($id);
-        $retailers = User::role('retailer')->get(['id','name']);
+        $retailers = [];
+
+        if(User::role('retailer')){
+
+            $retailers = User::role('retailer')->get(['id','name']);
+        }
 
         return view('admin.credit-money.edit', compact('creditmoney', 'retailers'));
     }
