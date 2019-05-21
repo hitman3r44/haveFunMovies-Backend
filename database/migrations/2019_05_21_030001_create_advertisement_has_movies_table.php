@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddvertisementHasMoviesTable extends Migration
+class CreateAdvertisementHasMoviesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class CreateAddvertisementHasMoviesTable extends Migration
     public function up()
     {
         Schema::create('advertisement_has_movies', function (Blueprint $table) {
-            $table->increments('id');
+//            $table->increments('id');  // multiple primary key does not support increment key
             $table->unsignedInteger('advertisement_id');
-            $table->unsignedBigInteger('movie_id');
+            $table->unsignedInteger('movie_id');
 
             $table->index('advertisement_id');
             $table->foreign('movie_id')
@@ -25,7 +25,7 @@ class CreateAddvertisementHasMoviesTable extends Migration
                 ->onDelete('cascade');
 
             $table->primary(['advertisement_id', 'movie_id'],
-                'adds_has_movies');
+                'advertisement_has_movies');
             $table->timestamps();
         });
     }
