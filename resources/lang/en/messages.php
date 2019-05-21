@@ -1447,6 +1447,26 @@ return array(
     'movies' => 'Movies',
     'add_movies' => 'Add Movies',
 
+    'advertisements' => 'Advertisement',
+    'enter_advertisement_title' => 'Add Advertisement Title',
+    'add_advertisement' => 'Add Advertisement',
+    'min_play_time' => 'Minimum Play Time',
+    'max_play_time' => 'Maximum Play Time',
+    'per_view_cost' => 'Per View Cost',
+    'start_playing_date_label' => 'Start Playing Date',
+    'start_playing_date' => 'Start Playing Date',
+    'end_playing_date_label' => 'End Playing Date',
+    'end_playing_date' => 'End Playing Date',
+    'already_played_time' => 'Already Played',
+    'start_playing_date_table_header' => 'Start Playing Ddate',
+    'end_playing_date_table_header' => 'End Playing Ddate',
+    'is_published' => 'Publish',
+    'is_expired' => 'Expire',
+    'unpublish' => 'Make Unpublish',
+    'make_expired' => 'Make Expired',
+    'advertisement_update_success' => 'Advertisement Updated Successfully',
+    'advertisement_add_success' => 'Advertisement Added Successfully',
+    'advertisement_not_found_error' => 'Sorry ! Can not found Advertisement',
 
 );
 

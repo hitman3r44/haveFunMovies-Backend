@@ -105,9 +105,9 @@
                                    class="col-sm-2 control-label">{{tr('start_playing_date_label')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" id="start_playing_date" name="start_playing_date"
-                                       class="form-control" autocomplete="off"
+                                       class="start-date form-control" autocomplete="off"
                                        placeholder="{{tr('start_playing_date')}}"
-                                       value="{{$edit_advertisement->start_playing_date ? $edit_advertisement->start_playing_date :
+                                       value="{{$edit_advertisement->start_playing_date ? date('m/d/Y', strtotime($edit_advertisement->start_playing_date)) :
                                        old('start_playing_date') }}"
                                 >
                             </div>
@@ -118,9 +118,9 @@
                             <label for="end_playing_date"
                                    class="col-sm-2 control-label">{{tr('end_playing_date_label')}}</label>
                             <div class="col-sm-10">
-                                <input type="text" id="end_playing_date" name="end_playing_date" class="form-control"
+                                <input type="text" id="end_playing_date" name="end_playing_date" class="end-date form-control"
                                        placeholder="{{tr('end_playing_date')}}" autocomplete="off"
-                                       value="{{$edit_advertisement->end_playing_date ? $edit_advertisement->end_playing_date :
+                                       value="{{$edit_advertisement->end_playing_date ? date('m/d/Y', strtotime($edit_advertisement->end_playing_date)) :
                                        old('end_playing_date') }}"
                                 >
                             </div>
