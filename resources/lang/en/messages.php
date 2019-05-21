@@ -744,9 +744,7 @@ return array(
 	'view_subscription'=>'View Subscription',
 
 	'popular' => 'Popular',
-	'yes' => 'Yes',
-	'no' => 'No',
-	'status' => 'Status',
+
 	'mark_popular' => 'Mark as popular',
 	'remove_popular' => 'Remove Popular',
 
@@ -836,7 +834,7 @@ return array(
 	'revenue_details'=>'Revenue Details',
 	'admin_amount'=>'Admin Amount',
 	'moderator_amount'=>'Moderator Amount',
-	'paid_amount'=>'Paid Amount',
+
 	'remaining_amount'=>'Remaining Amount',
 	'player_configuration'=>'Player Configuration',
 	'jwplayer_key'=>'Jwplayer Key',
@@ -1053,7 +1051,7 @@ return array(
 	
 	'age'=>'Age',
 	'example_format'=>'18+',
-	'email_notification'=>'Email Notification',
+
 	'enable_email_notification_to_user'=>'Send Email Notifications to User',
 	'notification_status_updated'=>'Notification has been updated successfully',
 	'email_templates'=>'Email Templates',
@@ -1146,7 +1144,7 @@ return array(
 	'video_amount_should_be_grater'=>'Pay per view amount should be greater than coupon amount',
 	'failed'=>'Failed',
 	'automatic_renewal_notification'=>'Automatic Renewal Notification',
-	'expiry_date'=>'Expiry Date',
+
 	'expiry_date_should_greater'=>'Expiry date should be greater than current date',
 	'expired_coupon_code'=>'Your are using promo code was expired',
 	'percentage_should_not_greater'=>'Percentage should be less than or equal to 100',
@@ -1163,8 +1161,7 @@ return array(
 	'all_user'=>'All Users',
 	'custom_user'=>'Send Mail Custom Users Count',
 	'custom_users'=>'Custom User mail id  is giving comma based. Ex : first@gmail.com,second@gmail.com',
-	'normal_user'=>'Normal Users',
-	'paid_user'=>'Paid Users',
+
 	'select_user'=>'Select Users',
 	'custom_users'=>'Custom Users',
 	'all_moderators'=>'All Moderators',
@@ -1196,11 +1193,7 @@ return array(
 	'edit_template'=>"Edit Template",
 	'template_type'=>'Template Type',
 	'view_template'=>'View Template',
-	'subject_note'=>'Subject Minimum 5 characters',
-	'select_users'=>'Select User List',
-	'select_moderators_list'=>'Select Moderator List',
-	'custom_user_count'=>'Email send to custom user count here check it.choose URL : admin-control ->custom_user_count.',
-	'subject_title'=>'Minium 5 characters want to subject',
+
 	'delete_wishlist_success'=>'Successfully, removed your selected video from wishlist',
 	'delete_history_success'=>'Successfully, removed your selected video from history',
 	'coupon_amount'=>'Coupon Amount',
@@ -1225,7 +1218,7 @@ return array(
 	'is_user'=>'Is User',
 	'subscription_cancelled'=>'Subscription Cancelled',
 	'templates'=>'Templates',
-	'only_for_alpha_values'=>'Only Accepted Alpha Values',
+
 	'add_ppv_amount'=>'Please enter PPV amount. ',
 	'social_unique_id'=>'Social Unique Id',
 	'timezone'=>'TimeZone',
@@ -1290,7 +1283,7 @@ return array(
 	'password_notes'=>'Password should be Minimum 6 characters',
 	'coupon_code_not_exists'=>'The coupon code is invalid',
 	'coupon_code_declined'=>'The coupon code is invalid',
-	'is_coupon_applied'=>'Is Coupon Applied',
+
 	'coupon_reason'=>'Coupon Reason',
 	'autorenewal_enable_success' => 'The subscription autorenewal enabled.',
 	'subscription_autorenewal_already_enabled' => 'The SubScription is already enabled.',
@@ -1378,16 +1371,10 @@ return array(
 	'per_users_limit_notes'=>'Enter minimum 1 to maximum 2 digits',
 
 	'subscription_not_exists'=>'The Subscription doesn’t exists',
-	'coupon_not_found'=>'Coupon not found, please try again later',
-	'coupon_inactive_status'=>'Promo Code is inactive status',
-	'subscription_inactive_status'=>'Subscription is inactive status',
-	'subscription_amount_should_be_grater'=>'Subscription amount should be greater than coupon amount',
-	'video_amount_should_be_grater'=>'Pay per view amount should be greater than coupon amount',
-	'expired_coupon_code'=>'Your are using promo code was expired',
 	'coupon_inactive_reason'=>'The promo code was deactivated by admin.',
 	'coupon_delete_reason'=>'The promo code was deleted by admin',
-		'is_coupon_applied'=>'Is coupon applied?',
-	'coupon_reason'=>'Coupon Reason',
+	'is_coupon_applied'=>'Is coupon applied?',
+
 	'create_a_new_coupon_row'=>'Create a new User coupon Details',
 	'total_no_of_users_maximum_limit_reached'=>'Coupon Limit Reached..!, You can`t use the coupon code.',
 	'per_users_limit_exceed'=>'Your maxiumum limit is over..!',
@@ -1469,7 +1456,6 @@ return array(
     'edit_prepaid_code' => 'Edit Prepaid Code',
     'view_prepaid_code' => 'View All Prepaid Code',
 
-
     'gift_card' => 'Gift Card',
     'add_gift_card' => 'Add Gift Card',
     'edit_gift_card' => 'Edit Gift Card',
@@ -1480,7 +1466,5 @@ return array(
 
     'movies' => 'Movies',
     'add_movies' => 'Add Movies',
-
-
 );
 
