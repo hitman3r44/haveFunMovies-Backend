@@ -37,6 +37,6 @@ class CreateAdvertisementHasCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addvertisement_has_countries');
+        Schema::dropIfExists('advertisement_has_countries');
     }
 }

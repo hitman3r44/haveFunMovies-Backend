@@ -85,6 +85,12 @@
                     <strong>{{tr('updated_at')}}</strong>
                     <h5 class="pull-right">{{convertTimeToUSERzone($view_advertisement->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</h5>
 
+                    @if(!empty($view_advertisement->video))
+                        <hr>
+                        <strong>{{tr('view_videos')}}</strong>
+                        <h5 class="pull-right"><a href="{{$view_advertisement->video}}" class="link-black" target="_blank">Show Current Video</a></h5>
+                    @endif
+
                     @if($view_advertisement->description == '')
 
                     @else

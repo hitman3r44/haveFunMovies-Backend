@@ -1475,7 +1475,6 @@ return array(
     'edit_gift_card' => 'Edit Gift Card',
     'view_gift_card' => 'View All Gift Card',
 
-
     'countries' => 'Countries',
     'add_country' => 'Add Country',
 

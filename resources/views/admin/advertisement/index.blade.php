@@ -181,8 +181,6 @@
 
                         </table>
 
-                        <div align="right" id="paglink"><?php echo $advertisements->links(); ?></div>
-
                         @else
                             <h3 class="no-result">{{tr('advertisement_result_not_found_error')}}</h3>
                         @endif
