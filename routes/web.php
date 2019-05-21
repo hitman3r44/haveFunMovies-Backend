@@ -478,6 +478,13 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
     //Advertisement approve and decline status
     Route::get('/advertisement/status','AdvertisementController@advertisement_status_change')->name('advertisement.status');
 
+    //Advertisement additional data for form, url content Advertisement in ajax blocked by add-blocker
+    Route::get('/advrtise/get-data','AdvertisementController@advertisement_get_data')->name('advertisement.data');
+
+
+    //search countries, url should be countries/search?term=Bangladesh
+    Route::get('/countries/search','CountryController@searchCountries')->name('countries.search');
+
 
     // Email Templates,
 

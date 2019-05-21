@@ -91,6 +91,22 @@
 							</div>
 						</div>
 
+                        {{--                        country list--}}
+						<div class="form-group row">
+							<label for="countries" class="col-sm-2 control-label">{{tr('add_country')}}</label>
+							<div class="col-sm-10">
+								<select id="countries" name="countries[]" class="form-control select2" multiple="multiple"></select>
+							</div>
+						</div>
+
+                        {{--                        movie list--}}
+						<div class="form-group row">
+							<label for="movies" class="col-sm-2 control-label">{{tr('add_movies')}}</label>
+							<div class="col-sm-10">
+								<select id="movies" name="movies[]" class="form-control select2" multiple="multiple"></select>
+							</div>
+						</div>
+
                         {{--                        Description--}}
 						<div class="form-group row">
 							<label for = "description" class="col-sm-2 control-label">{{tr('description')}}</label>
@@ -98,7 +114,7 @@
 								<textarea name="description" class="form-control" max="255" style="resize: none;"></textarea>
 							</div>
 						</div>
-					</div> 
+					</div>
 
 					<div class="box-footer">
 						<a href="{{ route('admin.add.advertisement') }}" class="btn btn-warning">{{tr('reset')}}</a>
@@ -114,12 +130,43 @@
 @section('scripts')
     <script src="{{asset('assets/js/jstz.min.js')}}"></script>
     <script>
+        function populateSelectOptionData(contentType, viewField){
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin.advertisement.data') }}",
+                data: {
+                    content: contentType
+                },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': "{{csrf_token()}}"
+                },
+                success: function (response) {
+                    var option = ''; //<option value="">Select '+contentType+'</option>
+                    if (response.statusCode == 1) {
+                        $.each(response.data, function (id, value) {
+                            option += '<option value="' + id + '" >' + value + '</option>';
+                        });
+
+                        $(viewField).html(option);
+
+                    }else{
+                       alert(response.message);
+                    }
+
+                }
+            });
+        }
 
         $(document).ready(function () {
 
             var dMin = new Date().getTimezoneOffset();
             var dtz = -(dMin / 60);
             $("#userTimezone").val(jstz.determine().name());
+
+            populateSelectOptionData('countries', '#countries');
+            populateSelectOptionData('movies', '#movies');
+
         });
 
     </script>

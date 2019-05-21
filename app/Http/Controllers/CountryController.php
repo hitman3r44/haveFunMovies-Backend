@@ -2,11 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
+use App\Model\Country;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return searched countries.
+     */
+    public function searchCountries(Request $request){
+        $searchTerm = $request->term;
+        $countries = [];
+        if(!empty($searchTerm)){
+
+            $countries = Country::where('name', 'LIKE', "%$searchTerm%")->orWhere('code', $searchTerm)->get(['id', 'name']);
+
+        }
+
+        return response()->json(['data' => $countries]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

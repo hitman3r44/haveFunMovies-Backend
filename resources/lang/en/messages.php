@@ -1462,4 +1462,13 @@ return array(
 	'logout_success'=>'Logged Out Successfully',
 	'notification_will_update'=>'You will receive notifications about Video Sections',
 	'notification_will_not_update'=>'Your Notifications will be blocked, based on your concern',
+
+    'countries' => 'Countries',
+    'add_country' => 'Add Country',
+
+    'movies' => 'Movies',
+    'add_movies' => 'Add Movies',
+
+
 );
+

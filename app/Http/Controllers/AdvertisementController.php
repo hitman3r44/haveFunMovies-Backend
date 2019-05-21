@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\AdminVideo;
 use App\Model\Advertisement;
+use App\Model\Country;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
@@ -45,19 +48,14 @@ class AdvertisementController extends Controller
     public function advertisement_save(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'id' => 'exists:advertisements,id',
             'title' => 'required',
             'total_amount'=>'required|numeric|min:1|max:5000',
             'per_view_cost'=>'required|numeric',
+            'countries'=>'required',
+            'movies'=>'required',
         ]);
-
-        if ($validator->fails()) {
-
-            $error_messages = implode(',', $validator->messages()->all());
-
-            return back()->with('flash_error', $error_messages);
-        }
 
         if ($request->id != '') {
 
@@ -79,7 +77,7 @@ class AdvertisementController extends Controller
 
             $advertisement_detail->updated_at = Carbon::now();
             $advertisement_detail->uploaded_at = Carbon::now();
-            $advertisement_detail->created_by = $request->created_by;
+            $advertisement_detail->created_by = Auth::user()->id;
 
             $message = tr('advertisement_add_success');
         }
@@ -304,6 +302,52 @@ class AdvertisementController extends Controller
         } else {
 
             return back()->with('flash_error', tr('advertisement_id_not_found_error'));
+        }
+    }
+
+
+    /**
+     * /**
+     * Function Name: advertisement_get_data()
+     *
+     * Description: Get the additional data for advertisement
+     *
+     * @created mehedi
+     *
+     * @edited mehedi
+     *
+     * @param Request $request content type
+     *
+     * @return json
+     */
+    public function advertisement_get_data(Request $request)
+    {
+        try{
+            $contentType = $request->get('content');
+
+            if($contentType == 'countries'){
+
+                $countries = Country::all();
+
+                if($countries){
+
+                    $data = $countries->pluck('name', 'id');
+                }
+            }else if($contentType == 'movies'){
+
+                $movies = AdminVideo::all();
+
+                if($movies){
+
+                    $data = $movies->pluck('title', 'id');
+                }
+            }
+
+            return response()->json(['statusCode' => 1, 'data' => $data]);
+
+        }catch (\Exception $e){
+
+            return response()->json(['statusCode' => 0, 'data' => [], 'message' => $e->getMessage()] );
         }
     }
 }
