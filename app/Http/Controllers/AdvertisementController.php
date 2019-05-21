@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Model\AdminVideo;
 use App\Model\Advertisement;
 use App\Model\Country;
@@ -50,15 +51,14 @@ class AdvertisementController extends Controller
     {
         try {
 
-            $this->validate($request, [
-                'id' => 'exists:advertisements,id',
+            $request->validate([
                 'title' => 'required',
                 'total_amount' => 'required|numeric|min:1|max:5000',
                 'per_view_cost' => 'required|numeric',
                 'countries' => 'required',
                 'movies' => 'required',
+//                'video' => 'required|mimes:mp4',
             ]);
-
 
             $requestedCountries = array_map('intval', $request->countries);
             $countries = Country::whereIn('id', $requestedCountries)->get();
@@ -109,6 +109,16 @@ class AdvertisementController extends Controller
             $advertisement->max_play_time = !empty($request->max_play_time) ? $request->max_play_time : 0;
             $advertisement->description = $request->description;
 
+            $advertisement->video = '';
+            if ($request->hasFile('video')) {
+
+                if ($request->application_id != '') {
+                    Helper::delete_picture($advertisement->video, '/uploads/videos/original/');
+                }
+                $advertisementVideo = Helper::video_upload($request->file('video'));
+                $advertisement->video = $advertisementVideo['db_url'];
+            }
+
             if ($advertisement->save()) {
 
                 if ($request->application_id != '') { // edit
@@ -137,7 +147,7 @@ class AdvertisementController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('flash_error', $e->getMessage().' Code :[ADV:0001]'.$e->getLine())->withInput();
+            return back()->with('flash_error', $e->getMessage().$e->getFile().' Code :[ADV:0001-'.$e->getLine().']')->withInput();
         }
     }
 

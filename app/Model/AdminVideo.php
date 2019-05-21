@@ -10,6 +10,18 @@ use DB;
 
 class AdminVideo extends Model
 {
+
+    protected $fillable = ['unique_id','title','description','age','details','category_id',
+        'sub_category_id','genre_id','video','video_subtitle','trailer_video','trailer_subtitle',
+        'default_image','video_gif_image','video_image_mobile','banner_image','ratings',
+        'reviews','status','is_approved','is_home_slider','is_banner','uploaded_by',
+        'publish_time','duration','trailer_duration','video_resolutions', 'trailer_video_resolutions',
+        'compress_status','main_video_compress_status', 'trailer_compress_status','video_resize_path',
+        'trailer_resize_path','edited_by', 'ppv_created_by','watch_count','is_pay_per_view','type_of_user',
+        'type_of_subscription', 'amount','redeem_amount','admin_amount','user_amount','video_type',
+        'video_upload_type', 'position',];
+
+
 	public function videoImage()
     {
         return $this->hasMany('App\Model\AdminVideoImage');

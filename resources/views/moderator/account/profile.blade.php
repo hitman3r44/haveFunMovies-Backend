@@ -22,26 +22,26 @@
 
                 <div class="box-body box-profile">
 
-                    <img class="profile-user-img img-responsive img-circle" src="@if(Auth::guard('moderator')->user()->picture) {{Auth::guard('moderator')->user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="@if(Auth::user()->picture) {{Auth::user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" alt="User profile picture">
 
-                    <h3 class="profile-username text-center">{{Auth::guard('moderator')->user()->name}}</h3>
+                    <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
 
                     <p class="text-muted text-center">{{tr('moderator')}}</p>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>{{tr('name')}}</b> <a class="pull-right">{{Auth::guard('moderator')->user()->name}}</a>
+                            <b>{{tr('name')}}</b> <a class="pull-right">{{Auth::user()->name}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>{{tr('email')}}</b> <a class="pull-right">{{Auth::guard('moderator')->user()->email}}</a>
-                        </li>
-
-                        <li class="list-group-item">
-                            <b>{{tr('mobile')}}</b> <a class="pull-right">{{Auth::guard('moderator')->user()->mobile}}</a>
+                            <b>{{tr('email')}}</b> <a class="pull-right">{{Auth::user()->email}}</a>
                         </li>
 
                         <li class="list-group-item">
-                            <b>{{tr('address')}}</b> <a class="pull-right">{{Auth::guard('moderator')->user()->address}}</a>
+                            <b>{{tr('mobile')}}</b> <a class="pull-right">{{Auth::user()->mobile}}</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <b>{{tr('address')}}</b> <a class="pull-right">{{Auth::user()->address}}</a>
                         </li>
                     </ul>
                 
@@ -67,13 +67,13 @@
                         <form class="form-horizontal" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.save.profile')}}" method="POST" enctype="multipart/form-data" role="form">
                             @csrf
 
-                            <input type="hidden" name="id" value="{{Auth::guard('moderator')->user()->id}}">
+                            <input type="hidden" name="id" value="{{Auth::user()->id}}">
 
                             <div class="form-group">
                                 <label for="name" required class="col-sm-2 control-label">{{tr('name')}}</label>
 
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name"  name="name" value="{{Auth::guard('moderator')->user()->name}}" placeholder="{{tr('name')}}" required>
+                                  <input type="text" class="form-control" id="name"  name="name" value="{{Auth::user()->name}}" placeholder="{{tr('name')}}" required>
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@
                                 <label for="email" class="col-sm-2 control-label">{{tr('email')}}</label>
 
                                 <div class="col-sm-10">
-                                  <input type="email" required value="{{Auth::guard('moderator')->user()->email}}" name="email" class="form-control" id="email" placeholder="{{tr('email')}}" readonly>
+                                  <input type="email" required value="{{Auth::user()->email}}" name="email" class="form-control" id="email" placeholder="{{tr('email')}}" readonly>
                                 </div>
                             </div>
 
@@ -90,7 +90,7 @@
                                 <label for="mobile" class="col-sm-2 control-label">{{tr('mobile')}}</label>
 
                                 <div class="col-sm-10">
-                                  <input type="text" required value="{{Auth::guard('moderator')->user()->mobile}}" name="mobile" class="form-control" id="mobile" placeholder="{{tr('mobile')}}" pattern="[0-9]{4,16}">
+                                  <input type="text" required value="{{Auth::user()->mobile}}" name="mobile" class="form-control" id="mobile" placeholder="{{tr('mobile')}}" pattern="[0-9]{4,16}">
                                   <small style="color:brown">{{tr('mobile_note')}}</small>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 <label for="address" class="col-sm-2 control-label">{{tr('address')}}</label>
 
                                 <div class="col-sm-10">
-                                  <input type="text" value="{{Auth::guard('moderator')->user()->address}}" name="address" class="form-control" id="address" placeholder="{{tr('address')}}">
+                                  <input type="text" value="{{Auth::user()->address}}" name="address" class="form-control" id="address" placeholder="{{tr('address')}}">
                                 </div>
                             </div>
 
@@ -120,10 +120,10 @@
 
                         <form class="form-horizontal" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.save.profile')}}" method="POST" enctype="multipart/form-data" role="form">
                             @csrf
-                            <input type="hidden" name="id" value="{{Auth::guard('moderator')->user()->id}}">
+                            <input type="hidden" name="id" value="{{Auth::user()->id}}">
 
-                            @if(Auth::guard('moderator')->user()->picture)
-                                <img style="height: 90px; margin-bottom: 15px; border-radius:2em;" src="{{Auth::guard('moderator')->user()->picture}}">
+                            @if(Auth::user()->picture)
+                                <img style="height: 90px; margin-bottom: 15px; border-radius:2em;" src="{{Auth::user()->picture}}">
                             @else
                                 <img style="height: 90px; margin-bottom: 15px; border-radius:2em;"  src="{{asset('admin-css/dist/img/avatar.png')}}">
                             @endif
@@ -154,7 +154,7 @@
 
                         <form class="form-horizontal" action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('moderator.change.password')}}" method="POST" enctype="multipart/form-data" role="form">
                             @csrf
-                            <input type="hidden" name="id" value="{{Auth::guard('moderator')->user()->id}}">
+                            <input type="hidden" name="id" value="{{Auth::user()->id}}">
 
                             <div class="form-group">
                                 <label for="old_password" class="col-sm-3 control-label">{{tr('old_password')}}</label>

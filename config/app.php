@@ -184,6 +184,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        \Kryptonit3\TMDBLaravel\TMDBServiceProvider::class,
 
     ],
 

@@ -62,14 +62,14 @@
                 </ul>
             </li>
             @can('role')
-            <li class="nav-item">
-                <a class="sidebar-link" href="{{url('admin/role')}}">
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{url('admin/role')}}">
                             <span class="icon-holder">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                    <span class="title">{{tr('role')}}</span>
-                </a>
-            </li>
+                        <span class="title">{{tr('role')}}</span>
+                    </a>
+                </li>
             @endcan
 
             <li class="nav-item dropdown" id="categories">
@@ -123,6 +123,15 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.videos.search.tmdb')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('search_videos')}} In TMDB</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.videos')}}">
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>
@@ -131,7 +140,7 @@
                         </a>
                     </li>
                     @if(Setting::get('is_spam'))
-                        <li  id="spam_videos" class="nav-item">
+                        <li id="spam_videos" class="nav-item">
                             <a class="sidebar-link" href="{{route('admin.spam-videos')}}">
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>
@@ -140,7 +149,7 @@
                             </a>
                         </li>
                     @endif
-                    <li  id="view-banner-videos" class="nav-item">
+                    <li id="view-banner-videos" class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.videos',['banner'=>BANNER_VIDEO])}}">
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>
@@ -182,35 +191,35 @@
                 </ul>
             </li>
 
-{{--            <li class="nav-item dropdown" id="coupons">--}}
-{{--                <a class="dropdown-toggle" href="javascript:void(0);">--}}
-{{--                    <span class="icon-holder">--}}
-{{--                        <i class="c-indigo-500 fa fa-gift"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="title">{{tr('coupons')}}</span> <span class="arrow">--}}
-{{--                        <i class="ti-angle-right"></i>--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--                <ul class="dropdown-menu">--}}
-{{--                    <li id="create" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.add.coupons')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                            <span class="title">{{tr('add_coupon')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+            {{--            <li class="nav-item dropdown" id="coupons">--}}
+            {{--                <a class="dropdown-toggle" href="javascript:void(0);">--}}
+            {{--                    <span class="icon-holder">--}}
+            {{--                        <i class="c-indigo-500 fa fa-gift"></i>--}}
+            {{--                    </span>--}}
+            {{--                    <span class="title">{{tr('coupons')}}</span> <span class="arrow">--}}
+            {{--                        <i class="ti-angle-right"></i>--}}
+            {{--                    </span>--}}
+            {{--                </a>--}}
+            {{--                <ul class="dropdown-menu">--}}
+            {{--                    <li id="create" class="nav-item">--}}
+            {{--                        <a class="sidebar-link" href="{{route('admin.add.coupons')}}">--}}
+            {{--                            <span class="icon-holder">--}}
+            {{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+            {{--                            </span>--}}
+            {{--                            <span class="title">{{tr('add_coupon')}}</span>--}}
+            {{--                        </a>--}}
+            {{--                    </li>--}}
 
-{{--                    <li id=view_coupons" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.coupon.list')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                            <span class="title">{{tr('view_coupon')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </li>--}}
+            {{--                    <li id=view_coupons" class="nav-item">--}}
+            {{--                        <a class="sidebar-link" href="{{route('admin.coupon.list')}}">--}}
+            {{--                            <span class="icon-holder">--}}
+            {{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+            {{--                            </span>--}}
+            {{--                            <span class="title">{{tr('view_coupon')}}</span>--}}
+            {{--                        </a>--}}
+            {{--                    </li>--}}
+            {{--                </ul>--}}
+            {{--            </li>--}}
 
 
             {{--            Advertisement--}}
@@ -249,7 +258,7 @@
             <li class="nav-item dropdown" id="payments">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-credit-card"></i>
+                        <i class="c-indigo-500 fa fa-money"></i>
                     </span>
                     <span class="title">{{tr('payments')}}</span> <span class="arrow">
                         <i class="ti-angle-right"></i>
@@ -265,39 +274,128 @@
                         </a>
                     </li>
 
-{{--                    <li id=user-payments" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.user.payments')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                            <span class="title">{{tr('subscription_payments')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    {{--                    <li id=user-payments" class="nav-item">--}}
+                    {{--                        <a class="sidebar-link" href="{{route('admin.user.payments')}}">--}}
+                    {{--                            <span class="icon-holder">--}}
+                    {{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+                    {{--                            </span>--}}
+                    {{--                            <span class="title">{{tr('subscription_payments')}}</span>--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
 
-{{--                    @if(Setting::get('is_payper_view'))--}}
+                    {{--                    @if(Setting::get('is_payper_view'))--}}
 
-{{--                        <li id=video-subscription" class="nav-item">--}}
-{{--                            <a class="sidebar-link" href="{{route('admin.user.video-payments')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                                <span class="title">{{tr('ppv_payments')}}</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    @endif--}}
+                    {{--                        <li id=video-subscription" class="nav-item">--}}
+                    {{--                            <a class="sidebar-link" href="{{route('admin.user.video-payments')}}">--}}
+                    {{--                            <span class="icon-holder">--}}
+                    {{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+                    {{--                            </span>--}}
+                    {{--                                <span class="title">{{tr('ppv_payments')}}</span>--}}
+                    {{--                            </a>--}}
+                    {{--                        </li>--}}
+                    {{--                    @endif--}}
                 </ul>
             </li>
 
-{{--            @if(Setting::get('redeem_control'))--}}
-{{--                <li id="redeems" class="nav-item">--}}
-{{--                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">--}}
-{{--                    <span class="icon-holder">--}}
-{{--                        <i class="c-indigo-500 fa fa-trophy"></i>--}}
-{{--                    </span>--}}
-{{--                        <span class="title">{{tr('redeems')}}</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endif--}}
+
+            <li class="nav-item dropdown" id="credit_money">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-indigo-500 fa fa-credit-card"></i>
+                    </span>
+                    <span class="title">{{tr('credit_money')}}</span> <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.credit-money.create')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('add_credit_money')}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.credit-money.index')}}">
+                                <span class="icon-holder">
+                                    <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                </span>
+                            <span class="title">{{tr('credit_money')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown" id="prepaid-code">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-indigo-500 fa fa-barcode"></i>
+                    </span>
+                    <span class="title">{{tr('prepaid_code')}}</span> <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.prepaid-code.create')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('add_prepaid_code')}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.prepaid-code.index')}}">
+                                <span class="icon-holder">
+                                    <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                </span>
+                            <span class="title">{{tr('view_prepaid_code')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown" id="gift_card">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-indigo-500 fa fa-gift"></i>
+                    </span>
+                    <span class="title">{{tr('gift_card')}}</span> <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.gift-card.create')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('add_gift_card')}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.gift-card.index')}}">
+                                <span class="icon-holder">
+                                    <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                </span>
+                            <span class="title">{{tr('view_gift_card')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            {{--            @if(Setting::get('redeem_control'))--}}
+            {{--                <li id="redeems" class="nav-item">--}}
+            {{--                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">--}}
+            {{--                    <span class="icon-holder">--}}
+            {{--                        <i class="c-indigo-500 fa fa-trophy"></i>--}}
+            {{--                    </span>--}}
+            {{--                        <span class="title">{{tr('redeems')}}</span>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            @endif--}}
 
             @if(Setting::get('admin_language_control') == 0)
                 <li id="languages" class="nav-item">
@@ -310,44 +408,44 @@
                 </li>
             @endif
 
-{{--            <li class="nav-item dropdown" id="settings">--}}
-{{--                <a class="dropdown-toggle" href="javascript:void(0);">--}}
-{{--                    <span class="icon-holder">--}}
-{{--                        <i class="c-indigo-500 fa fa-gears"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="title">{{tr('settings')}}</span> <span class="arrow">--}}
-{{--                        <i class="ti-angle-right"></i>--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--                <ul class="dropdown-menu">--}}
-{{--                    <li id="site_settings" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.settings')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                            <span class="title">{{tr('site_settings')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+            {{--            <li class="nav-item dropdown" id="settings">--}}
+            {{--                <a class="dropdown-toggle" href="javascript:void(0);">--}}
+            {{--                    <span class="icon-holder">--}}
+            {{--                        <i class="c-indigo-500 fa fa-gears"></i>--}}
+            {{--                    </span>--}}
+            {{--                    <span class="title">{{tr('settings')}}</span> <span class="arrow">--}}
+            {{--                        <i class="ti-angle-right"></i>--}}
+            {{--                    </span>--}}
+            {{--                </a>--}}
+            {{--                <ul class="dropdown-menu">--}}
+            {{--                    <li id="site_settings" class="nav-item">--}}
+            {{--                        <a class="sidebar-link" href="{{route('admin.settings')}}">--}}
+            {{--                            <span class="icon-holder">--}}
+            {{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+            {{--                            </span>--}}
+            {{--                            <span class="title">{{tr('site_settings')}}</span>--}}
+            {{--                        </a>--}}
+            {{--                    </li>--}}
 
-{{--                    <li id=home_page_settings" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </li>--}}
+            {{--                    <li id=home_page_settings" class="nav-item">--}}
+            {{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
+            {{--                            <span class="icon-holder">--}}
+            {{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+            {{--                            </span>--}}
+            {{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
+            {{--                        </a>--}}
+            {{--                    </li>--}}
+            {{--                </ul>--}}
+            {{--            </li>--}}
 
-{{--            <li id="custom-push" class="nav-item">--}}
-{{--                <a class="sidebar-link" href="{{route('admin.push')}}">--}}
-{{--                    <span class="icon-holder">--}}
-{{--                        <i class="c-indigo-500 fa fa-send"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="title">{{tr('custom_push')}}</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li id="custom-push" class="nav-item">--}}
+            {{--                <a class="sidebar-link" href="{{route('admin.push')}}">--}}
+            {{--                    <span class="icon-holder">--}}
+            {{--                        <i class="c-indigo-500 fa fa-send"></i>--}}
+            {{--                    </span>--}}
+            {{--                    <span class="title">{{tr('custom_push')}}</span>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
 
             <li id="email_templates" class="nav-item">
                 <a class="sidebar-link" href="{{route('admin.templates')}}">
@@ -407,14 +505,14 @@
                 </a>
             </li>
 
-{{--            <li id="help" class="nav-item">--}}
-{{--                <a class="sidebar-link" href="{{route('admin.help')}}">--}}
-{{--                    <span class="icon-holder">--}}
-{{--                        <i class="c-indigo-500 fa fa-question-circle"></i>--}}
-{{--                    </span>--}}
-{{--                    <span class="title">{{tr('help')}}</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li id="help" class="nav-item">--}}
+            {{--                <a class="sidebar-link" href="{{route('admin.help')}}">--}}
+            {{--                    <span class="icon-holder">--}}
+            {{--                        <i class="c-indigo-500 fa fa-question-circle"></i>--}}
+            {{--                    </span>--}}
+            {{--                    <span class="title">{{tr('help')}}</span>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
 
             <li class="nav-item">
                 <a class="sidebar-link" href="{{route('admin.logout')}}">

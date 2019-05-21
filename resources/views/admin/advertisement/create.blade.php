@@ -27,7 +27,7 @@
 					</div>
 				</div>
 
-				<form action="{{route('admin.save.advertisement')}}" method="POST" class="form-horizontal" role="form">
+				<form action="{{route('admin.save.advertisement')}}" method="POST" class="form-horizontal" enctype="multipart/form-data" role="form">
 					@csrf
 					<div class="box-body">
 
@@ -79,7 +79,7 @@
                         <div class="form-group row">
                             <label for="start_playing_date" class="col-sm-2 control-label">{{tr('start_playing_date_label')}}</label>
                             <div class="col-sm-10">
-                                <input type="text" id="start_playing_date" name="start_playing_date" class="start-date form-control" placeholder="{{tr('start_playing_date')}}" value="{{old('start_playing_date')}}" >
+                                <input type="text" autocomplete="off" id="start_playing_date" name="start_playing_date" class="start-date form-control" placeholder="{{tr('start_playing_date')}}" value="{{old('start_playing_date')}}" >
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
 						<div class="form-group row">
 							<label for="end_playing_date" class="col-sm-2 control-label">{{tr('end_playing_date_label')}}</label>
 							<div class="col-sm-10">
-								<input type="text" id="end_playing_date" name="end_playing_date" class="end-date form-control" placeholder="{{tr('end_playing_date')}}" value="{{old('end_playing_date')}}" >
+								<input type="text" autocomplete="off" id="end_playing_date" name="end_playing_date" class="end-date form-control" placeholder="{{tr('end_playing_date')}}" value="{{old('end_playing_date')}}" >
 							</div>
 						</div>
 
@@ -95,7 +95,7 @@
 						<div class="form-group row">
 							<label for="countries" class="col-sm-2 control-label">{{tr('add_country')}}</label>
 							<div class="col-sm-10">
-								<select id="countries" name="countries[]" class="form-control select2" multiple="multiple"></select>
+								<select id="countries" name="countries[]" class="form-control select2"  required multiple="multiple"></select>
 							</div>
 						</div>
 
@@ -103,7 +103,7 @@
 						<div class="form-group row">
 							<label for="movies" class="col-sm-2 control-label">{{tr('add_movies')}}</label>
 							<div class="col-sm-10">
-								<select id="movies" name="movies[]" class="form-control select2" multiple="multiple"></select>
+								<select id="movies" name="movies[]" class="form-control select2" required multiple="multiple"></select>
 							</div>
 						</div>
 
@@ -112,6 +112,14 @@
 							<label for = "description" class="col-sm-2 control-label">{{tr('description')}}</label>
 							<div class="col-sm-10">
 								<textarea name="description" class="form-control" max="255" style="resize: none;"></textarea>
+							</div>
+						</div>
+
+                        {{--                        video--}}
+						<div class="form-group row">
+							<label for = "description" class="col-sm-2 control-label">{{tr('video')}}</label>
+							<div class="col-sm-10">
+								<input type="file" name="video" accept="video/mp4,video/x-matroska" id="video"/>
 							</div>
 						</div>
 					</div>

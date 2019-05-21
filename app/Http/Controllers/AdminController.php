@@ -1493,7 +1493,7 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = Auth::guard('admin')->user()->id;
+                $sub_category->created_by = Auth::user()->id;
                 $sub_category->status = 1;
             }
 
@@ -1684,7 +1684,7 @@ class AdminController extends Controller
             $genre->status = DEFAULT_TRUE;
             $genre->is_approved = DEFAULT_TRUE;
             $genre->unique_id = uniqid();
-            $genre->created_by = Auth::guard('admin')->user()->id;
+            $genre->created_by = Auth::user()->id;
 
 
             if ($request->hasFile('video')) {
@@ -2835,7 +2835,7 @@ class AdminController extends Controller
 
         $result = EnvEditorHelper::getEnvValues();
 
-        \Auth::guard('admin')->loginUsingId($admin_id);
+//        Auth::user()->loginUsingId($admin_id);
 
         return view('admin.email-settings')->with('result', $result)->withPage('email-settings')->with('sub_page', '');
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4942ef84ef3d0829f9e18eddb8dcc499",
+    "content-hash": "eec74e0476658f1ee37f4eb426a4db38",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -937,17 +937,57 @@
             "time": "2018-03-21T22:21:57+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v5.8.16",
+            "name": "kryptonit3/tmdb-laravel",
+            "version": "0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd"
+                "url": "https://github.com/Kryptonit3/TMDB-Laravel.git",
+                "reference": "4710975d69e5dd34080eec09ab7f260cd94782e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/83d57f9f9162ab476c43b9ec00d463ff12c578fd",
-                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd",
+                "url": "https://api.github.com/repos/Kryptonit3/TMDB-Laravel/zipball/4710975d69e5dd34080eec09ab7f260cd94782e7",
+                "reference": "4710975d69e5dd34080eec09ab7f260cd94782e7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kryptonit3\\TMDBLaravel\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse Szypulski",
+                    "email": "jesse.szypulski@gmail.com"
+                }
+            ],
+            "description": "TMDB Wrapper for Laravel",
+            "time": "2016-01-24T04:51:56+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v5.8.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "9f571be04435883dab6f23ecfadb204273b7f527"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9f571be04435883dab6f23ecfadb204273b7f527",
+                "reference": "9f571be04435883dab6f23ecfadb204273b7f527",
                 "shasum": ""
             },
             "require": {
@@ -1081,7 +1121,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-05-07T14:37:11+00:00"
+            "time": "2019-05-21T16:40:34+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -1212,16 +1252,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.51",
+            "version": "1.0.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "755ba7bf3fb9031e6581d091db84d78275874396"
+                "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/755ba7bf3fb9031e6581d091db84d78275874396",
-                "reference": "755ba7bf3fb9031e6581d091db84d78275874396",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/c5a5097156387970e6f0ccfcdf03f752856f3391",
+                "reference": "c5a5097156387970e6f0ccfcdf03f752856f3391",
                 "shasum": ""
             },
             "require": {
@@ -1292,7 +1332,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-03-30T13:22:34+00:00"
+            "time": "2019-05-20T20:21:14+00:00"
         },
         {
             "name": "league/oauth1-client",
@@ -2859,16 +2899,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v6.34.5",
+            "version": "v6.35.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "124fafb57c287cf6e13830bcf329cac160a6afe8"
+                "reference": "f2fefccf3b56b453d65959f44f35b7fb9a8ae9bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/124fafb57c287cf6e13830bcf329cac160a6afe8",
-                "reference": "124fafb57c287cf6e13830bcf329cac160a6afe8",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/f2fefccf3b56b453d65959f44f35b7fb9a8ae9bc",
+                "reference": "f2fefccf3b56b453d65959f44f35b7fb9a8ae9bc",
                 "shasum": ""
             },
             "require": {
@@ -2911,7 +2951,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2019-05-07T00:56:15+00:00"
+            "time": "2019-05-21T05:25:45+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

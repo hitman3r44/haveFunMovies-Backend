@@ -1462,6 +1462,20 @@ return array(
 	'logout_success'=>'Logged Out Successfully',
 	'notification_will_update'=>'You will receive notifications about Video Sections',
 	'notification_will_not_update'=>'Your Notifications will be blocked, based on your concern',
+    'credit_money' => 'Credit Money',
+    'add_credit_money' => 'Add Credit Money',
+    'edit_credit_money' => 'Edit Credit Money',
+
+    'prepaid_code' => 'Prepaid Code',
+    'add_prepaid_code' => 'Add Prepaid Code',
+    'edit_prepaid_code' => 'Edit Prepaid Code',
+    'view_prepaid_code' => 'View All Prepaid Code',
+
+
+    'gift_card' => 'Gift Card',
+    'add_gift_card' => 'Add Gift Card',
+    'edit_gift_card' => 'Edit Gift Card',
+    'view_gift_card' => 'View All Gift Card',
 
     'countries' => 'Countries',
     'add_country' => 'Add Country',

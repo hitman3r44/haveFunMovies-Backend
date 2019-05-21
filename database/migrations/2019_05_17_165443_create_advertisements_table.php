@@ -34,6 +34,7 @@ class CreateAdvertisementsTable extends Migration
             $table->boolean('is_expired')->default(false);;
 
             $table->integer('status');
+            $table->string('video');
             $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();

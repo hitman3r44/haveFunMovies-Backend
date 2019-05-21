@@ -10,7 +10,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
@@ -51,7 +51,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 
 <script>
     $(document).ready(function () {
@@ -70,9 +70,10 @@
         // });
     });
 
-    @if(isset($page)) $("#{{$page}}").addClass("active"); @endif
 
-    @if(isset($sub_page)) $("#{{$sub_page}}").addClass("active"); @endif
+    @if(isset($page) && !empty($page)) $("#{{$page}}").addClass("active"); @endif
+
+    @if(isset($sub_page) && !empty($sub_page)) $("#{{$sub_page}}").addClass("active"); @endif
 
 </script>
 

@@ -50,10 +50,17 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
         ]);
 
+        $retailer = factory(App\User::class)->create([
+            'name' => 'Retailer',
+            'email' => 'retailer@havefunmovies.com',
+            'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
+        ]);
+
         $this->call([
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
             CountriesTableSeeder::class,
+            TmdbGenersSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -62,6 +69,7 @@ class DatabaseSeeder extends Seeder
         $director->assignRole(Role::findByName('director'));
         $publisher->assignRole(Role::findByName('publisher'));
         $customer->assignRole(Role::findByName('customer'));
+        $retailer->assignRole(Role::findByName('retailer'));
 
 
         factory(App\Model\AdminVideo::class, 3)->create()->each(function ($adminVideo) {
@@ -69,12 +77,25 @@ class DatabaseSeeder extends Seeder
             factory(App\Model\AdminVideoImage::class, 2)->create(['admin_video_id' => $adminVideo->id]);
         });
 
-
-
         factory(App\Model\Advertisement::class, 4)->create()->each(function ($advertisement)  {
             $advertisement->countries()->attach(Country::whereIn('id', [1,2,3])->get());
             $advertisement->movies()->attach(AdminVideo::whereIn('id', [1,2,3])->get());
 
         });
+
+
+        $categories = factory(App\Model\Category::class, 3)->create();
+
+        $categories->each(function ($category) {
+
+            $subCategories = factory(App\Model\SubCategory::class, rand(1, 3))->create(['category_id' => $category->id]);
+
+            $subCategories->each(function ($subCategory) {
+
+                factory(App\Model\SubCategoryImage::class)->create(['sub_category_id' => $subCategory->id]);
+
+            });
+        });
+
     }
 }
