@@ -60,7 +60,6 @@ use App\Helpers\EnvEditorHelper;
 use App\Model\Flag;
 
 use App\Model\Coupon;
-use App\Model\Advertisement;
 
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -4773,8 +4772,6 @@ class AdminController extends Controller
             'amount' => 'required|numeric|min:1|max:5000',
             'amount_type' => 'required',
             'expiry_date' => 'required|date_format:d-m-Y|after:today',
-            'no_of_users_limit' => 'required|numeric|min:1|max:1000',
-            'per_users_limit' => 'required|numeric|min:1|max:100',
         ]);
 
         if ($validator->fails()) {
@@ -4785,8 +4782,9 @@ class AdminController extends Controller
         }
         if ($request->id != '') {
 
-
             $coupon_detail = Coupon::find($request->id);
+
+            $coupon_detail->updated_by = Auth::user()->id;
 
             $message = tr('coupon_update_success');
 
@@ -4795,6 +4793,8 @@ class AdminController extends Controller
             $coupon_detail = new Coupon;
 
             $coupon_detail->status = DEFAULT_TRUE;
+            $coupon_detail->created_by = Auth::user()->id;
+            $coupon_detail->updated_by = Auth::user()->id;
 
             $message = tr('coupon_add_success');
         }
@@ -4842,10 +4842,7 @@ class AdminController extends Controller
         $coupon_detail->expiry_date = date('Y-m-d', strtotime($request->expiry_date));
 
         $coupon_detail->description = $request->has('description') ? $request->description : '';
-        // Based no users limit need to apply coupons
-        $coupon_detail->no_of_users_limit = $request->no_of_users_limit;
 
-        $coupon_detail->per_users_limit = $request->per_users_limit;
 
         if ($coupon_detail) {
 

@@ -85,31 +85,9 @@
                                 <input type="text" id="expiry_date" name="expiry_date" class="form-control"
                                        placeholder="{{tr('expiry_date_coupon')}}"
                                        value="{{ $edit_coupon->expiry_date ? date('d-m-Y',strtotime($edit_coupon->expiry_date)) : old('expiry_date')}}"
-                                       required readonly>
+                                       required>
                             </div>
                         </div>
-
-
-                        <div class="form-group">
-                            <label for="no_of_users_limit" class="col-sm-2 control-label">
-                                * {{tr('no_of_users_limit')}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" pattern="[0-9]{1,4}" name="no_of_users_limit" class="form-control"
-                                       placeholder="{{tr('no_of_users_limit')}}"
-                                       value="{{$edit_coupon->no_of_users_limit}}" required
-                                       title="{{tr('no_of_users_limit_notes')}}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="amount" class="col-sm-2 control-label"> * {{tr('per_users_limit')}}</label>
-                            <div class="col-sm-10">
-                                <input type="text" pattern="[0-9]{1,2}" name="per_users_limit" class="form-control"
-                                       placeholder="{{tr('per_users_limit')}}" value="{{$edit_coupon->per_users_limit}}"
-                                       required title="{{tr('per_users_limit_notes')}}">
-                            </div>
-                        </div>
-
 
                         <div class="form-group">
                             <label for="description" class="col-sm-2 control-label">{{tr('description')}}</label>

@@ -25,6 +25,7 @@ class CreateAdvertisementsTable extends Migration
             $table->date('uploaded_at');
 
             $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
 
             $table->float('total_amount');
             $table->float('per_view_cost');
