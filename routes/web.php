@@ -551,18 +551,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     // to edit the permission of these role
     Route::resource('role', 'RoleController');
+
+    //Log Route
+
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
-
-
-
-
-
-
-
-
-
-
-
 
 Route::get('/embed', 'UserController@embed_video')->name('embed_video');
 

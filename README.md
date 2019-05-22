@@ -29,6 +29,7 @@ Have Fun Movies is a VOD (Video On demand) application.
 1. Install [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/)
 2. Run `docker-compose up -d`
 3. Run `docker ps` to see all the running container
+4. To see the logs => `http://IP-ADDRESS/admin/logs`
 
 ## Important Command After Installation/Git pull
 
