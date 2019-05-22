@@ -36,6 +36,18 @@ class TmdbMovie extends Movie
         return isset($this->_data['original_language']) ? $this->_data['original_language'] : '';
     }
 
+    public function getGenre() {
+        $genresId = [];
+
+        if(isset($this->_data['genres']) && is_array($this->_data['genres'])){
+            foreach($this->_data['genres'] as $genre){
+                $genresId[] = $genre['id'];
+            }
+        }
+
+        return ['id' => $genresId, 'data' => $this->_data['genres']];
+    }
+
 
     public function getReleaseDate() {
 

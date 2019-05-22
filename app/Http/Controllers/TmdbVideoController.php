@@ -6,6 +6,7 @@ use App\Libraries\TMDB\TmdbApi;
 use App\Model\AdminVideo;
 use App\Model\CastCrew;
 use App\Model\Category;
+use App\Model\TmdbGenre;
 use Illuminate\Http\Request;
 
 class TmdbVideoController extends Controller
@@ -53,7 +54,7 @@ class TmdbVideoController extends Controller
 
             $tmdbVideo = $this->tmdbApi->getMovieDetails($videoId);
 
-            $imageUrl = $this->tmdbApi->getImageURL('w200');
+            $imageUrl = $this->tmdbApi->getImageURL('w300');
 
 
             $categories = Category::where('categories.is_approved', DEFAULT_TRUE)
@@ -66,11 +67,14 @@ class TmdbVideoController extends Controller
                     'categories.is_approved',
                 ]);
 
+            $genres = TmdbGenre::all();
+
             $model = new AdminVideo;
 
             $videoimages = [];
             $model->trailer_video_resolutions = [];
             $model->video_resolutions = [];
+            $genre = $tmdbVideo->getGenre();
 
             if($tmdbVideo->hasData()){
                 $model->title = $tmdbVideo->getTitle();
@@ -79,6 +83,8 @@ class TmdbVideoController extends Controller
                 $model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
                 $model->ratings = round($tmdbVideo->getVoteAverage()/ 2);
                 $model->default_image = $imageUrl . $tmdbVideo->getPoster();
+
+                $model->genre_id =  isset($genre['id']) ? $genre['id'][0] : null;
 
                 $videoimages[0] = new \stdClass();
                 $videoimages[1] = new \stdClass();
@@ -92,7 +98,7 @@ class TmdbVideoController extends Controller
             $cast_crews = CastCrew::select('id', 'name')->get();
 
             return view('admin.videos.upload_by_tmdb', compact('categories', 'model',
-                'videoimages','cast_crews','tmdbVideo'))
+                'videoimages','cast_crews','tmdbVideo', 'genres'))
                 ->with('page', 'videos')
                 ->with('sub_page', 'admin_videos_create');
 

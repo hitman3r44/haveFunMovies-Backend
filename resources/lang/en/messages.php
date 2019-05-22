@@ -450,6 +450,7 @@ return array(
 	// Admin Categories
 
 	'category' => 'Category',
+	'genre' => 'Genre',
 	'categories' => 'Categories',
 	'view_categories'	=>	'View Categories',
 	'add_category'	=>	'Add Category',
@@ -1317,13 +1318,14 @@ return array(
 	'upload_video_image'=>'Upload Video / Image',
 	'mandatory_field_notes'=>' fields are mandatory. Please fill and click next.',
 	'trailer_duration'=>'Trailer Duration',
-	'main_video_duration'=>'Main Video Duration',
+	'main_video_duration'=>'Video Duration',
 	'publish_type'=>'Publish Type',
 	'now'=>'Now',
 	'later'=>'Later',
 	'trailer_resize_video_resolutions'=>'Trailer Video Resize Resolutions',
 	'main_resize_video_resolutions'=>'Main Video Resize Resolutions',
 	'subtitle'=>'Subtitle',
+	'trailer_subtitle'=>'Trailer Subtitle',
 	'browse'=>'Browse',
 	'video_upload_success'=>'The video has been uploaded successfully',
 	'ffmpeg_warning_notes'=>'FFMPEG not yet installed, kindly confiure and compress. Otherwise compression willnot happen',
