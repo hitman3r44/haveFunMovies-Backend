@@ -8,9 +8,7 @@
 @section('breadcrumb')
 
 	<li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-
 	<li class="list-inline-item"><a href="{{route('admin.coupon.list')}}"><i class="fa fa-gift"></i>{{tr('coupons')}}</a></li>
-
 	<li class="list-inline-item active">{{tr('add_coupon')}}</li>
 
 @endsection
@@ -33,6 +31,9 @@
 				<form action="{{route('admin.save.coupon')}}" method="POST" class="form-horizontal" role="form">
 					@csrf
 					<div class="box-body">
+
+                        {{--                        Hidden Fields--}}
+                        <input type="hidden" name="created_by" id="created_by" value="{{Auth::user()->id}}">
 
 						<div class="form-group">
 
@@ -73,25 +74,9 @@
 						<div class="form-group">
 							<label for="expiry_date" class="col-sm-2 control-label"> * {{tr('expiry_date')}}</label>
 							<div class="col-sm-10">
-								<input type="text" id="expiry_date" name="expiry_date" class="form-control" placeholder="{{tr('expiry_date_coupon')}}" value="{{old('expiry_date')}}" required readonly>
+								<input type="text" id="expiry_date" name="expiry_date" class="form-control" placeholder="{{tr('expiry_date_coupon')}}" value="{{old('expiry_date')}}" required>
 							</div>
 						</div>
-
-
-						<div class="form-group">
-							<label for="no_of_users_limit" class="col-sm-2 control-label"> * {{tr('no_of_users_limit')}}</label>
-							<div class="col-sm-10">
-								<input type="text" pattern="[0-9]{1,4}" name="no_of_users_limit" class="form-control" placeholder="{{tr('no_of_users_limit')}}" value="{{old('no_of_users_limit')}}" required title="{{tr('no_of_users_limit_notes')}}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="amount" class="col-sm-2 control-label"> * {{tr('per_users_limit')}}</label>
-							<div class="col-sm-10">
-								<input type="text" pattern="[0-9]{1,2}" name="per_users_limit" class="form-control" placeholder="{{tr('per_users_limit')}}" value="{{old('per_users_limit')}}" required title="{{tr('per_users_limit_notes')}}">
-							</div>
-						</div>
-						
 
 						<div class="form-group">
 							<label for = "description" class="col-sm-2 control-label">{{tr('description')}}</label>
@@ -111,4 +96,3 @@
 	</div>
 
 @endsection
-

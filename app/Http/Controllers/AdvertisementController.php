@@ -57,7 +57,6 @@ class AdvertisementController extends Controller
                 'per_view_cost' => 'required|numeric',
                 'countries' => 'required',
                 'movies' => 'required',
-//                'video' => 'required|mimes:mp4',
             ]);
 
             $requestedCountries = array_map('intval', $request->countries);
@@ -73,6 +72,7 @@ class AdvertisementController extends Controller
                 $advertisement = Advertisement::find($request->application_id);
 
                 $advertisement->updated_at = Carbon::now();
+                $advertisement->updated_by = Auth::user()->id;
 
                 $message = tr('advertisement_update_success');
 
@@ -90,6 +90,7 @@ class AdvertisementController extends Controller
                 $advertisement->updated_at = Carbon::now();
                 $advertisement->uploaded_at = Carbon::now();
                 $advertisement->created_by = Auth::user()->id;
+                $advertisement->updated_by = Auth::user()->id;
 
                 $message = tr('advertisement_add_success');
             }
