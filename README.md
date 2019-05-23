@@ -105,6 +105,7 @@ docker logs -f <CONTAINER> // The -f or --follow option will show live log outpu
 ## Useful Commands
 ```bash
 composer dump-autoload
+php artisan iseed my_table // Make Seeder from database table
 ```
 
 
@@ -129,3 +130,4 @@ Please contribute using [Github Flow](https://guides.github.com/introduction/flo
  - [Docker Compose Cheat Sheet](https://gist.github.com/buonzz/054304b3145323c34ed05cb65f1b174f)
  - [Docker-mysql-nginx](https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose)
  - [Enable remote login via ssh](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu)
+  - [iSeed Github Link](https://github.com/orangehill/iseed)
