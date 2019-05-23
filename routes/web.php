@@ -293,6 +293,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
 
+    Route::post('/videos/save/tmdb', 'TmdbVideoController@tmdbVideosSave')->name('videos.save.tmdb');
+
     Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
 
     Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');

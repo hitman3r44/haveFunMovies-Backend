@@ -18,33 +18,9 @@
 
 @section('styles')
 
-    <link rel="stylesheet" href="{{asset('assets/css/wizard.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
-    <link rel="stylesheet"
-          href="{{asset('admin-css/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/imgareaselect-default.css')}}">
-
-    <link rel="stylesheet" href="{{asset('assets/css/jquery.awesome-cropper.css')}}">
-
-    <link rel="stylesheet" href="{{asset('admin-css/plugins/iCheck/all.css')}}">
-
-    <style type="text/css">
-
-        .container-narrow {
-            margin: 150px auto 50px auto;
-            max-width: 728px;
-        }
-
-        canvas {
-            width: 100%;
-            height: auto;
-        }
-
-
-    </style>
 
 @endsection
 
@@ -84,17 +60,18 @@
         <div class="col-md-12">
             <div class="bgc-white bd">
 
-                <form action="{{route('admin.save.advertisement')}}" method="POST" class="form-horizontal"
+                <form action="{{route('admin.videos.save.tmdb')}}" method="POST" class="form-horizontal" id="tmdb_video_upload"
                       enctype="multipart/form-data" role="form">
                     @csrf
-
-                    @if($tmdbVideo->hasData()) <input type="hidden" name="tmdb_video_id" id="tmdb_video_id" value="{{$tmdbVideo->getID()}}"> @endif
-                    <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
 
                     <div class="box-body">
 
                         {{--                        Hidden Fields--}}
                         <input type="hidden" name="created_by" id="created_by" value="{{Auth::user()->id}}">
+                        @if($tmdbVideo->hasData())
+                            <input type="hidden" name="tmdb_video_id"  id="tmdb_video_id" value="{{$tmdbVideo->getID()}}">
+                        @endif
+                        <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
                         <input type="hidden" name="user_time_zone" value="" id="userTimezone">
 
                         <div class="row">
@@ -144,7 +121,8 @@
                                     <label for="description" class="control-label">
                                         * {{tr('description')}}</label>
                                     <div class="col-sm-12">
-                                        <textarea name="description" id="description" class="form-control" >{{ $model->description }}</textarea>
+                                        <textarea name="description" id="description"
+                                                  class="form-control">{{ $model->description }}</textarea>
                                     </div>
                                 </div>
 
@@ -153,19 +131,10 @@
 
                             <div class="col-md-4">
 
-{{--                                --}}{{--                        age--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="age" class="control-label"> * {{tr('age')}}</label>--}}
-{{--                                    <div class="col-sm-12">--}}
-{{--                                        <input type="number" name="age" role="age" min="5" max="20" class="form-control"--}}
-{{--                                               value="{{ old('age') }}" required>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
                                 {{--                        ratings--}}
-                                <div class="form-group">
-                                    <label for="ratings" class="col-sm-5 control-label"> {{tr('ratings')}}</label>
-                                    <div class="col-sm-12">
+                                <div class="form-group row ">
+                                    <label for="ratings" class="col-sm-2 mt-2 control-label"> {{tr('ratings')}}</label>
+                                    <div class="col-sm-10">
 
                                         <div class="row starRating">
 
@@ -193,8 +162,13 @@
                                 </div>
 
                                 {{--                        main_video_duration--}}
-                                <div class="form-group mt-3">
-                                    <label for="trailer_duration" class="control-label">{{tr('main_video_duration')}}: {{$model->duration}}</label>
+                                <div class="form-group row">
+
+                                    <label for="ratings"
+                                           class="col-sm-4 control-label"> {{tr('main_video_duration')}}</label>
+                                    <div class="col-sm-7">
+                                        {{$model->duration}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -305,11 +279,11 @@
                                     <hr>&nbsp;
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-success pull-left">{{tr('add_video')}}</button>
+                                    <button type="submit" id="finish_video" class="btn btn-success pull-left">{{tr('add_video')}}</button>
                                 </div>
                                 <div class="col-md-6 col-md-offset-4">
                                     <div class="layer w-100 mT-10">
-                                        <span class="pull-right c-grey-600 fsz-sm ml-2"> 0% </span>
+                                        <span id="percentage_digit" class="pull-right c-grey-600 fsz-sm ml-2"> 0% </span>
                                         <div class="progress mT-10">
                                             <div class="progress-bar bgc-green-500" role="progressbar"
                                                  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
@@ -360,294 +334,164 @@
 
     <script src="{{asset('admin-css/plugins/jQuery/jQuery-2.2.0.min.js')}}"></script>
 
-    <!-- InputMask -->
-    <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.js')}}"></script>
-    <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
-    <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
-
-
     <script src="{{asset('admin-css/plugins/bootstrap-datetimepicker/js/moment.min.js')}}"></script>
-
-    <script src="{{asset('admin-css/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')}}"></script>
-
-    <script src="{{asset('admin-css/plugins/iCheck/icheck.min.js')}}"></script>
 
     <script src="{{asset('admin-css/plugins/jquery.form.js')}}"></script>
 
-    <script src="{{asset('assets/js/jquery.awesome-cropper.js')}}"></script>
-
     <script src="{{asset('assets/js/jquery.imgareaselect.js')}}"></script>
 
+    <script src="{{asset('assets/js/jstz.min.js')}}"></script>
 
     <script type="text/javascript">
 
-        // $('.multipleSelect').select2();
-
-        var banner_image = "{{$model->is_banner}}";
-
-        var cat_url = "{{ url('select/sub_category')}}";
-        var step3 = "{{REQUEST_STEP_3}}";
-        var sub_cat_url = "{{ url('select/genre')}}";
-        var final = "{{REQUEST_STEP_FINAL}}";
-
-        var video_id = "{{$model->id}}";
-        var genreId = "{{$model->genre_id}}";
-
-        var video_type = "{{$model->video_type}}";
-
         var view_video_url = "{{url('admin/view/video')}}?id=";
 
+        var bar = $('.progress-bar');
+        var percent = $('#percentage_digit');
+
+        var error = false;
 
         $(document).ready(function () {
 
-            $("#datemask").inputmask("dd:mm:yyyy", {"placeholder": "hh:mm:ss"});
-            // $("#datemask2").inputmask("hh:mm:ss", {"placeholder": "hh:mm:ss"});
-            $("[data-mask]").inputmask();
+            $("#user_time_zone").val(jstz.determine().name());
 
-            $('#datepicker').datetimepicker({
-                minTime: "00:00:00",
-                minDate: moment(),
-                autoclose: true,
-                format: 'dd-mm-yyyy hh:ii',
+
+            $('form#tmdb_video_upload').submit(function () {
+                window.onbeforeunload = null;
+            });
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('form#tmdb_video_upload').ajaxForm({
+
+                beforeSend: function (xhr, opts) {
+
+                    var title = $("#title").val();
+                    var description = $("#description").val();
+                    var category_id = $("#category_id").val();
+                    var sub_category_id = $("#sub_category_id").val();
+                    var default_image = document.getElementById("default_image").files.length;
+                    var other_image1 = document.getElementById("other_image1").files.length;
+                    var other_image2 = document.getElementById("other_image2").files.length;
+
+                    var err = '';
+
+                    if (title == '') err = "Title should not be blank";
+
+                    if (description == '' && err == '') err = "Description should not be blank";
+
+
+                    if (category_id == '' && err == '')  err = "Selete any one of the category from the list.";
+
+                    if (sub_category_id == '' && err == '') err = "Selete any one of the sub category from the list.";
+
+                    // if (default_image <= 0 && err == '')  err = "Please Choose Default Image.";
+                    //
+                    // if (other_image1 <= 0 && err == '') err = "Please Choose first other Image.";
+                    //
+                    // if (other_image2 <= 0 && err == '') err = "Please Choose second other Image.";
+
+
+                    if (err) {
+                        console.log("Sumit before sent" + xhr);
+
+                        $("#error_messages_text").html(err);
+
+                        $("#error_popup").click();
+
+                        xhr.abort();
+
+                        return false;
+                    }
+
+                    $(".loader-form").show();
+                    var percentVal = '0%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                    $("#finish_video").text("Wait Progressing...");
+                    $("#finish_video").attr('disabled', true);
+                    $("#error_message").html("");
+
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                    console.log(total);
+                    console.log(position);
+                    console.log(event);
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                    if (percentComplete == 100) {
+                        $("#finish_video").text("Video Uploading...");
+                        $(".loader-form").show();
+                        $("#finish_video").attr('disabled', true);
+                    }
+                },
+                complete: function (xhr) {
+
+                    if (!error) {
+                        bar.width("100%");
+                        percent.html("100%");
+                        $("#finish_video").text("Redirecting...");
+                        $("#finish_video").attr('disabled', true);
+
+                        console.log(error);
+                        console.log("complete" + xhr);
+                    } else {
+                        var percentVal = '0%';
+                        bar.width(percentVal);
+                        percent.html(percentVal);
+                    }
+                },
+                error: function (xhr) {
+
+                    $(".loader-form").fadeOut();
+                    $(".loader-form").css('display', 'none');
+                    $("#finish_video").text("Finish");
+                    $("#finish_video").attr('disabled', false);
+                    $("#error_messages_text").html("While Uploading Video some error occured. Please Try Again. Make sure upload file is meets with server upload limit.");
+                    $("#error_popup").click();
+                    error = true;
+                    return false;
+                    // console.log(xhr);
+                },
+                success: function (xhr) {
+
+
+                    $("#finish_video").text("Finish");
+
+                    $("#finish_video").attr('disabled', false);
+
+                    $(".loader-form").hide();
+                    console.log(xhr);
+                    if (xhr.response.success) {
+
+                        window.location.href = view_video_url + xhr.response.data.id;
+
+                    } else {
+
+                        error = true;
+
+                        $("#error_messages_text").html(xhr.response.error_messages);
+
+                        $("#error_popup").click();
+
+                        return false;
+                    }
+                }
             });
 
         });
 
 
-        $('form').submit(function () {
-            window.onbeforeunload = null;
-        });
-
-
-
-
-
-        var bar = $('.bar');
-        var percent = $('.percent');
-
-        var error = false;
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('form').ajaxForm({
-
-            beforeSend: function(xhr,opts) {
-
-                var title = $("#title").val();
-                var age = $("#age").val();
-                var trailer_duration = $("#trailer_duration").val();
-                var duration = $("#duration").val();
-                var description = $("#description").val();
-                var ratings = $("input[name='ratings']:checked").val();
-                var publish_type = $("input[name='publish_type']:checked").val();
-                var datepicker = $("#datepicker").val();
-                var details = $("#details").val();
-                var category_id = $("#category_id").val();
-                var sub_category_id = $("#sub_category_id").val();
-
-                var default_image =  document.getElementById("default_image").files.length;
-
-                var other_image1 =  document.getElementById("other_image1").files.length;
-
-                var other_image2 =  document.getElementById("other_image2").files.length;
-
-                var err = '';
-
-                if (title == '') {
-
-                    err = "Title should not be blank";
-
-                }
-
-                if (age == '' && err == '') {
-
-                    err = "Age should not be blank";
-
-                }
-
-                if (age != '' && err == '') {
-
-                    if (/^[0-9 +]+$/.test(age)) {
-
-
-                    } else {
-
-                        $("#age").val("");
-
-                        err = "Age wrong format..!";
-
-                    }
-
-                }
-
-
-                if (trailer_duration == '' && err == '') {
-
-                    err = "Trailer Duration should not be blank";
-
-                }
-
-                if (duration == '' && err == '') {
-
-                    err = "Duration should not be blank";
-
-                }
-
-                if (description == '' && err == '') {
-
-                    err = "Description should not be blank";
-
-                }
-
-                if ((ratings <= 0 || ratings == undefined) && err == '') {
-
-                    err = "Ratings should not be blank";
-
-                }
-
-                if (publish_type == 2 && datepicker == '' && err == '') {
-
-                    err = "Publish Time should not be blank";
-
-                }
-
-                if (details == '' && err == '') {
-
-                    err = "Details should not be blank";
-
-                }
-
-                if (category_id == '' && err == '') {
-
-                    err = "Selete any one of the category from the list.";
-
-                }
-
-                if (sub_category_id == '' && err == '') {
-
-                    err = "Selete any one of the sub category from the list.";
-
-                }
-                //
-                // if (!video_id || video_id <= 0 || video_id == null) {
-                //
-                //     if (default_image <= 0 && err == '') {
-                //
-                //         err = "Please Choose Default Image.";
-                //
-                //     }
-                //
-                //     if (other_image1 <= 0 && err == '') {
-                //
-                //         err = "Please Choose first other Image.";
-                //
-                //     }
-                //
-                //     if (other_image2 <= 0 && err == '') {
-                //
-                //         err = "Please Choose second other Image .";
-                //
-                //     }
-                //
-                // }
-
-                if (err) {
-                    console.log("Sumit before sent" + xhr);
-
-                    $("#error_messages_text").html(err);
-
-                    $("#error_popup").click();
-
-                    xhr.abort();
-
-                    return false;
-                }
-
-                $(".loader-form").show();
-                var percentVal = '0%';
-                bar.width(percentVal)
-                percent.html(percentVal);
-                $("#finish_video").text("Wait Progressing...");
-                $("#finish_video").attr('disabled', true);
-                $("#error_message").html("");
-
-            },
-            uploadProgress: function(event, position, total, percentComplete) {
-                console.log(total);
-                console.log(position);
-                console.log(event);
-                var percentVal = percentComplete + '%';
-                bar.width(percentVal)
-                percent.html(percentVal);
-                if (percentComplete == 100) {
-                    $("#finish_video").text("Video Uploading...");
-                    $(".loader-form").show();
-                    $("#finish_video").attr('disabled', true);
-                }
-            },
-            complete: function(xhr) {
-
-                if(!error)  {
-                    bar.width("100%");
-                    percent.html("100%");
-                    $("#finish_video").text("Redirecting...");
-                    $("#finish_video").attr('disabled', true);
-
-                    console.log(error);
-                    console.log("complete"+xhr);
-                } else {
-                    var percentVal = '0%';
-                    bar.width(percentVal);
-                    percent.html(percentVal);
-                }
-            },
-            error : function(xhr) {
-
-                $(".loader-form").fadeOut();
-                $(".loader-form").css('display', 'none');
-                $("#finish_video").text("Finish");
-                $("#finish_video").attr('disabled', false);
-                $("#error_messages_text").html("While Uploading Video some error occured. Please Try Again. Make sure upload file is meets with server upload limit.");
-                $("#error_popup").click();
-                error = true;
-                return false;
-                // console.log(xhr);
-            },
-            success : function(xhr) {
-
-
-                $("#finish_video").text("Finish");
-
-                $("#finish_video").attr('disabled', false);
-
-                $(".loader-form").hide();
-                console.log(xhr);
-                if (xhr.response.success) {
-
-                    window.location.href= view_video_url+xhr.response.data.id;
-
-                } else {
-
-                    error = true;
-
-                    $("#error_messages_text").html(xhr.response.error_messages);
-
-                    $("#error_popup").click();
-
-                    return false;
-                }
-            }
-        });
-
-        function loadFile(event, id){
+        function loadFile(event, id) {
             // alert(event.files[0]);
             var reader = new FileReader();
 
-            reader.onload = function(){
+            reader.onload = function () {
                 var output = document.getElementById(id);
                 // alert(output);
                 output.src = reader.result;
@@ -661,7 +505,7 @@
          * @param id
          */
         function clearSelectedFiles(id) {
-            e = $('#'+id);
+            e = $('#' + id);
             e.wrap('<form>').closest('form').get(0).reset();
             e.unwrap();
         }
