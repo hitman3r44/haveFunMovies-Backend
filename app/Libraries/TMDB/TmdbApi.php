@@ -18,16 +18,10 @@ class TmdbApi extends TMDB
         parent::__construct($this->apikey, $this->language, $this->debug);
     }
 
-
-
     public function getMovieDetails($idMovie, $appendToResponse = 'append_to_response=trailers,images,casts,translations'){
 
         return new TmdbMovie($this->call('movie/' . $idMovie, $appendToResponse));
     }
-
-
-
-
 
     public function searchTmdbMovie($movieTitle){
 
@@ -41,7 +35,6 @@ class TmdbApi extends TMDB
 
         return $movies;
     }
-
 
     private function call($action, $appendToResponse){
 

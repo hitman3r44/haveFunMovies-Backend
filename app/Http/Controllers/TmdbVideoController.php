@@ -56,7 +56,6 @@ class TmdbVideoController extends Controller
 
             $imageUrl = $this->tmdbApi->getImageURL('w300');
 
-
             $categories = Category::where('categories.is_approved', DEFAULT_TRUE)
                 ->get([
                     'categories.id as id',
@@ -77,12 +76,14 @@ class TmdbVideoController extends Controller
             $genre = $tmdbVideo->getGenre();
 
             if($tmdbVideo->hasData()){
+
                 $model->title = $tmdbVideo->getTitle();
                 $model->description = $tmdbVideo->getOverview();
                 $model->details = $tmdbVideo->getOverview();
                 $model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
                 $model->ratings = round($tmdbVideo->getVoteAverage()/ 2);
                 $model->default_image = $imageUrl . $tmdbVideo->getPoster();
+                $model->duration = date('H:i:s', mktime(0, $tmdbVideo->get('runtime')));
 
                 $model->genre_id =  isset($genre['id']) ? $genre['id'][0] : null;
 

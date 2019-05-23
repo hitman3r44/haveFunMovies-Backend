@@ -153,14 +153,14 @@
 
                             <div class="col-md-4">
 
-                                {{--                        age--}}
-                                <div class="form-group">
-                                    <label for="age" class="control-label"> * {{tr('age')}}</label>
-                                    <div class="col-sm-12">
-                                        <input type="number" name="age" role="age" min="5" max="20" class="form-control"
-                                               value="{{ old('age') }}" required>
-                                    </div>
-                                </div>
+{{--                                --}}{{--                        age--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="age" class="control-label"> * {{tr('age')}}</label>--}}
+{{--                                    <div class="col-sm-12">--}}
+{{--                                        <input type="number" name="age" role="age" min="5" max="20" class="form-control"--}}
+{{--                                               value="{{ old('age') }}" required>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
                                 {{--                        ratings--}}
                                 <div class="form-group">
@@ -192,31 +192,11 @@
                                     </div>
                                 </div>
 
-
                                 {{--                        main_video_duration--}}
                                 <div class="form-group mt-3">
-                                    <label for="trailer_duration" class="control-label"> * {{tr('main_video_duration')}}(hh:mm:ss)
-                                    </label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="duration" maxlength="8" class="form-control"
-                                               data-inputmask="'alias': 'hh:mm:ss'" data-mask
-                                               value="{{$model->duration}}" id="duration">
-                                    </div>
+                                    <label for="trailer_duration" class="control-label">{{tr('main_video_duration')}}: {{$model->duration}}</label>
                                 </div>
-
-                                {{--                        trailer_duration--}}
-                                <div class="form-group  mt-3">
-                                    <label for="trailer_duration" class="control-label"> * {{tr('trailer_duration')}}(hh:mm:ss)
-                                    </label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="trailer_duration" maxlength="8" class="form-control"
-                                               data-inputmask="'alias': 'hh:mm:ss'" data-mask
-                                               value="{{$model->trailer_duration}}" id="trailer_duration">
-                                    </div>
-                                </div>
-
                             </div>
-
                         </div>
 
                         <div class="row">
@@ -237,18 +217,13 @@
 
                                 {{--                        trailer_video--}}
                                 <div class="form-group">
-                                    <label for="trailer_video"
-                                           class="control-label">{{tr('trailer_video')}}</label>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="trailer_video" accept="video/mp4,video/x-matroska"
-                                               class="form-control-file" id="trailer_video"/>
-                                    </div>
+                                    <label for="trailer_video" class="control-label">{{tr('trailer_video')}}</label>
+
                                     <small class="form-text">Current Trailer : @if(!empty($model->trailer_video)) <a
                                                 class="text-navy"
                                                 href="{{$model->trailer_video}}">{{$model->trailer_video}}</a> @else
                                             N/A @endif</small>
                                 </div>
-
                             </div>
 
                             <div class="col-md-4">
@@ -261,18 +236,6 @@
                                         <small class="form-text text-muted">{{tr('subtitle_validate')}}</small>
                                     </div>
                                 </div>
-
-                                {{--                        trailer_subtitle--}}
-                                <div class="form-group">
-                                    <label for="trailer_video"
-                                           class="control-label">{{tr('trailer_subtitle')}}</label>
-                                    <div class="col-sm-12">
-                                        <input id="trailer_subtitle" class="form-control-file" type="file"
-                                               name="trailer_subtitle" onchange="checksrt(this, this.id)"/>
-                                        <small class="form-text text-muted">{{tr('subtitle_validate')}}</small>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
