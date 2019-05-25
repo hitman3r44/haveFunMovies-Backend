@@ -5,23 +5,24 @@
 @section('content-header')
 
     <div class="row">
-        <div class="col-md-4">
-            <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('add_user') }}</h4>
+        <div class="col-md-5">
+            <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('common_settings') }}</h4>
         </div>
-        <div class="col-md-8">
-            <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"
-               title="">{{tr('help_ques_mark')}}</a>
+        <div class="col-md-7">
 
-            <div id="help-content" style="display: none">
+            <button type="button" class="btn  btn-danger" data-toggle="popover" title="{{tr('paypal')}} | {{tr('stripe')}} " data-html="true"
+                    data-content="<b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}<br>
+                            <b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target='_blank' href='https://stripe.com/docs/currencies'>{{tr('check_references')}}</a>">{{tr('help_ques_mark')}} </button>
 
-                <ul class="popover-list">
-                    <li><b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}</li>
-                    <li><b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target="_blank"
-                                                                                          href="https://stripe.com/docs/currencies">{{tr('check_references')}}</a>
-                    </li>
-                </ul>
-
-            </div>
+            {{--<a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"--}}
+               {{--title="">{{tr('help_ques_mark')}}</a>--}}
+            {{--<div id="help-content" style="display: none">--}}
+                {{--<ul class="popover-list">--}}
+                    {{--<li><b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}</li>--}}
+                    {{--<li><b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target="_blank" href="https://stripe.com/docs/currencies">{{tr('check_references')}}</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
         </div>
     </div>
 
@@ -129,19 +130,20 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
-    <li  class="list-inline-item active"><i class="fa fa-gears"></i> {{tr('settings')}}</li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
+    <li class="list-inline-item active"><i class="fa fa-gears"></i> {{tr('settings')}}</li>
 @endsection
 
 @section('content')
 
     <div class="row gap-20">
         <div class="bgc-white p-20 bd">
-            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 streamview-tab-container">
+            <div class="row">
 
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 streamview-tab-menu">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 streamview-tab-menu">
 
-                    <div class="list-group">
+                    <div class="list-group nav flex-column nav-pills">
                         <a href="#" class="list-group-item active text-left">
                             <!-- <h4 class="fa fa-globe"></h4><br/> -->
 
@@ -205,9 +207,10 @@
 
                     <!-- flight section -->
 
-                    <div class="streamview-tab-content active">
+                    <div class="tab-content streamview-tab-content active">
 
-                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -296,7 +299,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn bg-primary text-white pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
 
@@ -307,7 +310,8 @@
                     <!-- train section -->
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -457,7 +461,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -548,7 +553,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -673,7 +679,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -766,7 +773,8 @@
                     <!-- Email settings -->
 
                     <div class="streamview-tab-content">
-                        <form action="{{route('admin.email.settings.save')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{route('admin.email.settings.save')}}" method="POST"
+                              enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -878,7 +886,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
                                 <div class="row">
@@ -967,7 +976,8 @@
                     <!-- APP Url Settings -->
 
                     <div class="streamview-tab-content">
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.mobile.settings.save')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.mobile.settings.save')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -1065,7 +1075,8 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}" method="POST" enctype="multipart/form-data" role="form">
+                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
+                              method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -1145,7 +1156,8 @@
                     <!-- OTHER Settings -->
 
                     <div class="streamview-tab-content">
-                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.other.settings.save')}}" method="POST" enctype="multipart/form-data" r ole="form">
+                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.other.settings.save')}}"
+                              method="POST" enctype="multipart/form-data" r ole="form">
 
                             @csrf
                             <div class="box-body">

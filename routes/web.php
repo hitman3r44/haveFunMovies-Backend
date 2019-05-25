@@ -119,6 +119,9 @@ Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin
 
 Route::post('save_admin_control', 'ApplicationController@save_admin_control')->name('save_admin_control');
 
+
+Route::get('/clear-cache', 'ArtisanCommandController@clearCache')->name('clear-cache');
+
 Route::get('login', function () {
     return redirect()->route('admin.login');
 });

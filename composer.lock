@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89a5ecb9c3132766faa141ae18abc358",
+    "content-hash": "ab4ecccd24f96c7d2840b36835809e47",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -4992,6 +4992,44 @@
                 "seeder"
             ],
             "time": "2015-09-05T16:39:43+00:00"
+        },
+        {
+            "name": "vidhyar2612/enveditor",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vidhyar2612/enveditor.git",
+                "reference": "181e4b403b442e0f120d35fe264e7a07b6f3fd84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vidhyar2612/enveditor/zipball/181e4b403b442e0f120d35fe264e7a07b6f3fd84",
+                "reference": "181e4b403b442e0f120d35fe264e7a07b6f3fd84",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "vidhyar2612\\Enveditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vidhya",
+                    "email": "vidhyar2612@gmail.com"
+                }
+            ],
+            "description": "Laravel 5.2 - Env Editor",
+            "keywords": [
+                "Env Edit",
+                "Laravel 5 Env Set Value",
+                "Laravel 5 env"
+            ],
+            "time": "2017-02-08T16:58:57+00:00"
         },
         {
             "name": "vidhyar2612/ffmpeg-php-class",
