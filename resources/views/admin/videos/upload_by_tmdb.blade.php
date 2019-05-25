@@ -60,7 +60,8 @@
         <div class="col-md-12">
             <div class="bgc-white bd">
 
-                <form action="{{route('admin.videos.save.tmdb')}}" method="POST" class="form-horizontal" id="tmdb_video_upload"
+                <form action="{{route('admin.videos.save.tmdb')}}" method="POST" class="form-horizontal"
+                      id="tmdb_video_upload"
                       enctype="multipart/form-data" role="form">
                     @csrf
 
@@ -69,7 +70,8 @@
                         {{--                        Hidden Fields--}}
                         <input type="hidden" name="created_by" id="created_by" value="{{Auth::user()->id}}">
                         @if($tmdbVideo->hasData())
-                            <input type="hidden" name="tmdb_video_id"  id="tmdb_video_id" value="{{$tmdbVideo->getID()}}">
+                            <input type="hidden" name="tmdb_video_id" id="tmdb_video_id"
+                                   value="{{$tmdbVideo->getID()}}">
                         @endif
                         <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
                         <input type="hidden" name="user_time_zone" value="" id="userTimezone">
@@ -91,7 +93,7 @@
                                     <label for="category_id" class="control-label">
                                         * {{tr('category')}}</label>
                                     <div class="col-sm-12">
-                                        <select name=category_id"" class="form-control input-md" id="category_id"
+                                        <select name="category_id" class="form-control input-md" id="category_id"
                                                 required>
                                             <option value=""></option>
                                             @foreach($categories as $category)
@@ -106,7 +108,7 @@
                                     <label for="sub_category_id" class="control-label">
                                         * {{tr('sub_category')}}/{{tr('genre')}} {{ $model->genre_id }}</label>
                                     <div class="col-sm-12">
-                                        <select name=sub_category_id"" class="form-control input-md select2"
+                                        <select name="sub_category_id" class="form-control input-md select2"
                                                 id="sub_category_id" required>
                                             <option value=""></option>
                                             @foreach($genres as $genre)
@@ -167,7 +169,11 @@
                                     <label for="ratings"
                                            class="col-sm-4 control-label"> {{tr('main_video_duration')}}</label>
                                     <div class="col-sm-7">
-                                        {{$model->duration}}
+                                        @if($model->duration != null)
+                                            {{$model->duration}}
+                                        @else
+                                            N/A
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -279,11 +285,13 @@
                                     <hr>&nbsp;
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" id="finish_video" class="btn btn-success pull-left">{{tr('add_video')}}</button>
+                                    <button type="submit" id="finish_video"
+                                            class="btn btn-success pull-left">{{tr('add_video')}}</button>
                                 </div>
                                 <div class="col-md-6 col-md-offset-4">
                                     <div class="layer w-100 mT-10">
-                                        <span id="percentage_digit" class="pull-right c-grey-600 fsz-sm ml-2"> 0% </span>
+                                        <span id="percentage_digit"
+                                              class="pull-right c-grey-600 fsz-sm ml-2"> 0% </span>
                                         <div class="progress mT-10">
                                             <div class="progress-bar bgc-green-500" role="progressbar"
                                                  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
@@ -374,9 +382,9 @@
                     var description = $("#description").val();
                     var category_id = $("#category_id").val();
                     var sub_category_id = $("#sub_category_id").val();
-                    var default_image = document.getElementById("default_image").files.length;
-                    var other_image1 = document.getElementById("other_image1").files.length;
-                    var other_image2 = document.getElementById("other_image2").files.length;
+                    var default_image = document.getElementById("default_img").getAttribute('src');
+                    var other_image1 = document.getElementById("other_img1").getAttribute('src');
+                    var other_image2 = document.getElementById("other_img2").getAttribute('src');
 
                     var err = '';
 
@@ -384,16 +392,15 @@
 
                     if (description == '' && err == '') err = "Description should not be blank";
 
-
-                    if (category_id == '' && err == '')  err = "Selete any one of the category from the list.";
+                    if (category_id == '' && err == '') err = "Selete any one of the category from the list.";
 
                     if (sub_category_id == '' && err == '') err = "Selete any one of the sub category from the list.";
 
-                    // if (default_image <= 0 && err == '')  err = "Please Choose Default Image.";
-                    //
-                    // if (other_image1 <= 0 && err == '') err = "Please Choose first other Image.";
-                    //
-                    // if (other_image2 <= 0 && err == '') err = "Please Choose second other Image.";
+                    if (default_image <= 0 && err == '') err = "Please Choose Default Image.";
+
+                    if (other_image1 <= 0 && err == '') err = "Please Choose first other Image.";
+
+                    if (other_image2 <= 0 && err == '') err = "Please Choose second other Image.";
 
 
                     if (err) {
@@ -409,9 +416,7 @@
                     }
 
                     $(".loader-form").show();
-                    var percentVal = '0%';
-                    bar.width(percentVal)
-                    percent.html(percentVal);
+                    percent.html('0%');
                     $("#finish_video").text("Wait Progressing...");
                     $("#finish_video").attr('disabled', true);
                     $("#error_message").html("");
@@ -422,7 +427,7 @@
                     console.log(position);
                     console.log(event);
                     var percentVal = percentComplete + '%';
-                    bar.width(percentVal)
+                    bar.width(percentComplete)
                     percent.html(percentVal);
                     if (percentComplete == 100) {
                         $("#finish_video").text("Video Uploading...");
@@ -447,6 +452,9 @@
                     }
                 },
                 error: function (xhr) {
+
+                    bar.width(0);
+                    percent.html('0%');
 
                     $(".loader-form").fadeOut();
                     $(".loader-form").css('display', 'none');

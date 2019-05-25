@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Libraries\TMDB\TmdbApi;
+use App\Libraries\Utility;
 use App\Model\AdminVideo;
+use App\Model\AdminVideoImage;
 use App\Model\CastCrew;
 use App\Model\Category;
 use App\Model\TmdbGenre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class TmdbVideoController extends Controller
 {
@@ -77,20 +80,18 @@ class TmdbVideoController extends Controller
             $model->trailer_video_resolutions = [];
             $model->video_resolutions = [];
 
-            dd($tmdbVideo);
-
             if ($tmdbVideo->hasData()) {
 
                 $genre = $tmdbVideo->getGenre();
                 $model->title = $tmdbVideo->getTitle();
                 $model->description = $tmdbVideo->getOverview();
                 $model->details = $tmdbVideo->getOverview();
-                $model->trailer_video = 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer();
+                $model->trailer_video = ($tmdbVideo->getTrailer() ) ? 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer() : null;
                 $model->ratings = round($tmdbVideo->getVoteAverage() / 2);
-                $model->default_image = $imageUrl . $tmdbVideo->getPoster();
-                $model->duration = date('H:i:s', mktime(0, $tmdbVideo->get('runtime')));
+                $model->default_image = ($tmdbVideo->getPoster()) ? $imageUrl . $tmdbVideo->getPoster() : null ;
+                $model->duration = ($tmdbVideo->get('runtime')) ? date('H:i:s', mktime(0, $tmdbVideo->get('runtime'))) : null;
 
-                $model->genre_id = isset($genre['id']) ? $genre['id'][0] : null;
+                $model->genre_id = isset($genre['id'][0]) ? $genre['id'][0] : null;
 
                 $videoimages[0] = new \stdClass();
                 $videoimages[1] = new \stdClass();
@@ -109,9 +110,8 @@ class TmdbVideoController extends Controller
                 ->with('sub_page', 'admin_videos_create');
 
         } catch (\Exception $e) {
-
-            dd($e);
-            return response()->json(['status' => 0, 'html' => $e->getMessage()]);
+            Session::flash('error', Utility::errorMsg($e, 'TMDBVC: 001', $e->getMessage()));
+            return redirect()->back();
         }
     }
 
@@ -119,7 +119,6 @@ class TmdbVideoController extends Controller
     {
 
         try {
-
 
             $tmdbVideo = $this->tmdbApi->getMovieDetails($request->tmdb_video_id);
 
@@ -132,8 +131,6 @@ class TmdbVideoController extends Controller
                 'other_image2'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
 
             ]);
-            dd($request->all());
-
 
 
             DB::beginTransaction();
@@ -171,41 +168,40 @@ class TmdbVideoController extends Controller
             $model->video_subtitle = '';
 
 
-            $model->genre_id = '';
+            $model->genre_id = 0;
             $model->video = '';
-
-            if ($tmdbVideo->hasData()) {
-                $model->trailer_video = 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer();
-            }
 
             $model->status = 1;
             $model->is_approved = 1;
             $model->is_home_slider = 0;
             $model->uploaded_by = Auth::user()->id;
-            $model->publish_time;
-            $model->duration;
-            $model->trailer_duration;
-            $model->video_resolutions->nullable();
-            $model->trailer_video_resolutions->nullable();
-            $model->compress_status->default(0);
-            $model->main_video_compress_status;
-            $model->trailer_compress_status->default(0);
-            $model->video_resize_path->nullable();
-            $model->trailer_resize_path->nullable();
+
+            $model->publish_time = date('Y-m-d H:i:s');
+            $model->duration = ($tmdbVideo->get('runtime')) ? date('H:i:s', mktime(0, $tmdbVideo->get('runtime'))) : '00:00:00';
+            $model->trailer_duration = '00:00:00';
+            $model->video_resolutions = null;
+            $model->trailer_video_resolutions = null;
+            $model->compress_status = 0;
+            $model->main_video_compress_status = DO_NOT_COMPRESS;
+            $model->trailer_compress_status = DO_NOT_COMPRESS;
+            $model->video_resize_path = null;
+            $model->trailer_resize_path = null;
             $model->edited_by = 'admin';
             $model->watch_count;
             $model->is_pay_per_view;
-            $model->type_of_user->default(0);
-            $model->type_of_subscription->default(0);
+            $model->type_of_user = 0;
+            $model->type_of_subscription = 0;
             $model->amount;
-            $model->video_type;
-            $model->video_upload_type;
-            $model->position;
+            $model->video_type = VIDEO_TYPE_UPLOAD;
+            $model->video_upload_type = VIDEO_UPLOAD_TYPE_DIRECT;
+            $model->position = 1;
 
             if ($tmdbVideo->hasData()) {
 
+                $imageUrl = $this->tmdbApi->getImageURL('w300');
+
                 $model->trailer_video = 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer();
-                $model->default_image = $this->tmdbApi->getImageURL('w300').$tmdbVideo->getPoster();
+                $model->default_image = $imageUrl.$tmdbVideo->getPoster();
             }
 
 
@@ -229,9 +225,45 @@ class TmdbVideoController extends Controller
                 $model->video_subtitle =  Helper::subtitle_upload($request->file('video_subtitle'));
             }
 
+            $model->save();
+
+            if ($tmdbVideo->hasData()) {
+
+                AdminVideoImage::firstOrCreate(
+                    ['admin_video_id' => $model->id],
+                    [
+                        'image' => isset($tmdbVideo->getPostersWithUrl($imageUrl, 1, 1)[0]) ? $tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0] : asset('images/default.png'),
+                        'is_default' => DEFAULT_FALSE,
+                        'position' => 2,
+                    ]
+                );
+
+                AdminVideoImage::firstOrCreate(
+                    ['admin_video_id' => $model->id],
+                    [
+                        'image' => isset($tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0]) ? $tmdbVideo->getPostersWithUrl($imageUrl, 1, 2)[0] : asset('images/default.png'),
+                        'is_default' => DEFAULT_FALSE,
+                        'position' => 2,
+                    ]
+                );
+            }
+
+
+            if($request->hasFile('other_image1')) {
+
+                Helper::upload_video_image($request->file('other_image1'),$model->id, $position = 2);
+
+            }
+
+            if($request->hasFile('other_image2')) {
+
+                Helper::upload_video_image($request->file('other_image2'),$model->id, $position = 3);
+
+            }
+
         DB::commit();
 
-        $response_array = ['success' => true, 'message' => tr('video_upload_success'), 'data' => $video_model];
+        $response_array = ['success' => true, 'message' => tr('video_upload_success'), 'data' => (object)['id' => $model->id]];
 
         return response()->json($response_array);
 
