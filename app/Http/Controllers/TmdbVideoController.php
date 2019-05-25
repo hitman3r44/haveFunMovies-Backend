@@ -158,7 +158,7 @@ class TmdbVideoController extends Controller
             $model->video_image_mobile = '';
             $model->banner_image = '';
             $model->is_banner = 0;
-            $model->ppv_created_by = '';
+            $model->ppv_created_by = Auth::user()->id;
             $model->watch_count = 0;
             $model->is_pay_per_view = 0;
             $model->redeem_amount = 0;
@@ -211,7 +211,8 @@ class TmdbVideoController extends Controller
 
                     Helper::s3_delete_picture($model->video);
                 }
-                $model->video = Helper::upload_file_to_s3($request->file('video'));
+                $main_video_details = Helper::video_upload($request->file('video'));
+                $model->video = $main_video_details['db_url'];
 
             }
 

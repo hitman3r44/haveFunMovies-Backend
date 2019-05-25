@@ -68,13 +68,12 @@
                     <div class="box-body">
 
                         {{--                        Hidden Fields--}}
-                        <input type="hidden" name="created_by" id="created_by" value="{{Auth::user()->id}}">
                         @if($tmdbVideo->hasData())
                             <input type="hidden" name="tmdb_video_id" id="tmdb_video_id"
                                    value="{{$tmdbVideo->getID()}}">
                         @endif
                         <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
-                        <input type="hidden" name="user_time_zone" value="" id="userTimezone">
+                        <input type="hidden" name="user_time_zone" value="" id="user_time_zone">
 
                         <div class="row">
                             <div class="col-md-8">
@@ -289,16 +288,26 @@
                                             class="btn btn-success pull-left">{{tr('add_video')}}</button>
                                 </div>
                                 <div class="col-md-6 col-md-offset-4">
-                                    <div class="layer w-100 mT-10">
-                                        <span id="percentage_digit"
-                                              class="pull-right c-grey-600 fsz-sm ml-2"> 0% </span>
-                                        <div class="progress mT-10">
-                                            <div class="progress-bar bgc-green-500" role="progressbar"
-                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width:0%">
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                   <div class="row">
+                                       <div class="progress mt-3" style="height: 15px; width:100%">
+                                           <div class="progress-bar bg-success" role="progressbar" style="width:0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                               <span id="percentage_digit">0%</span>
+                                           </div>
+                                       </div>
+                                   </div>
+
+
+                                    {{--<div class="layer w-100 mT-10">--}}
+                                        {{--<span id="percentage_digit"--}}
+                                              {{--class="pull-right c-grey-600 fsz-sm ml-2"> 0% </span>--}}
+                                        {{--<div class="progress mT-10">--}}
+                                            {{--<div class="progress-bar bgc-green-500" role="progressbar"--}}
+                                                 {{--aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"--}}
+                                                 {{--style="width:10%">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
                         </div>
@@ -427,7 +436,7 @@
                     console.log(position);
                     console.log(event);
                     var percentVal = percentComplete + '%';
-                    bar.width(percentComplete)
+                    bar.width(percentVal)
                     percent.html(percentVal);
                     if (percentComplete == 100) {
                         $("#finish_video").text("Video Uploading...");
@@ -453,7 +462,7 @@
                 },
                 error: function (xhr) {
 
-                    bar.width(0);
+                    bar.width("0%");
                     percent.html('0%');
 
                     $(".loader-form").fadeOut();
@@ -474,16 +483,19 @@
                     $("#finish_video").attr('disabled', false);
 
                     $(".loader-form").hide();
-                    console.log(xhr);
-                    if (xhr.response.success) {
-
-                        window.location.href = view_video_url + xhr.response.data.id;
+                    if (xhr.success === true) {
+                        window.location.href = view_video_url + xhr.data.id;
 
                     } else {
 
                         error = true;
 
-                        $("#error_messages_text").html(xhr.response.error_messages);
+                        var error_msg = xhr;
+
+                        if (typeof xhr.error_messages !== 'undefined') {
+                            error_msg = xhr.error_messages
+                        }
+                        $("#error_messages_text").html(error_msg);
 
                         $("#error_popup").click();
 
