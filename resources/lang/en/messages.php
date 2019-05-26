@@ -1468,5 +1468,18 @@ return array(
 
     'movies' => 'Movies',
     'add_movies' => 'Add Movies',
+
+    'add_generate_prepaid_code' => 'Sell Prepaid Code',
+    'generate_prepaid_code' => 'Sold Prepaid Code',
+    'edit_generate_prepaid_code' => 'Edit Sold Prepaid Code',
+
+    'prepaid_plan' => 'Prepaid Plan',
+    'customer' => 'Customer',
+    'sold_by' => 'Sold By',
+    'uuid' => 'UUID',
+
+
+    'sell_functionality' => 'Sell Functionality',
+    'sell_prepaid_code' => 'Sell Prepaid Code',
 );
 

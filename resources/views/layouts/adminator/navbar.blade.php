@@ -388,6 +388,29 @@
                 </ul>
             </li>
 
+
+            {{--            Sell Functionality--}}
+            <li class="nav-item dropdown" id="sell_functionality">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-indigo-500 fa fa-gift"></i>
+                    </span>
+                    <span class="title">{{tr('sell_functionality')}}</span> <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.generate-prepaid-code.create')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('sell_prepaid_code')}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             {{--            Redeems --}}
 {{--            @if(Setting::get('redeem_control'))--}}
 {{--                <li id="redeems" class="nav-item">--}}

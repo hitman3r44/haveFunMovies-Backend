@@ -60,7 +60,7 @@
         function buttonEnable(btnObj, btn_content) {
 
             btnObj.prop('disabled', false);
-            btn.html(btn_content);
+            btnObj.html(btn_content);
         }
 
 

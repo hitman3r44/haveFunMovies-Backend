@@ -57,6 +57,16 @@ class PrepaidCodeController extends Controller
         return redirect()->route('admin.prepaid-code.create')->with('success', 'Prepaid Code added!');
     }
 
+
+    /**
+     * Show the the specified resource.
+     */
+    public function show($id)
+    {
+        $prepaidcode = PrepaidCode::find($id);
+        return view('admin.prepaid-code.show', compact('prepaidcode'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
