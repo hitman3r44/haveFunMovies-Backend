@@ -42,14 +42,14 @@ class PrepaidCodeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'code' => 'required',
+			'title' => 'required',
 			'price' => 'required',
 		]);
 
         $prepaidCode = new PrepaidCode();
 
         $prepaidCode->price = $request->price;
-        $prepaidCode->code = $request->code;
+        $prepaidCode->title = $request->title;
         $prepaidCode->is_used = 0;
         $prepaidCode->is_paid = 0;
         $prepaidCode->save();

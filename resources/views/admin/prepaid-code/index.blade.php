@@ -52,7 +52,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Code</th>
+                                <th>Title</th>
                                 <th>Price</th>
                                 <th>Is Used</th>
                                 <th>Is Paid</th>
@@ -63,7 +63,7 @@
                             @foreach($prepaidcode as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->code }}</td>
+                                    <td>{{ $item->title }}</td>
                                     <td>{{ $item->price }}</td>
                                     <td>{{ ($item->is_used == 1) ? 'Yes' : 'No' }}</td>
                                     <td>{{ ($item->is_paid == 1) ? 'Yes' : 'No' }}</td>

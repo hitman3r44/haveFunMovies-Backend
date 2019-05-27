@@ -38,9 +38,9 @@
                         <div class="form-group row">
                             <label for="code" class="col-md-3 col-form-label">{{ 'Code' }}</label>
                             <div class="col-md-9">
-                                <div class="form-group">
-                                    <input class="form-control" name="code" type="text" id="code" value="{{ $uniqueId}}" required>
-                                    {!! $errors->first('code', '<small class="text-danger">:message</small>') !!}
+                                <div class="col-sm-10">
+                                    <input type="text" name="code" role="code" min="5" max="20" class="form-control" value="{{ old('title') }}" required placeholder="{{tr('enter_prepaid_title')}}">
+                                    {!! $errors->first('title', '<small class="text-danger">:message</small>') !!}
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <label for="price" class="col-md-3 col-form-label">{{ 'Price' }}</label>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input class="form-control" name="price" type="number" id="price" value=""
+                                    <input class="form-control" name="price" type="float" id="price" value=""
                                            required>
                                     {!! $errors->first('price', '<small class="text-danger">:message</small>') !!}
                                 </div>
@@ -58,7 +58,7 @@
 
                         <hr>
                         <div class="box-footer text-center">
-                            <input class="btn btn-fill btn-primary" type="submit" value="Generate">
+                            <input class="btn btn-fill btn-primary" type="submit" value="{{tr('submit')}}">
                         </div>
 
                     </div>

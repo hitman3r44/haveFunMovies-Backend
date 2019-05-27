@@ -26,7 +26,7 @@
                         <h4 class="card-title">
                             {{ tr('prepaid_code') }}
 
-                            <small class="category">Details of {{ $prepaidcode->code }}</small>
+                            <small class="category">Details of {{ $prepaidcode->title }}</small>
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <div class="btn-group">
@@ -48,8 +48,8 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th> Code</th>
-                                    <td> {{ $prepaidcode->code }} </td>
+                                    <th> Title</th>
+                                    <td> {{ $prepaidcode->title }} </td>
                                 </tr>
                                 <tr>
                                     <th> Price</th>

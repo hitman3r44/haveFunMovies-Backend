@@ -23,7 +23,7 @@
             <div class="bgc-white p-20 bd">
                 <div class="row bgc-grey-400 p-10">
                     <div class="col-8">
-                        <h6 class="c-grey-900"><b>{{tr('edit_prepaid_code')}} of {{$prepaidcode->code}}</b></h6>
+                        <h6 class="c-grey-900"><b>{{tr('edit_prepaid_code')}} of {{$prepaidcode->title}}</b></h6>
                     </div>
                     <div class="col-4">
                         <a href="{{route('admin.prepaid-code.create')}}"

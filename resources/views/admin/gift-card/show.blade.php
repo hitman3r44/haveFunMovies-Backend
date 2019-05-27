@@ -45,7 +45,7 @@
                             <div class="table-responsive col-md-8 offset-md-2">
                                 <table class="table">
                                     <tbody>
-                                        <tr><th> Code </th><td> {{ $giftcard->code }} </td></tr><tr><th> Price </th><td> {{ $giftcard->price }} </td></tr><tr><th> Is Used </th><td> {{ $giftcard->is_used }} </td></tr>
+                                        <tr><th> Title </th><td> {{ $giftcard->code }} </td></tr><tr><th> Price </th><td> {{ $giftcard->price }} </td></tr><tr><th> Is Used </th><td> {{ $giftcard->is_used }} </td></tr>
                                     </tbody>
                                 </table>
                             </div>

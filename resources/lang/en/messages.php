@@ -1102,6 +1102,12 @@ return array(
     'is_expired'=>'Expiration Status',
     'n/a'=>'N/A',
 
+	// Per-Paid Functionality
+    'enter_prepaid_title'=>'Enter Prepaid Title',
+
+	// Gift Card
+    'enter_gift_card_title'=>'Enter Gift Card Title',
+
 	//Coupons
 	'coupon'=>'Coupon',
 	'coupons'=>'Coupons',
