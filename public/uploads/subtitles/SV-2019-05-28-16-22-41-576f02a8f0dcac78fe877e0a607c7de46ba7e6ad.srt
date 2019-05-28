@@ -1,0 +1,44 @@
+1
+00:00:00.05 --> 00:00:01.09
+- [Instructor] I expect
+you to have knowledge
+
+2
+00:00:01.09 --> 00:00:06.00
+of the following, intermediate level Java,
+
+3
+00:00:06.00 --> 00:00:09.08
+the Spring framework, Spring
+Boot and Spring Data JPA
+
+4
+00:00:09.08 --> 00:00:12.02
+for relational databases,
+
+5
+00:00:12.02 --> 00:00:16.04
+spring Data REST, and Spring MVC.
+
+6
+00:00:16.04 --> 00:00:18.04
+We will build applications with Maven
+
+7
+00:00:18.04 --> 00:00:23.01
+and employ Postman to
+exercise RESTful APIs.
+
+8
+00:00:23.01 --> 00:00:25.00
+My course, Creating Your First
+
+9
+00:00:25.00 --> 00:00:27.02
+Spring Boot Microservice with JPA,
+
+10
+00:00:27.02 --> 00:00:29.05
+can help you achieve
+this knowledge if needed.
+
