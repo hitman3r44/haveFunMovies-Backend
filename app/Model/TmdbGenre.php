@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class TmdbGenre extends Model
 {
+    public function adminVideo()
+    {
+        return $this->hasMany(AdminVideo::class);
+    }
 
     public static function boot() {
         parent::boot();

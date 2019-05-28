@@ -105,7 +105,7 @@
                                 {{--                        sub_category--}}
                                 <div class="form-group">
                                     <label for="sub_category_id" class="control-label">
-                                        * {{tr('sub_category')}}/{{tr('genre')}} {{ $model->genre_id }}</label>
+                                        * {{tr('sub_category')}}/{{tr('genre')}} </label>
                                     <div class="col-sm-12">
                                         <select name="sub_category_id" class="form-control input-md select2"
                                                 id="sub_category_id" required>
