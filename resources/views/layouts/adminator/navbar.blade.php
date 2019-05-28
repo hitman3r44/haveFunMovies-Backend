@@ -322,7 +322,7 @@
                                 <span class="icon-holder">
                                     <i class="c-light-blue-500 fa fa-circle-o"></i>
                                 </span>
-                            <span class="title">{{tr('credit_money')}}</span>
+                            <span class="title">{{tr('view_credit_money')}}</span>
                         </a>
                     </li>
                 </ul>

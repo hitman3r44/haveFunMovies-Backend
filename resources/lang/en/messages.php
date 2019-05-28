@@ -1461,6 +1461,7 @@ return array(
 	'notification_will_update'=>'You will receive notifications about Video Sections',
 	'notification_will_not_update'=>'Your Notifications will be blocked, based on your concern',
     'credit_money' => 'Credit Money',
+    'view_credit_money' => 'View Credit Money',
     'add_credit_money' => 'Add Credit Money',
     'edit_credit_money' => 'Edit Credit Money',
 
