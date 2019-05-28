@@ -10,18 +10,19 @@
         </div>
         <div class="col-md-7">
 
-            <button type="button" class="btn  btn-danger" data-toggle="popover" title="{{tr('paypal')}} | {{tr('stripe')}} " data-html="true"
-                    data-content="<b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}<br>
-                            <b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target='_blank' href='https://stripe.com/docs/currencies'>{{tr('check_references')}}</a>">{{tr('help_ques_mark')}} </button>
+            {{--            <button type="button" class="btn  btn-danger" data-toggle="popover" title="{{tr('paypal')}} | {{tr('stripe')}} " data-html="true"--}}
+            {{--                    data-content="<b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}<br>--}}
+            {{--                            <b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target='_blank' href='https://stripe.com/docs/currencies'>{{tr('check_references')}}</a>">{{tr('help_ques_mark')}} --}}
+            {{--            </button>--}}
 
             {{--<a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"--}}
-               {{--title="">{{tr('help_ques_mark')}}</a>--}}
+            {{--title="">{{tr('help_ques_mark')}}</a>--}}
             {{--<div id="help-content" style="display: none">--}}
-                {{--<ul class="popover-list">--}}
-                    {{--<li><b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}</li>--}}
-                    {{--<li><b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target="_blank" href="https://stripe.com/docs/currencies">{{tr('check_references')}}</a>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
+            {{--<ul class="popover-list">--}}
+            {{--<li><b>{{tr('paypal')}}- </b>{{tr('minimum_accepted_amount_01')}}</li>--}}
+            {{--<li><b>{{tr('stripe')}}- </b>{{tr('minimum_accepted_amount')}}<br> <a target="_blank" href="https://stripe.com/docs/currencies">{{tr('check_references')}}</a>--}}
+            {{--</li>--}}
+            {{--</ul>--}}
             {{--</div>--}}
         </div>
     </div>
@@ -149,10 +150,10 @@
 
                             {{tr('site_settings')}}
                         </a>
-                        <a href="#" class="list-group-item text-left">
-                            <!-- <h4 class="glyphicon glyphicon-road"></h4><br/> -->
-                            {{tr('video_settings')}}
-                        </a>
+                        {{--                        <a href="#" class="list-group-item text-left">--}}
+                        {{--                            <!-- <h4 class="glyphicon glyphicon-road"></h4><br/> -->--}}
+                        {{--                            {{tr('video_settings')}}--}}
+                        {{--                        </a>--}}
                         <a href="#" class="list-group-item text-left">
                             <!-- <h4 class="glyphicon glyphicon-home"></h4><br/> -->
 
@@ -181,11 +182,11 @@
                             {{tr('site_url_settings')}}
                         </a>
 
-                        <a href="#" class="list-group-item text-left">
-                            <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
+{{--                        <a href="#" class="list-group-item text-left">--}}
+{{--                            <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->--}}
 
-                            {{tr('mobile_settings')}}
-                        </a>
+{{--                            {{tr('mobile_settings')}}--}}
+{{--                        </a>--}}
 
                         <a href="#" class="list-group-item text-left">
                             <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
@@ -193,11 +194,11 @@
                             {{tr('seo_settings')}}
                         </a>
 
-                        <a href="#" class="list-group-item text-left">
-                            <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
+{{--                        <a href="#" class="list-group-item text-left">--}}
+{{--                            <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->--}}
 
-                            {{tr('other_settings')}}
-                        </a>
+{{--                            {{tr('other_settings')}}--}}
+{{--                        </a>--}}
 
                     </div>
 
@@ -209,8 +210,9 @@
 
                     <div class="tab-content streamview-tab-content active">
 
-                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form
+                            action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
+                            method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -299,7 +301,8 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-primary text-white pull-right">{{tr('submit')}}</button>
+                                    <button type="submit"
+                                            class="btn bg-primary text-white pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
 
@@ -307,162 +310,162 @@
 
                     </div>
 
-                    <!-- train section -->
+                {{--                    <!-- train section -->--}}
+                {{--                    <div class="streamview-tab-content">--}}
+
+                {{--                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"--}}
+                {{--                              method="POST" enctype="multipart/form-data" role="form">--}}
+                {{--                            @csrf--}}
+                {{--                            <div class="box-body">--}}
+
+                {{--                                <div class="row">--}}
+
+                {{--                                    <div class="col-md-12">--}}
+
+                {{--                                        <h3 class="settings-sub-header text-uppercase"><b>{{tr('video_settings')}}</b>--}}
+                {{--                                        </h3>--}}
+
+                {{--                                        <hr>--}}
+
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-md-12">--}}
+
+                {{--                                        <h5 class="sub-title">{{tr('player_configuration')}}</h5>--}}
+
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+
+                {{--                                            <label for="JWPLAYER_KEY">{{tr('jwplayer_key')}}</label>--}}
+
+                {{--                                            <input type="text" value="{{ Setting::get('JWPLAYER_KEY')}}"--}}
+                {{--                                                   class="form-control" name="JWPLAYER_KEY" id="JWPLAYER_KEY"--}}
+                {{--                                                   placeholder="{{tr('jwplayer_key')}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+
+                {{--                                            <label for="socket_url">{{tr('socket_url')}}</label>--}}
+
+                {{--                                            <input type="text" value="{{ Setting::get('socket_url')}}"--}}
+                {{--                                                   class="form-control" name="socket_url" id="socket_url"--}}
+                {{--                                                   placeholder="{{tr('socket_url')}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-md-12">--}}
+
+                {{--                                        <h5 class="sub-title">{{tr('streaming_configuration')}}</h5>--}}
+
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+
+                {{--                                            <label for="streaming_url">{{tr('streaming_url')}}</label>--}}
+
+                {{--                                            <br>--}}
+
+                {{--                                            <p class="example-note">{{tr('rtmp_settings_note')}}</p>--}}
+
+                {{--                                            <input type="text" value="{{ Setting::get('streaming_url')}}"--}}
+                {{--                                                   class="form-control" name="streaming_url" id="streaming_url"--}}
+                {{--                                                   placeholder="{{tr('enter_streaming_url')}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+                {{--                                            <label for="HLS_STREAMING_URL">{{tr('HLS_STREAMING_URL')}}</label>--}}
+
+                {{--                                            <br>--}}
+
+                {{--                                            <p class="example-note">{{tr('hls_settings_note')}}</p>--}}
+
+                {{--                                            <input type="text" value="{{ Setting::get('HLS_STREAMING_URL')}}"--}}
+                {{--                                                   class="form-control" name="HLS_STREAMING_URL" id="HLS_STREAMING_URL"--}}
+                {{--                                                   placeholder="{{tr('enter_streaming_url')}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-md-12">--}}
+
+                {{--                                        <h5 class="sub-title">{{tr('s3_settings')}}</h5>--}}
+
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+                {{--                                            <label for="s3_key">{{tr('S3_KEY')}}</label>--}}
+                {{--                                            <input type="text" class="form-control" name="S3_KEY" id="s3_key"--}}
+                {{--                                                   placeholder="{{tr('S3_KEY')}}" value="{{$result['S3_KEY']}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+                {{--                                            <label for="s3_secret">{{tr('S3_SECRET')}}</label>--}}
+                {{--                                            <input type="text" class="form-control" name="S3_SECRET" id="s3_secret"--}}
+                {{--                                                   placeholder="{{tr('S3_SECRET')}}" value="{{$result['S3_SECRET']}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+                {{--                                            <label for="s3_region">{{tr('S3_REGION')}}</label>--}}
+                {{--                                            <input type="text" class="form-control" name="S3_REGION" id="s3_region"--}}
+                {{--                                                   placeholder="{{tr('S3_REGION')}}" value="{{$result['S3_REGION']}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+                {{--                                            <label for="s3_bucket">{{tr('S3_BUCKET')}}</label>--}}
+                {{--                                            <input type="text" class="form-control" name="S3_BUCKET" id="s3_bucket"--}}
+                {{--                                                   placeholder="{{tr('S3_BUCKET')}}" value="{{$result['S3_BUCKET']}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+                {{--                                    <div class="col-lg-6">--}}
+                {{--                                        <div class="form-group">--}}
+                {{--                                            <label for="s3_ses_region">{{tr('S3_SES_REGION')}}</label>--}}
+                {{--                                            <input type="text" class="form-control" name="S3_SES_REGION"--}}
+                {{--                                                   id="s3_ses_region" placeholder="{{tr('S3_SES_REGION')}}"--}}
+                {{--                                                   value="{{$result['S3_SES_REGION']}}">--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+
+
+                {{--                                </div>--}}
+
+                {{--                            </div>--}}
+
+                {{--                            <div class="box-footer">--}}
+
+                {{--                                <button type="reset" class="btn btn-warning">{{tr('reset')}}</button>--}}
+
+                {{--                                @if(Setting::get('admin_delete_control') == 1)--}}
+                {{--                                    <button type="submit" class="btn btn-primary pull-right"--}}
+                {{--                                            disabled>{{tr('submit')}}</button>--}}
+                {{--                                @else--}}
+                {{--                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>--}}
+                {{--                                @endif--}}
+                {{--                            </div>--}}
+
+                {{--                        </form>--}}
+                {{--                    </div>--}}
+
+                <!-- Revenue settings -->
+
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-                            @csrf
-                            <div class="box-body">
-
-                                <div class="row">
-
-                                    <div class="col-md-12">
-
-                                        <h3 class="settings-sub-header text-uppercase"><b>{{tr('video_settings')}}</b>
-                                        </h3>
-
-                                        <hr>
-
-                                    </div>
-
-                                    <div class="col-md-12">
-
-                                        <h5 class="sub-title">{{tr('player_configuration')}}</h5>
-
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-
-                                            <label for="JWPLAYER_KEY">{{tr('jwplayer_key')}}</label>
-
-                                            <input type="text" value="{{ Setting::get('JWPLAYER_KEY')}}"
-                                                   class="form-control" name="JWPLAYER_KEY" id="JWPLAYER_KEY"
-                                                   placeholder="{{tr('jwplayer_key')}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-
-                                            <label for="socket_url">{{tr('socket_url')}}</label>
-
-                                            <input type="text" value="{{ Setting::get('socket_url')}}"
-                                                   class="form-control" name="socket_url" id="socket_url"
-                                                   placeholder="{{tr('socket_url')}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-
-                                        <h5 class="sub-title">{{tr('streaming_configuration')}}</h5>
-
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-
-                                            <label for="streaming_url">{{tr('streaming_url')}}</label>
-
-                                            <br>
-
-                                            <p class="example-note">{{tr('rtmp_settings_note')}}</p>
-
-                                            <input type="text" value="{{ Setting::get('streaming_url')}}"
-                                                   class="form-control" name="streaming_url" id="streaming_url"
-                                                   placeholder="{{tr('enter_streaming_url')}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="HLS_STREAMING_URL">{{tr('HLS_STREAMING_URL')}}</label>
-
-                                            <br>
-
-                                            <p class="example-note">{{tr('hls_settings_note')}}</p>
-
-                                            <input type="text" value="{{ Setting::get('HLS_STREAMING_URL')}}"
-                                                   class="form-control" name="HLS_STREAMING_URL" id="HLS_STREAMING_URL"
-                                                   placeholder="{{tr('enter_streaming_url')}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-
-                                        <h5 class="sub-title">{{tr('s3_settings')}}</h5>
-
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="s3_key">{{tr('S3_KEY')}}</label>
-                                            <input type="text" class="form-control" name="S3_KEY" id="s3_key"
-                                                   placeholder="{{tr('S3_KEY')}}" value="{{$result['S3_KEY']}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="s3_secret">{{tr('S3_SECRET')}}</label>
-                                            <input type="text" class="form-control" name="S3_SECRET" id="s3_secret"
-                                                   placeholder="{{tr('S3_SECRET')}}" value="{{$result['S3_SECRET']}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="s3_region">{{tr('S3_REGION')}}</label>
-                                            <input type="text" class="form-control" name="S3_REGION" id="s3_region"
-                                                   placeholder="{{tr('S3_REGION')}}" value="{{$result['S3_REGION']}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="s3_bucket">{{tr('S3_BUCKET')}}</label>
-                                            <input type="text" class="form-control" name="S3_BUCKET" id="s3_bucket"
-                                                   placeholder="{{tr('S3_BUCKET')}}" value="{{$result['S3_BUCKET']}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="s3_ses_region">{{tr('S3_SES_REGION')}}</label>
-                                            <input type="text" class="form-control" name="S3_SES_REGION"
-                                                   id="s3_ses_region" placeholder="{{tr('S3_SES_REGION')}}"
-                                                   value="{{$result['S3_SES_REGION']}}">
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-
-                            <div class="box-footer">
-
-                                <button type="reset" class="btn btn-warning">{{tr('reset')}}</button>
-
-                                @if(Setting::get('admin_delete_control') == 1)
-                                    <button type="submit" class="btn btn-primary pull-right"
-                                            disabled>{{tr('submit')}}</button>
-                                @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
-                                @endif
-                            </div>
-
-                        </form>
-
-                    </div>
-
-                    <!-- Revenue settings -->
-
-                    <div class="streamview-tab-content">
-
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form
+                            action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                            method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -476,38 +479,40 @@
                                         <hr>
 
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
 
-                                            <label for="video_viewer_count">{{tr('video_viewer_count_size_label')}}</label>
+                                    {{--                                    <div class="col-md-12">--}}
+                                    {{--                                        <div class="form-group">--}}
 
-                                            <br>
+                                    {{--                                            <label for="video_viewer_count">{{tr('video_viewer_count_size_label')}}</label>--}}
 
-                                            <p class="example-note">{{tr('video_viewer_count_size_label_note')}}</p>
+                                    {{--                                            <br>--}}
 
-                                            <input type="text" class="form-control" name="video_viewer_count"
-                                                   value="{{Setting::get('video_viewer_count')  }}"
-                                                   id="video_viewer_count"
-                                                   placeholder="{{tr('video_viewer_count_size_label')}}">
-                                        </div>
-                                    </div>
+                                    {{--                                            <p class="example-note">{{tr('video_viewer_count_size_label_note')}}</p>--}}
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="upload_max_size">{{tr('amount_per_video')}}</label>
+                                    {{--                                            <input type="text" class="form-control" name="video_viewer_count"--}}
+                                    {{--                                                   value="{{Setting::get('video_viewer_count')  }}"--}}
+                                    {{--                                                   id="video_viewer_count"--}}
+                                    {{--                                                   placeholder="{{tr('video_viewer_count_size_label')}}">--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
 
-                                            <br>
+                                    {{--                                    <div class="col-md-12">--}}
+                                    {{--                                        <div class="form-group">--}}
+                                    {{--                                            <label for="upload_max_size">{{tr('amount_per_video')}}</label>--}}
 
-                                            <p class="example-note">{{tr('amount_per_video_note')}}</p>
+                                    {{--                                            <br>--}}
 
-                                            <input type="text" class="form-control" name="amount_per_video"
-                                                   value="{{Setting::get('amount_per_video')  }}" min="0.5"
-                                                   id="amount_per_video" placeholder="{{tr('amount_per_video')}}">
+                                    {{--                                            <p class="example-note">{{tr('amount_per_video_note')}}</p>--}}
 
-                                        </div>
-                                    </div>
+                                    {{--                                            <input type="text" class="form-control" name="amount_per_video"--}}
+                                    {{--                                                   value="{{Setting::get('amount_per_video')  }}" min="0.5"--}}
+                                    {{--                                                   id="amount_per_video" placeholder="{{tr('amount_per_video')}}">--}}
+
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
 
                                     <div class="col-md-6">
+                                        {{--                                        Admin Commission--}}
                                         <div class="form-group">
 
                                             <label for="admin_commission">{{tr('admin_commission')}}</label>
@@ -517,15 +522,42 @@
                                                    placeholder="{{tr('admin_commission')}}">
                                         </div>
                                     </div>
-
+                                    {{--                                        Retailer Commission--}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="user_commission">{{tr('moderator_commission')}}</label>
-                                            <input type="text" class="form-control" name="user_commission"
-                                                   value="{{Setting::get('user_commission')  }}" id="user_commission"
-                                                   placeholder="{{tr('moderator_commission')}}">
+
+                                            <label for="admin_commission">{{tr('retailer_commission')}}</label>
+
+                                            <input type="text" class="form-control" name="retailer_commission"
+                                                   value="{{Setting::get('retailer_commission')}}"
+                                                   id="retailer_commission"
+                                                   placeholder="{{tr('retailer_commission')}}">
                                         </div>
                                     </div>
+
+                                    {{--                                        Director Commission--}}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <label for="admin_commission">{{tr('director_commission')}}</label>
+
+                                            <input type="text" class="form-control" name="director_commission"
+                                                   value="{{Setting::get('director_commission')}}"
+                                                   id="director_commission"
+                                                   placeholder="{{tr('director_commission')}}">
+                                        </div>
+                                    </div>
+
+                                    {{--                                    --}}{{--                                        Modarator Commission--}}
+                                    {{--                                    <div class="col-md-6">--}}
+                                    {{--                                        <div class="form-group">--}}
+                                    {{--                                            <label for="user_commission">{{tr('moderator_commission')}}</label>--}}
+                                    {{--                                            <input type="text" class="form-control" name="user_commission"--}}
+                                    {{--                                                   value="{{Setting::get('user_commission')  }}" id="user_commission"--}}
+                                    {{--                                                   placeholder="{{tr('moderator_commission')}}">--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
+
                                     <div class="clearfix"></div>
 
                                 </div>
@@ -540,7 +572,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
 
@@ -553,8 +585,9 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form
+                            action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                            method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -568,7 +601,7 @@
                                         <hr>
 
                                     </div>
-
+                                    {{--Facebook Settings--}}
                                     <div class="col-md-12">
 
                                         <h5 class="sub-title">{{tr('fb_settings')}}</h5>
@@ -600,30 +633,39 @@
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
-                                <!-- <div class="col-md-12">
+                                    {{--Twitter Settings--}}
+                                    <div class="col-md-12">
 
-                                <h5 class="sub-title" >{{tr('twitter_settings')}}</h5>
+                                        <h5 class="sub-title">{{tr('twitter_settings')}}</h5>
 
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="twitter_client_id">{{tr('TWITTER_CLIENT_ID')}}</label>
-                                    <input type="text" class="form-control" name="TWITTER_CLIENT_ID" id="twitter_client_id" placeholder="{{tr('TWITTER_CLIENT_ID')}}" value="{{$result['TWITTER_CLIENT_ID']}}">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="twitter_client_secret">{{tr('TWITTER_CLIENT_SECRET')}}</label>    
-                                    <input type="text" class="form-control" name="TWITTER_CLIENT_SECRET" id="twitter_client_secret" placeholder="{{tr('TWITTER_CLIENT_SECRET')}}" value="{{$result['TWITTER_CLIENT_SECRET']}}">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="twitter_call_back">{{tr('TWITTER_CALL_BACK')}}</label>    
-                                    <input type="text" class="form-control" name="TWITTER_CALL_BACK" id="twitter_call_back" placeholder="{{tr('TWITTER_CALL_BACK')}}" value="{{$result['TWITTER_CALL_BACK']}}">
-                                </div>
-                            </div>
-                            <div class="clearfix"></div> -->
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="twitter_client_id">{{tr('TWITTER_CLIENT_ID')}}</label>
+                                            <input type="text" class="form-control" name="TWITTER_CLIENT_ID"
+                                                   id="twitter_client_id" placeholder="{{tr('TWITTER_CLIENT_ID')}}"
+                                                   value="{{$result['TWITTER_CLIENT_ID']}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="twitter_client_secret">{{tr('TWITTER_CLIENT_SECRET')}}</label>
+                                            <input type="text" class="form-control" name="TWITTER_CLIENT_SECRET"
+                                                   id="twitter_client_secret"
+                                                   placeholder="{{tr('TWITTER_CLIENT_SECRET')}}"
+                                                   value="{{$result['TWITTER_CLIENT_SECRET']}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="twitter_call_back">{{tr('TWITTER_CALL_BACK')}}</label>
+                                            <input type="text" class="form-control" name="TWITTER_CALL_BACK"
+                                                   id="twitter_call_back" placeholder="{{tr('TWITTER_CALL_BACK')}}"
+                                                   value="{{$result['TWITTER_CALL_BACK']}}">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    {{--Google Settings--}}
                                     <div class="col-md-12">
 
                                         <h5 class="sub-title">{{tr('google_settings')}}</h5>
@@ -668,7 +710,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
 
@@ -679,8 +721,9 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form
+                            action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                            method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -763,7 +806,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
                         </form>
@@ -874,7 +917,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>
                                 @endif
 
                             </div>
@@ -886,8 +929,9 @@
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form
+                            action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.common-settings')}}"
+                            method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
                                 <div class="row">
@@ -967,7 +1011,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
                         </form>
@@ -975,108 +1019,110 @@
 
                     <!-- APP Url Settings -->
 
-                    <div class="streamview-tab-content">
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.mobile.settings.save')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
-                            @csrf
-                            <div class="box-body">
+{{--                    <div class="streamview-tab-content">--}}
+{{--                        <form--}}
+{{--                            action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.mobile.settings.save')}}"--}}
+{{--                            method="POST" enctype="multipart/form-data" role="form">--}}
+{{--                            @csrf--}}
+{{--                            <div class="box-body">--}}
 
-                                <div class="row">
+{{--                                <div class="row">--}}
 
-                                    <div class="col-md-12">
+{{--                                    <div class="col-md-12">--}}
 
-                                        <h3 class="settings-sub-header text-uppercase"><b>{{tr('mobile_settings')}}</b>
-                                        </h3>
+{{--                                        <h3 class="settings-sub-header text-uppercase"><b>{{tr('mobile_settings')}}</b>--}}
+{{--                                        </h3>--}}
 
-                                        <hr>
+{{--                                        <hr>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <div class="col-md-12">
+{{--                                    <div class="col-md-12">--}}
 
-                                        <h5 class="sub-title">{{tr('fcm_settings')}}</h5>
+{{--                                        <h5 class="sub-title">{{tr('fcm_settings')}}</h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <div class="form-group">--}}
 
-                                            <label for="FCM_SERVER_KEY">{{tr('FCM_SERVER_KEY')}}</label>
+{{--                                            <label for="FCM_SERVER_KEY">{{tr('FCM_SERVER_KEY')}}</label>--}}
 
-                                            <input type="text" class="form-control" name="FCM_SERVER_KEY"
-                                                   id="FCM_SERVER_KEY"
-                                                   value="{{envfile('FCM_SERVER_KEY')}}"
-                                                   placeholder="{{tr('FCM_SERVER_KEY')}}">
-                                        </div>
-                                    </div>
+{{--                                            <input type="text" class="form-control" name="FCM_SERVER_KEY"--}}
+{{--                                                   id="FCM_SERVER_KEY"--}}
+{{--                                                   value="{{envfile('FCM_SERVER_KEY')}}"--}}
+{{--                                                   placeholder="{{tr('FCM_SERVER_KEY')}}">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <div class="form-group">--}}
 
-                                            <label for="FCM_SENDER_ID">{{tr('FCM_SENDER_ID')}}</label>
+{{--                                            <label for="FCM_SENDER_ID">{{tr('FCM_SENDER_ID')}}</label>--}}
 
-                                            <input type="text" class="form-control" name="FCM_SENDER_ID"
-                                                   id="FCM_SENDER_ID"
-                                                   value="{{envfile('FCM_SENDER_ID')}}"
-                                                   placeholder="{{tr('FCM_SENDER_ID')}}">
-                                        </div>
-                                    </div>
+{{--                                            <input type="text" class="form-control" name="FCM_SENDER_ID"--}}
+{{--                                                   id="FCM_SENDER_ID"--}}
+{{--                                                   value="{{envfile('FCM_SENDER_ID')}}"--}}
+{{--                                                   placeholder="{{tr('FCM_SENDER_ID')}}">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
 
-                                    <div class="col-md-12">
+{{--                                    <div class="col-md-12">--}}
 
-                                        <h5 class="sub-title">{{tr('app_url_settings')}}</h5>
+{{--                                        <h5 class="sub-title">{{tr('app_url_settings')}}</h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <div class="col-md-6">
+{{--                                    <div class="col-md-6">--}}
 
-                                        <div class="form-group">
+{{--                                        <div class="form-group">--}}
 
-                                            <label for="appstore">{{tr('appstore')}}</label>
+{{--                                            <label for="appstore">{{tr('appstore')}}</label>--}}
 
-                                            <input type="url" class="form-control" name="appstore" id="appstore"
-                                                   value="{{Setting::get('appstore')}}"
-                                                   placeholder="{{tr('appstore')}}">
+{{--                                            <input type="url" class="form-control" name="appstore" id="appstore"--}}
+{{--                                                   value="{{Setting::get('appstore')}}"--}}
+{{--                                                   placeholder="{{tr('appstore')}}">--}}
 
-                                        </div>
-                                    </div>
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="playstore">{{tr('playstore')}}</label>
+{{--                                    <div class="col-md-6">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="playstore">{{tr('playstore')}}</label>--}}
 
-                                            <input type="url" class="form-control" name="playstore"
-                                                   value="{{Setting::get('playstore')  }}" id="playstore"
-                                                   placeholder="{{tr('playstore')}}">
+{{--                                            <input type="url" class="form-control" name="playstore"--}}
+{{--                                                   value="{{Setting::get('playstore')  }}" id="playstore"--}}
+{{--                                                   placeholder="{{tr('playstore')}}">--}}
 
-                                        </div>
-                                    </div>
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                            </div>
+{{--                            </div>--}}
 
-                            <div class="box-footer">
+{{--                            <div class="box-footer">--}}
 
-                                <button type="reset" class="btn btn-warning">{{tr('reset')}}</button>
+{{--                                <button type="reset" class="btn btn-warning">{{tr('reset')}}</button>--}}
 
-                                @if(Setting::get('admin_delete_control') == 1)
-                                    <button type="submit" class="btn btn-primary pull-right"
-                                            disabled>{{tr('submit')}}</button>
-                                @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
-                                @endif
-                            </div>
-                        </form>
-                    </div>
+{{--                                @if(Setting::get('admin_delete_control') == 1)--}}
+{{--                                    <button type="submit" class="btn btn-primary pull-right"--}}
+{{--                                            disabled>{{tr('submit')}}</button>--}}
+{{--                                @else--}}
+{{--                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
 
                     <!-- SEO Settings -->
 
                     <div class="streamview-tab-content">
 
-                        <form action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
-                              method="POST" enctype="multipart/form-data" role="form">
+                        <form
+                            action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.settings')}}"
+                            method="POST" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="box-body">
 
@@ -1146,7 +1192,7 @@
                                     <button type="submit" class="btn btn-primary pull-right"
                                             disabled>{{tr('submit')}}</button>
                                 @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
+                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>
                                 @endif
                             </div>
 
@@ -1155,107 +1201,109 @@
 
                     <!-- OTHER Settings -->
 
-                    <div class="streamview-tab-content">
-                        <form action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.other.settings.save')}}"
-                              method="POST" enctype="multipart/form-data" r ole="form">
+{{--                    <div class="streamview-tab-content">--}}
+{{--                        <form--}}
+{{--                            action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.other.settings.save')}}"--}}
+{{--                            method="POST" enctype="multipart/form-data" r ole="form">--}}
 
-                            @csrf
-                            <div class="box-body">
-                                <div class="row">
+{{--                            @csrf--}}
+{{--                            <div class="box-body">--}}
+{{--                                <div class="row">--}}
 
-                                    <div class="col-md-12">
+{{--                                    <div class="col-md-12">--}}
 
-                                        <h3 class="settings-sub-header text-uppercase"><b>{{tr('other_settings')}}</b>
-                                        </h3>
+{{--                                        <h3 class="settings-sub-header text-uppercase"><b>{{tr('other_settings')}}</b>--}}
+{{--                                        </h3>--}}
 
-                                        <hr>
+{{--                                        <hr>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <div class="col-lg-12">
+{{--                                    <div class="col-lg-12">--}}
 
-                                        <div class="form-group">
-                                            <label for="google_analytics">{{tr('google_analytics')}}</label>
-                                            <textarea class="form-control" id="google_analytics"
-                                                      name="google_analytics">{{Setting::get('google_analytics')}}</textarea>
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="google_analytics">{{tr('google_analytics')}}</label>--}}
+{{--                                            <textarea class="form-control" id="google_analytics"--}}
+{{--                                                      name="google_analytics">{{Setting::get('google_analytics')}}</textarea>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <div class="col-lg-12">
+{{--                                    <div class="col-lg-12">--}}
 
-                                        <div class="form-group">
-                                            <label for="header_scripts">{{tr('header_scripts')}}</label>
-                                            <textarea class="form-control" id="header_scripts"
-                                                      name="header_scripts">{{Setting::get('header_scripts')}}</textarea>
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="header_scripts">{{tr('header_scripts')}}</label>--}}
+{{--                                            <textarea class="form-control" id="header_scripts"--}}
+{{--                                                      name="header_scripts">{{Setting::get('header_scripts')}}</textarea>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <div class="col-lg-12">
+{{--                                    <div class="col-lg-12">--}}
 
-                                        <div class="form-group">
-                                            <label for="body_scripts">{{tr('body_scripts')}}</label>
-                                            <textarea class="form-control" id="body_scripts"
-                                                      name="body_scripts">{{Setting::get('body_scripts')}}</textarea>
-                                        </div>
-                                    </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label for="body_scripts">{{tr('body_scripts')}}</label>--}}
+{{--                                            <textarea class="form-control" id="body_scripts"--}}
+{{--                                                      name="body_scripts">{{Setting::get('body_scripts')}}</textarea>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="col-lg-12">
+{{--                                    <div class="col-lg-12">--}}
 
-                                        <div class="form-group">
+{{--                                        <div class="form-group">--}}
 
-                                            <label for="email_notification">{{tr('email_notification')}}</label>
-                                            <div class="clearfix"></div>
+{{--                                            <label for="email_notification">{{tr('email_notification')}}</label>--}}
+{{--                                            <div class="clearfix"></div>--}}
 
-                                            <input type="checkbox" name="email_notification" value="1"
-                                                   id="email_notification"
-                                                   @if(Setting::get('email_notification')) checked @endif>{{tr('enable_email_notification_to_user')}}
-                                        </div>
+{{--                                            <input type="checkbox" name="email_notification" value="1"--}}
+{{--                                                   id="email_notification"--}}
+{{--                                                   @if(Setting::get('email_notification')) checked @endif>{{tr('enable_email_notification_to_user')}}--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    @if(Setting::get('admin_language_control') == 0)
+{{--                                    @if(Setting::get('admin_language_control') == 0)--}}
 
-                                        <div class="col-lg-4">
+{{--                                        <div class="col-lg-4">--}}
 
-                                            <div class="form-group">
-                                                <label for="default_lang">{{tr('default_lang')}}</label>
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="default_lang">{{tr('default_lang')}}</label>--}}
 
-                                                <select class="form-control select2" name="default_lang"
-                                                        id="default_lang" required>
+{{--                                                <select class="form-control select2" name="default_lang"--}}
+{{--                                                        id="default_lang" required>--}}
 
-                                                    <option value="">{{tr('language')}}</option>
-                                                    @foreach($languages as $h => $language)
-                                                        <option value="{{$language->folder_name}}" {{(Setting::get('default_lang') == $language->folder_name) ? 'selected' : Setting::get('default_lang')}}>{{$language->language}}
-                                                            ({{$language->folder_name}})
-                                                        </option>
-                                                    @endforeach
+{{--                                                    <option value="">{{tr('language')}}</option>--}}
+{{--                                                    @foreach($languages as $h => $language)--}}
+{{--                                                        <option--}}
+{{--                                                            value="{{$language->folder_name}}" {{(Setting::get('default_lang') == $language->folder_name) ? 'selected' : Setting::get('default_lang')}}>{{$language->language}}--}}
+{{--                                                            ({{$language->folder_name}})--}}
+{{--                                                        </option>--}}
+{{--                                                    @endforeach--}}
 
-                                                </select>
-                                            </div>
+{{--                                                </select>--}}
+{{--                                            </div>--}}
 
-                                        </div>
+{{--                                        </div>--}}
 
-                                    @endif
+{{--                                    @endif--}}
 
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <!-- /.box-body -->--}}
 
-                            <div class="box-footer">
+{{--                            <div class="box-footer">--}}
 
-                                <button type="reset" class="btn btn-warning">{{tr('reset')}}</button>
+{{--                                <button type="reset" class="btn btn-warning">{{tr('reset')}}</button>--}}
 
-                                @if(Setting::get('admin_delete_control') == 1)
-                                    <button type="submit" class="btn btn-primary pull-right"
-                                            disabled>{{tr('submit')}}</button>
-                                @else
-                                    <button type="submit" class="btn bg-blue pull-right">{{tr('submit')}}</button>
-                                @endif
-                            </div>
-                        </form>
-                    </div>
+{{--                                @if(Setting::get('admin_delete_control') == 1)--}}
+{{--                                    <button type="submit" class="btn btn-primary pull-right"--}}
+{{--                                            disabled>{{tr('submit')}}</button>--}}
+{{--                                @else--}}
+{{--                                    <button type="submit" class="btn btn-primary pull-right">{{tr('submit')}}</button>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>

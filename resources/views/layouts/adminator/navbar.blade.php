@@ -445,7 +445,9 @@
                                     <i class="ti-angle-right"></i>
                                 </span>
                 </a>
+
                 <ul class="dropdown-menu">
+
                     <li id="site_settings" class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.settings')}}">
                                         <span class="icon-holder">
@@ -455,14 +457,15 @@
                         </a>
                     </li>
 
-                    <li id=home_page_settings" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">
-                                        <span class="icon-holder">
-                                            <i class="c-light-blue-500 fa fa-circle-o"></i>
-                                        </span>
-                            <span class="title">{{tr('home_page_settings')}}</span>
-                        </a>
-                    </li>
+{{--                    <li id=home_page_settings" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
+{{--                                        <span class="icon-holder">--}}
+{{--                                            <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                                        </span>--}}
+{{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+
                 </ul>
             </li>
 

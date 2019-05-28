@@ -38,6 +38,8 @@ return array(
 	'amount_per_video_note' => "Usage : The amount set for each view once the count crosses the view limit.",
 	// Mobile Home 
 	'my_commission'=>'My Commission',
+    'retailer_commission'=>'Retailer Commission (in %)',
+    'director_commission'=>'Director Commission (in %)',
 	'admin_commission'=>'Admin Commission (in %)',
 	'sub_title'=>'Subtitle',
 	'subtitle_validate'=>'The video subtitle must be a file of type: srt.',

@@ -296,8 +296,18 @@ class SettingsTableSeeder extends Seeder
             ],
 
             [
+                'key' => 'retailer_commission',
+                'value' => '10',
+            ],
+
+            [
+                'key' => 'director_commission',
+                'value' => '10',
+            ],
+
+            [
                 'key' => 'user_commission',
-                'value' => '90',
+                'value' => '10',
             ],
 
             [

@@ -3159,11 +3159,14 @@ class AdminController extends Controller
                     if ($user_commission_details) {
 
                         $user_commission_details->value = $user_commission;
-
-
                         $user_commission_details->save();
                     }
 
+                } else if ($setting->key === 'director_commission_details'){
+                    $setting->value = $request->has('director_commission_details') ? ($request->director_commission_details < 100 ? $request->director_commission_details : 100) : $setting->value;
+
+                } else if ($setting->key === 'retailer_commission_details'){
+                    $setting->value = $request->has('retailer_commission_details') ? ($request->retailer_commission_details < 100 ? $request->retailer_commission_details : 100) : $setting->value;
 
                 } else if ($setting->key == 'site_name') {
 
@@ -3761,7 +3764,7 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key == "admin_commission") {
+                } else if ($setting->key === 'admin_commission') {
 
                     $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
 
@@ -3769,14 +3772,17 @@ class AdminController extends Controller
 
                     $user_commission_details = Settings::where('key', 'user_commission')->first();
 
-                    if (count($user_commission_details) > 0) {
+                    if (is_array($user_commission_details) ? count($user_commission_details) : 0) {
 
                         $user_commission_details->value = $user_commission;
-
-
                         $user_commission_details->save();
                     }
 
+                } else if ($setting->key === 'director_commission_details'){
+                    $setting->value = $request->has('director_commission_details') ? ($request->director_commission_details < 100 ? $request->director_commission_details : 100) : $setting->value;
+
+                } else if ($setting->key === 'retailer_commission_details'){
+                    $setting->value = $request->has('retailer_commission_details') ? ($request->retailer_commission_details < 100 ? $request->retailer_commission_details : 100) : $setting->value;
 
                 } else {
 
