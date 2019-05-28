@@ -120,21 +120,22 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.videos.create')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('add_video')}}</span>
-                        </a>
-                    </li>
+
+                    {{--                    <li class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.videos.create')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('add_video')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.videos.search.tmdb')}}">
                             <span class="icon-holder">
                                 <i class="c-light-blue-500 fa fa-circle-o"></i>
                             </span>
-                            <span class="title">{{tr('search_videos')}} In TMDB</span>
+                            <span class="title">{{tr('add_video')}}</span>
                         </a>
                     </li>
 
@@ -146,24 +147,27 @@
                             <span class="title">{{tr('view_videos')}}</span>
                         </a>
                     </li>
-                    @if(Setting::get('is_spam'))
-                        <li id="spam_videos" class="nav-item">
-                            <a class="sidebar-link" href="{{route('admin.spam-videos')}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                                <span class="title">{{tr('spam_videos')}}</span>
-                            </a>
-                        </li>
-                    @endif
-                    <li id="view-banner-videos" class="nav-item">
-                        <a class="sidebar-link" href="{{route('admin.videos',['banner'=>BANNER_VIDEO])}}">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('banner_videos')}}</span>
-                        </a>
-                    </li>
+
+{{--                    @if(Setting::get('is_spam'))--}}
+{{--                        <li id="spam_videos" class="nav-item">--}}
+{{--                            <a class="sidebar-link" href="{{route('admin.spam-videos')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                                <span class="title">{{tr('spam_videos')}}</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
+
+{{--                    <li id="view-banner-videos" class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="{{route('admin.videos',['banner'=>BANNER_VIDEO])}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('banner_videos')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+
                 </ul>
             </li>
             @endcan

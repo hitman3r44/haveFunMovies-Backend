@@ -98,30 +98,18 @@
                         <div class=" table-responsive">
 
                             @if(count($videos) > 0)
-                                <table id="dataTable" class="table table-striped table-bordered" cellspacing="0"
-                                       width="100%">
-
+                                <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
                                         <th>{{tr('id')}}</th>
-                                        <th>{{tr('action')}}</th>
-                                        <th>{{tr('status')}}</th>
                                         <th>{{tr('title')}}</th>
                                         <th>{{tr('revenue')}}</th>
-                                        @if(Setting::get('is_payper_view'))
-                                            <th>{{tr('ppv')}}</th>
-                                        @endif
                                         <th>{{tr('category')}}</th>
-                                        <th>{{tr('sub_category')}}</th>
                                         <th>{{tr('genre_name')}}</th>
                                         <th>{{tr('viewers_cnt')}}</th>
-                                        <th>{{tr('is_banner')}}</th>
-                                        <th>{{tr('position')}}</th>
-                                        @if(Setting::get('theme') == 'default')
-                                            <th>{{tr('slider_video')}}</th>
-                                        @endif
                                         <th>{{tr('uploaded_by')}}</th>
-
+                                        <th>{{tr('status')}}</th>
+                                        <th>{{tr('action')}}</th>
                                     </tr>
                                     </thead>
 
@@ -129,8 +117,44 @@
                                     @foreach($videos as $i => $video)
 
                                         <tr>
+                                            {{--Title--}}
                                             <td>{{showEntries($_GET, $i+1)}}</td>
 
+                                            {{--Revenue--}}
+                                            <td>
+                                                <a href="{{route('admin.view.video' , array('id' => $video->video_id))}}">{{substr($video->title , 0,25)}}...</a>
+                                            </td>
+
+                                            <td>{{Setting::get('currency')}} {{$video->admin_amount ? $video->admin_amount : "0.00"}}</td>
+
+                                            {{--Category--}}
+                                            <td>{{$video->category_name}}</td>
+
+                                            {{--Genre--}}
+                                            <td>{{$video->genre_name ? $video->genre_name : '-'}}</td>
+
+                                            {{--Watch Count--}}
+                                            <td>{{number_format_short($video->watch_count)}}</td>
+
+                                            {{--Uploaded By--}}
+                                            <td>
+                                                @if(is_numeric($video->uploaded_by))
+                                                    <a href="{{route('admin.moderator.view',$video->uploaded_by)}}">{{$video->moderator ? $video->moderator->name : ''}}</a>
+                                                @else
+                                                    {{$video->uploaded_by}}
+                                                @endif
+                                            </td>
+
+                                            {{--                                            Status--}}
+                                            <td>
+                                                @if($video->is_approved)
+                                                    <span class="label label-success">{{tr('approved')}}</span>
+                                                @else
+                                                    <span class="label label-warning">{{tr('pending')}}</span>
+                                                @endif
+                                            </td>
+
+                                            {{--Action--}}
                                             <td>
                                                 <ul class="admin-action btn btn-default">
                                                     <li class="{{ $i < 5 ? 'dropdown' : 'dropup'}}">
@@ -186,7 +210,7 @@
                                                                             @if($video->is_banner == BANNER_VIDEO)
 
                                                                                 <span class="text-green"><i
-                                                                                            class="fa fa-check-circle"></i></span>
+                                                                                        class="fa fa-check-circle"></i></span>
 
                                                                             @endif
 
@@ -209,7 +233,7 @@
                                                                         @if($video->amount > 0)
 
                                                                             <span class="text-green pull-right"><i
-                                                                                        class="fa fa-check-circle"></i></span>
+                                                                                    class="fa fa-check-circle"></i></span>
 
                                                                         @endif
 
@@ -270,101 +294,6 @@
                                                         </ul>
                                                     </li>
                                                 </ul>
-                                            </td>
-
-                                            <td>
-                                                @if ($video->compress_status < OVERALL_COMPRESS_COMPLETED)
-                                                    <span class="label label-danger">{{tr('compress')}}</span>
-                                                @else
-                                                    @if($video->is_approved)
-                                                        <span class="label label-success">{{tr('approved')}}</span>
-                                                    @else
-                                                        <span class="label label-warning">{{tr('pending')}}</span>
-                                                    @endif
-                                                @endif
-                                            </td>
-
-                                            <td>
-                                                <a href="{{route('admin.view.video' , array('id' => $video->video_id))}}">{{substr($video->title , 0,25)}}
-                                                    ...</a></td>
-
-                                            <td>{{Setting::get('currency')}} {{$video->admin_amount ? $video->admin_amount : "0.00"}}</td>
-
-                                            @if(Setting::get('is_payper_view'))
-                                                <td class="text-center">
-                                                    @if($video->amount > 0)
-                                                        <span class="label label-success">{{tr('yes')}}</span>
-                                                    @else
-                                                        <span class="label label-danger">{{tr('no')}}</span>
-                                                    @endif
-                                                </td>
-                                            @endif
-
-
-                                            <td>{{$video->category_name}}</td>
-                                            <td>{{$video->sub_category_name}}</td>
-                                            <td>{{$video->genre_name ? $video->genre_name : '-'}}</td>
-
-                                            <td>{{number_format_short($video->watch_count)}}</td>
-
-                                            <td class="text-center">
-                                                @if($video->is_banner == BANNER_VIDEO)
-                                                    <span class="label label-success">{{tr('yes')}}</span>
-                                                @else
-                                                    <span class="label label-danger">{{tr('no')}}</span>
-                                                @endif
-                                            </td>
-
-                                            <td>
-
-                                                @if ($video->genre_id > 0)
-
-                                                    @if($video->position > 0)
-
-                                                        <span class="label label-success">{{$video->position}}</span>
-
-                                                    @else
-
-                                                        <span class="label label-danger">{{$video->position}}</span>
-
-                                                    @endif
-
-                                                @else
-
-                                                    <span class="label label-warning">{{tr('not_genre')}}</span>
-
-                                                @endif
-
-                                            </td>
-
-
-                                            @if(Setting::get('theme') == 'default')
-                                                <td>
-                                                    @if($video->is_home_slider == 0 && $video->is_approved && $video->status)
-                                                        <a href="{{route('admin.slider.video' , $video->video_id)}}"><span
-                                                                    class="label label-danger">{{tr('set_slider')}}</span></a>
-                                                    @elseif($video->is_home_slider)
-                                                        <span class="label label-success">{{tr('slider')}}</span>
-                                                    @else
-                                                        -
-                                                    @endif
-                                                </td>
-
-                                            @endif
-
-                                            <td>
-
-                                                @if(is_numeric($video->uploaded_by))
-
-                                                    <a href="{{route('admin.moderator.view',$video->uploaded_by)}}">{{$video->moderator ? $video->moderator->name : ''}}</a>
-
-
-                                                @else
-
-                                                    {{$video->uploaded_by}}
-
-                                                @endif
-
                                             </td>
 
                                         </tr>
