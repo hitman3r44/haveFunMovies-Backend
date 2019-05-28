@@ -63,7 +63,8 @@ class DatabaseSeeder extends Seeder
             TmdbGenersSeeder::class,
             CategoriesTableSeeder::class,
             SubscriptionsTableSeeder::class,
-            CouponsTableSeeder::class
+            CouponsTableSeeder::class,
+            AdminVideosTableSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -73,11 +74,6 @@ class DatabaseSeeder extends Seeder
         $publisher->assignRole(Role::findByName('publisher'));
         $customer->assignRole(Role::findByName('customer'));
         $retailer->assignRole(Role::findByName('retailer'));
-
-        factory(App\Model\AdminVideo::class, 3)->create()->each(function ($adminVideo) {
-
-            factory(App\Model\AdminVideoImage::class, 2)->create(['admin_video_id' => $adminVideo->id]);
-        });
 
         factory(App\Model\Advertisement::class, 4)->create()->each(function ($advertisement)  {
             $advertisement->countries()->attach(Country::whereIn('id', [1,2,3])->get());

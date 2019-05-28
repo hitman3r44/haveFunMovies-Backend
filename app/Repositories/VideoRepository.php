@@ -506,7 +506,7 @@ class VideoRepository {
                 $video_model->video_subtitle = '';
                 if($request->has('tmdb_video_id') &&  $tmdbVideo != null){
 
-                    $video_model->trailer_video = 'https://www.youtube.com/watch?v='.$tmdbVideo->getTrailer();
+                    $video_model->trailer_video = 'https://www.youtube.com/embed/'.$tmdbVideo->getTrailer();
                     $video_model->default_image = $tmdbApi->getImageURL('w300').$tmdbVideo->getPoster();
                 }
 

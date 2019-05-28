@@ -1,0 +1,69 @@
+1
+00:00:00.05 --> 00:00:01.08
+- [Mary] Are you read to graduate
+
+2
+00:00:01.08 --> 00:00:05.07
+from coding simple demos to
+writing real applications?
+
+3
+00:00:05.07 --> 00:00:08.06
+We'll start with a basic
+Spring Boot Microservice,
+
+4
+00:00:08.06 --> 00:00:11.01
+then elevate it to a
+production-ready application
+
+5
+00:00:11.01 --> 00:00:13.01
+employing standards of quality,
+
+6
+00:00:13.01 --> 00:00:16.04
+security, persistence and deployment.
+
+7
+00:00:16.04 --> 00:00:19.04
+I'm talking about external
+databases with schema versioning,
+
+8
+00:00:19.04 --> 00:00:22.06
+secured APIs, progression test coverage
+
+9
+00:00:22.06 --> 00:00:24.08
+and application delivery with Docker.
+
+10
+00:00:24.08 --> 00:00:26.09
+Hi, I'm Mary Ellen Bowman.
+
+11
+00:00:26.09 --> 00:00:28.05
+I'm a senior job developer
+
+12
+00:00:28.05 --> 00:00:30.06
+and I regularly employ these standards
+
+13
+00:00:30.06 --> 00:00:32.07
+when creating solutions.
+
+14
+00:00:32.07 --> 00:00:34.00
+If you are up to the challenge,
+
+15
+00:00:34.00 --> 00:00:37.01
+then I invite you to join
+me on this learning journey.
+
+16
+00:00:37.01 --> 00:00:37.09
+So let's go!
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\TmdbGenre;
 use App\Repositories\VideoRepository as VideoRepo;
 
 use App\Repositories\PushNotificationRepository as PushRepo;
@@ -2089,10 +2090,15 @@ class AdminController extends Controller
 
         $query = AdminVideo::leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
             ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-            ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
-            ->select('admin_videos.id as video_id', 'admin_videos.title',
-                'admin_videos.description', 'admin_videos.ratings',
-                'admin_videos.reviews', 'admin_videos.created_at as video_date',
+            ->leftJoin('tmdb_genres', 'admin_videos.genre_id', '=', 'tmdb_genres.tmdb_genre_id')
+            ->leftJoin('users', 'admin_videos.uploaded_by', '=', 'users.id')
+            ->select(
+                'admin_videos.id as video_id',
+                'admin_videos.title',
+                'admin_videos.description',
+                'admin_videos.ratings',
+                'admin_videos.reviews',
+                'admin_videos.created_at as video_date',
                 'admin_videos.default_image',
                 'admin_videos.banner_image',
                 'admin_videos.amount',
@@ -2104,6 +2110,7 @@ class AdminController extends Controller
                 'admin_videos.category_id as category_id',
                 'admin_videos.sub_category_id',
                 'admin_videos.genre_id',
+                'admin_videos.uploaded_by',
                 'admin_videos.is_home_slider',
                 'admin_videos.watch_count',
                 'admin_videos.compress_status',
@@ -2113,8 +2120,10 @@ class AdminController extends Controller
                 'admin_videos.edited_by', 'admin_videos.is_approved',
                 'admin_videos.video_subtitle',
                 'admin_videos.trailer_subtitle',
-                'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                'genres.name as genre_name',
+                'categories.name as category_name',
+                'sub_categories.name as sub_category_name',
+                'tmdb_genres.name as genre_name',
+                'users.name as user_name',
                 'admin_videos.is_banner',
                 'admin_videos.position')
             ->orderBy('admin_videos.created_at', 'desc');
@@ -2153,7 +2162,16 @@ class AdminController extends Controller
 
             $query->where('admin_videos.genre_id', $request->genre_id);
 
-            $genre = Genre::find($request->genre_id);
+            $genre = TmdbGenre::find($request->genre_id);
+
+        }
+
+        // Find User Information
+        if ($request->uploaded_by) {
+
+            $query->where('admin_videos.uploaded_by', $request->uploaded_by);
+
+            $user = User::find($request->uploaded_by);
 
         }
 
@@ -2173,8 +2191,8 @@ class AdminController extends Controller
             ->with('category', $category)
             ->with('sub_category', $sub_category)
             ->with('genre', $genre)
+//            ->with('user', $user)
             ->with('moderator_details', $moderator_details);
-
     }
 
     /**
@@ -2243,7 +2261,7 @@ class AdminController extends Controller
             $videos = AdminVideo::where('admin_videos.id', $request->id)
                 ->leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
                 ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-                ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
+                ->leftJoin('tmdb_genres', 'admin_videos.genre_id', '=', 'tmdb_genres.tmdb_genre_id')
                 ->select('admin_videos.id as video_id', 'admin_videos.title',
                     'admin_videos.description', 'admin_videos.ratings',
                     'admin_videos.reviews', 'admin_videos.created_at as video_date',
@@ -2280,7 +2298,7 @@ class AdminController extends Controller
                     'admin_videos.trailer_video_resolutions',
                     'admin_videos.publish_time',
                     'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                    'genres.name as genre_name',
+                    'tmdb_genres.name as genre_name',
                     'admin_videos.video_gif_image',
                     'admin_videos.is_banner',
                     'admin_videos.is_pay_per_view',

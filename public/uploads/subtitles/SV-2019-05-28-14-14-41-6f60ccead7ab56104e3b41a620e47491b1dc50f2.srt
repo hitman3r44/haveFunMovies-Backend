@@ -1,0 +1,247 @@
+1
+00:00:00.05 --> 00:00:03.00
+- [Instructor] So now that
+we understand the project,
+
+2
+00:00:03.00 --> 00:00:04.06
+let's start up the application
+
+3
+00:00:04.06 --> 00:00:07.09
+and exercise some of the APIs
+by launching the application
+
+4
+00:00:07.09 --> 00:00:11.06
+and invoke them via Postman.
+
+5
+00:00:11.06 --> 00:00:13.05
+So, on ExplorecaliApplication,
+
+6
+00:00:13.05 --> 00:00:18.06
+I'm gonna right click it and say run.
+
+7
+00:00:18.06 --> 00:00:22.03
+And we'll watch the console.
+
+8
+00:00:22.03 --> 00:00:27.04
+So we see it started
+with Tomcat on port 8080.
+
+9
+00:00:27.04 --> 00:00:29.02
+Now I've launched Postman
+
+10
+00:00:29.02 --> 00:00:33.08
+and I'll show you that
+you can import a set,
+
+11
+00:00:33.08 --> 00:00:45.00
+a collection API calls.
+
+12
+00:00:45.00 --> 00:00:48.09
+This API Demo 1 postman
+collection.json file,
+
+13
+00:00:48.09 --> 00:00:53.02
+if you click that and open it,
+I've already got it opened,
+
+14
+00:00:53.02 --> 00:00:55.05
+it will launch and then start
+
+15
+00:00:55.05 --> 00:00:58.03
+with this Explore
+California API's collection.
+
+16
+00:00:58.03 --> 00:01:00.00
+And this is just a shortcut I've added
+
+17
+00:01:00.00 --> 00:01:03.07
+so you don't have to type in
+each one of the API calls.
+
+18
+00:01:03.07 --> 00:01:05.08
+So, within the Introduction folder,
+
+19
+00:01:05.08 --> 00:01:10.06
+select the first one which
+is Get All Tour Packages.
+
+20
+00:01:10.06 --> 00:01:14.00
+So here's the http call to
+get all the tour packages.
+
+21
+00:01:14.00 --> 00:01:16.09
+Click Send.
+
+22
+00:01:16.09 --> 00:01:20.02
+And we see there's our tour packages,
+
+23
+00:01:20.02 --> 00:01:27.00
+our Backpack Cali, California
+Hot Springs, et cetera.
+
+24
+00:01:27.00 --> 00:01:32.03
+Now, let's get all of the tours.
+
+25
+00:01:32.03 --> 00:01:36.08
+Here's all the details of
+my Big Sur Retreat Tour,
+
+26
+00:01:36.08 --> 00:01:40.02
+Death Valley,
+
+27
+00:01:40.02 --> 00:01:42.07
+Mount Whitney Climbers Tour.
+
+28
+00:01:42.07 --> 00:01:48.05
+Now, if I wanna look up
+a tour by a tour package
+
+29
+00:01:48.05 --> 00:01:52.07
+and here I provide the code
+equals BC which is Backpack Cali
+
+30
+00:01:52.07 --> 00:01:58.02
+so that's gonna fetch just
+the Backpack Cali Tours.
+
+31
+00:01:58.02 --> 00:02:02.07
+Next, let's create a rating.
+
+32
+00:02:02.07 --> 00:02:06.09
+In the body of that I'm
+sending a json string.
+
+33
+00:02:06.09 --> 00:02:10.00
+The score is five.
+
+34
+00:02:10.00 --> 00:02:11.08
+The comment was, "I thought it was okay."
+
+35
+00:02:11.08 --> 00:02:14.00
+And the customer ID is eight.
+
+36
+00:02:14.00 --> 00:02:18.09
+And this would be for the
+tour with the ID equal one.
+
+37
+00:02:18.09 --> 00:02:21.06
+Send that that post method and let's see.
+
+38
+00:02:21.06 --> 00:02:24.08
+The results was that that was created.
+
+39
+00:02:24.08 --> 00:02:26.07
+Now let's look up a rating.
+
+40
+00:02:26.07 --> 00:02:31.07
+Let's call the tours
+slash 1 slash ratings API
+
+41
+00:02:31.07 --> 00:02:36.04
+which will get all the
+ratings for tour one.
+
+42
+00:02:36.04 --> 00:02:39.05
+And there's the one we just created.
+
+43
+00:02:39.05 --> 00:02:44.06
+Let's get the average score for a tour.
+
+44
+00:02:44.06 --> 00:02:46.06
+And the average score was five.
+
+45
+00:02:46.06 --> 00:02:49.07
+And let's update a
+rating with the put verb.
+
+46
+00:02:49.07 --> 00:02:55.00
+So, we're going to update the tour rating.
+
+47
+00:02:55.00 --> 00:02:59.00
+Have customer four who
+thought it was not that great
+
+48
+00:02:59.00 --> 00:03:03.09
+and a score of one.
+
+49
+00:03:03.09 --> 00:03:06.03
+This has been a very quick overview
+
+50
+00:03:06.03 --> 00:03:09.00
+of our starting point code base.
+
+51
+00:03:09.00 --> 00:03:11.01
+If you have access to the exercise files,
+
+52
+00:03:11.01 --> 00:03:13.01
+I really encourage you to take the time
+
+53
+00:03:13.01 --> 00:03:15.08
+to familiarize yourself with it.
+
+54
+00:03:15.08 --> 00:03:19.01
+Good developers are always
+looking to improve their code.
+
+55
+00:03:19.01 --> 00:03:23.00
+So, developer, we know this
+is not production ready.
+
+56
+00:03:23.00 --> 00:03:24.01
+How can we do better?
+

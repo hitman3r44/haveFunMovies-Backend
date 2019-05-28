@@ -105,7 +105,7 @@
                                 {{--                        sub_category--}}
                                 <div class="form-group">
                                     <label for="sub_category_id" class="control-label">
-                                        * {{tr('sub_category')}}/{{tr('genre')}} {{ $model->genre_id }}</label>
+                                        * {{tr('sub_category')}}/{{tr('genre')}} </label>
                                     <div class="col-sm-12">
                                         <select name="sub_category_id" class="form-control input-md select2"
                                                 id="sub_category_id" required>
@@ -127,12 +127,6 @@
                                     </div>
                                 </div>
 
-                            </div> <!--col-md-8 -->
-
-
-                            <div class="col-md-4">
-
-                                {{--                        ratings--}}
                                 <div class="form-group row ">
                                     <label for="ratings" class="col-sm-2 mt-2 control-label"> {{tr('ratings')}}</label>
                                     <div class="col-sm-10">
@@ -176,14 +170,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            </div> <!--col-md-8 -->
+
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <hr>&nbsp;
-                            </div>
-                            <div class="col-md-8">
 
+                            <div class="col-md-8">
                                 {{--                        video--}}
                                 <div class="form-group">
                                     <label for="video" class="control-label">{{tr('video')}}</label>
@@ -194,18 +187,6 @@
                                     </div>
                                 </div>
 
-                                {{--                        trailer_video--}}
-                                <div class="form-group">
-                                    <label for="trailer_video" class="control-label">{{tr('trailer_video')}}</label>
-
-                                    <small class="form-text">Current Trailer : @if(!empty($model->trailer_video)) <a
-                                                class="text-navy"
-                                                href="{{$model->trailer_video}}">{{$model->trailer_video}}</a> @else
-                                            N/A @endif</small>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
                                 {{--                        subtitle--}}
                                 <div class="form-group">
                                     <label for="trailer_video" class="control-label">{{tr('subtitle')}}</label>
@@ -214,6 +195,19 @@
                                                name="video_subtitle" onchange="checksrt(this, this.id)"/>
                                         <small class="form-text text-muted">{{tr('subtitle_validate')}}</small>
                                     </div>
+                                </div>
+
+                                {{--                        trailer_video--}}
+                                <div class="form-group">
+                                    <label for="trailer_video" class="control-label">{{tr('trailer_video')}}</label>
+
+                                    <small class="form-text">
+                                        @if(!empty($model->trailer_video))
+                                            <iframe width="420" height="315" src="{{$model->trailer_video}}" frameborder="0" allowfullscreen></iframe>
+                                        @else
+                                            N/A
+                                        @endif
+                                    </small>
                                 </div>
                             </div>
                         </div>

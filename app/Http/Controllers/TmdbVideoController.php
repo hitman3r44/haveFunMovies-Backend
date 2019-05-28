@@ -40,7 +40,7 @@ class TmdbVideoController extends Controller
 
             $movies = $this->tmdbApi->searchTmdbMovie($request->movie_name);
 
-            $viewData = strval(view('admin.videos.ajax_videos.movie_list', compact('movies')));
+            $viewData = (string)view('admin.videos.ajax_videos.movie_list', compact('movies'));
 
             return response()->json([
                 'status' => 1,
@@ -86,7 +86,7 @@ class TmdbVideoController extends Controller
                 $model->title = $tmdbVideo->getTitle();
                 $model->description = $tmdbVideo->getOverview();
                 $model->details = $tmdbVideo->getOverview();
-                $model->trailer_video = ($tmdbVideo->getTrailer() ) ? 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer() : null;
+                $model->trailer_video = ($tmdbVideo->getTrailer() ) ? 'https://www.youtube.com/embed/' . $tmdbVideo->getTrailer() : null;
                 $model->ratings = round($tmdbVideo->getVoteAverage() / 2);
                 $model->default_image = ($tmdbVideo->getPoster()) ? $imageUrl . $tmdbVideo->getPoster() : null ;
                 $model->duration = ($tmdbVideo->get('runtime')) ? date('H:i:s', mktime(0, $tmdbVideo->get('runtime'))) : null;
@@ -168,7 +168,7 @@ class TmdbVideoController extends Controller
             $model->video_subtitle = '';
 
 
-            $model->genre_id = 0;
+            $model->genre_id = $request->sub_category_id;
             $model->video = '';
 
             $model->status = 1;
@@ -200,7 +200,7 @@ class TmdbVideoController extends Controller
 
                 $imageUrl = $this->tmdbApi->getImageURL('w300');
 
-                $model->trailer_video = 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer();
+                $model->trailer_video = 'https://www.youtube.com/embed/' . $tmdbVideo->getTrailer();
                 $model->default_image = $imageUrl.$tmdbVideo->getPoster();
             }
 

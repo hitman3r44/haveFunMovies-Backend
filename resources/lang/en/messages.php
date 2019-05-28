@@ -475,6 +475,7 @@ return array(
 	'no_sub_category_found' => 'No sub categories found for this category.',
 	'sub_categories' => 'Sub Categories',
 	'sub_category' => 'Sub Category',
+    'sub_category_genre' => 'Sub Category / Genre',
 	'view_sub_categories'	=>	'View Sub Categories',
 	'view_sub_category'	=>	'View Sub Category',
 	'add_sub_category'	=>	'Add Sub Category',

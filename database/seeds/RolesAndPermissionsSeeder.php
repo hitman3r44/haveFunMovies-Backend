@@ -30,11 +30,11 @@ class RolesAndPermissionsSeeder extends Seeder
 
 
         Role::create(['name' => 'admin'])->givePermissionTo([
-            'admin', 'director', 'publisher', 'retailer'
+            'admin', 'director', 'publisher', 'retailer', 'video', 'advertisement'
         ]);
 
         Role::create(['name' => 'moderator'])->givePermissionTo([
-            'moderator', 'director', 'publisher'
+            'admin', 'director', 'publisher', 'retailer', 'video', 'advertisement'
         ]);
 
         Role::create(['name' => 'director'])->givePermissionTo([
