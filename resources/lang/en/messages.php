@@ -1129,7 +1129,7 @@ return array(
 	'coupon_code'=>'Promo Code',
 	'amount_type'=>'Amount Type',
 	'select_option'=>'Select Option',
-	'validation'=>'Please use Uppercase and numbers only 5 to 10 characters',
+	'validation'=>'Please use Uppercase and numbers only 5 to 50 characters',
 	'only_number'=>'Only use Number 1 between 5000',
 	'coupon_update_success'=>'Coupon Updated Successfully',
 	'coupon_add_success'=>'Coupon Added Successfully',

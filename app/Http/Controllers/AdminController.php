@@ -4769,7 +4769,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => 'exists:coupons,id',
             'title' => 'required',
-            'coupon_code' => $request->id ? 'required|max:10|min:1|unique:coupons,coupon_code,' . $request->id : 'required|unique:coupons,coupon_code|min:1|max:10',
+            'coupon_code' => $request->id ? 'required|max:50|min:1|unique:coupons,coupon_code,' . $request->id : 'required|unique:coupons,coupon_code|min:1|max:50',
             'amount' => 'required|numeric|min:1|max:5000',
             'amount_type' => 'required',
             'expiry_date' => 'required|date_format:d-m-Y|after:today',

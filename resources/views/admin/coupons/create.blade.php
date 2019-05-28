@@ -47,7 +47,7 @@
 						<div class="form-group">
 							<label for = "coupon_code" class="col-sm-2 control-label"> * {{tr('coupon_code')}}</label>
 							<div class="col-sm-10">
-								<input type="text" name="coupon_code" min="1" max="10" class="form-control" value="{{old('coupon_code')}}"  required pattern="[A-Z0-9]{1,10}"  placeholder="{{tr('enter_coupon_code')}}" title="{{tr('validation')}}"><p class="help-block">{{tr('note')}} : {{tr('coupon_code_note')}}</p>
+								<input type="text" name="coupon_code" min="1" max="10" class="form-control" value="{{old('coupon_code')}}"  required pattern="[A-Z0-9]{1,50}"  placeholder="{{tr('enter_coupon_code')}}" title="{{tr('validation')}}"><p class="help-block">{{tr('note')}} : {{tr('coupon_code_note')}}</p>
 							</div>
 						</div>
 
