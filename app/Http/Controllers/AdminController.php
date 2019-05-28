@@ -2261,7 +2261,7 @@ class AdminController extends Controller
             $videos = AdminVideo::where('admin_videos.id', $request->id)
                 ->leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
                 ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-                ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
+                ->leftJoin('tmdb_genres', 'admin_videos.genre_id', '=', 'tmdb_genres.tmdb_genre_id')
                 ->select('admin_videos.id as video_id', 'admin_videos.title',
                     'admin_videos.description', 'admin_videos.ratings',
                     'admin_videos.reviews', 'admin_videos.created_at as video_date',
@@ -2298,7 +2298,7 @@ class AdminController extends Controller
                     'admin_videos.trailer_video_resolutions',
                     'admin_videos.publish_time',
                     'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                    'genres.name as genre_name',
+                    'tmdb_genres.name as genre_name',
                     'admin_videos.video_gif_image',
                     'admin_videos.is_banner',
                     'admin_videos.is_pay_per_view',

@@ -6,21 +6,21 @@
     <div class="col-md-4">
         <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('view_video') }}</h4>
     </div>
-    <div class="col-md-8">
+{{--    <div class="col-md-8">--}}
 
-        <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"
-           title="Any Help ?">HELP ?</a>
+{{--        <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"--}}
+{{--           title="Any Help ?">HELP ?</a>--}}
 
-        <div id="help-content" style="display: none">
+{{--        <div id="help-content" style="display: none">--}}
 
-            <ul class="popover-list">
-                <li><b>{{tr('redeems')}} - </b>{{tr('moderator_earnings')}}</li>
-                <li><b>{{tr('viewers_cnt')}} - </b>{{tr('total_watch_count')}} </li>
-                <li><b>{{tr('ppv_created_by')}} - </b>{{tr('admin_moderator_names')}} </li>
-            </ul>
+{{--            <ul class="popover-list">--}}
+{{--                <li><b>{{tr('redeems')}} - </b>{{tr('moderator_earnings')}}</li>--}}
+{{--                <li><b>{{tr('viewers_cnt')}} - </b>{{tr('total_watch_count')}} </li>--}}
+{{--                <li><b>{{tr('ppv_created_by')}} - </b>{{tr('admin_moderator_names')}} </li>--}}
+{{--            </ul>--}}
 
-        </div>
-    </div>
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection
 
 @section('styles')
@@ -92,22 +92,15 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class='pull-right'>
-                            <a href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}"
-                               class="btn bg-orange text-uppercase">
-                                <i class="fa fa-pencil"></i>
-                                <b>{{tr('edit')}}</b>
-                            </a>
-                            {{--@if ($video->compress_status <   OVERALL_COMPRESS_COMPLETED)--}}
-                            {{--<span class="label label-danger">{{tr('compress')}}</span>--}}
-                            {{--@else--}}
-                            {{--<a href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}"--}}
-                            {{--class="btn bg-orange text-uppercase">--}}
-                            {{--<i class="fa fa-pencil"></i>--}}
-                            {{--<b>{{tr('edit')}}</b>--}}
-                            {{--</a>--}}
-                            {{--@endif--}}
-                        </div>
+
+{{--                        <div class='pull-right'>--}}
+{{--                            <a href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}"--}}
+{{--                               class="btn bg-orange text-uppercase">--}}
+{{--                                <i class="fa fa-pencil"></i>--}}
+{{--                                <b>{{tr('edit')}}</b>--}}
+{{--                            </a>                            --}}
+{{--                        </div>--}}
+
                     </div>
                 </div>
 
@@ -279,10 +272,10 @@
 
                                     <!-- start -->
 
-                                    <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('sub_category')}}</strong>
+                                    <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('sub_category_genre')}}</strong>
 
                                     <p class="text-muted">
-                                        {{$video->sub_category_name}}
+                                        {{$video->genre_name}}
                                     </p>
 
                                     <hr>
@@ -338,12 +331,6 @@
 
                                     <!-- start -->
 
-                                    <strong><i class="fa fa-suitcase margin-r-5"></i> {{tr('trailer_duration')}}
-                                    </strong>
-
-                                    <p class="text-muted">
-                                        {{$video->trailer_duration}}
-                                    </p>
 
                                     <hr>
 
@@ -409,13 +396,13 @@
 
                                     <hr>
 
-                                    <strong><i class="fa fa-male margin-r-5"></i> {{tr('cast_crews')}}</strong>
+{{--                                    <strong><i class="fa fa-male margin-r-5"></i> {{tr('cast_crews')}}</strong>--}}
 
-                                    <p class="text-muted">
-                                        {{$video_cast_crews ? implode(', ', $video_cast_crews) : '-'}}
-                                    </p>
+{{--                                    <p class="text-muted">--}}
+{{--                                        {{$video_cast_crews ? implode(', ', $video_cast_crews) : '-'}}--}}
+{{--                                    </p>--}}
 
-                                    <hr>
+{{--                                    <hr>--}}
                                     <!-- end -->
 
                                     @if(Setting::get('is_payper_view') && $video->amount > 0)
@@ -621,12 +608,11 @@
 
                                 <div class="col-lg-6">
 
-                                    <h5 class="text-uppercase"><i
-                                                class="fa fa-video-camera margin-r-5"></i> {{tr('trailer_video')}}</h5>
+                                    <h5 class="text-uppercase"><i class="fa fa-video-camera margin-r-5"></i> {{tr('trailer_video')}}</h5>
 
                                     <div class="image" id="trailer_video_setup_error" style="display:none">
-                                        <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}"
-                                             style="width: 100%">
+{{--                                        <img src="{{asset('error.jpg')}}" alt="{{Setting::get('site_name')}}" style="width: 100%">--}}
+                                        <iframe width="420" height="315" src="{{$video->trailer_video}}" frameborder="0" allowfullscreen></iframe>
                                     </div>
 
 
@@ -682,7 +668,13 @@
                                     @else
                                         @if(check_valid_url($video->video))
 
-                                            <?php $url = (Setting::get('streaming_url')) ? Setting::get('streaming_url') . get_video_end($video->video) : $video->video; ?>
+                                            <div class="title m-b-md">
+                                                <video width="420" height="315" frameborder="0" controls>
+                                                    <source src="{{$video->video}}" autobuffer autoloop loop controls type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+
                                             <div id="main-video-player"></div>
                                         @else
                                             <div class="image">

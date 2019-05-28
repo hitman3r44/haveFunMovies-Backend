@@ -200,7 +200,7 @@ class TmdbVideoController extends Controller
 
                 $imageUrl = $this->tmdbApi->getImageURL('w300');
 
-                $model->trailer_video = 'https://www.youtube.com/watch?v=' . $tmdbVideo->getTrailer();
+                $model->trailer_video = 'https://www.youtube.com/embed/' . $tmdbVideo->getTrailer();
                 $model->default_image = $imageUrl.$tmdbVideo->getPoster();
             }
 
