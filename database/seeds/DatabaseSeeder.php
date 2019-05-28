@@ -60,7 +60,8 @@ class DatabaseSeeder extends Seeder
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
             CountriesTableSeeder::class,
-            TmdbGenersSeeder::class
+            TmdbGenersSeeder::class,
+            CategoriesTableSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -80,20 +81,6 @@ class DatabaseSeeder extends Seeder
             $advertisement->countries()->attach(Country::whereIn('id', [1,2,3])->get());
             $advertisement->movies()->attach(AdminVideo::whereIn('id', [1,2,3])->get());
 
-        });
-
-
-        $categories = factory(App\Model\Category::class, 3)->create();
-
-        $categories->each(function ($category) {
-
-            $subCategories = factory(App\Model\SubCategory::class, rand(1, 3))->create(['category_id' => $category->id]);
-
-            $subCategories->each(function ($subCategory) {
-
-                factory(App\Model\SubCategoryImage::class)->create(['sub_category_id' => $subCategory->id]);
-
-            });
         });
     }
 }
