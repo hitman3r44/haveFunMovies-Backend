@@ -38,6 +38,12 @@ class AdminVideo extends Model
     }
 
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'uploaded_by');
+    }
+
+
     public function getScopeLikeCount() {
 
         return $this->hasMany('App\Model\LikeDislikeVideo', 'admin_video_id', 'video_id')->where('like_status', DEFAULT_TRUE);

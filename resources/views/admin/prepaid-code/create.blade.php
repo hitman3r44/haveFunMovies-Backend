@@ -35,12 +35,14 @@
                     enctype="multipart/form-data" role="form">
                         @csrf
                     <div class="box-body">
+
                         <div class="form-group row">
-                            <label for="code" class="col-md-3 col-form-label">Code</label>
+                            <label for = "title" class="col-sm-2 control-label"> * {{tr('title')}}</label>
+
                             <div class="col-md-9">
-                                <div class="form-group">
-                                    <input class="form-control" name="code" type="text" id="code" value="{{ $uniqueId}}">
-                                    {!! $errors->first('code', '<small class="text-danger">:message</small>') !!}
+                                <div class="col-sm-10">
+                                    <input type="text" name="title" role="title" min="5" max="20" class="form-control" value="{{ old('title') }}" required placeholder="{{tr('enter_gift_card_title')}}">
+                                    {!! $errors->first('title', '<small class="text-danger">:message</small>') !!}
                                 </div>
                             </div>
                         </div>
@@ -57,7 +59,7 @@
 
                         <hr>
                         <div class="box-footer text-center">
-                            <input class="btn btn-fill btn-primary" type="submit" value="Generate">
+                            <input class="btn btn-fill btn-primary" type="submit" value="{{tr('submit')}}">
                         </div>
 
                     </div>

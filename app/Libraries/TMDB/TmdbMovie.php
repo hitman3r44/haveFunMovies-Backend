@@ -24,6 +24,21 @@ class TmdbMovie extends Movie
         return (isset($this->_data['id']) && !empty($this->_data['id']));
     }
 
+    public function getVoteAverage() {
+        return isset($this->_data['vote_average']) ? $this->_data['vote_average'] : 0;
+    }
+
+
+    public function getTrailer() {
+
+        $trailers = $this->getTrailers();
+
+        return isset($trailers['youtube'][0]) ?  $trailers['youtube'][0]['source'] : null ;
+    }
+
+    public function getTitle() {
+        return isset($this->_data['title']) ? $this->_data['title'] : null;
+    }
 
 
     public function getOverview() {
@@ -34,6 +49,18 @@ class TmdbMovie extends Movie
     public function getLanguage() {
 
         return isset($this->_data['original_language']) ? $this->_data['original_language'] : '';
+    }
+
+    public function getGenre() {
+        $genresId = [];
+
+        if(isset($this->_data['genres']) && is_array($this->_data['genres'])){
+            foreach($this->_data['genres'] as $genre){
+                $genresId[] = $genre['id'];
+            }
+        }
+
+        return ['id' => $genresId, 'data' => $this->_data['genres']];
     }
 
 

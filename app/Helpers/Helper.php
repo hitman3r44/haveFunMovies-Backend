@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 use Hash;
@@ -40,10 +42,6 @@ use App\Requests;
 use Mail;
 
 use File;
-
-use Log;
-
-use Storage;
 
 use Setting;
 

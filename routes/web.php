@@ -119,6 +119,9 @@ Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin
 
 Route::post('save_admin_control', 'ApplicationController@save_admin_control')->name('save_admin_control');
 
+
+Route::get('/clear-cache', 'ArtisanCommandController@clearCache')->name('clear-cache');
+
 Route::get('login', function () {
     return redirect()->route('admin.login');
 });
@@ -293,6 +296,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
 
+    Route::post('/videos/save/tmdb', 'TmdbVideoController@tmdbVideosSave')->name('videos.save.tmdb');
+
     Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
 
     Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');
@@ -331,6 +336,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('credit-money', 'CreditMoneyController');
     Route::resource('prepaid-code', 'PrepaidCodeController');
     Route::resource('gift-card', 'GiftCardController');
+    Route::post('generate-prepaid-code/generate-uuid' , 'GeneratePrepaidCodeController@generateUuid')->name('generate-prepaid-code.uuid');
+    Route::resource('generate-prepaid-code', 'GeneratePrepaidCodeController');
+
 
     // Ajax User payments
 

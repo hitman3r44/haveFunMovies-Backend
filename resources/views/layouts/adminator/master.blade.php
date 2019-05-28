@@ -53,30 +53,6 @@
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 
-<script>
-    $(document).ready(function () {
-
-        $('#help-popover').popover({
-            html: true,
-            content: function () {
-                return $('#help-content').html();
-            }
-        });
-
-        // $('#datepicker').datepicker({
-        //     autoclose: true,
-        //     format: 'dd-mm-yyyy',
-        //     startDate: 'today',
-        // });
-    });
-
-
-    @if(isset($page) && !empty($page)) $("#{{$page}}").addClass("active"); @endif
-
-    @if(isset($sub_page) && !empty($sub_page)) $("#{{$sub_page}}").addClass("active"); @endif
-
-</script>
-
 <script type="text/javascript">
 
     // $(function () {

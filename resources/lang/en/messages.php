@@ -38,6 +38,8 @@ return array(
 	'amount_per_video_note' => "Usage : The amount set for each view once the count crosses the view limit.",
 	// Mobile Home 
 	'my_commission'=>'My Commission',
+    'retailer_commission'=>'Retailer Commission (in %)',
+    'director_commission'=>'Director Commission (in %)',
 	'admin_commission'=>'Admin Commission (in %)',
 	'sub_title'=>'Subtitle',
 	'subtitle_validate'=>'The video subtitle must be a file of type: srt.',
@@ -450,6 +452,7 @@ return array(
 	// Admin Categories
 
 	'category' => 'Category',
+	'genre' => 'Genre',
 	'categories' => 'Categories',
 	'view_categories'	=>	'View Categories',
 	'add_category'	=>	'Add Category',
@@ -1101,6 +1104,12 @@ return array(
     'is_expired'=>'Expiration Status',
     'n/a'=>'N/A',
 
+	// Per-Paid Functionality
+    'enter_prepaid_title'=>'Enter Prepaid Title',
+
+	// Gift Card
+    'enter_gift_card_title'=>'Enter Gift Card Title',
+
 	//Coupons
 	'coupon'=>'Coupon',
 	'coupons'=>'Coupons',
@@ -1317,13 +1326,14 @@ return array(
 	'upload_video_image'=>'Upload Video / Image',
 	'mandatory_field_notes'=>' fields are mandatory. Please fill and click next.',
 	'trailer_duration'=>'Trailer Duration',
-	'main_video_duration'=>'Main Video Duration',
+	'main_video_duration'=>'Video Duration',
 	'publish_type'=>'Publish Type',
 	'now'=>'Now',
 	'later'=>'Later',
 	'trailer_resize_video_resolutions'=>'Trailer Video Resize Resolutions',
 	'main_resize_video_resolutions'=>'Main Video Resize Resolutions',
 	'subtitle'=>'Subtitle',
+	'trailer_subtitle'=>'Trailer Subtitle',
 	'browse'=>'Browse',
 	'video_upload_success'=>'The video has been uploaded successfully',
 	'ffmpeg_warning_notes'=>'FFMPEG not yet installed, kindly confiure and compress. Otherwise compression willnot happen',
@@ -1466,5 +1476,18 @@ return array(
 
     'movies' => 'Movies',
     'add_movies' => 'Add Movies',
+
+    'add_generate_prepaid_code' => 'Sell Prepaid Code',
+    'generate_prepaid_code' => 'Sold Prepaid Code',
+    'edit_generate_prepaid_code' => 'Edit Sold Prepaid Code',
+
+    'prepaid_plan' => 'Prepaid Plan',
+    'customer' => 'Customer',
+    'sold_by' => 'Sold By',
+    'uuid' => 'UUID',
+
+
+    'sell_functionality' => 'Sell Functionality',
+    'sell_prepaid_code' => 'Sell Prepaid Code',
 );
 

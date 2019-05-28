@@ -15,7 +15,7 @@ class CreatePrepaidCodesTable extends Migration
     {
         Schema::create('prepaid_codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code')->nullable();
+            $table->string('title')->nullable();
             $table->decimal('price')->nullable();
             $table->tinyInteger('is_used')->default(0);
             $table->tinyInteger('is_paid')->default(0);
