@@ -1062,6 +1062,7 @@ return array(
 	'notification_status_updated'=>'Notification has been updated successfully',
 	'email_templates'=>'Email Templates',
 	'create_template'=>'Create Template',
+    'view_template'=>'View Template',
 	'template_not_found'=>'You are searching email template not found',
 	'user_welcome_email'=>'User Welcome Mail (Direct Signup)',
 	'admin_created_user_welcome_mail'=>'User Welcome Email (Created By Admin)',

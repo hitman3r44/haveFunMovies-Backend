@@ -8,28 +8,29 @@
                             <div class="peer">
                                 <div class="logo">
                                     <img
-                                            src="{{ URL::to('/') }}/images/haveFunMoviesAdminLogo.png"
-                                            alt=""></div>
+                                        src="{{ URL::to('/') }}/images/haveFunMoviesAdminLogo.png"
+                                        alt=""></div>
                             </div>
                             <div class="peer peer-greed">
 
                                 <h5 class="lh-1 mB-0 logo-text">{{ ucwords(Auth::user()->name) }}</h5>
-                                <span class="mt-5 lh-1 mB-0 logo-text">{{ \App\Helpers\Helper::getUserType(Auth::user()->user_type) }}</span>
+                                <span
+                                    class="mt-5 lh-1 mB-0 logo-text">{{ \App\Helpers\Helper::getUserType(Auth::user()->user_type) }}</span>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="peer">
                     <div class="mobile-toggle sidebar-toggle"><a href="#" class="td-n"><i
-                                    class="ti-arrow-circle-left"></i></a></div>
+                                class="ti-arrow-circle-left"></i></a></div>
                 </div>
             </div>
         </div>
         <ul class="sidebar-menu scrollable pos-r">
             <li class="nav-item mT-30 active">
                 <a class="sidebar-link" href="{{route('admin.dashboard')}}" default><span
-                            class="icon-holder"><i class="c-blue-500 ti-home"></i> </span><span
-                            class="title">Dashboard</span></a>
+                        class="icon-holder"><i class="c-blue-500 ti-home"></i> </span><span
+                        class="title">Dashboard</span></a>
             </li>
 
             <li class="nav-item dropdown" id="users">
@@ -412,16 +413,16 @@
             </li>
 
             {{--            Redeems --}}
-{{--            @if(Setting::get('redeem_control'))--}}
-{{--                <li id="redeems" class="nav-item">--}}
-{{--                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">--}}
-{{--                                <span class="icon-holder">--}}
-{{--                                    <i class="c-indigo-500 fa fa-trophy"></i>--}}
-{{--                                </span>--}}
-{{--                        <span class="title">{{tr('redeems')}}</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endif--}}
+            {{--            @if(Setting::get('redeem_control'))--}}
+            {{--                <li id="redeems" class="nav-item">--}}
+            {{--                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">--}}
+            {{--                                <span class="icon-holder">--}}
+            {{--                                    <i class="c-indigo-500 fa fa-trophy"></i>--}}
+            {{--                                </span>--}}
+            {{--                        <span class="title">{{tr('redeems')}}</span>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            @endif--}}
 
             {{--            Language --}}
             @if(Setting::get('admin_language_control') == 0)
@@ -457,36 +458,58 @@
                         </a>
                     </li>
 
-{{--                    <li id=home_page_settings" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
-{{--                                        <span class="icon-holder">--}}
-{{--                                            <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                                        </span>--}}
-{{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    {{--                    <li id=home_page_settings" class="nav-item">--}}
+                    {{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
+                    {{--                                        <span class="icon-holder">--}}
+                    {{--                                            <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+                    {{--                                        </span>--}}
+                    {{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
 
                 </ul>
             </li>
 
             {{--            Push --}}
-{{--            <li id="custom-push" class="nav-item">--}}
-{{--                <a class="sidebar-link" href="{{route('admin.push')}}">--}}
-{{--                                <span class="icon-holder">--}}
-{{--                                    <i class="c-indigo-500 fa fa-send"></i>--}}
-{{--                                </span>--}}
-{{--                    <span class="title">{{tr('custom_push')}}</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li id="custom-push" class="nav-item">--}}
+            {{--                <a class="sidebar-link" href="{{route('admin.push')}}">--}}
+            {{--                                <span class="icon-holder">--}}
+            {{--                                    <i class="c-indigo-500 fa fa-send"></i>--}}
+            {{--                                </span>--}}
+            {{--                    <span class="title">{{tr('custom_push')}}</span>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
 
             {{--            Email Templates--}}
-            <li id="email_templates" class="nav-item">
-                <a class="sidebar-link" href="{{route('admin.templates')}}">
+            <li class="nav-item dropdown" id="email_templates" >
+                <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="c-indigo-500 fa fa-envelope"></i>
                     </span>
                     <span class="title">{{tr('email_templates')}}</span>
+                    <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
                 </a>
+
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.create.template')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('create_template')}}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.templates')}}">
+                                <span class="icon-holder">
+                                    <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                </span>
+                            <span class="title">{{tr('view_template')}}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             {{--            Pages--}}
@@ -495,7 +518,8 @@
                     <span class="icon-holder">
                         <i class="c-indigo-500 fa fa-picture-o"></i>
                     </span>
-                    <span class="title">{{tr('pages')}}</span> <span class="arrow">
+                    <span class="title">{{tr('pages')}}</span>
+                    <span class="arrow">
                         <i class="ti-angle-right"></i>
                     </span>
                 </a>
