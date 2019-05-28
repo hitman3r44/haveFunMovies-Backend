@@ -39,8 +39,11 @@ return array(
 	// Mobile Home 
 	'my_commission'=>'My Commission',
     'retailer_commission'=>'Retailer Commission (in %)',
+    'coupon_code_commission'=>'Coupon Code Commission (in %)',
+    'advertisement_commission'=>'Advertisement Commission (in %)',
     'director_commission'=>'Director Commission (in %)',
 	'admin_commission'=>'Admin Commission (in %)',
+    'subscription_commission'=>'Subscription Commission (in %)',
 	'sub_title'=>'Subtitle',
 	'subtitle_validate'=>'The video subtitle must be a file of type: srt.',
 	'mobile_banner_heading' => 'Special Collections',
