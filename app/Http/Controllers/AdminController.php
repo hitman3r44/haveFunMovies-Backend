@@ -3872,10 +3872,6 @@ class AdminController extends Controller
     public function user_subscription_save($s_id, $u_id)
     {
 
-        // Load 
-
-        // $load = UserPayment::where('user_id', $u_id)->orderBy('created_at', 'desc')->first();
-
         $load = UserPayment::where('user_id', $u_id)->where('status', DEFAULT_TRUE)->orderBy('id', 'desc')->first();
 
         $payment = new UserPayment();
@@ -3957,9 +3953,8 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'plan' => 'required|numeric|min:1|max:12',
+            'plan' => 'required|numeric',
             'amount' => 'required|numeric',
-            'no_of_account' => 'required|numeric|min:1',
         ]);
 
         if ($validator->fails()) {
@@ -3983,22 +3978,22 @@ class AdminController extends Controller
 
             } else {
                 $model = new Subscription();
+
                 $model->title = $request->title;
                 $model->description = $request->description;
                 $model->plan = $request->plan;
-                $model->no_of_account = $request->no_of_account;
                 $model->amount = $request->amount;
                 $model->status = 1;
                 $model->popular_status = $request->popular_status ? 1 : 0;
                 $model->unique_id = $model->title;
-                $model->no_of_account = $request->no_of_account;
-                $model->subscription_type = 'month';
+                $model->subscription_type = 'days';
                 $model->total_subscription = 0;
+
                 $model->save();
             }
 
             if ($model) {
-                return redirect(route('admin.subscriptions.view', $model->unique_id))->with('flash_success', $request->id ? tr('subscription_update_success') : tr('subscription_create_success'));
+                return redirect(route('admin.subscriptions.index', $model->unique_id))->with('flash_success', $request->id ? tr('subscription_update_success') : tr('subscription_create_success'));
 
             } else {
                 return back()->with('flash_error', tr('admin_not_error'));

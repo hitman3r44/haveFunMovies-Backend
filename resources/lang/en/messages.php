@@ -701,7 +701,8 @@ return array(
 
 	'type_of_subscription'=>'Subscription Type',
 	'subscription'=>'SubScription',
-	'one_time_payment'=> 'One Time Payment',
+    'subscription_header_view'=>'Subscription',
+    'one_time_payment'=> 'One Time Payment',
 	'recurring_payment'=> 'Recurring Payment',
 	'payment_added'=> 'Payment Added Successfully',
 	'for_subscription'=>'Please click here to subscribe!',
@@ -764,6 +765,7 @@ return array(
 	'subscribers' => 'Subscribers',
 
 	'no_of_months' => 'No of months',
+    'no_of_days' => 'No of days',
 	
 	'subscription_plans'=>'Plans',
 
@@ -894,6 +896,7 @@ return array(
 	'help_notes_streamhash'=>'We have this team of innate developers and dedicated team of support to sort out the things for your benefits. Tell us what you like about Have Fun Movies and we may suggest you the best solution for you :)',
 	'cheers'=>'Cheers!',
 	'please_enter_plan_month'=>'Please enter the plan months. Max : 12 months',
+    'please_enter_plan_days'=>'Please enter the plan days. Max : 365 days',
 	'paid_subscribed_users'=>'Paid / Subscribed Users',
 	'unpaid_unsubscribed_user'=>' Unpaid / Unsubscribed Users',
 	'expiry_days_subscription_user'=>' Expiry days of the subscription for the user.',

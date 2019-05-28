@@ -61,7 +61,8 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             CountriesTableSeeder::class,
             TmdbGenersSeeder::class,
-            CategoriesTableSeeder::class
+            CategoriesTableSeeder::class,
+            SubscriptionsTableSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
