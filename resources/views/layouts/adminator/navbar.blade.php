@@ -62,16 +62,16 @@
                     </li>
                 </ul>
             </li>
-            @can('role')
-                <li class="nav-item">
-                    <a class="sidebar-link" href="{{url('admin/role')}}">
-                            <span class="icon-holder">
-                                <i class="fa fa-list-ul"></i>
-                            </span>
-                        <span class="title">{{tr('role')}}</span>
-                    </a>
-                </li>
-            @endcan
+{{--            @can('role')--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="sidebar-link" href="{{url('admin/role')}}">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="fa fa-list-ul"></i>--}}
+{{--                            </span>--}}
+{{--                        <span class="title">{{tr('role')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endcan--}}
 
             <li class="nav-item dropdown" id="categories">
                 <a class="dropdown-toggle" href="javascript:void(0);">
