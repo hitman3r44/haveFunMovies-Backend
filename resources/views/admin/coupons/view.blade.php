@@ -39,7 +39,7 @@
                     <hr>
 
                     <strong>{{tr('coupon_code')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_coupon->coupon_code}}</h4>
+                    <h4 class="pull-right" >{{$view_coupon->coupon_code}}</h4>
                     <hr>
 
                     <strong>{{tr('amount_type')}}</strong>

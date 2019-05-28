@@ -35,15 +35,15 @@
 
                     <hr>
                     <strong>{{tr('min_play_time')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_advertisement->min_play_time}}</h4>
+                    <h4 class="pull-right" >{{$view_advertisement->min_play_time}}</h4>
 
                     <hr>
                     <strong>{{tr('max_play_time')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_advertisement->max_play_time}}</h4>
+                    <h4 class="pull-right" >{{$view_advertisement->max_play_time}}</h4>
 
                     <hr>
                     <strong>{{tr('already_played_time')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_advertisement->already_played_time}}</h4>
+                    <h4 class="pull-right" >{{$view_advertisement->already_played_time}}</h4>
 
                     <hr>
                     <strong>{{tr('end_playing_date_table_header')}}</strong>
@@ -55,11 +55,11 @@
 
                     <hr>
                     <strong>{{tr('amount')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_advertisement->total_amount}}</h4>
+                    <h4 class="pull-right" >{{$view_advertisement->total_amount}}</h4>
 
                     <hr>
                     <strong>{{tr('per_view_cost')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_advertisement->per_view_cost}}</h4>
+                    <h4 class="pull-right" >{{$view_advertisement->per_view_cost}}</h4>
 
                     <hr>
                     <strong>{{tr('is_published')}}</strong>

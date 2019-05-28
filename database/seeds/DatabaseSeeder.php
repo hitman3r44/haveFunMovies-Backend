@@ -95,8 +95,5 @@ class DatabaseSeeder extends Seeder
 
             });
         });
-
-        $customer->assignRole(Role::findByName('customer'));
-
     }
 }
