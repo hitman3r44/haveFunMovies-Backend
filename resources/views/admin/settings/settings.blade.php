@@ -512,39 +512,39 @@
                                     {{--                                    </div>--}}
 
                                     <div class="col-md-6">
-                                        {{--                                        Admin Commission--}}
+                                        {{--                                        Subscription Commission--}}
                                         <div class="form-group">
 
-                                            <label for="admin_commission">{{tr('admin_commission')}}</label>
+                                            <label for="subscription_commission">{{tr('subscription_commission')}}</label>
 
-                                            <input type="text" class="form-control" name="admin_commission"
-                                                   value="{{Setting::get('admin_commission')}}" id="admin_commission"
-                                                   placeholder="{{tr('admin_commission')}}">
+                                            <input type="text" class="form-control" name="subscription_commission"
+                                                   value="{{Setting::get('subscription_commission')}}" id="subscription_commission"
+                                                   placeholder="{{tr('subscription_commission')}}">
                                         </div>
                                     </div>
-                                    {{--                                        Retailer Commission--}}
+                                    {{--                                        coupon_code_commission Commission--}}
                                     <div class="col-md-6">
                                         <div class="form-group">
 
-                                            <label for="admin_commission">{{tr('retailer_commission')}}</label>
+                                            <label for="coupon_code_commission">{{tr('coupon_code_commission')}}</label>
 
-                                            <input type="text" class="form-control" name="retailer_commission"
-                                                   value="{{Setting::get('retailer_commission')}}"
-                                                   id="retailer_commission"
-                                                   placeholder="{{tr('retailer_commission')}}">
+                                            <input type="text" class="form-control" name="coupon_code_commission"
+                                                   value="{{Setting::get('coupon_code_commission')}}"
+                                                   id="coupon_code_commission"
+                                                   placeholder="{{tr('coupon_code_commission')}}">
                                         </div>
                                     </div>
 
-                                    {{--                                        Director Commission--}}
+                                    {{--                                        advertisement_commission Commission--}}
                                     <div class="col-md-6">
                                         <div class="form-group">
 
-                                            <label for="admin_commission">{{tr('director_commission')}}</label>
+                                            <label for="advertisement_commission">{{tr('advertisement_commission')}}</label>
 
-                                            <input type="text" class="form-control" name="director_commission"
-                                                   value="{{Setting::get('director_commission')}}"
-                                                   id="director_commission"
-                                                   placeholder="{{tr('director_commission')}}">
+                                            <input type="text" class="form-control" name="advertisement_commission"
+                                                   value="{{Setting::get('advertisement_commission')}}"
+                                                   id="advertisement_commission"
+                                                   placeholder="{{tr('advertisement_commission')}}">
                                         </div>
                                     </div>
 

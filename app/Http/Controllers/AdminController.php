@@ -3148,9 +3148,9 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key == "admin_commission") {
+                } else if ($setting->key == "subscription_commission") {
 
-                    $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
+                    $setting->value = $request->has('subscription_commission') ? ($request->subscription_commission < 100 ? $request->subscription_commission : 100) : $setting->value;
 
                     $user_commission = $setting->value < 100 ? 100 - $setting->value : 0;
 
@@ -3162,11 +3162,11 @@ class AdminController extends Controller
                         $user_commission_details->save();
                     }
 
-                } else if ($setting->key === 'director_commission_details'){
-                    $setting->value = $request->has('director_commission_details') ? ($request->director_commission_details < 100 ? $request->director_commission_details : 100) : $setting->value;
+                } else if ($setting->key === 'advertisement_commission'){
+                    $setting->value = $request->has('advertisement_commission') ? ($request->advertisement_commission < 100 ? $request->advertisement_commission : 100) : $setting->value;
 
-                } else if ($setting->key === 'retailer_commission_details'){
-                    $setting->value = $request->has('retailer_commission_details') ? ($request->retailer_commission_details < 100 ? $request->retailer_commission_details : 100) : $setting->value;
+                } else if ($setting->key === 'coupon_code_commission'){
+                    $setting->value = $request->has('coupon_code_commission') ? ($request->coupon_code_commission < 100 ? $request->coupon_code_commission : 100) : $setting->value;
 
                 } else if ($setting->key == 'site_name') {
 
@@ -3764,9 +3764,9 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key === 'admin_commission') {
+                } else if ($setting->key === 'subscription_commission') {
 
-                    $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
+                    $setting->value = $request->has('subscription_commission') ? ($request->subscription_commission < 100 ? $request->subscription_commission : 100) : $setting->value;
 
                     $user_commission = $setting->value < 100 ? 100 - $setting->value : 0;
 
@@ -3778,11 +3778,11 @@ class AdminController extends Controller
                         $user_commission_details->save();
                     }
 
-                } else if ($setting->key === 'director_commission_details'){
-                    $setting->value = $request->has('director_commission_details') ? ($request->director_commission_details < 100 ? $request->director_commission_details : 100) : $setting->value;
+                } else if ($setting->key === 'advertisement_commission'){
+                    $setting->value = $request->has('advertisement_commission') ? ($request->advertisement_commission < 100 ? $request->advertisement_commission : 100) : $setting->value;
 
-                } else if ($setting->key === 'retailer_commission_details'){
-                    $setting->value = $request->has('retailer_commission_details') ? ($request->retailer_commission_details < 100 ? $request->retailer_commission_details : 100) : $setting->value;
+                } else if ($setting->key === 'coupon_code_commission'){
+                    $setting->value = $request->has('coupon_code_commission') ? ($request->coupon_code_commission < 100 ? $request->coupon_code_commission : 100) : $setting->value;
 
                 } else {
 
