@@ -33,6 +33,7 @@
                         class="title">Dashboard</span></a>
             </li>
 
+            @can('admin')
             <li class="nav-item dropdown" id="users">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -62,17 +63,20 @@
                     </li>
                 </ul>
             </li>
-{{--            @can('role')--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="sidebar-link" href="{{url('admin/role')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="fa fa-list-ul"></i>--}}
-{{--                            </span>--}}
-{{--                        <span class="title">{{tr('role')}}</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endcan--}}
+            @endcan
 
+            @can('role')
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{url('admin/role')}}">
+                            <span class="icon-holder">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                        <span class="title">{{tr('role')}}</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('admin')
             <li class="nav-item dropdown" id="categories">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -102,8 +106,10 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
-
+            {{--Video Menu Items--}}
+            @can('video')
             <li class="nav-item dropdown" id="videos">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -160,8 +166,10 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
-
+            {{--Subscription Menu Items--}}
+            @can('admin')
             <li class="nav-item dropdown" id="subscriptions">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -191,8 +199,10 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Coupons--}}
+            @can('retailer')
             <li class="nav-item dropdown" id="coupons">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
@@ -222,9 +232,11 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Advertisement--}}
 
+            @can('advertisement')
             <li class="nav-item dropdown" id="advertisements">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
@@ -255,7 +267,9 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
+            @can('admin')
             {{--            Payment--}}
             <li class="nav-item dropdown" id="payments">
                 <a class="dropdown-toggle" href="javascript:void(0);">
@@ -298,8 +312,10 @@
                     {{--                    @endif--}}
                 </ul>
             </li>
+            @endcan
 
             {{--            Credit Money--}}
+            @can('admin')
             <li class="nav-item dropdown" id="credit_money">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -328,8 +344,10 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Pre-Paid Code--}}
+            @can('retailer')
             <li class="nav-item dropdown" id="prepaid-code">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -358,8 +376,10 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Gift Card--}}
+            @can('retailer')
             <li class="nav-item dropdown" id="gift_card">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -388,9 +408,11 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
 
             {{--            Sell Functionality--}}
+            @can('retailer')
             <li class="nav-item dropdown" id="sell_functionality">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -411,6 +433,7 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Redeems --}}
             {{--            @if(Setting::get('redeem_control'))--}}
@@ -437,6 +460,7 @@
             @endif
 
             {{--            Settings --}}
+            @can('admin')
             <li class="nav-item dropdown" id="settings">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
@@ -469,6 +493,7 @@
 
                 </ul>
             </li>
+            @endcan
 
             {{--            Push --}}
             {{--            <li id="custom-push" class="nav-item">--}}
@@ -481,6 +506,7 @@
             {{--            </li>--}}
 
             {{--            Email Templates--}}
+            @can('admin')
             <li class="nav-item dropdown" id="email_templates" >
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -511,8 +537,10 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Pages--}}
+            @can('admin')
             <li class="nav-item dropdown" id="viewpages">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -543,6 +571,7 @@
                     </li>
                 </ul>
             </li>
+            @endcan
 
             {{--            Admin Profile--}}
             <li id="profile" class="nav-item">
@@ -555,6 +584,7 @@
             </li>
 
             {{--            Mail Camp--}}
+            @can('admin')
             <li id="mail_camp" class="nav-item">
                 <a class="sidebar-link" href="{{route('admin.add.mailcamp')}}">
                     <span class="icon-holder">
@@ -563,15 +593,7 @@
                     <span class="title">{{tr('mail_camp')}}</span>
                 </a>
             </li>
-
-            <li id="help" class="nav-item">
-                <a class="sidebar-link" href="{{route('admin.help')}}">
-                                <span class="icon-holder">
-                                    <i class="c-indigo-500 fa fa-question-circle"></i>
-                                </span>
-                    <span class="title">{{tr('help')}}</span>
-                </a>
-            </li>
+            @endcan
 
             <li class="nav-item">
                 <a class="sidebar-link" href="{{route('admin.logout')}}">

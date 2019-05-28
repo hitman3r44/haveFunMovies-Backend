@@ -6,21 +6,6 @@
 
     {{tr('users')}}
 
-    <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600"
-       title="{{tr('any_help')}}">{{tr('help_ques_mark')}}</a>
-
-    <div id="help-content" style="display: none">
-
-        <ul class="popover-list">
-            <li><span class="text-green"><i class="fa fa-check-circle"></i></span> - {{tr('paid_subscribed_users')}}
-            </li>
-            <li><span class="text-red"><i class="fa fa-times"></i></span> -{{tr('unpaid_unsubscribed_user')}}</li>
-            <li><b>{{tr('validity_days')}} - </b>{{tr('expiry_days_subscription_user')}}</li>
-            <li><b>{{tr('upgrade')}} - </b>{{tr('admin_moderator_upgrade_option')}}</li>
-        </ul>
-
-    </div>
-
 @endsection
 
 @section('breadcrumb')

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
 
 /*
@@ -129,12 +130,52 @@ Route::get('login', function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Auth::routes();
+
     Route::get('register', function () {
         return abort(404);
     })->name('register');
+
     Route::post('register', function () {
         return abort(404);
     })->name('register');
+});
+
+
+Route::group(['middleware' => ['role: admin|director', 'auth'],'prefix' => 'admin', 'as' => 'admin.'], static function() {
+// New Video Upload Code
+
+Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
+
+Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
+
+Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
+
+Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+
+Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
+
+Route::post('/videos/save/tmdb', 'TmdbVideoController@tmdbVideosSave')->name('videos.save.tmdb');
+
+Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
+
+Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');
+
+Route::get('/view/video', 'AdminController@view_video')->name('view.video');
+
+Route::get('/gif/generation', 'AdminController@gif_generator')->name('gif_generator');
+
+Route::post('/save_video_payment/{id}', 'AdminController@save_video_payment')->name('save.video-payment');
+
+Route::get('/delete/video/{id}', 'AdminController@delete_video')->name('delete.video');
+
+Route::get('/video/approve/{id}', 'AdminController@approve_video')->name('video.approve');
+
+Route::get('/video/publish-video/{id}', 'AdminController@publish_video')->name('video.publish-video');
+
+Route::get('/video/decline/{id}', 'AdminController@decline_video')->name('video.decline');
+
+Route::post('/video/change/position', 'AdminController@video_position')->name('save.video.position');
+
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
@@ -282,41 +323,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/videos', 'AdminController@videos')->name('videos');
 
     Route::get('/moderator/videos/{id}','AdminController@moderator_videos')->name('moderator.videos.list');
-
-
-    // New Video Upload Code
-
-    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
-
-    Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
-
-    Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
-
-    Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
-
-    Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
-
-    Route::post('/videos/save/tmdb', 'TmdbVideoController@tmdbVideosSave')->name('videos.save.tmdb');
-
-    Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
-
-    Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');
-
-    Route::get('/view/video', 'AdminController@view_video')->name('view.video');
-
-    Route::get('/gif/generation', 'AdminController@gif_generator')->name('gif_generator');
-
-    Route::post('/save_video_payment/{id}', 'AdminController@save_video_payment')->name('save.video-payment');
-
-    Route::get('/delete/video/{id}', 'AdminController@delete_video')->name('delete.video');
-
-    Route::get('/video/approve/{id}', 'AdminController@approve_video')->name('video.approve');
-
-    Route::get('/video/publish-video/{id}', 'AdminController@publish_video')->name('video.publish-video');
-
-    Route::get('/video/decline/{id}', 'AdminController@decline_video')->name('video.decline');
-
-    Route::post('/video/change/position', 'AdminController@video_position')->name('save.video.position');
 
     // Slider Videos
 
