@@ -6,7 +6,13 @@
             <select name="prepaid_plan_id" id="prepaid_plan_id" class="form-control">
                 <option value=""></option>
                 @foreach($prepaidCodes as $prepaidCode)
-                    <option value="{{ $prepaidCode->id }}" {{ (isset($generatePrepaidCode->prepaid_plan_id) ? ($generatePrepaidCode->prepaid_plan_id == $prepaidCode->id ? 'selected' : '') : '' ) }}>{{ $prepaidCode->code.' ('.$prepaidCode->price.')' }}</option>
+                    <option value="{{ $prepaidCode->id }}"
+                        {{ (isset($generatePrepaidCode->prepaid_plan_id)
+                        ?
+                        ($generatePrepaidCode->prepaid_plan_id == $prepaidCode->id ? 'selected' : '') : '' ) }}
+                    >
+                        {{ $prepaidCode->title}}
+                    </option>
                 @endforeach
             </select>
             {!! $errors->first('prepaid_plan_id', '<small class="text-danger">:message</small>') !!}
@@ -19,20 +25,31 @@
     <label for="customer_id" class="col-md-3 col-form-label">{{  tr('customer') }}</label>
     <div class="col-md-9">
         <div class="form-group">
-            {{-- ::TODO need to know about customer  ? --}}
-            <input class="form-control" name="customer_id" type="number" id="customer_id" placeholder="Customer Unknown"
-                   value="{{ $generatePrepaidCode->customer_id ?? ''}}" required>
+            <select name="customer_id" id="customer_id" class="form-control">
+                <option value=""></option>
+                @foreach($customers as $customer)
+                    <option value="{{ $customer->id }}"
+                        {{ (isset($generatePrepaidCode->prepaid_plan_id)
+                        ?
+                        ($generatePrepaidCode->prepaid_plan_id == $prepaidCode->id ? 'selected' : '') : '' ) }}
+                    >
+                        {{$customer->name}}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('customer_id', '<small class="text-danger">:message</small>') !!}
         </div>
     </div>
 </div>
+
 {{--                        UUid--}}
 <div class="form-group row">
     <label for="customer_id" class="col-md-3 col-form-label">{{  tr('uuid') }}</label>
     <div class="col-md-7">
         <div class="form-group">
-            <input class="form-control" name="uuid" type="text" id="uuid" placeholder="Generate UUID"
-                   value="{{ $generatePrepaidCode->uuid ?? ''}}" required>
+            <input class="form-control" id="uuid" name="uuid" placeholder="Generate UUID" required
+                   type="text"
+                   value="{{ $generatePrepaidCode->uuid ?? ''}}">
             {!! $errors->first('customer_id', '<small class="text-danger">:message</small>') !!}
         </div>
     </div>

@@ -436,6 +436,17 @@
                         </a>
                     </li>
                 </ul>
+
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.generate-prepaid-code.index')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('sold_prepaid_code')}}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             @endcan
 

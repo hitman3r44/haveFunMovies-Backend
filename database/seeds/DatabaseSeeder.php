@@ -64,7 +64,9 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             SubscriptionsTableSeeder::class,
             CouponsTableSeeder::class,
-            AdminVideosTableSeeder::class
+            AdminVideosTableSeeder::class,
+            GiftCardsTableSeeder::class,
+            PrepaidCodesTableSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));

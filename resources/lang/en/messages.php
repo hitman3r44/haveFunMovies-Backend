@@ -1114,9 +1114,14 @@ return array(
 
 	// Per-Paid Functionality
     'enter_prepaid_title'=>'Enter Prepaid Title',
+    'prepaid_plan_name'=>'Prepaid Plan Name',
+    'price'=>'Price',
+
+
 
 	// Gift Card
     'enter_gift_card_title'=>'Enter Gift Card Title',
+    'giftcard'=>'Gift Card',
 
 	//Coupons
 	'coupon'=>'Coupon',
@@ -1233,6 +1238,7 @@ return array(
 	'login_by'=>'Login by',
 	'amount_paid'=>'Amount Paid',
 	'is_user'=>'Is User',
+    'is_used'=>'Is Used',
 	'subscription_cancelled'=>'Subscription Cancelled',
 	'templates'=>'Templates',
 
@@ -1492,11 +1498,16 @@ return array(
 
     'prepaid_plan' => 'Prepaid Plan',
     'customer' => 'Customer',
+    'customer_name' => 'Customer Name',
     'sold_by' => 'Sold By',
     'uuid' => 'UUID',
+    'uuid_code' => 'CODE',
+    'is_paid' => 'Is paid',
+
 
 
     'sell_functionality' => 'Sell Functionality',
     'sell_prepaid_code' => 'Sell Prepaid Code',
+    'sold_prepaid_code' => 'Sold Prepaid Code',
 );
 

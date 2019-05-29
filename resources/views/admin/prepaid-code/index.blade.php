@@ -52,10 +52,9 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Price</th>
-                                <th>Is Used</th>
-                                <th>Is Paid</th>
+                                <th>{{tr('prepaid_plan')}}</th>
+                                <th>{{tr('price')}}</th>
+                                <th>{{tr('is_used')}}</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -66,7 +65,7 @@
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->price }}</td>
                                     <td>{{ ($item->is_used == 1) ? 'Yes' : 'No' }}</td>
-                                    <td>{{ ($item->is_paid == 1) ? 'Yes' : 'No' }}</td>
+
                                     <td>
                                         <ul class="admin-action btn btn-default">
                                             <li class="dropup">
@@ -75,11 +74,11 @@
                                                 </a>
 
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li role="presentation">
-                                                        <a role="menuitem"
-                                                           href="#"
-                                                           title="View PrepaidCode"> Pay</a>
-                                                    </li>
+{{--                                                    <li role="presentation">--}}
+{{--                                                        <a role="menuitem"--}}
+{{--                                                           href="#"--}}
+{{--                                                           title="View PrepaidCode"> Pay</a>--}}
+{{--                                                    </li>--}}
                                                     <li role="presentation">
                                                         <a role="menuitem"
                                                            href="{{ url('/admin/prepaid-code/' . $item->id) }}"
