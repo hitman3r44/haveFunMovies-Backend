@@ -426,6 +426,8 @@
                         <i class="ti-angle-right"></i>
                     </span>
                 </a>
+
+                {{--            Sell Pre Paid Code--}}
                 <ul class="dropdown-menu">
                     <li class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.generate-prepaid-code.create')}}">
@@ -436,7 +438,6 @@
                         </a>
                     </li>
                 </ul>
-
                 <ul class="dropdown-menu">
                     <li class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.generate-prepaid-code.index')}}">
@@ -447,6 +448,28 @@
                         </a>
                     </li>
                 </ul>
+                {{--            Sell Gift Card--}}
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.generate-gift-card.create')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('sell_gift_card')}}</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.generate-gift-card.index')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('sold_gift_card')}}</span>
+                        </a>
+                    </li>
+                </ul>
+
             </li>
             @endcan
 

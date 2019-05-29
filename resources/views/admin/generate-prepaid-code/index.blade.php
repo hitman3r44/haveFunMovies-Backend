@@ -57,7 +57,8 @@
                                 <th>{{tr('uuid_code')}}</th>
                                 <th>{{tr('sold_by')}}</th>
                                 <th>{{tr('is_paid')}}</th>
-                                <th>Actions</th>
+                                <th>{{tr('action')}}</th>
+
                             </tr>
                             </thead>
                             <tbody>

@@ -431,7 +431,6 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
                     'email' => 'required|email|max:255|unique:users,email,' . $request->id,
-                    'mobile' => 'required|digits_between:4,16',
                 )
             );
 
@@ -439,7 +438,6 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
                     'email' => 'required|email|max:255|unique:users,email',
-                    'mobile' => 'required|digits_between:4,16',
                     'password' => 'required|min:6|confirmed',
                 )
             );
@@ -506,7 +504,7 @@ class AdminController extends Controller
                 $email_data['email'] = $user->email;
                 $email_data['template_type'] = ADMIN_USER_WELCOME;
 
-                // $subject = tr('user_welcome_title').' '.Setting::get('site_name');
+                $subject = tr('user_welcome_title').' '.Setting::get('site_name');
                 $page = "emails.admin_user_welcome";
                 $email = $user->email;
                 Helper::send_email($page, $subject = null, $email, $email_data);
@@ -514,15 +512,11 @@ class AdminController extends Controller
 
             $user->save();
 
-            if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
-                if ($request->id != '') {
-                    $user->assignRole($request->role);
-                } else {
-                    $user->syncRoles($request->role);
-                }
+            if ($request->id != '') {
+                $user->assignRole($request->role);
+            } else {
+                $user->syncRoles($request->role);
             }
-
-
 
             if ($new_user) {
 

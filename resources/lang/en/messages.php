@@ -1122,6 +1122,7 @@ return array(
 	// Gift Card
     'enter_gift_card_title'=>'Enter Gift Card Title',
     'giftcard'=>'Gift Card',
+    'gift_card_name'=>'Gift Card Name',
 
 	//Coupons
 	'coupon'=>'Coupon',
@@ -1493,6 +1494,7 @@ return array(
     'add_movies' => 'Add Movies',
 
     'add_generate_prepaid_code' => 'Sell Prepaid Code',
+    'add_generate_gift_card' => 'Sell Gift Card',
     'generate_prepaid_code' => 'Sold Prepaid Code',
     'edit_generate_prepaid_code' => 'Edit Sold Prepaid Code',
 
@@ -1506,8 +1508,19 @@ return array(
 
 
 
+    'generate_prepaid_code_title' => 'Generate Prepaid Code',
+    'generate_gift_card_title' => 'Generate Gift Card',
     'sell_functionality' => 'Sell Functionality',
     'sell_prepaid_code' => 'Sell Prepaid Code',
     'sold_prepaid_code' => 'Sold Prepaid Code',
+    'select_role' => 'Select Role',
+
+    'gift_card_plan' => 'Gift Card Plan',
+    'generate_gift_card' => 'Sold Gift Card',
+    'add_generate_gift_card' => 'Sold Gift Card',
+    'sell_gift_card' => 'Sell Gift Card',
+    'add_generate_gift_card' => 'Sell Gift Card',
+    'edit_generate_gift_card' => 'Edit Gift Card',
+    'sold_gift_card' => 'Sold Gift Card',
 );
 

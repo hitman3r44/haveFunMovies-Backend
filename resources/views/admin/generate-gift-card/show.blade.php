@@ -1,19 +1,19 @@
 @extends('layouts.adminator.master')
 
-@section('title', tr('generate_prepaid_code'))
+@section('title', tr('generate_gift_card'))
 
 @section('content-header')
-    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('generate_prepaid_code') }}</h4>
+    <h4 class="c-grey-900 mT-10 mB-30"> {{ tr('generate_gift_card') }}</h4>
 @endsection
 
 @section('breadcrumb')
     <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
         </a> >
     </li>
-    <li class="list-inline-item"><a href="{{route('admin.generate-prepaid-code.index')}}"><i
-                    class="fa fa-suitcase"></i> {{tr('generate_prepaid_code')}}</a> >
+    <li class="list-inline-item"><a href="{{route('admin.generate-gift-card.index')}}"><i
+                class="fa fa-suitcase"></i> {{tr('generate_gift_card')}}</a> >
     </li>
-    <li class="list-inline-item active">{{tr('generate_prepaid_code')}}</li>
+    <li class="list-inline-item active">{{tr('generate_gift_card')}}</li>
 @endsection
 
 @section('content')
@@ -23,14 +23,14 @@
                 <div class="card">
                     <div class="card-header card-header-success card-header-icon">
                         <h4 class="card-title">
-                            {{tr('generate_prepaid_code_title')}}
+                            {{tr('generate_gift_card_title')}}
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <div class="btn-group">
-                                        <a href="{{route('admin.generate-prepaid-code.create')}}"
-                                           class="btn btn-info btn-sm">{{tr('add_generate_prepaid_code')}}</a>
-                                        <a href="{{route('admin.generate-prepaid-code.index')}}"
-                                           class="btn btn-primary btn-sm">{{tr('generate_prepaid_code')}}</a>
+                                        <a href="{{route('admin.generate-gift-card.create')}}"
+                                           class="btn btn-info btn-sm">{{tr('add_generate_gift_card')}}</a>
+                                        <a href="{{route('admin.generate-gift-card.index')}}"
+                                           class="btn btn-primary btn-sm">{{tr('generate_gift_card')}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -42,16 +42,16 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th> {{tr("prepaid_plan")}}</th>
-                                    <td> {{ $generatePrepaidCode->prepaidCode->code }} </td>
+                                    <th> {{tr("gift_card_plan")}}</th>
+                                    <td> {{ $generateGiftCard->giftCard->code }} </td>
                                 </tr>
                                 <tr>
                                     <th> {{tr("customer_id")}}</th>
-                                    <td> {{ $generatePrepaidCode->customer_id }} </td>
+                                    <td> {{ $generateGiftCard->customer_id }} </td>
                                 </tr>
                                 <tr>
                                     <th> {{tr("sold_by")}}</th>
-                                    <td> {{ $generatePrepaidCode->soldBy->name }} </td>
+                                    <td> {{ $generateGiftCard->soldBy->name }} </td>
                                 </tr>
                                 </tbody>
                             </table>

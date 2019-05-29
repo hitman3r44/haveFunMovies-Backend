@@ -82,5 +82,9 @@ class DatabaseSeeder extends Seeder
             $advertisement->movies()->attach(AdminVideo::whereIn('id', [1,2,3])->get());
 
         });
+
+        $customers = factory(App\User::class, 4)->create()->each(function ($advertisement){
+
+        });
     }
 }
