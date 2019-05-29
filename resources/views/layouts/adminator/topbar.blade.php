@@ -6,7 +6,7 @@
             <li class="search-box"><a class="search-toggle no-pdd-right" href="javascript:void(0);"><i
                             class="search-icon ti-search pdd-right-10"></i> <i
                             class="search-icon-close ti-close pdd-right-10"></i></a></li>
-            <li class="search-input"><input class="form-control" type="text" placeholder="Search..."></li>
+            <li class="search-input"><input class="form-control" type="text" placeholder="{{tr('search_place_holder')}}"></li>
         </ul>
         <ul class="nav-right">
             {{--<li class="notifications dropdown">--}}
@@ -197,7 +197,6 @@
                     <li><a href="{{route('admin.profile')}}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700"><i class="ti-user mR-10"></i>
                             <span>Profile</span></a></li>
                     <li>
-
                         <a class="d-b td-n pY-5 bgcH-grey-100 c-grey-700" href="{{ route('admin.logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ti-power-off mR-10"></i> <span>{{tr('sign_out')}}</span>

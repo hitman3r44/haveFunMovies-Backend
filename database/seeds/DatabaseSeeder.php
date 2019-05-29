@@ -83,8 +83,8 @@ class DatabaseSeeder extends Seeder
 
         });
 
-        $customers = factory(App\User::class, 4)->create()->each(function ($advertisement){
-
-        });
+//        $customers = factory(App\User::class, 4)->create()->each(function ($advertisement){
+//
+//        });
     }
 }
