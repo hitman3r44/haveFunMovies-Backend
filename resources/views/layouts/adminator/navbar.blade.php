@@ -30,7 +30,7 @@
             <li class="nav-item mT-30 active">
                 <a class="sidebar-link" href="{{route('admin.dashboard')}}" default><span
                         class="icon-holder"><i class="c-blue-500 ti-home"></i> </span><span
-                        class="title">Dashboard</span></a>
+                        class="title">{{tr('dashboard')}}</span></a>
             </li>
 
             @can('admin')
@@ -634,14 +634,14 @@
             @endcan
 
             <li class="nav-item">
-                <a class="sidebar-link" href="{{route('admin.logout')}}">
-                    <span class="icon-holder">
-                        <i class="c-indigo-500 fa fa-sign-out"></i>
-                    </span>
+                <a class="sidebar-link" href="{{route('admin.logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <span class="icon-holder"> <i class="c-indigo-500 fa fa-sign-out"></i></span>
                     <span class="title">{{tr('sign_out')}}</span>
                 </a>
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
-
         </ul>
     </div>
 </div>

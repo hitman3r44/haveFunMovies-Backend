@@ -124,6 +124,8 @@ return array(
 	'moderator' => 'Moderator',
 	'home'	=>	'Home',
 	'dashboard'	=> 	'Dashboard',
+    'search_place_holder'	=> 	'Search...',
+
 	'menu' => 'Menu',
 
 	'register'	=>	'Register',
