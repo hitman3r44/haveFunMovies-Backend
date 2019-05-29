@@ -1114,9 +1114,15 @@ return array(
 
 	// Per-Paid Functionality
     'enter_prepaid_title'=>'Enter Prepaid Title',
+    'prepaid_plan_name'=>'Prepaid Plan Name',
+    'price'=>'Price',
+
+
 
 	// Gift Card
     'enter_gift_card_title'=>'Enter Gift Card Title',
+    'giftcard'=>'Gift Card',
+    'gift_card_name'=>'Gift Card Name',
 
 	//Coupons
 	'coupon'=>'Coupon',
@@ -1233,6 +1239,7 @@ return array(
 	'login_by'=>'Login by',
 	'amount_paid'=>'Amount Paid',
 	'is_user'=>'Is User',
+    'is_used'=>'Is Used',
 	'subscription_cancelled'=>'Subscription Cancelled',
 	'templates'=>'Templates',
 
@@ -1487,16 +1494,33 @@ return array(
     'add_movies' => 'Add Movies',
 
     'add_generate_prepaid_code' => 'Sell Prepaid Code',
+    'add_generate_gift_card' => 'Sell Gift Card',
     'generate_prepaid_code' => 'Sold Prepaid Code',
     'edit_generate_prepaid_code' => 'Edit Sold Prepaid Code',
 
     'prepaid_plan' => 'Prepaid Plan',
     'customer' => 'Customer',
+    'customer_name' => 'Customer Name',
     'sold_by' => 'Sold By',
     'uuid' => 'UUID',
+    'uuid_code' => 'CODE',
+    'is_paid' => 'Is paid',
 
 
+
+    'generate_prepaid_code_title' => 'Generate Prepaid Code',
+    'generate_gift_card_title' => 'Generate Gift Card',
     'sell_functionality' => 'Sell Functionality',
     'sell_prepaid_code' => 'Sell Prepaid Code',
+    'sold_prepaid_code' => 'Sold Prepaid Code',
+    'select_role' => 'Select Role',
+
+    'gift_card_plan' => 'Gift Card Plan',
+    'generate_gift_card' => 'Sold Gift Card',
+    'add_generate_gift_card' => 'Sold Gift Card',
+    'sell_gift_card' => 'Sell Gift Card',
+    'add_generate_gift_card' => 'Sell Gift Card',
+    'edit_generate_gift_card' => 'Edit Gift Card',
+    'sold_gift_card' => 'Sold Gift Card',
 );
 

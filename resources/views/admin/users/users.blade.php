@@ -82,9 +82,7 @@
                                     <th>{{tr('id')}}</th>
                                     <th>{{tr('username')}}</th>
                                     <th>{{tr('email')}}</th>
-                                    <th>{{tr('validity_days')}}</th>
-                                    <th>{{tr('active_plan')}}</th>
-                                    <th>{{tr('clear_login')}}</th>
+                                    <th>{{tr('role')}}</th>
                                     <th>{{tr('status')}}</th>
                                     <th>{{tr('action')}}</th>
                                 </tr>
@@ -115,19 +113,9 @@
 
                                         <td>{{$user->email}}</td>
                                         <td>
-                                            @if($user->user_type)
-                                                {{get_expiry_days($user->id)}}
+                                            @if($user->roles)
+                                                {{strtoupper($user->getRoleNames()->first())}}
                                             @endif
-                                        </td>
-
-                                        <td>
-                                            <?php echo active_plan($user->id);?>
-                                        </td>
-                                        <td class="text-center">
-
-                                            <a href="{{route('admin.users.clear-login', ['id'=>$user->id])}}"><span
-                                                        class="badge badge-warning">{{tr('clear')}}</span></a>
-
                                         </td>
 
                                         <td>
@@ -212,12 +200,12 @@
                                                         <?php /*<li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('admin.user.history', $user->id)}}">{{tr('history')}}</a></li>
 
 											                  	<li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('admin.user.wishlist', $user->id)}}">{{tr('wishlist')}}</a></li> */?>
-                                                        <li>
-                                                            <a href="{{route('admin.subscriptions.plans' , $user->id)}}">
-                                                                <span class="text-green"><b><i class="fa fa-eye"></i>&nbsp;{{tr('subscription_plans')}}</b></span>
-                                                            </a>
+{{--                                                        <li>--}}
+{{--                                                            <a href="{{route('admin.subscriptions.plans' , $user->id)}}">--}}
+{{--                                                                <span class="text-green"><b><i class="fa fa-eye"></i>&nbsp;{{tr('subscription_plans')}}</b></span>--}}
+{{--                                                            </a>--}}
 
-                                                        </li>
+{{--                                                        </li>--}}
 
 
                                                     </ul>

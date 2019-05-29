@@ -339,7 +339,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('gift-card', 'GiftCardController');
     Route::post('generate-prepaid-code/generate-uuid' , 'GeneratePrepaidCodeController@generateUuid')->name('generate-prepaid-code.uuid');
     Route::resource('generate-prepaid-code', 'GeneratePrepaidCodeController');
-
+    Route::resource('generate-gift-card', 'GeneratedGiftCardController');
+    Route::post('generate-gift-card/generate-uuid' , 'GeneratedGiftCardController@generateUuid')->name('generate-gift-card.uuid');
 
     // Ajax User payments
 

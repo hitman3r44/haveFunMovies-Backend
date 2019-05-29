@@ -41,16 +41,17 @@
 
                             <div class="col-md-9">
                                 <div class="col-sm-10">
-                                    <input type="text" name="title" role="title" min="5" max="20" class="form-control" value="{{ old('title') }}" required placeholder="{{tr('enter_gift_card_title')}}">
+                                    <input type="text" name="title" role="title" min="5" max="20" class="form-control" value="{{ old('title') }}" required placeholder="{{tr('prepaid_plan_name')}}">
                                     {!! $errors->first('title', '<small class="text-danger">:message</small>') !!}
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="price" class="col-md-3 col-form-label">Price</label>
+                            <label for="price" class="col-sm-2 control-label"> * {{tr('price')}}</label>
                             <div class="col-md-9">
-                                <div class="form-group">
-                                    <input class="form-control" name="price" type="number" id="price" value="">
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="price" type="float" id="price" value="">
                                     {!! $errors->first('price', '<small class="text-danger">:message</small>') !!}
                                 </div>
                             </div>

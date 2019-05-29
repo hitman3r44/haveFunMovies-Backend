@@ -18,8 +18,8 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => 'Admin',
-        'email' => 'admin@havefunmovies.com',
+        'name' => $faker->name,
+        'email' => $faker->firstName.'@havefunmovies.com',
         'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
         'picture' => 'http://adminview.streamhash.com/placeholder.png',
         'token' => '2y103gI7f5tk4o1peCGWzx6Q604yx0xu8kPf1WdSgxZkCnMGAOSsmWaW',

@@ -52,19 +52,32 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Prepaid Plan Id</th>
-                                <th>Customer Id</th>
-                                <th>Sold By</th>
-                                <th>Actions</th>
+                                <th>{{tr('prepaid_plan_name')}}</th>
+                                <th>{{tr('customer_name')}}</th>
+                                <th>{{tr('uuid_code')}}</th>
+                                <th>{{tr('sold_by')}}</th>
+                                <th>{{tr('is_paid')}}</th>
+                                <th>{{tr('action')}}</th>
+
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($generatePrepaidCode as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->prepaid_plan }}</td>
-                                    <td>{{ $item->customer_id }}</td>
-                                    <td>{{ $item->sold_by }}</td>
+                                    <td>{{ $item->title}}</td>
+                                    <td>{{ $item->receiver_name}}</td>
+                                    <td>{{ $item->UUID}}</td>
+                                    <td>{{ $item->giver_name }}</td>
+                                    <td class="text-center">
+
+                                        @if($item->is_paid)
+                                            <span class="label label-success">{{tr('yes')}}</span>
+                                        @else
+                                            <span class="label label-warning">{{tr('no')}}</span>
+                                        @endif
+                                    </td>
+
                                     <td>
                                         <ul class="admin-action btn btn-default">
                                             <li class="dropup">
@@ -78,25 +91,25 @@
                                                            href="{{ url('/admin/generate-prepaid-code/' . $item->id) }}"
                                                            title="View GeneratePrepaidCode"> {{tr('view')}}</a>
                                                     </li>
-                                                    {{--<li role="presentation">--}}
-                                                        {{--<a role="menuitem"--}}
-                                                           {{--href="{{ url('/admin/generate-prepaid-code/' . $item->id . '/edit') }}"--}}
-                                                           {{--title="View GeneratePrepaidCode"> {{tr('edit')}}</a>--}}
-                                                    {{--</li>--}}
-                                                    {{--<li role="presentation">--}}
-                                                        {{--<a>--}}
-                                                            {{--<form role="menuitem" method="POST"--}}
-                                                                  {{--action="{{ url('/admin/generate-prepaid-code' . '/' . $item->id) }}"--}}
-                                                                  {{--accept-charset="UTF-8" style="display:inline">--}}
-                                                                {{--@csrf--}}
-                                                                {{--@method('DELETE')--}}
-                                                                {{--<input type="submit" class="deleteGeneratePrepaidCode"--}}
-                                                                       {{--title="Delete GeneratePrepaidCode"--}}
-                                                                       {{--onclick="return confirm('&quot;Confirm GeneratePrepaidCode delete?&quot;')"--}}
-                                                                       {{--value="{{tr('delete')}}"">--}}
-                                                            {{--</form>--}}
-                                                        {{--</a>--}}
-                                                    {{--</li>--}}
+{{--                                                    <li role="presentation">--}}
+{{--                                                        <a role="menuitem"--}}
+{{--                                                           href="{{ url('/admin/generate-prepaid-code/' . $item->id . '/edit') }}"--}}
+{{--                                                           title="View GeneratePrepaidCode"> {{tr('edit')}}</a>--}}
+{{--                                                    </li>--}}
+{{--                                                    <li role="presentation">--}}
+{{--                                                        <a>--}}
+{{--                                                            <form role="menuitem" method="POST"--}}
+{{--                                                                  action="{{ url('/admin/generate-prepaid-code' . '/' . $item->id) }}"--}}
+{{--                                                                  accept-charset="UTF-8" style="display:inline">--}}
+{{--                                                                @csrf--}}
+{{--                                                                @method('DELETE')--}}
+{{--                                                                <input type="submit" class="deleteGeneratePrepaidCode"--}}
+{{--                                                                       title="Delete GeneratePrepaidCode"--}}
+{{--                                                                       onclick="return confirm('&quot;Confirm GeneratePrepaidCode delete?&quot;')"--}}
+{{--                                                                       value="{{tr('delete')}} "" >--}}
+{{--                                                            </form>--}}
+{{--                                                        </a>--}}
+{{--                                                    </li>--}}
                                                 </ul>
                                             </li>
                                         </ul>

@@ -52,10 +52,10 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Code</th>
-                                <th>Price</th>
-                                <th>Is Used</th>
-                                <th>Actions</th>
+                                <th>{{tr('giftcard')}}</th>
+                                <th>{{tr('price')}}</th>
+                                <th>{{tr('is_used')}}</th>
+                                <th>{{tr('action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -63,8 +63,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->code }}</td>
+                                    <td>{{ $item->price }}</td>
                                     <td>{{ ($item->is_used == 1) ? 'Yes' : 'No' }}</td>
-                                    <td>{{ ($item->is_paid == 1) ? 'Yes' : 'No' }}</td>
                                     <td>
                                         <ul class="admin-action btn btn-default">
                                             <li class="dropup">
