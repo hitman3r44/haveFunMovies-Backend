@@ -43,7 +43,6 @@
                                     <th>{{tr('id')}}</th>
                                     <th>{{tr('category')}}</th>
                                     <th>{{tr('picture')}}</th>
-                                    <th>{{tr('sub_categories')}}</th>
                                     <th>{{tr('is_series')}}</th>
                                     <th>{{tr('status')}}</th>
                                     <th>{{tr('action')}}</th>
@@ -59,10 +58,7 @@
                                         <td>
                                             <img style="height: 30px;" src="{{$category->picture}}">
                                         </td>
-                                        <td>
-                                            <a href="{{route('admin.sub_categories' , array('category' => $category->id))}}">
-                                                {{count($category->subCategory)}}</a>
-                                        </td>
+
                                         <td>
                                             @if($category->is_series)
                                                 <span class="badge badge-success">{{tr('yes')}}</span>
@@ -126,16 +122,6 @@
                                                                                        href="{{route('admin.category.approve' , array('id' => $category->id , 'status' => 1))}}">{{tr('approve')}}</a>
                                                             </li>
                                                         @endif
-
-                                                        <li class="divider" role="presentation"></li>
-
-                                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                                   href="{{route('admin.add.sub_category' , array('category' => $category->id))}}">{{tr('add_sub_category')}}</a>
-                                                        </li>
-
-                                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                                   href="{{route('admin.sub_categories' , array('category' => $category->id))}}">{{tr('view_sub_categories')}}</a>
-                                                        </li>
 
                                                         <li class="divider" role="presentation"></li>
 

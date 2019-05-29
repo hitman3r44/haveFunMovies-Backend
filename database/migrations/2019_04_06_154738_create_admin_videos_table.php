@@ -63,6 +63,7 @@ class CreateAdminVideosTable extends Migration
             $table->integer('video_type');
             $table->integer('video_upload_type');
             $table->smallInteger('position');
+            $table->integer('tmdb_video_id')->nullable();
         });
     }
 

@@ -16,6 +16,7 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('unique_id');
             $table->string('title');
             $table->text('description');
@@ -25,8 +26,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('total_subscription');
             $table->integer('status');
             $table->integer('popular_status')->default(0);
-            $table->integer('no_of_account')->default(1);
-            $table->softDeletes();
+
             $table->timestamps();
         });
     }

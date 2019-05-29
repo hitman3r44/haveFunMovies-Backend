@@ -74,7 +74,7 @@ function moderator_details($id , $property = "") {
 *
 */
 function tr($key , $confirmation_content_lang_key = "") {
-    if(Auth::guard('admin')->check()) {
+    if(Auth::check()) {
         $locale = Setting::get('default_lang' , 'en');
     } else {
         if (!\Session::has('locale')) {
@@ -281,7 +281,7 @@ function get_youtube_embed_link($video_url) {
     if(strpos($video_url , 'embed')) {
         $video_url_id = explode('embed/', $video_url);
         if (count($video_url_id) == 2) {
-            return "https://www.youtube.com/watch?v=".$video_url_id[1];
+            return "https://www.youtube.com/embed/".$video_url_id[1];
         }
     }
 

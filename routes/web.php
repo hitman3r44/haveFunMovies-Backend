@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redis;
 */
 
 /***********************  UI Routes *********************/
+
 
 Route::get('/upload-video' , 'UIController@upload_video');
 
@@ -119,27 +120,26 @@ Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin
 Route::post('save_admin_control', 'ApplicationController@save_admin_control')->name('save_admin_control');
 
 
+Route::get('/clear-cache', 'ArtisanCommandController@clearCache')->name('clear-cache');
 
+Route::get('login', function () {
+    return redirect()->route('admin.login');
+});
 
-
-
-
-
-
-
-
-
-
-Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Auth::routes();
+
     Route::get('register', function () {
         return abort(404);
     })->name('register');
+
     Route::post('register', function () {
         return abort(404);
     })->name('register');
+});
 
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Route::get('/', 'AdminController@dashboard')->name('dashboard');
 
@@ -285,10 +285,31 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::get('/moderator/videos/{id}','AdminController@moderator_videos')->name('moderator.videos.list');
 
+    // Slider Videos
+
+    Route::get('/slider/video/{id}', 'AdminController@slider_video')->name('slider.video');
+
+    // Banner Videos
+
+    Route::get('/banner/videos', 'AdminController@banner_videos')->name('banner.videos');
+
+    Route::get('/add/banner/video', 'AdminController@add_banner_video')->name('add.banner.video');
+
+    Route::get('/change/banner/video/{id}', 'AdminController@change_banner_video')->name('change.video');
 
     // New Video Upload Code
 
     Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
+
+    Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
+
+    Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
+
+    Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+
+    Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
+
+    Route::post('/videos/save/tmdb', 'TmdbVideoController@tmdbVideosSave')->name('videos.save.tmdb');
 
     Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
 
@@ -310,20 +331,16 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::post('/video/change/position', 'AdminController@video_position')->name('save.video.position');
 
-    // Slider Videos
-
-    Route::get('/slider/video/{id}', 'AdminController@slider_video')->name('slider.video');
-
-    // Banner Videos
-
-    Route::get('/banner/videos', 'AdminController@banner_videos')->name('banner.videos');
-
-    Route::get('/add/banner/video', 'AdminController@add_banner_video')->name('add.banner.video');
-
-    Route::get('/change/banner/video/{id}', 'AdminController@change_banner_video')->name('change.video');
-
     // User Payment details
     Route::get('user/payments' , 'AdminController@user_payments')->name('user.payments');
+
+    Route::resource('credit-money', 'CreditMoneyController');
+    Route::resource('prepaid-code', 'PrepaidCodeController');
+    Route::resource('gift-card', 'GiftCardController');
+    Route::post('generate-prepaid-code/generate-uuid' , 'GeneratePrepaidCodeController@generateUuid')->name('generate-prepaid-code.uuid');
+    Route::resource('generate-prepaid-code', 'GeneratePrepaidCodeController');
+    Route::resource('generate-gift-card', 'GeneratedGiftCardController');
+    Route::post('generate-gift-card/generate-uuid' , 'GeneratedGiftCardController@generateUuid')->name('generate-gift-card.uuid');
 
     // Ajax User payments
 
@@ -455,6 +472,36 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::post('/email/form/action','AdminController@email_send_process')->name('email.success');
 
+    // Advertisement
+
+    // Get the add advertisement forms
+    Route::get('/advertisement/add','AdvertisementController@advertisement_create')->name('add.advertisement');
+
+    // Get the edit advertisement forms
+    Route::get('/advertisement/edit/{id}','AdvertisementController@advertisement_edit')->name('edit.advertisement');
+
+    // Get the list of advertisement details
+    Route::get('/advertisement/list','AdvertisementController@advertisement_index')->name('advertisement.list');
+
+    // Save the advertisement details
+    Route::post('/advertisement/save','AdvertisementController@advertisement_save')->name('save.advertisement');
+
+    //Get the particular advertisement details
+    Route::get('/advertisement/view/{id}','AdvertisementController@advertisement_view')->name('advertisement.view');
+
+    // Delete the advertisement details
+    Route::get('/advertisement/delete/{id}','AdvertisementController@advertisement_delete')->name('delete.advertisement');
+
+    //Advertisement approve and decline status
+    Route::get('/advertisement/status','AdvertisementController@advertisement_status_change')->name('advertisement.status');
+
+    //Advertisement additional data for form, url content Advertisement in ajax blocked by add-blocker
+    Route::get('/advrtise/get-data','AdvertisementController@advertisement_get_data')->name('advertisement.data');
+
+
+    //search countries, url should be countries/search?term=Bangladesh
+    Route::get('/countries/search','CountryController@searchCountries')->name('countries.search');
+
 
     // Email Templates,
 
@@ -512,20 +559,13 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::get('videos/banner/remove', 'AdminController@videos_remove_banner')->name('banner.remove');
 
-
+    // to edit the permission of these role
     Route::resource('role', 'RoleController');
+
+    //Log Route
+
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
-
-
-
-
-
-
-
-
-
-
-
 
 Route::get('/embed', 'UserController@embed_video')->name('embed_video');
 

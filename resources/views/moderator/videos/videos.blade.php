@@ -173,7 +173,7 @@
 
 											      	<div class="modal-body">
 
-											      		<input type="hidden" name="ppv_created_by" id="ppv_created_by" value="{{Auth::guard('moderator')->user()->id}}">
+											      		<input type="hidden" name="ppv_created_by" id="ppv_created_by" value="{{Auth::user()->id}}">
 
 												        <div class="row">
 

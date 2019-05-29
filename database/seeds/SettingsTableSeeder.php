@@ -291,13 +291,23 @@ class SettingsTableSeeder extends Seeder
             ],
 
             [
-                'key' => 'admin_commission',
+                'key' => 'subscription_commission',
+                'value' => '10',
+            ],
+
+            [
+                'key' => 'coupon_code_commission',
+                'value' => '10',
+            ],
+
+            [
+                'key' => 'advertisement_commission',
                 'value' => '10',
             ],
 
             [
                 'key' => 'user_commission',
-                'value' => '90',
+                'value' => '10',
             ],
 
             [

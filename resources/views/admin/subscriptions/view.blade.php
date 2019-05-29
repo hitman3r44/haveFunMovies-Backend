@@ -10,7 +10,7 @@
     <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
         </a></li>
     <li class="list-inline-item"><a href="{{route('admin.subscriptions.index')}}"><i
-                    class="fa fa-key"></i> {{tr('subscriptions')}}</a></li>
+                class="fa fa-key"></i> {{tr('subscriptions')}}</a></li>
     <li class="list-inline-item active"><i class="fa fa-eye"></i>&nbsp;{{tr('view_subscriptions')}}</li>
 @endsection
 
@@ -37,7 +37,7 @@
                 <div class="row bgc-grey-600 p-10">
 
                     <div class="col-md-6 text-white">
-                        <h3>{{tr('subscription')}}</h3>
+                        <h3>{{tr('subscription_header_view')}}</h3>
                     </div>
 
                     <div class="col-md-6">
@@ -50,8 +50,9 @@
                                     <i class="fa fa-check"></i>&nbsp;&nbsp;{{tr('approve')}}
                                 @endif
                             </a>
-                            <a href="{{route('admin.subscriptions.edit',$data->unique_id)}}" class="btn btn-sm btn-warning"><i
-                                        class="fa fa-pencil"></i> {{tr('edit')}}</a>
+                            <a href="{{route('admin.subscriptions.edit',$data->unique_id)}}"
+                               class="btn btn-sm btn-warning"><i
+                                    class="fa fa-pencil"></i> {{tr('edit')}}</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +71,7 @@
 
                         <hr>
 
-                        <strong><i class="fa fa-calendar margin-r-5"></i> {{tr('no_of_months')}}</strong>
+                        <strong><i class="fa fa-calendar margin-r-5"></i> {{tr('no_of_days')}}</strong>
                         <br>
                         <br>
 
@@ -118,16 +119,6 @@
                     </div>
 
                     <div class="col-md-6">
-                        <strong><i class="fa fa-users margin-r-5"></i> {{tr('no_of_account')}}</strong>
-
-                        <br>
-                        <br>
-
-                        <p><span class="label label-danger"
-                                 style="padding: 5px 10px;margin: 5px;font-size: 18px"><b>{{$data->no_of_account}}</b></span>
-                        </p>
-                        <hr>
-
 
                         <strong><i class="fa fa-users margin-r-5"></i> {{tr('total_subscribers')}}</strong>
 

@@ -1,5 +1,7 @@
 <?php
 
+use Kryptonit3\TMDBLaravel\TMDBServiceProvider;
+
 return [
 
     /*
@@ -180,10 +182,16 @@ return [
         App\Providers\RouteServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-//        Maatwebsite\Excel\ExcelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        TMDBServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
+        vidhyar2612\Enveditor\EnveditorServiceProvider::class
+
+
 
     ],
 
@@ -241,7 +249,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
+        'Enveditor' => 'vidhyar2612\Enveditor\Facade',
     ],
-
 ];

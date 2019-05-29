@@ -12,7 +12,7 @@ use App\Model\AdminVideo;
 use App\User;
 use App\Helpers\Helper;
 
-use App\Page;
+use App\Model\Page;
 
 use Setting;
 
