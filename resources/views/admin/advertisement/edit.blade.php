@@ -174,7 +174,8 @@
                     </div>
 
                     <div class="box-footer">
-                        <a href="" class="btn btn-danger">{{tr('reset')}}</a>
+
+                        <a href="{{ url()->previous() }}" class="btn btn-danger">{{tr('cancel')}}</a>
                         <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
                     </div>
                 </form>

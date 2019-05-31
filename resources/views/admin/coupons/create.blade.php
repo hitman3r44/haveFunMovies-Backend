@@ -87,7 +87,7 @@
 					</div> 
 
 					<div class="box-footer">
-						<a class="btn btn-danger">{{tr('reset')}}</a>
+						<button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
 						<button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
 					</div>
 				</form>
