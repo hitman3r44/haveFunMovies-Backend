@@ -341,6 +341,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('generate-prepaid-code', 'GeneratePrepaidCodeController');
     Route::resource('generate-gift-card', 'GeneratedGiftCardController');
     Route::post('generate-gift-card/generate-uuid' , 'GeneratedGiftCardController@generateUuid')->name('generate-gift-card.uuid');
+    Route::get('/cast_and_crew_type/get-data','CastAndCrewTypeController@cast_and_crew_types_get_data')->name('cast-and-crew-type.data');
 
     // Ajax User payments
 
