@@ -18,6 +18,7 @@ class CreateCreditMoneysTable extends Migration
             $table->integer('retailer_id');
             $table->decimal('amount');
             $table->integer('given_by');
+
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->softDeletes();

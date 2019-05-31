@@ -59,11 +59,12 @@ class CreateAdminVideosTable extends Migration
             $table->float('redeem_amount');
             $table->float('admin_amount');
             $table->float('user_amount');
-            $table->timestamps();
             $table->integer('video_type');
             $table->integer('video_upload_type');
             $table->smallInteger('position');
             $table->integer('tmdb_video_id')->nullable();
+            $table->integer('created_by');
+            $table->timestamps();
         });
     }
 

@@ -23,6 +23,7 @@ class CreateRedeemsTable extends Migration
             $table->float('paid');
             $table->float('remaining');
             $table->integer('status');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

@@ -89,7 +89,6 @@ class AdvertisementController extends Controller
 
                 $advertisement->updated_at = Carbon::now();
                 $advertisement->uploaded_at = Carbon::now();
-                $advertisement->created_by = Auth::user()->id;
                 $advertisement->updated_by = Auth::user()->id;
 
                 $message = tr('advertisement_add_success');

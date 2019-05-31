@@ -18,6 +18,7 @@ class CreateVideoCastCrewsTable extends Migration
             $table->increments('id');
             $table->integer('admin_video_id');
             $table->integer('cast_crew_id');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
