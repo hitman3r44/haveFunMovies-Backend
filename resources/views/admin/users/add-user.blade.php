@@ -33,7 +33,7 @@
                     <div class="mT-30">
 
                         <div class="form-group row">
-                            <label for="username" class="col-sm-2 control-label">* {{tr('username')}}</label>
+                            <label for="username" class="col-sm-2 col-form-label">* {{tr('username')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="name"
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-2 control-label">* {{tr('email')}}</label>
+                            <label for="email" class="col-sm-2 col-form-label">* {{tr('email')}}</label>
                             <div class="col-sm-10">
                                 <input type="email" maxlength="255" required class="form-control" id="email"
                                        name="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,10}$"
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="mobile" class="col-sm-2 control-label">{{tr('mobile')}}</label>
+                            <label for="mobile" class="col-sm-2 col-form-label">{{tr('mobile')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" name="mobile" class="form-control" id="mobile"
@@ -65,7 +65,7 @@
 
                         @if ($authUser->hasRole('super-admin') || $authUser->hasRole('admin'))
                             <div class="form-group row">
-                                <label for="mobile" class="col-sm-2 control-label">* {{tr('role')}}</label>
+                                <label for="mobile" class="col-sm-2 col-form-label">* {{tr('role')}}</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="role" id="role" required>
                                         <option value="}">{{tr('select_role')}}</option>
@@ -78,7 +78,7 @@
                         @endif
 
                         <div class="form-group row">
-                            <label for="password" class="col-sm-2 control-label">* {{tr('password')}}</label>
+                            <label for="password" class="col-sm-2 col-form-label">* {{tr('password')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="password" required name="password" pattern=".{6,}"
@@ -89,7 +89,7 @@
 
                         <div class="form-group row">
                             <label for="username"
-                                   class="col-sm-2  control-label">* {{tr('password_confirmation')}}</label>
+                                   class="col-sm-2  col-form-label">* {{tr('password_confirmation')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="password" required pattern=".{6,}" title="{{tr('password_notes')}}"

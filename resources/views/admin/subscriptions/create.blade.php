@@ -31,7 +31,7 @@
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label">*{{tr('title')}}</label>
+                            <label for="title" class="col-sm-2 col-form-label">*{{tr('title')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="title" class="form-control" id="title" value="{{old('title')}}" placeholder="{{tr('title')}}" pattern = "[a-zA-Z,0-9\s\-\.]{2,100}">
@@ -40,7 +40,7 @@
 
                         <div class="form-group">
 
-                            <label for="description" class="col-sm-2 control-label">* {{tr('description')}}</label>
+                            <label for="description" class="col-sm-2 col-form-label">* {{tr('description')}}</label>
 
                             <div class="col-sm-10">
 
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="plan" class="col-sm-2 control-label">* {{tr('no_of_days')}}</label>
+                            <label for="plan" class="col-sm-2 col-form-label">* {{tr('no_of_days')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="number" min="1" max="365" pattern="[0-9][0-2]{2}"  required
@@ -63,7 +63,7 @@
 
                         <div class="form-group">
 
-                            <label for="amount" class="col-sm-2 control-label">*{{tr('amount')}}</label>
+                            <label for="amount" class="col-sm-2 col-form-label">*{{tr('amount')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="number" required name="amount" class="form-control" id="amount" placeholder="{{tr('amount')}}" step="any">
@@ -77,7 +77,7 @@
 
                                 <input type="checkbox" name="popular_status" class="">
 
-                                <label for="mark_popular" class="control-label">
+                                <label for="mark_popular" class="col-form-label">
                                     {{tr('mark_popular')}}
                                 </label>
 

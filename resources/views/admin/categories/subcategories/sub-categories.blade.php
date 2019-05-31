@@ -118,7 +118,7 @@
                                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('admin.view.sub_category' , array('sub_category_id' => $sub_category->id))}}">{{tr('view_sub_category')}}</a></li> -->
 
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         @if($sub_category->is_approved)
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -154,7 +154,7 @@
                                                         @if($category->is_series)
 
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                        href="{{route('admin.add.genre' , array('sub_category' => $sub_category->id))}}">{{tr('add_genre')}}</a>
@@ -165,7 +165,7 @@
 
                                                         @endif
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                    href="{{route('admin.videos' , array('sub_category_id' => $sub_category->id))}}">{{tr('videos')}}</a>

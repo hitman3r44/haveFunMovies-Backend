@@ -80,7 +80,7 @@
                                                             @endif
                                                         </li>
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         @if($video->adminVideo->is_approved)
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -92,7 +92,7 @@
                                                             </li>
                                                         @endif
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                    href="{{route('admin.spam-videos.user-reports' , $video->video_id)}}">{{tr('user_reports')}}</a>

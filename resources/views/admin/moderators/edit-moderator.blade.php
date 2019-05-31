@@ -39,7 +39,7 @@
                         <input type="hidden" name="id" value="{{$admin->id}}">
 
                         <div class="form-group">
-                            <label for="username" class="col-sm-1 control-label">*{{tr('username')}}</label>
+                            <label for="username" class="col-sm-1 col-form-label">*{{tr('username')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required pattern="[a-zA-Z0-9\s\-\.]{2,100}"
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-sm-1 control-label">*{{tr('email')}}</label>
+                            <label for="email" class="col-sm-1 col-form-label">*{{tr('email')}}</label>
                             <div class="col-sm-10">
                                 <input type="email" maxlength="255"
                                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,10}$" required
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-1 control-label">*{{tr('mobile')}}</label>
+                            <label for="mobile" class="col-sm-1 col-form-label">*{{tr('mobile')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="mobile" value="{{$admin->mobile}}"
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-2 control-label">* {{tr('user_type')}}</label>
+                            <label for="mobile" class="col-sm-2 col-form-label">* {{tr('user_type')}}</label>
 
                             <div class="col-sm-10">
                                 <select class="form-control" name="user_type" id="user_type" required>

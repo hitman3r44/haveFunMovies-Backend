@@ -53,43 +53,42 @@
 
                 <div class="box box-primary">
 
-                    <div class="row bgc-grey-400 p-10">
+                    <div class="row bgc-grey-600 p-10">
 
-                        <b style="font-size:18px;">{{tr('view_videos')}}</b>
+                        <div class="col-md-6 text-white">
+                            <h3>{{tr('view_videos')}}</h3>
+                        </div>
 
-                        <a href="{{route('admin.videos.create')}}"
-                           class="btn btn-default pull-right">{{tr('add_video')}}</a>
+                        <div class="col-md-6">
+                            <a href="{{route('admin.videos.search.tmdb')}}"
+                               class="btn btn-sm btn-default pull-right">{{tr('add_video')}}</a>
 
-                        <!-- EXPORT OPTION START -->
+                            {{--@if(count($videos) > 0 )--}}
+                                {{--<ul class="admin-action btn-sm  btn btn-default pull-right" style="margin-right: 20px">--}}
 
-                    @if(count($videos) > 0 )
+                                    {{--<li class="dropdown">--}}
+                                        {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
+                                            {{--{{tr('export')}} <span class="caret"></span>--}}
+                                        {{--</a>--}}
+                                        {{--<ul class="dropdown-menu">--}}
+                                            {{--<li role="presentation">--}}
+                                                {{--<a role="menuitem" tabindex="-1"--}}
+                                                   {{--href="{{route('admin.videos.export' , ['format' => 'xls'])}}">--}}
+                                                    {{--<span class="text-red"><b>{{tr('excel_sheet')}}</b></span>--}}
+                                                {{--</a>--}}
+                                            {{--</li>--}}
 
-                        {{--                            <ul class="admin-action btn btn-default pull-right" style="margin-right: 20px">--}}
-
-                        {{--                                <li class="dropdown">--}}
-                        {{--                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
-                        {{--                                        {{tr('export')}} <span class="caret"></span>--}}
-                        {{--                                    </a>--}}
-                        {{--                                    <ul class="dropdown-menu">--}}
-                        {{--                                        <li role="presentation">--}}
-                        {{--                                            <a role="menuitem" tabindex="-1"--}}
-                        {{--                                               href="{{route('admin.videos.export' , ['format' => 'xls'])}}">--}}
-                        {{--                                                <span class="text-red"><b>{{tr('excel_sheet')}}</b></span>--}}
-                        {{--                                            </a>--}}
-                        {{--                                        </li>--}}
-
-                        {{--                                        <li role="presentation">--}}
-                        {{--                                            <a role="menuitem" tabindex="-1"--}}
-                        {{--                                               href="{{route('admin.videos.export' , ['format' => 'csv'])}}">--}}
-                        {{--                                                <span class="text-blue"><b>{{tr('csv')}}</b></span>--}}
-                        {{--                                            </a>--}}
-                        {{--                                        </li>--}}
-                        {{--                                    </ul>--}}
-                        {{--                                </li>--}}
-                        {{--                            </ul>--}}
-
-                    @endif
-
+                                            {{--<li role="presentation">--}}
+                                                {{--<a role="menuitem" tabindex="-1"--}}
+                                                   {{--href="{{route('admin.videos.export' , ['format' => 'csv'])}}">--}}
+                                                    {{--<span class="text-blue"><b>{{tr('csv')}}</b></span>--}}
+                                                {{--</a>--}}
+                                            {{--</li>--}}
+                                        {{--</ul>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--@endif--}}
+                        </div>
                     <!-- EXPORT OPTION END -->
                     </div>
 
@@ -184,7 +183,7 @@
                                                                                        href="{{route('admin.view.video' , array('id' => $video->video_id))}}">{{tr('view')}}</a>
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             @if($video->is_approved == VIDEO_APPROVED)
 
@@ -198,20 +197,20 @@
                                                                 </li>
                                                             @endif
 
-                                                                <li role="presentation">
-                                                                    @if(Setting::get('admin_delete_control'))
+                                                            <li role="presentation">
+                                                                @if(Setting::get('admin_delete_control'))
 
-                                                                        <a role="button" href="javascript:;"
-                                                                           class="btn disabled"
-                                                                           style="text-align: left">{{tr('delete')}}</a>
+                                                                    <a role="button" href="javascript:;"
+                                                                       class="btn disabled"
+                                                                       style="text-align: left">{{tr('delete')}}</a>
 
-                                                                    @else
-                                                                        <a role="menuitem" tabindex="-1"
-                                                                           onclick="return confirm('Are you sure want to delete video? Remaining video positions will Rearrange')"
-                                                                           href="{{route('admin.delete.video' , array('id' => $video->video_id))}}">{{tr('delete')}}</a>
-                                                                    @endif
+                                                                @else
+                                                                    <a role="menuitem" tabindex="-1"
+                                                                       onclick="return confirm('Are you sure want to delete video? Remaining video positions will Rearrange')"
+                                                                       href="{{route('admin.delete.video' , array('id' => $video->video_id))}}">{{tr('delete')}}</a>
+                                                                @endif
 
-                                                                </li>
+                                                            </li>
 
 
                                                             @if($video->status == 0)
@@ -250,7 +249,7 @@
                                                                 @if($video->amount > 0)
 
                                                                     <span class="text-green"><i
-                                                                            class="fa fa-check-circle"></i></span>
+                                                                                class="fa fa-check-circle"></i></span>
 
                                                                 @endif
 
@@ -267,7 +266,7 @@
 
                                                                 <div class="col-lg-12">
                                                                     <label
-                                                                        class="text-uppercase">{{tr('video')}}</label>
+                                                                            class="text-uppercase">{{tr('video')}}</label>
                                                                 </div>
 
                                                                 <div class="col-lg-12">
@@ -287,15 +286,15 @@
 
                                                                         <input type="radio" name="type_of_user"
                                                                                value="{{NORMAL_USER}}" {{($video->type_of_user == 0 || $video->type_of_user == '') ? 'checked' : (($video->type_of_user == NORMAL_USER) ? 'checked' : '')}}>&nbsp;<label
-                                                                            class="text-normal">{{tr('normal_user')}}</label>&nbsp;
+                                                                                class="text-normal">{{tr('normal_user')}}</label>&nbsp;
 
                                                                         <input type="radio" name="type_of_user"
                                                                                value="{{PAID_USER}}" {{($video->type_of_user == PAID_USER) ? 'checked' : ''}}>&nbsp;<label
-                                                                            class="text-normal">{{tr('paid_user')}}</label>&nbsp;
+                                                                                class="text-normal">{{tr('paid_user')}}</label>&nbsp;
 
                                                                         <input type="radio" name="type_of_user"
                                                                                value="{{BOTH_USERS}}" {{($video->type_of_user == BOTH_USERS) ? 'checked' : ''}}>&nbsp;<label
-                                                                            class="text-normal">{{tr('both_user')}}</label>
+                                                                                class="text-normal">{{tr('both_user')}}</label>
                                                                     </div>
 
                                                                     <!-- /input-group -->
@@ -306,7 +305,7 @@
                                                                 <div class="col-lg-12">
 
                                                                     <label
-                                                                        class="text-uppercase">{{tr('type_of_subscription')}}
+                                                                            class="text-uppercase">{{tr('type_of_subscription')}}
                                                                         *</label>
 
                                                                 </div>
@@ -315,10 +314,10 @@
                                                                     <div class="input-group">
                                                                         <input type="radio" name="type_of_subscription"
                                                                                value="{{ONE_TIME_PAYMENT}}" {{($video->type_of_subscription == 0 || $video->type_of_subscription == '') ? 'checked' : (($video->type_of_subscription == ONE_TIME_PAYMENT) ? 'checked' : '')}}>&nbsp;<label
-                                                                            class="text-normal">{{tr('one_time_payment')}}</label>&nbsp;
+                                                                                class="text-normal">{{tr('one_time_payment')}}</label>&nbsp;
                                                                         <input type="radio" name="type_of_subscription"
                                                                                value="{{RECURRING_PAYMENT}}" {{($video->type_of_subscription == RECURRING_PAYMENT) ? 'checked' : ''}}>&nbsp;<label
-                                                                            class="text-normal">{{tr('recurring_payment')}}</label>
+                                                                                class="text-normal">{{tr('recurring_payment')}}</label>
                                                                     </div>
                                                                     <!-- /input-group -->
                                                                 </div>
@@ -384,8 +383,8 @@
                                                 <div class="modal-dialog">
 
                                                     <form
-                                                        action="{{route('admin.banner.set', ['admin_video_id'=>$video->video_id])}}"
-                                                        method="POST" enctype="multipart/form-data">
+                                                            action="{{route('admin.banner.set', ['admin_video_id'=>$video->video_id])}}"
+                                                            method="POST" enctype="multipart/form-data">
                                                     @csrf
 
                                                     <!-- Modal content-->
@@ -418,7 +417,7 @@
                                                                     <div class="col-lg-12">
                                                                         <label>{{tr('picture')}} *</label>
 
-                                                                        <p class="help-block">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
+                                                                        <p class="form-text">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
                                                                     </div>
 
                                                                     <div class="col-lg-12">
@@ -435,11 +434,11 @@
 
                                                                             <div>
                                                                                 <img
-                                                                                    src="{{($video->is_banner) ? $video->banner_image : asset('images/320x150.png')}}"
-                                                                                    style="width:300px;height:150px;"
-                                                                                    onclick="$('#banner_image_file_{{$video->video_id}}').click();return false;"
-                                                                                    id="banner_image_{{$video->video_id}}"
-                                                                                    style="cursor: pointer;"/>
+                                                                                        src="{{($video->is_banner) ? $video->banner_image : asset('images/320x150.png')}}"
+                                                                                        style="width:300px;height:150px;"
+                                                                                        onclick="$('#banner_image_file_{{$video->video_id}}').click();return false;"
+                                                                                        id="banner_image_{{$video->video_id}}"
+                                                                                        style="cursor: pointer;"/>
                                                                             </div>
 
                                                                         </div>
@@ -493,8 +492,8 @@
                                             <div id="video_{{$video->video_id}}" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <form
-                                                        action="{{route('admin.save.video.position',['video_id'=>$video->video_id])}}"
-                                                        method="POST">
+                                                            action="{{route('admin.save.video.position',['video_id'=>$video->video_id])}}"
+                                                            method="POST">
                                                     @csrf
                                                     <!-- Modal content-->
                                                         <div class="modal-content">

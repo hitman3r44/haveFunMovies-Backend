@@ -109,7 +109,7 @@
                                                             @endif
                                                         </li>
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         @if($category->is_approved)
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -123,7 +123,7 @@
                                                             </li>
                                                         @endif
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                    href="{{route('admin.videos' , array('category_id' => $category->id))}}">{{tr('videos')}}</a>

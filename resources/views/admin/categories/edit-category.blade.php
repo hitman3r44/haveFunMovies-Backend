@@ -47,7 +47,7 @@
                                     <input type="hidden" name="id" value="{{$category->id}}">
 
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-1 control-label">*{{tr('name')}}</label>
+                                        <label for="name" class="col-sm-1 col-form-label">*{{tr('name')}}</label>
                                         <div class="col-sm-10">
                                             <input type="text" required class="form-control"
                                                    pattern="[a-zA-Z0-9\s\-\.]{2,100}"
@@ -59,7 +59,7 @@
 
                                     <div class="form-group">
 
-                                        <label for="picture" class="col-sm-1 control-label">{{tr('picture')}}</label>
+                                        <label for="picture" class="col-sm-1 col-form-label">{{tr('picture')}}</label>
 
                                         @if($category->picture)
                                             <img style="height: 90px;margin-bottom: 15px; border-radius:2em;"
@@ -71,7 +71,7 @@
                                             <input type="file" accept="image/png, image/jpeg" id="picture"
                                                    name="picture" placeholder="{{tr('picture')}}"
                                                    onchange="loadFile(this,'image_preview')">
-                                            <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                                            <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
                                         </div>
 
                                     </div>

@@ -145,56 +145,56 @@
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 streamview-tab-menu">
 
                     <div class="list-group nav flex-column nav-pills">
-                        <a href="#" class="list-group-item active text-left">
+                        <a href="#" class="list-group-item list-group-item-action active text-left">
                             <!-- <h4 class="fa fa-globe"></h4><br/> -->
 
                             {{tr('site_settings')}}
                         </a>
-                        {{--                        <a href="#" class="list-group-item text-left">--}}
+                        {{--                        <a href="#" class="list-group-item list-group-item-action text-left">--}}
                         {{--                            <!-- <h4 class="glyphicon glyphicon-road"></h4><br/> -->--}}
                         {{--                            {{tr('video_settings')}}--}}
                         {{--                        </a>--}}
-                        <a href="#" class="list-group-item text-left">
+                        <a href="#" class="list-group-item list-group-item-action text-left">
                             <!-- <h4 class="glyphicon glyphicon-home"></h4><br/> -->
 
                             {{tr('revenue_settings')}}
                         </a>
-                        <a href="#" class="list-group-item text-left">
+                        <a href="#" class="list-group-item list-group-item-action text-left">
                             <!-- <h4 class="glyphicon glyphicon-cutlery"></h4><br/> -->
 
                             {{tr('social_settings')}}
                         </a>
-                        <a href="#" class="list-group-item text-left">
+                        <a href="#" class="list-group-item list-group-item-action text-left">
                             <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
 
                             {{tr('payment_settings')}}
                         </a>
 
-                        <a href="#" class="list-group-item text-left">
+                        <a href="#" class="list-group-item list-group-item-action text-left">
                             <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
 
                             {{tr('email_settings')}}
                         </a>
 
-                        <a href="#" class="list-group-item text-left">
+                        <a href="#" class="list-group-item list-group-item-action text-left">
                             <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
 
                             {{tr('site_url_settings')}}
                         </a>
 
-{{--                        <a href="#" class="list-group-item text-left">--}}
+{{--                        <a href="#" class="list-group-item list-group-item-action text-left">--}}
 {{--                            <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->--}}
 
 {{--                            {{tr('mobile_settings')}}--}}
 {{--                        </a>--}}
 
-                        <a href="#" class="list-group-item text-left">
+                        <a href="#" class="list-group-item list-group-item-action text-left">
                             <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->
 
                             {{tr('seo_settings')}}
                         </a>
 
-{{--                        <a href="#" class="list-group-item text-left">--}}
+{{--                        <a href="#" class="list-group-item list-group-item-action text-left">--}}
 {{--                            <!-- <h4 class="glyphicon glyphicon-credit-card"></h4><br/> -->--}}
 
 {{--                            {{tr('other_settings')}}--}}
@@ -252,7 +252,7 @@
 
                                             <input type="file" id="site_logo" name="site_logo"
                                                    accept="image/png, image/jpeg">
-                                            <p class="help-block">{{tr('image_note_help')}}</p>
+                                            <p class="form-text">{{tr('image_note_help')}}</p>
                                         </div>
 
                                     </div>
@@ -282,7 +282,7 @@
                                             @endif
                                             <input type="file" id="site_icon" name="site_icon"
                                                    accept="image/png, image/jpeg">
-                                            <p class="help-block">{{tr('image_note_help')}}</p>
+                                            <p class="form-text">{{tr('image_note_help')}}</p>
                                         </div>
 
                                     </div>

@@ -101,14 +101,14 @@
                             @if($data->popular_status)
 
                                 <a href="{{route('admin.subscriptions.popular.status' , $data->unique_id)}}"
-                                   class="btn  btn-xs btn-danger">
+                                   class="btn  btn-sm btn-danger">
                                     {{tr('remove_popular')}}
                                 </a>
 
                             @else
 
                                 <a href="{{route('admin.subscriptions.popular.status' , $data->unique_id)}}"
-                                   class="btn  btn-xs btn-success">
+                                   class="btn  btn-sm btn-success">
 
                                     {{tr('mark_popular')}}
 

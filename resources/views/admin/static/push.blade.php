@@ -24,7 +24,7 @@
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="message" class="col-sm-1 control-label">{{tr('message')}}</label>
+                            <label for="message" class="col-sm-1 col-form-label">{{tr('message')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="message" class="form-control" id="message"

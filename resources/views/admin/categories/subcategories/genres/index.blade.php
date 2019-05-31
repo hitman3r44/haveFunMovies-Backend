@@ -126,7 +126,7 @@
 
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             @if($value->is_approved)
                                                                 <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -158,7 +158,7 @@
 
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                        href="{{route('admin.videos' , array('genre_id' => $value->genre_id))}}">{{tr('videos')}}</a>

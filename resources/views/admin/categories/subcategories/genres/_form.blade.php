@@ -23,7 +23,7 @@
 
                     <div class="form-group">
 
-                        <label for="name" class="col-sm-2 control-label">{{tr('name')}}*</label>
+                        <label for="name" class="col-sm-2 col-form-label">{{tr('name')}}*</label>
                         <div class="col-sm-10">
                             <input type="text" required pattern="[a-zA-Z0-9\s\-\.]{2,100}"
                                    title="{{tr('only_alphanumeric')}}" class="form-control" id="name" name="name"
@@ -34,12 +34,12 @@
                     <div class="form-group">
 
 
-                        <label for="picture1" class="col-sm-2 control-label">{{tr('image')}} * </label>
+                        <label for="picture1" class="col-sm-2 col-form-label">{{tr('image')}} * </label>
                         <div class="col-sm-10">
                             <input type="file" accept="image/png,image/jpeg" id="image" name="image"
                                    placeholder="{{tr('image')}}" onchange="loadFile(this,'image_preview')"
                                    @if(!$genre->id) required @endif>
-                            <p class="help-block">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
+                            <p class="form-text">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
 
                             @if(!$genre->id)
                                 <img id="image_preview" style="width:100px;height:100px; display: none;">
@@ -52,21 +52,21 @@
 
                     <div class="form-group">
 
-                        <label for="picture1" class="col-sm-2 control-label">{{tr('trailer_video')}} *</label>
+                        <label for="picture1" class="col-sm-2 col-form-label">{{tr('trailer_video')}} *</label>
 
                         <div class="col-sm-10">
                             <input type="file" accept="video/mp4" id="video" name="video" placeholder="{{tr('video')}}"
                                    @if(!$genre->id) required @endif>
-                            <p class="help-block">{{tr('video_validate')}}</p>
+                            <p class="form-text">{{tr('video_validate')}}</p>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="video" class="col-sm-2 control-label">{{tr('sub_title')}}</label>
+                        <label for="video" class="col-sm-2 col-form-label">{{tr('sub_title')}}</label>
 
                         <div class="col-sm-10">
                             <input type="file" id="subtitle" name="subtitle" accept="text/plain">
-                            <p class="help-block">{{tr('subtitle_validate')}}</p>
+                            <p class="form-text">{{tr('subtitle_validate')}}</p>
 
                         </div>
                     </div>

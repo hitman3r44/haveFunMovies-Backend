@@ -79,7 +79,7 @@
                             <div class="col-md-8">
                                 {{--                        Title--}}
                                 <div class="form-group">
-                                    <label for="title" class="control-label"> * {{tr('title')}}</label>
+                                    <label for="title" class="col-form-label"> * {{tr('title')}}</label>
                                     <div class="col-sm-12">
                                         <input type="text" role="title" name="title" maxlength="255"
                                                value="{{$model->title}}" id="title" class="form-control" required
@@ -89,7 +89,7 @@
 
                                 {{--                        category--}}
                                 <div class="form-group">
-                                    <label for="category_id" class="control-label">
+                                    <label for="category_id" class="col-form-label">
                                         * {{tr('category')}}</label>
                                     <div class="col-sm-12">
                                         <select name="category_id" class="form-control input-md" id="category_id"
@@ -104,7 +104,7 @@
 
                                 {{--                        sub_category--}}
                                 <div class="form-group">
-                                    <label for="sub_category_id" class="control-label">
+                                    <label for="sub_category_id" class="col-form-label">
                                         * {{tr('sub_category')}}/{{tr('genre')}} </label>
                                     <div class="col-sm-12">
                                         <select name="sub_category_id" class="form-control input-md select2"
@@ -119,7 +119,7 @@
 
                                 {{--                        description--}}
                                 <div class="form-group">
-                                    <label for="description" class="control-label">
+                                    <label for="description" class="col-form-label">
                                         * {{tr('description')}}</label>
                                     <div class="col-sm-12">
                                         <textarea name="description" id="description"
@@ -128,7 +128,7 @@
                                 </div>
 
                                 <div class="form-group row ">
-                                    <label for="ratings" class="col-sm-2 mt-2 control-label"> {{tr('ratings')}}</label>
+                                    <label for="ratings" class="col-sm-2 mt-2 col-form-label"> {{tr('ratings')}}</label>
                                     <div class="col-sm-10">
 
                                         <div class="row starRating">
@@ -160,7 +160,7 @@
                                 <div class="form-group row">
 
                                     <label for="ratings"
-                                           class="col-sm-4 control-label"> {{tr('main_video_duration')}}</label>
+                                           class="col-sm-4 col-form-label"> {{tr('main_video_duration')}}</label>
                                     <div class="col-sm-7">
                                         @if($model->duration != null)
                                             {{$model->duration}}
@@ -179,7 +179,7 @@
                             <div class="col-md-8">
                                 {{--                        video--}}
                                 <div class="form-group">
-                                    <label for="video" class="control-label">{{tr('video')}}</label>
+                                    <label for="video" class="col-form-label">{{tr('video')}}</label>
                                     <div class="col-sm-12">
                                         <input type="file" name="video" accept="video/mp4,video/x-matroska"
                                                class="form-control-file" id="video" @if(!$model->id) required @endif/>
@@ -189,7 +189,7 @@
 
                                 {{--                        subtitle--}}
                                 <div class="form-group">
-                                    <label for="trailer_video" class="control-label">{{tr('subtitle')}}</label>
+                                    <label for="trailer_video" class="col-form-label">{{tr('subtitle')}}</label>
                                     <div class="col-sm-12">
                                         <input id="video_subtitle" class="form-control-file" type="file"
                                                name="video_subtitle" onchange="checksrt(this, this.id)"/>
@@ -199,7 +199,7 @@
 
                                 {{--                        trailer_video--}}
                                 <div class="form-group">
-                                    <label for="trailer_video" class="control-label">{{tr('trailer_video')}}</label>
+                                    <label for="trailer_video" class="col-form-label">{{tr('trailer_video')}}</label>
 
                                     <small class="form-text">
                                         @if(!empty($model->trailer_video))

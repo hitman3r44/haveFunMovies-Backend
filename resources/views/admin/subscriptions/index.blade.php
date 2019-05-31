@@ -73,14 +73,14 @@
                                         @if($value->popular_status)
 
                                             <a href="{{route('admin.subscriptions.popular.status' , $value->unique_id)}}"
-                                               class="btn  btn-xs btn-danger">
+                                               class="btn  btn-sm btn-danger">
                                                 {{tr('remove_popular')}}
                                             </a>
 
                                         @else
 
                                             <a href="{{route('admin.subscriptions.popular.status' , $value->unique_id)}}"
-                                               class="btn  btn-xs btn-success">
+                                               class="btn  btn-sm btn-success">
 
                                                 {{tr('mark_popular')}}
 
@@ -120,7 +120,7 @@
                                                     </li>
 
 
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation" class="dropdown-divider"></li>
 
                                                     <li role="presentation">
                                                         <a role="menuitem" tabindex="-1"
@@ -129,7 +129,7 @@
                                                         </a>
                                                     </li>
 
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation" class="dropdown-divider"></li>
 
                                                     @if($value->status)
 
@@ -152,7 +152,7 @@
                                                         </li>
 
                                                     @endif
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation" class="dropdown-divider"></li>
 
                                                     <li role="presentation">
 

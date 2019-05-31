@@ -83,10 +83,10 @@
                                             </td>
                                             <td>
                                                 @if(Setting::get('admin_delete_control') == 1)
-                                                    <button class="btn btn-primary btn-xs"
+                                                    <button class="btn btn-primary btn-sm"
                                                             disabled>{{tr('remove_banner')}}</button>
                                                 @else
-                                                    <a class="btn btn-primary btn-xs"
+                                                    <a class="btn btn-primary btn-sm"
                                                        href="{{route('admin.change.video' ,$video->video_id )}}">{{tr('remove_banner')}}</a>
                                                 @endif
                                             </td>
@@ -114,7 +114,7 @@
                                                                                        href="{{route('admin.view.video' , array('id' => $video->video_id))}}">{{tr('view')}}</a>
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             @if($video->is_approved)
                                                                 <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -126,7 +126,7 @@
                                                                 </li>
                                                             @endif
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             <li role="presentation">
                                                                 @if(Setting::get('admin_delete_control'))
