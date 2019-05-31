@@ -151,20 +151,6 @@
 
                                                         </li>
 
-                                                        @if($category->is_series)
-
-
-                                                            <li class="dropdown-divider" role="presentation"></li>
-
-                                                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                                       href="{{route('admin.add.genre' , array('sub_category' => $sub_category->id))}}">{{tr('add_genre')}}</a>
-                                                            </li>
-                                                            <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                                       href="{{route('admin.genres' , array('sub_category' => $sub_category->id))}}">{{tr('view_genres')}}</a>
-                                                            </li>
-
-                                                        @endif
-
                                                         <li class="dropdown-divider" role="presentation"></li>
 
                                                         <li role="presentation"><a role="menuitem" tabindex="-1"

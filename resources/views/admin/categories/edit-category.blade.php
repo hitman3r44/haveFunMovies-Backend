@@ -76,13 +76,6 @@
 
                                     </div>
 
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" name="is_series" value="1" class="form-check-input"
-                                                   @if($category->is_series) checked @endif> {{tr('is_series')}}
-                                        </label>
-                                    </div>
-
                                 </div>
 
                                 <div class="box-footer">

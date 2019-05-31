@@ -1286,7 +1286,7 @@ class AdminController extends Controller
             }
 
             $category->name = $request->has('name') ? $request->name : '';
-            $category->is_series = $request->has('is_series') ? $request->is_series : 0;
+            $category->is_series = 0;
             $category->status = 1;
 
             if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
