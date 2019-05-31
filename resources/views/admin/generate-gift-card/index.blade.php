@@ -72,9 +72,9 @@
                                     <td class="text-center">
 
                                         @if($item->is_paid)
-                                            <span class="label label-success">{{tr('yes')}}</span>
+                                            <span class="badge badge-success">{{tr('yes')}}</span>
                                         @else
-                                            <span class="label label-warning">{{tr('no')}}</span>
+                                            <span class="badge badge-warning">{{tr('no')}}</span>
                                         @endif
                                     </td>
 

@@ -65,9 +65,9 @@
                                                 <td>
                                                     @if($video->is_home_slider == 0 && $video->is_approved && $video->status)
                                                         <a href="{{route('admin.slider.video' , $video->video_id)}}"><span
-                                                                    class="label label-danger">{{tr('set_slider')}}</span></a>
+                                                                    class="badge badge-danger">{{tr('set_slider')}}</span></a>
                                                     @elseif($video->is_home_slider)
-                                                        <span class="label label-success">{{tr('slider')}}</span>
+                                                        <span class="badge badge-success">{{tr('slider')}}</span>
                                                     @else
                                                         -
                                                     @endif
@@ -76,9 +76,9 @@
                                             @endif
                                             <td>
                                                 @if($video->is_approved)
-                                                    <span class="label label-success">{{tr('approved')}}</span>
+                                                    <span class="badge badge-success">{{tr('approved')}}</span>
                                                 @else
-                                                    <span class="label label-warning">{{tr('pending')}}</span>
+                                                    <span class="badge badge-warning">{{tr('pending')}}</span>
                                                 @endif
                                             </td>
                                             <td>

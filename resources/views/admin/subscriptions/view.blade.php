@@ -76,7 +76,7 @@
                         <br>
 
                         <p>
-                            <span class="label label-success"
+                            <span class="badge badge-success"
                                   style="padding: 5px 10px;margin: 5px;font-size: 18px"><b>{{$data->plan}}</b></span>
 
                         </p>
@@ -88,7 +88,7 @@
                         <br>
                         <br>
 
-                        <p><span class="label label-danger"
+                        <p><span class="badge badge-danger"
                                  style="padding: 5px 10px;margin: 5px;font-size: 18px"><b>{{Setting::get('currency' , "$")}} {{$data->amount}}</b></span>
                         </p>
 
@@ -122,7 +122,7 @@
 
                         <strong><i class="fa fa-users margin-r-5"></i> {{tr('total_subscribers')}}</strong>
 
-                        <p><span class="label label-danger"
+                        <p><span class="badge badge-danger"
                                  style="padding: 5px 10px;margin: 5px;font-size: 18px"><b>{{$total_subscribers}}</b></span>
 
                         <?php /*<hr>

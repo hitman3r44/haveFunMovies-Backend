@@ -107,9 +107,9 @@
                                     <td>{{date('d M Y',strtotime($payment->expiry_date))}}</td>
                                     <td>
                                         @if($payment->is_coupon_applied)
-                                            <span class="label label-success">{{tr('yes')}}</span>
+                                            <span class="badge badge-success">{{tr('yes')}}</span>
                                         @else
-                                            <span class="label label-danger">{{tr('no')}}</span>
+                                            <span class="badge badge-danger">{{tr('no')}}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -117,9 +117,9 @@
                                     </td>
                                     <td>
                                         @if($payment->status)
-                                            <span class="label label-success">{{tr('paid')}}</span>
+                                            <span class="badge badge-success">{{tr('paid')}}</span>
                                         @else
-                                            <span class="label label-danger">{{tr('not_paid')}}</span>
+                                            <span class="badge badge-danger">{{tr('not_paid')}}</span>
                                         @endif
                                     </td>
                                 </tr>

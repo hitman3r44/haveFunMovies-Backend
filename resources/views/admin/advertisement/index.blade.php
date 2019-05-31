@@ -108,17 +108,17 @@
 
                                     <td>
                                         @if($value->is_published ==0)
-                                            <span class="label label-warning">{{tr('declined')}}</span>
+                                            <span class="badge badge-warning">{{tr('declined')}}</span>
                                         @else
-                                            <span class="label label-success">{{tr('approved')}}</span>
+                                            <span class="badge badge-success">{{tr('approved')}}</span>
                                         @endif
                                     </td>
 
                                     <td>
                                         @if($value->is_expired ==0)
-                                            <span class="label label-warning">{{tr('no')}}</span>
+                                            <span class="badge badge-warning">{{tr('no')}}</span>
                                         @else
-                                            <span class="label label-success">{{tr('yes')}}</span>
+                                            <span class="badge badge-success">{{tr('yes')}}</span>
                                         @endif
                                     </td>
 

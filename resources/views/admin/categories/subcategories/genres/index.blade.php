@@ -71,11 +71,11 @@
 
                                                 @if($value->position > 0)
 
-                                                    <span class="label label-success">{{$value->position}}</span>
+                                                    <span class="badge badge-success">{{$value->position}}</span>
 
                                                 @else
 
-                                                    <span class="label label-danger">{{$value->position}}</span>
+                                                    <span class="badge badge-danger">{{$value->position}}</span>
 
                                                 @endif
                                             </td>
@@ -84,9 +84,9 @@
                                             </td>
                                             <td>
                                                 @if($value->is_approved)
-                                                    <span class="label label-success">{{tr('approved')}}</span>
+                                                    <span class="badge badge-success">{{tr('approved')}}</span>
                                                 @else
-                                                    <span class="label label-warning">{{tr('pending')}}</span>
+                                                    <span class="badge badge-warning">{{tr('pending')}}</span>
                                                 @endif
                                             </td>
 

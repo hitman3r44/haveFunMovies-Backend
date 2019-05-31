@@ -62,9 +62,9 @@
                                     <td class="text-center">
 
                                         @if($value->status)
-                                            <span class="label label-success">{{tr('approved')}}</span>
+                                            <span class="badge badge-success">{{tr('approved')}}</span>
                                         @else
-                                            <span class="label label-warning">{{tr('pending')}}</span>
+                                            <span class="badge badge-warning">{{tr('pending')}}</span>
                                         @endif
                                     </td>
 

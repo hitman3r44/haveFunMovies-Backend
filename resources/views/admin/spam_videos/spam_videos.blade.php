@@ -52,9 +52,9 @@
                                         <td>{{count($video->adminVideo->userFlags)}}</td>
                                         <td>
                                             @if($video->adminVideo->is_approved)
-                                                <span class="label label-success">{{tr('approved')}}</span>
+                                                <span class="badge badge-success">{{tr('approved')}}</span>
                                             @else
-                                                <span class="label label-warning">{{tr('pending')}}</span>
+                                                <span class="badge badge-warning">{{tr('pending')}}</span>
                                             @endif
                                         </td>
                                         <td>
