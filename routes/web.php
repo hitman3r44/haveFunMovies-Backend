@@ -299,13 +299,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     // New Video Upload Code
 
-    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
+//    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
 
     Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
 
     Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
 
     Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+    Route::get('/videos/create', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create');
 
     Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
 

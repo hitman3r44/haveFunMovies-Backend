@@ -21,6 +21,7 @@ class CreateAdminVideosTable extends Migration
             $table->text('description');
             $table->string('age', 4);
             $table->text('details');
+            $table->decimal('price');
             $table->integer('category_id');
             $table->integer('sub_category_id');
             $table->integer('genre_id');
