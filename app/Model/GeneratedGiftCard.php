@@ -1,19 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
-use App\Model\CastCrew;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class CastAndCrewType extends Model
+class GeneratedGiftCard extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'cast_and_crew_types';
+    protected $table = 'generated_gift_cards';
 
     /**
      * The database primary key value.
@@ -27,11 +26,19 @@ class CastAndCrewType extends Model
      *
      * @var array
      */
-    protected $fillable = ['title'];
+    protected $fillable = ['gift_card_id', 'customer_id', 'sold_by', 'UUID', 'is_paid', 'is_deleted'];
 
-    public function castAndCrews()
+    public function giftCard()
     {
-        return $this->hasMany(CastCrew::class, 'cast_and_crew_type_id', 'id');
+        return $this->belongsTo(GiftCard::class, 'gift_card_id', 'id');
+    }
+    public function customer()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function soldBy()
+    {
+        return $this->belongsTo(User::class, 'sold_by', 'id');
     }
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CastAndCrewType;
+use App\Model\CastAndCrewType;
 use Illuminate\Http\Request;
 use PHPUnit\Util\Json;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\MovieHasCastAndCrewType;
+use App\Model\MovieHasCastAndCrewType;
 use Illuminate\Http\Request;
 
 class MovieHasCastAndCrewTypeController extends Controller
