@@ -1,5 +1,6 @@
 
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    @csrf
     <input name = "cmd" value = "_cart" type = "hidden">
     <input name = "upload" value = "1" type = "hidden">
     <input name = "no_note" value = "0" type = "hidden">

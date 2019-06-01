@@ -4,7 +4,7 @@
 
 @section('content-header') 
 
-{{tr('video_payments') }} {{Setting::get('currency')}} {{total_moderator_video_revenue(Auth::guard('moderator')->user()->id)}} 
+{{tr('video_payments') }} {{Setting::get('currency')}} {{total_moderator_video_revenue(Auth::user()->id)}}
 
 <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600;border-radius:50%" title="Any Help ?"><i class="fa fa-question"></i></a>
 

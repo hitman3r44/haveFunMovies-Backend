@@ -38,11 +38,10 @@
                             <tr>
                                 <th>{{tr('id')}}</th>
                                 <th>{{tr('title')}}</th>
-                                <th>{{tr('no_of_months')}}</th>
+                                <th>{{tr('no_of_days')}}</th>
                                 <th>{{tr('amount')}}</th>
                                 <th>{{tr('status')}}</th>
                                 <th>{{tr('popular')}}</th>
-                                <th>{{tr('no_of_account')}}</th>
                                 <th>{{tr('subscribers')}}</th>
                                 <th>{{tr('action')}}</th>
                             </tr>
@@ -90,8 +89,6 @@
                                         @endif
 
                                     </td>
-
-                                    <td>{{$value->no_of_account}}</td>
 
                                     <td>
                                         <a href="{{route('admin.subscriptions.users' , $value->id)}}"> {{$value->userSubscription()->where('subscription_id',$value->id)->where('status' , 1)->count()}}</a>

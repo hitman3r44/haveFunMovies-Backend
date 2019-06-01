@@ -19,6 +19,7 @@
 
                 <form class="form-horizontal" action="{{route('admin.send.push')}}" method="POST"
                       enctype="multipart/form-data" role="form">
+                    @csrf
 
                     <div class="box-body">
 

@@ -16,6 +16,7 @@ body {
     @include('notification.notify')
 
         <form class="form-layout" role="form" method="POST" action="{{ url('/moderator/login') }}">
+            @csrf
             {{ csrf_field() }}
 
             <div class="login-logo">

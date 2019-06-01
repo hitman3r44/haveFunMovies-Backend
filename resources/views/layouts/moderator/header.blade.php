@@ -25,17 +25,17 @@
                 <li class="dropdown user user-menu">
 
                     <a href="{{route('moderator.profile')}}" class="dropdown-toggle" data-toggle="dropdown">
-                      <img src="@if(Auth::guard('moderator')->user()->picture){{Auth::guard('moderator')->user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" class="user-image" alt="User Image">
-                      <span class="hidden-xs">{{Auth::guard('moderator')->user()->name}}</span>
+                      <img src="@if(Auth::user()->picture){{Auth::user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" class="user-image" alt="User Image">
+                      <span class="hidden-xs">{{Auth::user()->name}}</span>
                     </a>
                     
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="@if(Auth::guard('moderator')->user()->picture){{Auth::guard('moderator')->user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" class="img-circle" alt="User Image">
+                            <img src="@if(Auth::user()->picture){{Auth::user()->picture}} @else {{asset('admin-css/dist/img/avatar.png')}} @endif" class="img-circle" alt="User Image">
 
                             <p>
-                              {{Auth::guard('moderator')->user()->name}}
+                              {{Auth::user()->name}}
                               <small>{{tr('moderator')}}</small>
                             </p>
                         </li>

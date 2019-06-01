@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\AdminVideo;
+use App\Model\Country;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -42,9 +44,29 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
         ]);
 
+        $customer = factory(App\User::class)->create([
+            'name' => 'Customer',
+            'email' => 'customer@havefunmovies.com',
+            'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
+        ]);
+
+        $retailer = factory(App\User::class)->create([
+            'name' => 'Retailer',
+            'email' => 'retailer@havefunmovies.com',
+            'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
+        ]);
+
         $this->call([
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
+            CountriesTableSeeder::class,
+            TmdbGenersSeeder::class,
+            CategoriesTableSeeder::class,
+            SubscriptionsTableSeeder::class,
+            CouponsTableSeeder::class,
+            AdminVideosTableSeeder::class,
+            GiftCardsTableSeeder::class,
+            PrepaidCodesTableSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -52,5 +74,17 @@ class DatabaseSeeder extends Seeder
         $moderator->assignRole(Role::findByName('moderator'));
         $director->assignRole(Role::findByName('director'));
         $publisher->assignRole(Role::findByName('publisher'));
+        $customer->assignRole(Role::findByName('customer'));
+        $retailer->assignRole(Role::findByName('retailer'));
+
+        factory(App\Model\Advertisement::class, 4)->create()->each(function ($advertisement)  {
+            $advertisement->countries()->attach(Country::whereIn('id', [1,2,3])->get());
+            $advertisement->movies()->attach(AdminVideo::whereIn('id', [1,2,3])->get());
+
+        });
+
+//        $customers = factory(App\User::class, 4)->create()->each(function ($advertisement){
+//
+//        });
     }
 }

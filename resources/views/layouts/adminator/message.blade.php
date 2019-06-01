@@ -37,11 +37,26 @@
             </div>
         @endif
 
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                {{Session::get('success')}}
+                @php Session::forget('success') @endphp
+            </div>
+        @endif
+
         @if (Session::has('flash_error'))
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 {{Session::get('flash_error')}}
                 @php Session::forget('flash_error') @endphp
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                {{Session::get('error')}}
+                @php Session::forget('error') @endphp
             </div>
         @endif
 

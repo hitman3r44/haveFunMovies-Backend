@@ -171,8 +171,8 @@
                                         </tr>
                                         <div id="genre_{{$value->genre_id}}" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
-                                                <form action="{{route('admin.save.genre.position',['genre_id'=>$value->genre_id])}}"
-                                                      method="POST">
+                                                <form action="{{route('admin.save.genre.position',['genre_id'=>$value->genre_id])}}" method="POST">
+                                                @csrf
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">

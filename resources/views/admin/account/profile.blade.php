@@ -84,6 +84,7 @@
                             <form class="form-horizontal"
                                   action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.profile')}}"
                                   method="POST" enctype="multipart/form-data" role="form">
+                                @csrf
 
                                 <input type="hidden" name="id" value="{{Auth::user()->id}}">
 
@@ -152,6 +153,7 @@
                             <form class="form-horizontal"
                                   action="{{(Setting::get('admin_delete_control') == 1) ? '' : route('admin.save.profile')}}"
                                   method="POST" enctype="multipart/form-data" role="form">
+                                @csrf
 
                                 <input type="hidden" name="id" value="{{Auth::user()->id}}">
 
@@ -196,6 +198,7 @@
                             <form class="form-horizontal"
                                   action="{{ (Setting::get('admin_delete_control') == 1) ? '' : route('admin.change.password')}}"
                                   method="POST" enctype="multipart/form-data" role="form">
+                                @csrf
 
                                 <input type="hidden" name="id" value="{{Auth::user()->id}}">
 

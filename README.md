@@ -6,6 +6,7 @@ Have Fun Movies is a VOD (Video On demand) application.
 
 - [Technology](#technology)
 - [Installation](#installation)
+- [Important Command After Installation/Git pull](#important-command-after-installation/git-pull)
 - [Docker Commands](#docker-commands)
 - [Useful Artisan Commands](#useful-artisan-commands)
 - [Useful Docker Commands](#useful-docker-commands)
@@ -28,6 +29,17 @@ Have Fun Movies is a VOD (Video On demand) application.
 1. Install [docker](https://docs.docker.com/engine/installation/) and [docker-compose](https://docs.docker.com/compose/install/)
 2. Run `docker-compose up -d`
 3. Run `docker ps` to see all the running container
+4. To see the logs => `http://IP-ADDRESS/admin/logs`
+
+## Important Command After Installation/Git pull
+
+```bash
+docker-compose exec app composer install
+docker-compose exec app php artisan config:clear
+docker-compose exec app php artisan view:clear
+docker-compose exec app php artisan migrate:fresh --seed
+
+```
 
 ## Docker Commands
 
@@ -37,6 +49,7 @@ docker-compose exec app composer install
 docker-compose exec app php artisan migrate
 docker-compose exec app php artisan config:clear
 docker-compose exec app php artisan migrate:refresh --seed
+docker-compose exec app php artisan migrate:fresh --seed
 docker-compose exec app php artisan db:seed
 docker-compose exec app php artisan db:seed --class=SeederClassName
 ```
@@ -62,8 +75,8 @@ php artisan config:clear
 php artisan clear-compiled 
 php artisan config:publish
 
-php artisan view: publish
-php artisan view: clear
+php artisan view:publish
+php artisan view:clear
 
 php artisan controller:make ControllerName
 
@@ -92,6 +105,7 @@ docker logs -f <CONTAINER> // The -f or --follow option will show live log outpu
 ## Useful Commands
 ```bash
 composer dump-autoload
+php artisan iseed my_table // Make Seeder from database table
 ```
 
 
@@ -116,3 +130,4 @@ Please contribute using [Github Flow](https://guides.github.com/introduction/flo
  - [Docker Compose Cheat Sheet](https://gist.github.com/buonzz/054304b3145323c34ed05cb65f1b174f)
  - [Docker-mysql-nginx](https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose)
  - [Enable remote login via ssh](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu)
+  - [iSeed Github Link](https://github.com/orangehill/iseed)

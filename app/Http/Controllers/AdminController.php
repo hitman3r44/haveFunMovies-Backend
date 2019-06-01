@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\AdminRepository as AdminRepo;
-
+use App\Model\TmdbGenre;
 use App\Repositories\VideoRepository as VideoRepo;
 
 use App\Repositories\PushNotificationRepository as PushRepo;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Requests;
@@ -71,8 +71,6 @@ use Hash;
 use Mail;
 
 use DB;
-
-use DateTime;
 
 use Exception;
 
@@ -399,10 +397,7 @@ class AdminController extends Controller
         $user = User::find($request->id);
         $authUser = Auth::user();
 
-        $roles = Role::all();
-
-        if (!$user) {
-
+        if (is_array($user) ? count($user) : 0) {
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
 
@@ -436,7 +431,6 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
                     'email' => 'required|email|max:255|unique:users,email,' . $request->id,
-                    'mobile' => 'required|digits_between:4,16',
                 )
             );
 
@@ -444,7 +438,6 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
                     'email' => 'required|email|max:255|unique:users,email',
-                    'mobile' => 'required|digits_between:4,16',
                     'password' => 'required|min:6|confirmed',
                 )
             );
@@ -511,7 +504,7 @@ class AdminController extends Controller
                 $email_data['email'] = $user->email;
                 $email_data['template_type'] = ADMIN_USER_WELCOME;
 
-                // $subject = tr('user_welcome_title').' '.Setting::get('site_name');
+                $subject = tr('user_welcome_title').' '.Setting::get('site_name');
                 $page = "emails.admin_user_welcome";
                 $email = $user->email;
                 Helper::send_email($page, $subject = null, $email, $email_data);
@@ -519,15 +512,11 @@ class AdminController extends Controller
 
             $user->save();
 
-            if ($user->hasRole('super-admin') || $user->hasRole('admin')) {
-                if ($request->id != '') {
-                    $user->assignRole($request->role);
-                } else {
-                    $user->syncRoles($request->role);
-                }
+            if ($request->id != '') {
+                $user->assignRole($request->role);
+            } else {
+                $user->syncRoles($request->role);
             }
-
-
 
             if ($new_user) {
 
@@ -578,10 +567,28 @@ class AdminController extends Controller
 
             return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
 
+                    $user->is_moderator = DEFAULT_TRUE;
+                    $user->moderator_id = $moderator->id;
+                    $user->save();
 
-        }
+                    $moderator->is_activated = DEFAULT_TRUE;
+//                    $moderator->is_user = DEFAULT_TRUE;
+                    $moderator->save();
 
-    }
+                }
+
+                register_mobile('web');
+
+                if (Setting::get('track_user_mail')) {
+
+                    user_track("Have Fun Movies - New User Created");
+                }
+                else {
+                    return back()->with('flash_error', tr('admin_not_error'));
+                }
+
+                return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
+            }
 
     /**
      * Function: users_delete()
@@ -625,7 +632,7 @@ class AdminController extends Controller
 
                     if ($moderator) {
 
-                        $moderator->is_user = 0;
+//                        $moderator->is_user = 0;
 
                         $moderator->save();
                     }
@@ -663,7 +670,7 @@ class AdminController extends Controller
 
         $user_details = User::find($request->id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
@@ -791,7 +798,7 @@ class AdminController extends Controller
                 $user->save();
 
                 $moderator->is_activated = 1;
-                $moderator->is_user = 1;
+//                $moderator->is_user = 1;
                 $moderator->save();
 
                 return back()->with('flash_success', tr('admin_user_upgrade'));
@@ -1054,7 +1061,7 @@ class AdminController extends Controller
                         $user->save();
 
                         $admin->is_activated = DEFAULT_TRUE;
-                        $admin->is_user = DEFAULT_TRUE;
+//                        $admin->is_user = DEFAULT_TRUE;
                         $admin->save();
 
                     }
@@ -1106,18 +1113,18 @@ class AdminController extends Controller
 
             }
 
-            if ($moderator->is_user) {
-
-                $user = User::where('email', $moderator->email)->first();
-
-                if ($user) {
-
-                    $user->is_moderator = 0;
-
-                    $user->save();
-                }
-
-            }
+//            if ($moderator->is_user) {
+//
+//                $user = User::where('email', $moderator->email)->first();
+//
+//                if ($user) {
+//
+//                    $user->is_moderator = 0;
+//
+//                    $user->save();
+//                }
+//
+//            }
 
             $moderator->delete();
 
@@ -1480,7 +1487,7 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = 1; // ::TODO : handle this ADMIN constant
+                $sub_category->created_by = Auth::user()->id;
                 $sub_category->status = 1;
             }
 
@@ -1646,8 +1653,7 @@ class AdminController extends Controller
 
         } else {
 
-
-            $genre = $request->id ? Genre::find($request->id) : new Genre;
+            $genre = $request->id ? Genre::find($request->id) : new Genre();
 
             if ($genre->id) {
 
@@ -1671,7 +1677,8 @@ class AdminController extends Controller
             $genre->position = $position;
             $genre->status = DEFAULT_TRUE;
             $genre->is_approved = DEFAULT_TRUE;
-            $genre->created_by = ADMIN;
+            $genre->unique_id = uniqid();
+            $genre->created_by = Auth::user()->id;
 
 
             if ($request->hasFile('video')) {
@@ -1705,6 +1712,7 @@ class AdminController extends Controller
                 $genre->image = Helper::normal_upload_picture($request->file('image'), '/uploads/images/');
             }
 
+            $genre->subtitle = '';
 
             if ($request->hasFile('subtitle')) {
 
@@ -2076,10 +2084,15 @@ class AdminController extends Controller
 
         $query = AdminVideo::leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
             ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-            ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
-            ->select('admin_videos.id as video_id', 'admin_videos.title',
-                'admin_videos.description', 'admin_videos.ratings',
-                'admin_videos.reviews', 'admin_videos.created_at as video_date',
+            ->leftJoin('tmdb_genres', 'admin_videos.genre_id', '=', 'tmdb_genres.tmdb_genre_id')
+            ->leftJoin('users', 'admin_videos.uploaded_by', '=', 'users.id')
+            ->select(
+                'admin_videos.id as video_id',
+                'admin_videos.title',
+                'admin_videos.description',
+                'admin_videos.ratings',
+                'admin_videos.reviews',
+                'admin_videos.created_at as video_date',
                 'admin_videos.default_image',
                 'admin_videos.banner_image',
                 'admin_videos.amount',
@@ -2091,6 +2104,7 @@ class AdminController extends Controller
                 'admin_videos.category_id as category_id',
                 'admin_videos.sub_category_id',
                 'admin_videos.genre_id',
+                'admin_videos.uploaded_by',
                 'admin_videos.is_home_slider',
                 'admin_videos.watch_count',
                 'admin_videos.compress_status',
@@ -2100,8 +2114,10 @@ class AdminController extends Controller
                 'admin_videos.edited_by', 'admin_videos.is_approved',
                 'admin_videos.video_subtitle',
                 'admin_videos.trailer_subtitle',
-                'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                'genres.name as genre_name',
+                'categories.name as category_name',
+                'sub_categories.name as sub_category_name',
+                'tmdb_genres.name as genre_name',
+                'users.name as user_name',
                 'admin_videos.is_banner',
                 'admin_videos.position')
             ->orderBy('admin_videos.created_at', 'desc');
@@ -2140,7 +2156,16 @@ class AdminController extends Controller
 
             $query->where('admin_videos.genre_id', $request->genre_id);
 
-            $genre = Genre::find($request->genre_id);
+            $genre = TmdbGenre::find($request->genre_id);
+
+        }
+
+        // Find User Information
+        if ($request->uploaded_by) {
+
+            $query->where('admin_videos.uploaded_by', $request->uploaded_by);
+
+            $user = User::find($request->uploaded_by);
 
         }
 
@@ -2160,8 +2185,8 @@ class AdminController extends Controller
             ->with('category', $category)
             ->with('sub_category', $sub_category)
             ->with('genre', $genre)
+//            ->with('user', $user)
             ->with('moderator_details', $moderator_details);
-
     }
 
     /**
@@ -2230,7 +2255,7 @@ class AdminController extends Controller
             $videos = AdminVideo::where('admin_videos.id', $request->id)
                 ->leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
                 ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-                ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
+                ->leftJoin('tmdb_genres', 'admin_videos.genre_id', '=', 'tmdb_genres.tmdb_genre_id')
                 ->select('admin_videos.id as video_id', 'admin_videos.title',
                     'admin_videos.description', 'admin_videos.ratings',
                     'admin_videos.reviews', 'admin_videos.created_at as video_date',
@@ -2267,7 +2292,7 @@ class AdminController extends Controller
                     'admin_videos.trailer_video_resolutions',
                     'admin_videos.publish_time',
                     'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                    'genres.name as genre_name',
+                    'tmdb_genres.name as genre_name',
                     'admin_videos.video_gif_image',
                     'admin_videos.is_banner',
                     'admin_videos.is_pay_per_view',
@@ -2821,7 +2846,7 @@ class AdminController extends Controller
 
         $result = EnvEditorHelper::getEnvValues();
 
-        \Auth::guard('admin')->loginUsingId($admin_id);
+//        Auth::user()->loginUsingId($admin_id);
 
         return view('admin.email-settings')->with('result', $result)->withPage('email-settings')->with('sub_page', '');
     }
@@ -3135,9 +3160,9 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key == "admin_commission") {
+                } else if ($setting->key == "subscription_commission") {
 
-                    $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
+                    $setting->value = $request->has('subscription_commission') ? ($request->subscription_commission < 100 ? $request->subscription_commission : 100) : $setting->value;
 
                     $user_commission = $setting->value < 100 ? 100 - $setting->value : 0;
 
@@ -3146,11 +3171,14 @@ class AdminController extends Controller
                     if ($user_commission_details) {
 
                         $user_commission_details->value = $user_commission;
-
-
                         $user_commission_details->save();
                     }
 
+                } else if ($setting->key === 'advertisement_commission'){
+                    $setting->value = $request->has('advertisement_commission') ? ($request->advertisement_commission < 100 ? $request->advertisement_commission : 100) : $setting->value;
+
+                } else if ($setting->key === 'coupon_code_commission'){
+                    $setting->value = $request->has('coupon_code_commission') ? ($request->coupon_code_commission < 100 ? $request->coupon_code_commission : 100) : $setting->value;
 
                 } else if ($setting->key == 'site_name') {
 
@@ -3748,22 +3776,25 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key == "admin_commission") {
+                } else if ($setting->key === 'subscription_commission') {
 
-                    $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
+                    $setting->value = $request->has('subscription_commission') ? ($request->subscription_commission < 100 ? $request->subscription_commission : 100) : $setting->value;
 
                     $user_commission = $setting->value < 100 ? 100 - $setting->value : 0;
 
                     $user_commission_details = Settings::where('key', 'user_commission')->first();
 
-                    if (count($user_commission_details) > 0) {
+                    if (is_array($user_commission_details) ? count($user_commission_details) : 0) {
 
                         $user_commission_details->value = $user_commission;
-
-
                         $user_commission_details->save();
                     }
 
+                } else if ($setting->key === 'advertisement_commission'){
+                    $setting->value = $request->has('advertisement_commission') ? ($request->advertisement_commission < 100 ? $request->advertisement_commission : 100) : $setting->value;
+
+                } else if ($setting->key === 'coupon_code_commission'){
+                    $setting->value = $request->has('coupon_code_commission') ? ($request->coupon_code_commission < 100 ? $request->coupon_code_commission : 100) : $setting->value;
 
                 } else {
 
@@ -3853,10 +3884,6 @@ class AdminController extends Controller
     public function user_subscription_save($s_id, $u_id)
     {
 
-        // Load 
-
-        // $load = UserPayment::where('user_id', $u_id)->orderBy('created_at', 'desc')->first();
-
         $load = UserPayment::where('user_id', $u_id)->where('status', DEFAULT_TRUE)->orderBy('id', 'desc')->first();
 
         $payment = new UserPayment();
@@ -3938,9 +3965,8 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'plan' => 'required|numeric|min:1|max:12',
+            'plan' => 'required|numeric',
             'amount' => 'required|numeric',
-            'no_of_account' => 'required|numeric|min:1',
         ]);
 
         if ($validator->fails()) {
@@ -3964,22 +3990,22 @@ class AdminController extends Controller
 
             } else {
                 $model = new Subscription();
+
                 $model->title = $request->title;
                 $model->description = $request->description;
                 $model->plan = $request->plan;
-                $model->no_of_account = $request->no_of_account;
                 $model->amount = $request->amount;
                 $model->status = 1;
                 $model->popular_status = $request->popular_status ? 1 : 0;
                 $model->unique_id = $model->title;
-                $model->no_of_account = $request->no_of_account;
-                $model->subscription_type = 'month';
+                $model->subscription_type = 'days';
                 $model->total_subscription = 0;
+
                 $model->save();
             }
 
             if ($model) {
-                return redirect(route('admin.subscriptions.view', $model->unique_id))->with('flash_success', $request->id ? tr('subscription_update_success') : tr('subscription_create_success'));
+                return redirect(route('admin.subscriptions.index', $model->unique_id))->with('flash_success', $request->id ? tr('subscription_update_success') : tr('subscription_create_success'));
 
             } else {
                 return back()->with('flash_error', tr('admin_not_error'));
@@ -4131,7 +4157,7 @@ class AdminController extends Controller
 
         $user_details = User::find($id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
 
@@ -4755,12 +4781,10 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => 'exists:coupons,id',
             'title' => 'required',
-            'coupon_code' => $request->id ? 'required|max:10|min:1|unique:coupons,coupon_code,' . $request->id : 'required|unique:coupons,coupon_code|min:1|max:10',
+            'coupon_code' => $request->id ? 'required|max:50|min:1|unique:coupons,coupon_code,' . $request->id : 'required|unique:coupons,coupon_code|min:1|max:50',
             'amount' => 'required|numeric|min:1|max:5000',
             'amount_type' => 'required',
             'expiry_date' => 'required|date_format:d-m-Y|after:today',
-            'no_of_users_limit' => 'required|numeric|min:1|max:1000',
-            'per_users_limit' => 'required|numeric|min:1|max:100',
         ]);
 
         if ($validator->fails()) {
@@ -4771,8 +4795,9 @@ class AdminController extends Controller
         }
         if ($request->id != '') {
 
-
             $coupon_detail = Coupon::find($request->id);
+
+            $coupon_detail->updated_by = Auth::user()->id;
 
             $message = tr('coupon_update_success');
 
@@ -4781,6 +4806,8 @@ class AdminController extends Controller
             $coupon_detail = new Coupon;
 
             $coupon_detail->status = DEFAULT_TRUE;
+            $coupon_detail->created_by = Auth::user()->id;
+            $coupon_detail->updated_by = Auth::user()->id;
 
             $message = tr('coupon_add_success');
         }
@@ -4828,10 +4855,7 @@ class AdminController extends Controller
         $coupon_detail->expiry_date = date('Y-m-d', strtotime($request->expiry_date));
 
         $coupon_detail->description = $request->has('description') ? $request->description : '';
-        // Based no users limit need to apply coupons
-        $coupon_detail->no_of_users_limit = $request->no_of_users_limit;
 
-        $coupon_detail->per_users_limit = $request->per_users_limit;
 
         if ($coupon_detail) {
 
@@ -5024,6 +5048,7 @@ class AdminController extends Controller
             return back()->with('flash_error', tr('coupon_id_not_found_error'));
         }
     }
+
 
     // Mail Camp
 

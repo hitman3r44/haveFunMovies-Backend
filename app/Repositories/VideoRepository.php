@@ -12,17 +12,19 @@
 
 namespace App\Repositories;
 
+use App\Libraries\TMDB\TmdbApi;
+use App\Model\AdminVideoImage;
 use Illuminate\Http\Request;
 
 use App\Jobs\StreamviewCompressVideo;
 
 use App\Helpers\Helper;
 
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 use Hash;
 
-use Log;
 
 use Setting;
 
@@ -210,7 +212,6 @@ class VideoRepository {
  	public static function video_save(Request $request) {
 
  		try {
-
  			DB::beginTransaction();
 
 	 		// Basic validations of video save form
@@ -218,7 +219,7 @@ class VideoRepository {
 	 		$validator = Validator::make($request->all(),
 	 			[
 //	 				'admin_video_id'=>'exists:admin_videos,id',
-	 				'title'=>'required|max:255|min:4',	
+	 				'title'=>'required|max:255|min:4',
 	 				'publish_type'=>'required|in:'.PUBLISH_NOW.','.PUBLISH_LATER,
 	 				'publish_time'=>$request->publish_type == PUBLISH_LATER ? 'required' : '',
 	 				'age'=>'required|min:2|max:3',
@@ -229,14 +230,14 @@ class VideoRepository {
 	 				'category_id'=>'required|exists:categories,id,is_approved,'.DEFAULT_TRUE,
 	 				'sub_category_id'=>'required|exists:sub_categories,id,is_approved,'.DEFAULT_TRUE,
 	 				'genre_id'=>'exists:genres,id,is_approved,'.DEFAULT_TRUE,
-	 				'default_image'=> $request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
-	 				'other_image1'=>$request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
-	 				'other_image2'=>$request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg',
+	 				'default_image'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
+	 				'other_image1'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
+	 				'other_image2'=> $request->has('tmdb_video_id') ? '' : ($request->admin_video_id ? 'mimes:png,jpeg,jpg' : 'required|mimes:png,jpeg,jpg'),
 	 				'video_type'=>'required|in:'.VIDEO_TYPE_UPLOAD.','.VIDEO_TYPE_YOUTUBE.','.VIDEO_TYPE_OTHER,
 //	 				'compress_video'=>'required|in:'.COMPRESS_ENABLED.','.COMPRESS_DISABLED,
 	 				'video_upload_type'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? 'required|in:'.VIDEO_UPLOAD_TYPE_s3.','.VIDEO_UPLOAD_TYPE_DIRECT : '',
 	 				'video'=> ($request->video_type == VIDEO_TYPE_UPLOAD) ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255',
-	 				'trailer_video'=>$request->hasFile('trailer_subtitle') ? ($request->video_type == VIDEO_TYPE_UPLOAD ?  'mimes:mp4' : 'required|max:255') : ($request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|max:255'), // If trailer subtitle uploading by admin without trailer video it will throw an error
+	 				'trailer_video'=>$request->hasFile('trailer_subtitle') ? ($request->video_type == VIDEO_TYPE_UPLOAD ?  'mimes:mp4' : 'required|max:255') : ($request->video_type == VIDEO_TYPE_UPLOAD ? ($request->has('tmdb_video_id') ? '' : 'mimes:mp4') : 'required|max:255'), // If trailer subtitle uploading by admin without trailer video it will throw an error
 	 				'duration'=>'required',
 	 				'trailer_duration'=>'required',
 	 				// |date_format:hh:mm:ss
@@ -250,6 +251,7 @@ class VideoRepository {
 	 			]
 	 		);
 
+
 	 		if ($validator->fails()) {
 
 	 			$errors = implode(',', $validator->messages()->all());
@@ -258,8 +260,17 @@ class VideoRepository {
 
 	 		} else {
 
-	 			// Check the category having genre or not
 
+                $tmdbApi = new TmdbApi();
+                $tmdbVideo = null;
+
+                if($request->has('tmdb_video_id') && !empty($request->tmdb_video_id)){
+
+                    $tmdbVideo = $tmdbApi->getMovieDetails($request->tmdb_video_id);
+
+                }
+
+	 			// Check the category having genre or not
 	 			$load_category = Category::find($request->category_id);
 
 	 			if ($load_category) {
@@ -291,40 +302,28 @@ class VideoRepository {
 	 			}
 
 	 			// Check Genre present or not
+	 			if(!$request->has('tmdb_video_id') ||  $tmdbVideo == null){
 
-	 			if($request->genre_id <= 0) {
+                    if($request->genre_id && $request->genre_id <= 0) { // If Genre not present, trailer video should be required
+                        $genre_validator = Validator::make($request->all(),[
+                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : ($request->has('tmdb_video_id') && $tmdbVideo != null) ? '' : 'required|mimes:mp4')  : 'required|max:255' ,
+                        ]);
+                    } else { // If Genre present, trailer video Optional
+                        $genre_validator = Validator::make($request->all(),[
+                            'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : ($request->has('tmdb_video_id') && $tmdbVideo != null) ? '' : 'required|mimes:mp4') : 'required|max:255' ,
+                        ]);
+                    }
 
-	 				// If Genre not present, trailer video should be required
-
-	 				$genre_validator = Validator::make($request->all(),[
-
-	 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'required|mimes:mp4') : 'required|max:255'
-
-	 				]);
-
-	 			} else {
-
-	 				// If Genre present, trailer video Optional
-
-	 				$genre_validator = Validator::make($request->all(),[
-
-	 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? ($request->admin_video_id ? 'mimes:mp4' : 'mimes:mp4') : 'required|max:255'
-
-	 				]);
-
-	 			}
-
-	 			if ($genre_validator->fails()) {
-
-		 			$errors = implode(',', $genre_validator->messages()->all());
-
-		 			throw new Exception($errors);
-
-		 		}
+                    if ($genre_validator->fails()) {
+                        $errors = implode(',', $genre_validator->messages()->all());
+                        throw new Exception($errors);
+                    }
+                }
 
 		 		$videopath = '/uploads/videos/original/';
 
 		 		// If video id present, load video and check whether the user changed the video type or not
+
 	 			if ($request->admin_video_id) {
 
 	 				$video_model = AdminVideo::find($request->admin_video_id);
@@ -339,7 +338,7 @@ class VideoRepository {
 
 		 					'video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|url|max:255',
 
-		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'mimes:mp4' : 'required|max:255',
+		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? (( $request->has('tmdb_video_id') && $tmdbVideo != null ) ? '' : 'mimes:mp4') : 'required|max:255',
 
 		 				]);
 
@@ -351,19 +350,19 @@ class VideoRepository {
 
 		 					'video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'required|mimes:mp4' : 'required|url|max:255',
 
-		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? 'required|mimes:mp4' : 'required|max:255',
+		 					'trailer_video'=> $request->video_type == VIDEO_TYPE_UPLOAD ? (( $request->has('tmdb_video_id') && $tmdbVideo != null ) ? '' : 'required|mimes:mp4') : 'required|max:255',
 
 		 				]);
 
 	 				}
 
 	 				if ($video_validator->fails()) {
-
-			 			$errors = implode(',', $video_validator->messages()->all());
+	 				    $errors = implode(',', $video_validator->messages()->all());
 
 			 			throw new Exception($errors);
 
 			 		}
+
 
 			 		$video_model->edited_by = $request->edited_by ? $request->edited_by : ADMIN;
 
@@ -491,6 +490,26 @@ class VideoRepository {
 
 	            $no_need_compression = DEFAULT_TRUE;
 
+
+                $video_model->default_image = '';
+                $video_model->video_gif_image = '';
+                $video_model->video_image_mobile = '';
+                $video_model->banner_image = '';
+                $video_model->is_banner = 0;
+                $video_model->ppv_created_by = '';
+                $video_model->watch_count = 0;
+                $video_model->is_pay_per_view = 0;
+                $video_model->redeem_amount = 0;
+                $video_model->admin_amount = 0;
+                $video_model->user_amount = 0;
+                $video_model->trailer_subtitle = '';
+                $video_model->video_subtitle = '';
+                if($request->has('tmdb_video_id') &&  $tmdbVideo != null){
+
+                    $video_model->trailer_video = 'https://www.youtube.com/embed/'.$tmdbVideo->getTrailer();
+                    $video_model->default_image = $tmdbApi->getImageURL('w300').$tmdbVideo->getPoster();
+                }
+
 	            // If the video type is manual upload then below code will excute
 
 		        if($request->video_type == VIDEO_TYPE_UPLOAD) {
@@ -569,6 +588,7 @@ class VideoRepository {
 	                    	$video_model->video = $main_video_details['db_url'];
 
 	                    }
+
 
                     	if($request->hasFile('trailer_video')) {
 
@@ -684,6 +704,7 @@ class VideoRepository {
 
 	            }
 
+
 	            if($request->hasFile('video_subtitle')) {
 
 	                if ($video_model->id) {
@@ -753,9 +774,9 @@ class VideoRepository {
 
 	            // Incase of queue and ffmpeg not configured properly, compress will not work so by default we will approve the videos
 
-	            if (envfile('QUEUE_DRIVER') != 'redis' || Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED || $no_need_compression) {
+	            if (env('QUEUE_DRIVER') != 'redis' || Setting::get('ffmpeg_installed') == FFMPEG_NOT_INSTALLED || $no_need_compression) {
 
-                    \Log::info("Queue Driver : ".envfile('QUEUE_DRIVER'));
+                    \Log::info("Queue Driver : ".env('QUEUE_DRIVER'));
 
                     // On update check the video & trailer video having resolutions
 
@@ -816,9 +837,25 @@ class VideoRepository {
 	                $video_model->trailer_compress_status = COMPRESSION_NOT_HAPPEN;
 
 	                $video_model->compress_status = COMPRESSION_NOT_HAPPEN;
+
                 }
 
-	            if ($video_model->save()) {
+                if ($video_model->save()) {
+
+                    if($request->has('tmdb_video_id') &&  $tmdbVideo != null){
+                        AdminVideoImage::firstOrCreate([ // other image one
+                            'admin_video_id' => $video_model->id,
+                            'position' => 2,
+                            'image' => isset($tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 1)[0]) ? $tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 1)[0] : asset('images/default.png'),
+                            'is_default' => 0,
+                        ]);
+                        AdminVideoImage::firstOrCreate([ // other image two
+                            'admin_video_id' => $video_model->id,
+                            'position' => 3,
+                            'image' => isset($tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 2)[0]) ? $tmdbVideo->getPostersWithUrl($tmdbApi->getImageURL('w300'), 1, 2)[0] : asset('images/default.png'),
+                            'is_default' => 0,
+                        ]);
+                    }
 
 	            	if($request->hasFile('default_image')) {
 
@@ -850,8 +887,7 @@ class VideoRepository {
 
 			                $FFmpeg = new \FFmpeg;
 
-				            $FFmpeg
-				                ->input($default_image_input_path)
+				            $FFmpeg->input($default_image_input_path)
 				                ->imageScale("385:225")
 				                ->output($default_image_output_path)
 				                ->ready();

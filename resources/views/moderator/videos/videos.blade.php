@@ -151,6 +151,7 @@
 								    <div id="{{$video->video_id}}" class="modal fade" role="dialog">
 									  	<div class="modal-dialog">
 										  	<form action="{{route('moderator.save.video-payment', $video->video_id)}}" method="POST">
+                                            @csrf
 											    <!-- Modal content-->
 											   	<div class="modal-content">
 											      	
@@ -172,7 +173,7 @@
 
 											      	<div class="modal-body">
 
-											      		<input type="hidden" name="ppv_created_by" id="ppv_created_by" value="{{Auth::guard('moderator')->user()->id}}">
+											      		<input type="hidden" name="ppv_created_by" id="ppv_created_by" value="{{Auth::user()->id}}">
 
 												        <div class="row">
 

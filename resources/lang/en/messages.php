@@ -38,7 +38,12 @@ return array(
 	'amount_per_video_note' => "Usage : The amount set for each view once the count crosses the view limit.",
 	// Mobile Home 
 	'my_commission'=>'My Commission',
+    'retailer_commission'=>'Retailer Commission (in %)',
+    'coupon_code_commission'=>'Coupon Code Commission (in %)',
+    'advertisement_commission'=>'Advertisement Commission (in %)',
+    'director_commission'=>'Director Commission (in %)',
 	'admin_commission'=>'Admin Commission (in %)',
+    'subscription_commission'=>'Subscription Commission (in %)',
 	'sub_title'=>'Subtitle',
 	'subtitle_validate'=>'The video subtitle must be a file of type: srt.',
 	'mobile_banner_heading' => 'Special Collections',
@@ -119,6 +124,8 @@ return array(
 	'moderator' => 'Moderator',
 	'home'	=>	'Home',
 	'dashboard'	=> 	'Dashboard',
+    'search_place_holder'	=> 	'Search...',
+
 	'menu' => 'Menu',
 
 	'register'	=>	'Register',
@@ -450,6 +457,7 @@ return array(
 	// Admin Categories
 
 	'category' => 'Category',
+	'genre' => 'Genre',
 	'categories' => 'Categories',
 	'view_categories'	=>	'View Categories',
 	'add_category'	=>	'Add Category',
@@ -469,6 +477,7 @@ return array(
 	'no_sub_category_found' => 'No sub categories found for this category.',
 	'sub_categories' => 'Sub Categories',
 	'sub_category' => 'Sub Category',
+    'sub_category_genre' => 'Sub Category / Genre',
 	'view_sub_categories'	=>	'View Sub Categories',
 	'view_sub_category'	=>	'View Sub Category',
 	'add_sub_category'	=>	'Add Sub Category',
@@ -698,7 +707,8 @@ return array(
 
 	'type_of_subscription'=>'Subscription Type',
 	'subscription'=>'SubScription',
-	'one_time_payment'=> 'One Time Payment',
+    'subscription_header_view'=>'Subscription',
+    'one_time_payment'=> 'One Time Payment',
 	'recurring_payment'=> 'Recurring Payment',
 	'payment_added'=> 'Payment Added Successfully',
 	'for_subscription'=>'Please click here to subscribe!',
@@ -744,9 +754,7 @@ return array(
 	'view_subscription'=>'View Subscription',
 
 	'popular' => 'Popular',
-	'yes' => 'Yes',
-	'no' => 'No',
-	'status' => 'Status',
+
 	'mark_popular' => 'Mark as popular',
 	'remove_popular' => 'Remove Popular',
 
@@ -763,6 +771,7 @@ return array(
 	'subscribers' => 'Subscribers',
 
 	'no_of_months' => 'No of months',
+    'no_of_days' => 'No of days',
 	
 	'subscription_plans'=>'Plans',
 
@@ -836,7 +845,7 @@ return array(
 	'revenue_details'=>'Revenue Details',
 	'admin_amount'=>'Admin Amount',
 	'moderator_amount'=>'Moderator Amount',
-	'paid_amount'=>'Paid Amount',
+
 	'remaining_amount'=>'Remaining Amount',
 	'player_configuration'=>'Player Configuration',
 	'jwplayer_key'=>'Jwplayer Key',
@@ -893,6 +902,7 @@ return array(
 	'help_notes_streamhash'=>'We have this team of innate developers and dedicated team of support to sort out the things for your benefits. Tell us what you like about Have Fun Movies and we may suggest you the best solution for you :)',
 	'cheers'=>'Cheers!',
 	'please_enter_plan_month'=>'Please enter the plan months. Max : 12 months',
+    'please_enter_plan_days'=>'Please enter the plan days. Max : 365 days',
 	'paid_subscribed_users'=>'Paid / Subscribed Users',
 	'unpaid_unsubscribed_user'=>' Unpaid / Unsubscribed Users',
 	'expiry_days_subscription_user'=>' Expiry days of the subscription for the user.',
@@ -1053,11 +1063,12 @@ return array(
 	
 	'age'=>'Age',
 	'example_format'=>'18+',
-	'email_notification'=>'Email Notification',
+
 	'enable_email_notification_to_user'=>'Send Email Notifications to User',
 	'notification_status_updated'=>'Notification has been updated successfully',
 	'email_templates'=>'Email Templates',
 	'create_template'=>'Create Template',
+    'view_template'=>'View Template',
 	'template_not_found'=>'You are searching email template not found',
 	'user_welcome_email'=>'User Welcome Mail (Direct Signup)',
 	'admin_created_user_welcome_mail'=>'User Welcome Email (Created By Admin)',
@@ -1069,6 +1080,52 @@ return array(
 	'template_not_saved'=>'Template not saved properly, please try again later',
 	'template_update_success'=>'Template has been updated successfully',
 	'template_create_success'=>'Template has been created successfully',
+
+    //Advertisement
+    'advertisement'=>'Advertisement',
+    'advertisements'=>'Advertisements',
+    'add_advertisement'=>'Add Advertisement',
+    'view_advertisement'=>'View Advertisement',
+    'edit_advertisement'=>'Edit Advertisement',
+    'advertisement_code'=>'Advertisement Code',
+    'enter_advertisement_title'=>'Enter Advertisement Title',
+    'advertisement_result_not_found_error'=>'Oops ! Seems you haven’t created advertisement.',
+    'advertisement_update_success'=> 'Advertisement Updated Successfully',
+    'advertisement_add_success'=>'Advertisement Added Successfully',
+    'advertisement_not_found_error'=>'Advertisement Details  Not Found',
+    'advertisement_id_not_found_error'=>'Advertisement Id doesn’t Exists',
+    'advertisement_delete_success'=>'Advertisement Deleted Successfully',
+    'advertisement_approve_success'=>'Advertisement Approved Successfully',
+    'advertisement_decline_success'=>'Advertisement Declined Successfully',
+    'min_play_time'=>'Minimum Play Time',
+    'max_play_time'=>'Maximum Play Time',
+    'already_played_time'=>'Already Played',
+    'start_playing_date'=>'When Ads start DD-MM-YYYY',
+    'start_playing_date_label'=>'Start Date of Add',
+    'start_playing_date_table_header'=>'Start Time',
+    'end_playing_date'=>'When Ads stop DD-MM-YYYY',
+    'end_playing_date_label'=>'Stop Date of Add',
+    'end_playing_date_table_header'=>'End Time',
+    'per_view_cost'=>'Per View Cost',
+    'unpublish'=>'Unpublish',
+    'is_published'=>'Published Status',
+    'make_expired'=>'Make Expire',
+    'decline_expired'=>'Decline Expire',
+    'is_expired'=>'Expiration Status',
+    'n/a'=>'N/A',
+
+	// Per-Paid Functionality
+    'enter_prepaid_title'=>'Enter Prepaid Title',
+    'prepaid_plan_name'=>'Prepaid Plan Name',
+    'price'=>'Price',
+
+
+
+	// Gift Card
+    'enter_gift_card_title'=>'Enter Gift Card Title',
+    'giftcard'=>'Gift Card',
+    'gift_card_name'=>'Gift Card Name',
+
 	//Coupons
 	'coupon'=>'Coupon',
 	'coupons'=>'Coupons',
@@ -1085,7 +1142,7 @@ return array(
 	'coupon_code'=>'Promo Code',
 	'amount_type'=>'Amount Type',
 	'select_option'=>'Select Option',
-	'validation'=>'Please use Uppercase and numbers only 5 to 10 characters',
+	'validation'=>'Please use Uppercase and numbers only 5 to 50 characters',
 	'only_number'=>'Only use Number 1 between 5000',
 	'coupon_update_success'=>'Coupon Updated Successfully',
 	'coupon_add_success'=>'Coupon Added Successfully',
@@ -1112,7 +1169,7 @@ return array(
 	'video_amount_should_be_grater'=>'Pay per view amount should be greater than coupon amount',
 	'failed'=>'Failed',
 	'automatic_renewal_notification'=>'Automatic Renewal Notification',
-	'expiry_date'=>'Expiry Date',
+
 	'expiry_date_should_greater'=>'Expiry date should be greater than current date',
 	'expired_coupon_code'=>'Your are using promo code was expired',
 	'percentage_should_not_greater'=>'Percentage should be less than or equal to 100',
@@ -1129,8 +1186,7 @@ return array(
 	'all_user'=>'All Users',
 	'custom_user'=>'Send Mail Custom Users Count',
 	'custom_users'=>'Custom User mail id  is giving comma based. Ex : first@gmail.com,second@gmail.com',
-	'normal_user'=>'Normal Users',
-	'paid_user'=>'Paid Users',
+
 	'select_user'=>'Select Users',
 	'custom_users'=>'Custom Users',
 	'all_moderators'=>'All Moderators',
@@ -1162,11 +1218,7 @@ return array(
 	'edit_template'=>"Edit Template",
 	'template_type'=>'Template Type',
 	'view_template'=>'View Template',
-	'subject_note'=>'Subject Minimum 5 characters',
-	'select_users'=>'Select User List',
-	'select_moderators_list'=>'Select Moderator List',
-	'custom_user_count'=>'Email send to custom user count here check it.choose URL : admin-control ->custom_user_count.',
-	'subject_title'=>'Minium 5 characters want to subject',
+
 	'delete_wishlist_success'=>'Successfully, removed your selected video from wishlist',
 	'delete_history_success'=>'Successfully, removed your selected video from history',
 	'coupon_amount'=>'Coupon Amount',
@@ -1189,9 +1241,10 @@ return array(
 	'login_by'=>'Login by',
 	'amount_paid'=>'Amount Paid',
 	'is_user'=>'Is User',
+    'is_used'=>'Is Used',
 	'subscription_cancelled'=>'Subscription Cancelled',
 	'templates'=>'Templates',
-	'only_for_alpha_values'=>'Only Accepted Alpha Values',
+
 	'add_ppv_amount'=>'Please enter PPV amount. ',
 	'social_unique_id'=>'Social Unique Id',
 	'timezone'=>'TimeZone',
@@ -1256,7 +1309,7 @@ return array(
 	'password_notes'=>'Password should be Minimum 6 characters',
 	'coupon_code_not_exists'=>'The coupon code is invalid',
 	'coupon_code_declined'=>'The coupon code is invalid',
-	'is_coupon_applied'=>'Is Coupon Applied',
+
 	'coupon_reason'=>'Coupon Reason',
 	'autorenewal_enable_success' => 'The subscription autorenewal enabled.',
 	'subscription_autorenewal_already_enabled' => 'The SubScription is already enabled.',
@@ -1290,13 +1343,14 @@ return array(
 	'upload_video_image'=>'Upload Video / Image',
 	'mandatory_field_notes'=>' fields are mandatory. Please fill and click next.',
 	'trailer_duration'=>'Trailer Duration',
-	'main_video_duration'=>'Main Video Duration',
+	'main_video_duration'=>'Video Duration',
 	'publish_type'=>'Publish Type',
 	'now'=>'Now',
 	'later'=>'Later',
 	'trailer_resize_video_resolutions'=>'Trailer Video Resize Resolutions',
 	'main_resize_video_resolutions'=>'Main Video Resize Resolutions',
 	'subtitle'=>'Subtitle',
+	'trailer_subtitle'=>'Trailer Subtitle',
 	'browse'=>'Browse',
 	'video_upload_success'=>'The video has been uploaded successfully',
 	'ffmpeg_warning_notes'=>'FFMPEG not yet installed, kindly confiure and compress. Otherwise compression willnot happen',
@@ -1344,16 +1398,10 @@ return array(
 	'per_users_limit_notes'=>'Enter minimum 1 to maximum 2 digits',
 
 	'subscription_not_exists'=>'The Subscription doesn’t exists',
-	'coupon_not_found'=>'Coupon not found, please try again later',
-	'coupon_inactive_status'=>'Promo Code is inactive status',
-	'subscription_inactive_status'=>'Subscription is inactive status',
-	'subscription_amount_should_be_grater'=>'Subscription amount should be greater than coupon amount',
-	'video_amount_should_be_grater'=>'Pay per view amount should be greater than coupon amount',
-	'expired_coupon_code'=>'Your are using promo code was expired',
 	'coupon_inactive_reason'=>'The promo code was deactivated by admin.',
 	'coupon_delete_reason'=>'The promo code was deleted by admin',
-		'is_coupon_applied'=>'Is coupon applied?',
-	'coupon_reason'=>'Coupon Reason',
+	'is_coupon_applied'=>'Is coupon applied?',
+
 	'create_a_new_coupon_row'=>'Create a new User coupon Details',
 	'total_no_of_users_maximum_limit_reached'=>'Coupon Limit Reached..!, You can`t use the coupon code.',
 	'per_users_limit_exceed'=>'Your maxiumum limit is over..!',
@@ -1426,10 +1474,55 @@ return array(
 	'logout_success'=>'Logged Out Successfully',
 	'notification_will_update'=>'You will receive notifications about Video Sections',
 	'notification_will_not_update'=>'Your Notifications will be blocked, based on your concern',
+    'credit_money' => 'Credit Money',
+    'view_credit_money' => 'View Credit Money',
+    'add_credit_money' => 'Add Credit Money',
+    'edit_credit_money' => 'Edit Credit Money',
+
+    'prepaid_code' => 'Prepaid Code',
+    'add_prepaid_code' => 'Add Prepaid Code',
+    'edit_prepaid_code' => 'Edit Prepaid Code',
+    'view_prepaid_code' => 'View All Prepaid Code',
+
+    'gift_card' => 'Gift Card',
+    'add_gift_card' => 'Add Gift Card',
+    'edit_gift_card' => 'Edit Gift Card',
+    'view_gift_card' => 'View All Gift Card',
+
+    'countries' => 'Countries',
+    'add_country' => 'Add Country',
+
+    'movies' => 'Movies',
+    'add_movies' => 'Add Movies',
+
+    'add_generate_prepaid_code' => 'Sell Prepaid Code',
+    'add_generate_gift_card' => 'Sell Gift Card',
+    'generate_prepaid_code' => 'Sold Prepaid Code',
+    'edit_generate_prepaid_code' => 'Edit Sold Prepaid Code',
+
+    'prepaid_plan' => 'Prepaid Plan',
+    'customer' => 'Customer',
+    'customer_name' => 'Customer Name',
+    'sold_by' => 'Sold By',
+    'uuid' => 'UUID',
+    'uuid_code' => 'CODE',
+    'is_paid' => 'Is paid',
+
+
+
+    'generate_prepaid_code_title' => 'Generate Prepaid Code',
+    'generate_gift_card_title' => 'Generate Gift Card',
+    'sell_functionality' => 'Sell Functionality',
+    'sell_prepaid_code' => 'Sell Prepaid Code',
+    'sold_prepaid_code' => 'Sold Prepaid Code',
+    'select_role' => 'Select Role',
+
+    'gift_card_plan' => 'Gift Card Plan',
+    'generate_gift_card' => 'Sold Gift Card',
+    'add_generate_gift_card' => 'Sold Gift Card',
+    'sell_gift_card' => 'Sell Gift Card',
+    'add_generate_gift_card' => 'Sell Gift Card',
+    'edit_generate_gift_card' => 'Edit Gift Card',
+    'sold_gift_card' => 'Sold Gift Card',
 );
-
-
-
-
-
 

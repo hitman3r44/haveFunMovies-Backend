@@ -53,10 +53,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="mobile" class="col-sm-2 control-label">* {{tr('mobile')}}</label>
+                            <label for="mobile" class="col-sm-2 control-label">{{tr('mobile')}}</label>
 
                             <div class="col-sm-10">
-                                <input type="text" required name="mobile" class="form-control" id="mobile"
+                                <input type="text" name="mobile" class="form-control" id="mobile"
                                        placeholder="{{tr('mobile')}}" minlength="4" maxlength="16" pattern="[0-9]{4,16}"
                                        value="{{old('mobile')}}">
                                 <small style="color:brown">{{tr('mobile_note')}}</small>
@@ -68,7 +68,7 @@
                                 <label for="mobile" class="col-sm-2 control-label">* {{tr('role')}}</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="role" id="role" required>
-                                        <option value="}">Select Role</option>
+                                        <option value="}">{{tr('select_role')}}</option>
                                         @foreach($roles as $role)
                                             <option value="{{$role->name}}">{{ucwords($role->name)}}</option>
                                         @endforeach
