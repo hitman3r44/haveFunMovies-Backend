@@ -427,6 +427,12 @@
 
     <script src="{{asset('assets/js/jstz.min.js')}}"></script>
 
+    <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.js')}}"></script>
+    <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+    <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
+
+
+
     <script type="text/javascript">
 
         var view_video_url = "{{url('admin/view/video')}}?id=";
@@ -437,6 +443,8 @@
         var error = false;
 
         $(document).ready(function () {
+
+            $("[data-mask]").inputmask();
 
             $("#user_time_zone").val(jstz.determine().name());
 
