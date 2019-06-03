@@ -165,18 +165,15 @@
 
                                                         <ul class="dropdown-menu dropdown-menu-left">
 
-                                                            @if ($video->compress_status >= OVERALL_COMPRESS_COMPLETED)
-                                                                <li role="presentation">
-                                                                    @if(Setting::get('admin_delete_control'))
-                                                                        <a role="button" href="javascript:;"
-                                                                           class="btn disabled"
-                                                                           style="text-align: left">{{tr('edit')}}</a>
-                                                                    @else
-                                                                        <a role="menuitem" tabindex="-1"
-                                                                           href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}">{{tr('edit')}}</a>
-                                                                    @endif
-                                                                </li>
-                                                            @endif
+                                                            <li role="presentation">
+                                                                @if(Setting::get('admin_delete_control'))
+                                                                    <a role="button" href="javascript:;"
+                                                                       class="btn disabled"
+                                                                       style="text-align: left">{{tr('edit')}}</a>
+                                                                @endif
+                                                                <a role="menuitem" tabindex="-1"
+                                                                   href="{{route('admin.videos.edit' , array('id' => $video->video_id))}}">{{tr('edit')}}</a>
+                                                            </li>
 
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                        target="_blank"

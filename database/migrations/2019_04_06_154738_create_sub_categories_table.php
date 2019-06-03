@@ -22,7 +22,6 @@ class CreateSubCategoriesTable extends Migration
             $table->string('status');
             $table->integer('is_approved');
             $table->integer('created_by');
-            $table->integer('created_by');
             $table->timestamps();
         });
     }

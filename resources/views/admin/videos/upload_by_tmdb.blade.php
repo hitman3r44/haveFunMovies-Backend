@@ -96,7 +96,7 @@
                                                 required>
                                             <option value=""></option>
                                             @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{$category->id}}" {{ ($model->category_id == $category->id) ? 'selected' : '' }}>{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -197,12 +197,12 @@
                                             <div class="pull-right">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="video_type"
-                                                           id="video_type_link" value="1">
+                                                           {{ ($model->video_type == 1) ? 'checked' : ''  }}  id="video_type_link" value="1">
                                                     <label class="form-check-label" for="video_type_link">Youtube Link </label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="video_type"
-                                                          checked id="video_type_file" value="2">
+                                                         @if(!isset($model->video_type)) checked @else {{ ($model->video_type == 2) ? 'checked' : ''  }} @endif id="video_type_file" value="2">
                                                     <label class="form-check-label" for="video_type_file">File Upload </label>
                                                 </div>
                                             </div>
@@ -210,15 +210,16 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div id="video_link" style="display: none;">
+                                        <div id="video_link" @if(!isset($model->video_type)) style="display: none;" @else {!! ($model->video_type != 1) ? 'style="display: none;"' : ''  !!} @endif >
                                             <input type="url" role="video" name="video" maxlength="255"
-                                                   value="{{$model->video}}" disabled id="video"
+                                                   value="{{$model->video}}" id="video" @if(!isset($model->video_type)) disabled @else {!! ($model->video_type != 1) ? 'disabled' : ''  !!} @endif
                                                    class="form-control"
                                                    placeholder="Enter trailer video Link">
                                         </div>
-                                        <div id="video_file">
+
+                                        <div id="video_file" @if(isset($model->video_type)) {!! ($model->video_type != 2) ? 'style="display: none;"' : '' !!} @endif >
                                             <input type="file" name="video" accept="video/mp4,video/x-matroska"
-                                                   class="form-control-file" id="video"
+                                                   class="form-control-file" id="video" @if(isset($model->video_type)) {!! ($model->video_type != 2) ? 'disabled' : '' !!} @endif
                                                    @if(!$model->id) required @endif/>
                                             <small class="form-text text-muted">{{tr('video_validate')}}</small>
                                         </div>
@@ -246,7 +247,7 @@
                                             <div class="pull-right">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="trailer_video_type"
-                                                           id="trailer_video_type_link" value="1">
+                                                           @if(isset($model->trailer_video)) checked @endif id="trailer_video_type_link" value="1">
                                                     <label class="form-check-label" for="trailer_video_type_link">Youtube
                                                         Link </label>
                                                 </div>
@@ -267,9 +268,9 @@
                                                     frameborder="0"
                                                     allowfullscreen></iframe>
                                         @endif
-                                        <div id="trailer_video_link" style="display: none;">
+                                        <div id="trailer_video_link" @if(!isset($model->trailer_video)) style="display: none;" @endif >
                                             <input type="url" role="trailer_video" name="trailer_video" maxlength="255"
-                                                   value="{{$model->trailer_video}}" disabled id="trailer_video"
+                                                   value="{{$model->trailer_video}}" @if(!isset($model->trailer_video)) disabled @endif id="trailer_video"
                                                    class="form-control"
                                                    placeholder="Enter trailer video Link">
                                         </div>
@@ -416,10 +417,6 @@
 @endsection
 
 @section('scripts')
-
-    <script src="{{asset('admin-css/plugins/jQuery/jQuery-2.2.0.min.js')}}"></script>
-
-    <script src="{{asset('admin-css/plugins/bootstrap-datetimepicker/js/moment.min.js')}}"></script>
 
     <script src="{{asset('admin-css/plugins/jquery.form.js')}}"></script>
 

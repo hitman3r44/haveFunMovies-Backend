@@ -1,17 +1,30 @@
 <div class="form-group row">
-    <label for="retailer_id" class="col-md-3 col-form-label">{{ 'Retailer Id' }}</label>
+    <label for="retailer_id" class="col-md-3 col-form-label">{{ tr('role') }}</label>
     <div class="col-md-9">
         <div class="form-group">
-            <select name="retailer_id" id="retailer_id" class="form-control">
+            <select id="role_id" class="form-control">
                 <option value=""></option>
-                @foreach($retailers as $retailer)
-                    <option value="{{ $retailer->id }}" {{ (isset($creditmoney->retailer_id) ? ($creditmoney->retailer_id == $retailer->id ? 'selected' : '') : '' ) }}>{{ $retailer->name }}</option>
+                @foreach($roles as $role)
+                    <option @if(isset($creditmoney->user_id)) {{ (in_array($role->name, $creditmoney->user->getRoleNames()->toArray())) ? 'selected' : '' }} @endif value="{{$role->id}}">{{ ucfirst($role->name) }}</option>
                 @endforeach
             </select>
             {!! $errors->first('retailer_id', '<small class="text-danger">:message</small>') !!}
         </div>
     </div>
 </div>
+
+<div class="form-group row">
+    <label for="retailer_id" class="col-md-3 col-form-label">{{ tr('user') }}</label>
+    <div class="col-md-9">
+        <div class="form-group">
+            <select name="user_id" id="user_id" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
 <div class="form-group row">
     <label for="amount" class="col-md-3 col-form-label">{{ 'Amount' }}</label>
     <div class="col-md-9">

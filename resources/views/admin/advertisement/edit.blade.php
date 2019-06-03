@@ -228,10 +228,6 @@
             var countriesArr = [ {!! implode(',', $edit_advertisement->countries()->pluck('id')->toArray()) !!}]
             var moviesArr = [ {!! implode(',', $edit_advertisement->movies()->pluck('id')->toArray()) !!}]
 
-            console.log(countriesArr);
-            console.log(moviesArr);
-            console.log(countriesArr.indexOf(1));
-
             populateSelectOptionData('countries', '#countries', countriesArr);
             populateSelectOptionData('movies', '#movies', moviesArr);
 
