@@ -19,6 +19,7 @@ $factory->define(Advertisement::class, function (Faker $faker) {
         'created_by' => 1,
         'total_amount' => $faker->numberBetween($min = 120, $max = 160),
         'per_view_cost' => $faker->numberBetween($min = 1, $max = 17),
+        'custom_commission_rate' => $faker->numberBetween($min = 1, $max = 50),
         'video' => 'https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_30mb.mp4',
         'is_published' => true,
         'is_deleted' => false,

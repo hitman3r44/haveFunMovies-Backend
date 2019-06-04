@@ -1524,5 +1524,7 @@ return array(
     'add_generate_gift_card' => 'Sell Gift Card',
     'edit_generate_gift_card' => 'Edit Gift Card',
     'sold_gift_card' => 'Sold Gift Card',
+    'custom_commission_rate' => 'Custom Commission Rate (%)',
+
 );
 

@@ -40,14 +40,16 @@
                             <tr>
                                 <th>{{tr('id')}}</th>
                                 <th>{{tr('title')}}</th>
-                                <th>{{tr('min_play_time')}}</th>
-                                <th>{{tr('max_play_time')}}</th>
+{{--                                <th>{{tr('min_play_time')}}</th>--}}
+{{--                                <th>{{tr('max_play_time')}}</th>--}}
                                 <th>{{tr('already_played_time')}}</th>
                                 <th>{{tr('start_playing_date_table_header')}}</th>
                                 <th>{{tr('end_playing_date_table_header')}}</th>
 
                                 <th>{{tr('amount')}}</th>
                                 <th>{{tr('per_view_cost')}}</th>
+                                <th>{{tr('custom_commission_rate')}}</th>
+
                                 <th>{{tr('is_published')}}</th>
                                 <th>{{tr('is_expired')}}</th>
 
@@ -63,21 +65,21 @@
                                         <a href="{{route('admin.advertisement.view',$value->id)}}">{{$value->title}}</a>
                                     </td>
 
-                                    <td>
-                                        @if($value->min_play_time == null)
-                                            {{0}}
-                                        @else
-                                            {{$value->min_play_time}}
-                                        @endif
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        @if($value->min_play_time == null)--}}
+{{--                                            {{0}}--}}
+{{--                                        @else--}}
+{{--                                            {{$value->min_play_time}}--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
 
-                                    <td>
-                                        @if($value->max_play_time == null)
-                                            {{0}}
-                                        @else
-                                            {{$value->max_play_time}}
-                                        @endif
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        @if($value->max_play_time == null)--}}
+{{--                                            {{0}}--}}
+{{--                                        @else--}}
+{{--                                            {{$value->max_play_time}}--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
 
                                     <td>
                                         @if($value->already_played_time == null)
@@ -105,6 +107,7 @@
 
                                     <td>{{Setting::get('currency')}} {{$value->total_amount}}</td>
                                     <td>{{$value->per_view_cost}}</td>
+                                    <td>{{$value->custom_commission_rate}}</td>
 
                                     <td>
                                         @if($value->is_published ==0)
