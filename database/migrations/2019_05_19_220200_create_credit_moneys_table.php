@@ -15,9 +15,10 @@ class CreateCreditMoneysTable extends Migration
     {
         Schema::create('credit_moneys', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('retailer_id');
+            $table->integer('user_id');
             $table->decimal('amount');
             $table->integer('given_by');
+
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->softDeletes();

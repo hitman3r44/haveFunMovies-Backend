@@ -20,7 +20,16 @@
         <div class="bgc-white col-md-10 offset-1">
             <div class="">
                 <div class="bgc-white p-20 bd">
-                    <h6 class="c-grey-900">{{tr('search_videos')}}  </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="c-grey-900">{{tr('search_videos')}}  </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{route('admin.videos.create')}}" class="btn btn-secondary btn-sm pull-right">Upload Video</a>
+                        </div>
+                    </div>
+
+
                     <div class="mT-30">
                         <form method="POST" id="search_video" action="{{route('admin.videos.search')}}">
                             <div class="form-group row">

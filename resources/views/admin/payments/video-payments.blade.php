@@ -121,9 +121,9 @@
 
 							      	<td>
 							      		@if($payment->is_coupon_applied)
-										<span class="label label-success">{{tr('yes')}}</span>
+										<span class="badge badge-success">{{tr('yes')}}</span>
 										@else
-										<span class="label label-danger">{{tr('no')}}</span>
+										<span class="badge badge-danger">{{tr('no')}}</span>
 										@endif
 							      	</td>
 							      	<td>
@@ -134,16 +134,16 @@
 
 							      			@if($payment->coupon_amount <= 0)
 
-							      				<label class="label label-danger">{{tr('not_paid')}}</label>
+							      				<label class="badge badge-danger">{{tr('not_paid')}}</label>
 
 							      			@else 
 
-							      				<label class="label label-success">{{tr('paid')}}</label>
+							      				<label class="badge badge-success">{{tr('paid')}}</label>
 
 							      			@endif
 
 							      		@else
-							      			<label class="label label-success">{{tr('paid')}}</label>
+							      			<label class="badge badge-success">{{tr('paid')}}</label>
 
 							      		@endif 
 							      	</td>

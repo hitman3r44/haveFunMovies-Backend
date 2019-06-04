@@ -36,3 +36,53 @@
     </div>
  </div>
 @endsection
+
+
+@section('scripts')
+
+    <script>
+        function getUserByRole(roleId, viewField){
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.credit-money.user.role') }}",
+                data: {
+                    role: roleId
+                },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': "{{csrf_token()}}"
+                },
+                success: function (response) {
+                    var option = '<option></option>'; //<option value="">Select '+contentType+'</option>
+                    if (response.statusCode == 1) {
+                        $.each(response.data, function (id, value) {
+                            if (id == parseInt({{$creditmoney->user_id}})) {
+                                option += '<option selected value="' + id + '" >' + value + '</option>';
+                            } else {
+                                option += '<option value="' + id + '" >' + value + '</option>';
+                            }
+                        });
+
+                        $(viewField).html(option);
+
+                    }else{
+                        alert(response.message);
+                    }
+
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            getUserByRole($('select#role_id').val(), 'select#user_id')
+
+            $('select#role_id').on('change', function (e) {
+                var roleId = $(this).val();
+                getUserByRole(roleId, 'select#user_id')
+            })
+
+        });
+
+    </script>
+@endsection

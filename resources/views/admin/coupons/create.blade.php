@@ -37,7 +37,7 @@
 
 						<div class="form-group">
 
-							<label for = "title" class="col-sm-2 control-label"> * {{tr('title')}}</label>
+							<label for = "title" class="col-sm-2 col-form-label"> * {{tr('title')}}</label>
 
 							<div class="col-sm-10">
 								<input type="text" name="title" role="title" min="5" max="20" class="form-control" value="{{ old('title') }}" required placeholder="{{tr('enter_coupon_title')}}">
@@ -45,14 +45,14 @@
 						</div> 
 
 						<div class="form-group">
-							<label for = "coupon_code" class="col-sm-2 control-label"> * {{tr('coupon_code')}}</label>
+							<label for = "coupon_code" class="col-sm-2 col-form-label"> * {{tr('coupon_code')}}</label>
 							<div class="col-sm-10">
-								<input type="text" name="coupon_code" min="1" max="10" class="form-control" value="{{old('coupon_code')}}"  required pattern="[A-Z0-9]{1,50}"  placeholder="{{tr('enter_coupon_code')}}" title="{{tr('validation')}}"><p class="help-block">{{tr('note')}} : {{tr('coupon_code_note')}}</p>
+								<input type="text" name="coupon_code" min="1" max="10" class="form-control" value="{{old('coupon_code')}}"  required pattern="[A-Z0-9]{1,50}"  placeholder="{{tr('enter_coupon_code')}}" title="{{tr('validation')}}"><p class="form-text">{{tr('note')}} : {{tr('coupon_code_note')}}</p>
 							</div>
 						</div>
 
 						<div class="form-group floating-label">
-							<label for = "amount_type" class="col-sm-2 control-label"> *
+							<label for = "amount_type" class="col-sm-2 col-form-label"> *
 							{{tr('amount_type')}}</label>
 							<div class="col-sm-10">
 							    <select id ="amount_type" name="amount_type" class="form-control select2">
@@ -65,21 +65,21 @@
 						</div>
 
 						<div class="form-group">
-							<label for="amount" class="col-sm-2 control-label"> * {{tr('amount')}}</label>
+							<label for="amount" class="col-sm-2 col-form-label"> * {{tr('amount')}}</label>
 							<div class="col-sm-10">
 								<input type="number" name="amount" min="1" max="5000" step="any" class="form-control" placeholder="{{tr('amount')}}" value="{{old('amount')}}" required title="{{tr('only_number')}}">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="expiry_date" class="col-sm-2 control-label"> * {{tr('expiry_date')}}</label>
+							<label for="expiry_date" class="col-sm-2 col-form-label"> * {{tr('expiry_date')}}</label>
 							<div class="col-sm-10">
 								<input type="text" id="expiry_date" name="expiry_date" class="form-control" placeholder="{{tr('expiry_date_coupon')}}" value="{{old('expiry_date')}}" required>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for = "description" class="col-sm-2 control-label">{{tr('description')}}</label>
+							<label for = "description" class="col-sm-2 col-form-label">{{tr('description')}}</label>
 							<div class="col-sm-10">
 								<textarea name="description" class="form-control" max="255" style="resize: none;"></textarea>
 							</div>
@@ -87,7 +87,7 @@
 					</div> 
 
 					<div class="box-footer">
-						<a class="btn btn-danger">{{tr('reset')}}</a>
+						<button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
 						<button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
 					</div>
 				</form>

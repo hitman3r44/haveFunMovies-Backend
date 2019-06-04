@@ -37,7 +37,7 @@
                     <div class="box-body">
 
                         <div class="form-group row">
-                            <label for = "title" class="col-sm-2 control-label"> * {{tr('title')}}</label>
+                            <label for = "title" class="col-sm-2 col-form-label"> * {{tr('title')}}</label>
 
                             <div class="col-md-9">
                                 <div class="col-sm-10">
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="price" class="col-sm-2 control-label"> * {{tr('price')}}</label>
+                            <label for="price" class="col-sm-2 col-form-label"> * {{tr('price')}}</label>
                             <div class="col-md-9">
                                 <div class="col-sm-10">
                                     <input class="form-control" name="price" type="float" id="price" value="">

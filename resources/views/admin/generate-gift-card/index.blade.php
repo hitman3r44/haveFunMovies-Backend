@@ -47,7 +47,7 @@
 
                 <div class="box-body">
                     <div class="table table-responsive">
-                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                        <table id="dataTable" class="table table-striped table-no-bordered table-hover" cellspacing="0"
                                width="100%" style="width:100%">
                             <thead>
                             <tr>
@@ -72,9 +72,9 @@
                                     <td class="text-center">
 
                                         @if($item->is_paid)
-                                            <span class="label label-success">{{tr('yes')}}</span>
+                                            <span class="badge badge-success">{{tr('yes')}}</span>
                                         @else
-                                            <span class="label label-warning">{{tr('no')}}</span>
+                                            <span class="badge badge-warning">{{tr('no')}}</span>
                                         @endif
                                     </td>
 

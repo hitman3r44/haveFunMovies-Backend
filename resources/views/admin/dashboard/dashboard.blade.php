@@ -278,7 +278,7 @@ use  Carbon\Carbon;
                     <h3 class="box-title text-uppercase">{{tr('latest_users')}}</h3>
 
                     <div class="box-tools pull-right">
-                        <!-- <span class="label label-danger">8 New Members</span> -->
+                        <!-- <span class="badge badge-danger">8 New Members</span> -->
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" style="color: white"><i class="fa fa-minus"></i>
                         </button>
                         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
@@ -347,7 +347,7 @@ use  Carbon\Carbon;
                                         </div>
                                         <div class="product-info">
                                             <a href="{{route('admin.view.video' , array('id' => $video->admin_video_id))}}" class="product-title">{{substr($video->title, 0,50)}}
-                                                <span class="label label-warning pull-right">{{$video->duration}}</span>
+                                                <span class="badge badge-warning pull-right">{{$video->duration}}</span>
                                             </a>
                                             <span class="product-description">
                                               {{substr($video->description , 0 , 75)}}

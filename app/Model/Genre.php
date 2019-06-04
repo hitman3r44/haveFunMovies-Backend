@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Genre extends Model
 {
@@ -31,6 +32,11 @@ class Genre extends Model
     {
         //execute the parent's boot method 
         parent::boot();
+
+        static::creating(function($post)
+        {
+            $post->created_by = Auth::check() ? Auth::user()->id : 0;
+        });
 
         //delete your related models here, for example
         static::deleting(function($genres)

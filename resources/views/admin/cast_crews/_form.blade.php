@@ -14,7 +14,7 @@
                 <div class="box-body">
 
                     <div class="form-group">
-                        <label for="name" class="col-sm-1 control-label">*{{tr('name')}}</label>
+                        <label for="name" class="col-sm-1 col-form-label">*{{tr('name')}}</label>
                         <div class="col-sm-10">
                             <input type="text" required class="form-control" 
                               pattern = "[a-zA-Z0-9\s\-\.]{2,100}" title="{{tr('only_alphanumeric')}}" id="name" name="name" placeholder="{{tr('name')}}" value="{{$model->name}}">
@@ -24,11 +24,11 @@
                     <input type="hidden" name="id" value="{{$model->id}}">
 
                     <div class="form-group">
-                        <label for="picture" class="col-sm-1 control-label">*{{tr('picture')}}</label>
+                        <label for="picture" class="col-sm-1 col-form-label">*{{tr('picture')}}</label>
                         <div class="col-sm-10"> 
 
                              <input type="file" @if(!$model->id) required @endif accept="image/jpeg,image/png" id="picture" name="image" placeholder="{{tr('picture')}}" onchange="loadFile(this,'image_preview')">
-                            <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                            <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
 
                             @if ($model->id)
 
@@ -47,7 +47,7 @@
 
                     <div class="form-group">
 
-                        <label for="description" class="col-sm-1 control-label">*{{tr('description')}}</label>
+                        <label for="description" class="col-sm-1 col-form-label">*{{tr('description')}}</label>
 
                         <br>
 
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="box-footer">
-                    <a href="" class="btn btn-danger">{{tr('cancel')}}</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-danger">{{tr('cancel')}}</a>
                     @if(Setting::get('admin_delete_control'))
                         <a href="#" class="btn btn-success pull-right" disabled>{{tr('submit')}}</a>
                     @else

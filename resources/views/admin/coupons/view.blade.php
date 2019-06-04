@@ -44,16 +44,16 @@
 
                     <strong>{{tr('amount_type')}}</strong>
                     @if($view_coupon->amount_type == 0)
-                        <span class="label label-primary pull-right">{{tr('percentage')}}</span>
+                        <span class="badge badge-primary pull-right">{{tr('percentage')}}</span>
                     @else
-                        <span class="label label-primary pull-right">{{tr('absoulte')}}</span>
+                        <span class="badge badge-primary pull-right">{{tr('absoulte')}}</span>
                     @endif
                     <hr>
                     <strong>{{tr('amount')}}</strong>
                     @if($view_coupon->amount_type == 0)
-                        <span class="label label-primary pull-right">{{$view_coupon->amount}} % </span>
+                        <span class="badge badge-primary pull-right">{{$view_coupon->amount}} % </span>
                     @else
-                        <span class="label label-primary pull-right">{{Setting::get('currency')}}{{$view_coupon->amount}}</span>
+                        <span class="badge badge-primary pull-right">{{Setting::get('currency')}}{{$view_coupon->amount}}</span>
                     @endif
                     <hr>
                     <strong>{{tr('expiry_date')}}</strong>
@@ -78,9 +78,9 @@
 
                     <strong>{{tr('status')}}</strong>
                     @if($view_coupon->status == 0)
-                        <span class="label label-warning pull-right">{{tr('declined')}}</span>
+                        <span class="badge badge-warning pull-right">{{tr('declined')}}</span>
                     @else
-                        <span class="label label-success pull-right">{{tr('approved')}}</span>
+                        <span class="badge badge-success pull-right">{{tr('approved')}}</span>
                     @endif
 
                     <hr>

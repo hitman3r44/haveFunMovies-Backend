@@ -26,7 +26,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('total_subscription');
             $table->integer('status');
             $table->integer('popular_status')->default(0);
-
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class CreatePagesTable extends Migration
             $table->string('heading');
             $table->text('description');
             $table->enum('type', array('about', 'privacy', 'terms', 'help', 'others', 'contact', 'faq'));
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

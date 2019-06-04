@@ -21,6 +21,7 @@ class CreateCastCrewsTable extends Migration
             $table->string('image');
             $table->text('description');
             $table->boolean('status');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
