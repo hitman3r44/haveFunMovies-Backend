@@ -262,26 +262,23 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     // Genres
 
-    Route::get('/genres/{sub_category}', 'AdminController@genres')->name('genres');
+//    Route::get('/genres/{sub_category}', 'AdminController@genres')->name('genres');
+//
+//    Route::get('/add/genre/{sub_category}', 'AdminController@add_genre')->name('add.genre');
+//
+//    Route::get('/edit/genre/{sub_category_id}/{genre_id}', 'AdminController@genres_edit')->name('edit.edit_genre');
+//
+//
+//    Route::post('/save/genre' , 'AdminController@genres_save')->name('save.genre');
+//
+//    Route::get('/genre/approve', 'AdminController@approve_genre')->name('genre.approve');
+//
+//    Route::get('/delete/genre/{id}', 'AdminController@genres_delete')->name('delete.genre');
+//
+//    Route::get('/view/genre/{id}', 'AdminController@genres_view')->name('view.genre');
 
-    Route::get('/add/genre/{sub_category}', 'AdminController@add_genre')->name('add.genre');
+//    Route::post('genre/change/position', 'AdminController@genre_position')->name('save.genre.position');
 
-    Route::get('/edit/genre/{sub_category_id}/{genre_id}', 'AdminController@genres_edit')->name('edit.edit_genre');
-
-
-    Route::post('/save/genre' , 'AdminController@genres_save')->name('save.genre');
-
-    Route::get('/genre/approve', 'AdminController@approve_genre')->name('genre.approve');
-
-    Route::get('/delete/genre/{id}', 'AdminController@genres_delete')->name('delete.genre');
-
-    Route::get('/view/genre/{id}', 'AdminController@genres_view')->name('view.genre');
-
-    Route::post('genre/change/position', 'AdminController@genre_position')->name('save.genre.position');
-
-    // Videos
-
-    Route::get('/videos', 'AdminController@videos')->name('videos');
 
     Route::get('/moderator/videos/{id}','AdminController@moderator_videos')->name('moderator.videos.list');
 
@@ -299,23 +296,29 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     // New Video Upload Code
 
-    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
+//    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
 
-    Route::get('/videos/search/tmdb', 'TmdbVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
 
-    Route::post('/videos/search', 'TmdbVideoController@getSearchVideosResult')->name('videos.search');
+    // Videos
 
-    Route::get('/videos/{videoId}/create/tmdb', 'TmdbVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+    Route::get('/videos', 'AdminVideoController@videos')->name('videos');
 
-    Route::post('/videos/{videoId}/details', 'TmdbVideoController@getDetailsVideos')->name('videos.details');
+    Route::get('/videos/search/tmdb', 'AdminVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
 
-    Route::post('/videos/save/tmdb', 'TmdbVideoController@tmdbVideosSave')->name('videos.save.tmdb');
+    Route::post('/videos/search', 'AdminVideoController@getSearchVideosResult')->name('videos.search');
 
-    Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
+    Route::get('/videos/{videoId}/create/tmdb', 'AdminVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+    Route::get('/videos/create', 'AdminVideoController@tmdbVideosCreate')->name('videos.create');
 
-    Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');
+    Route::post('/videos/{videoId}/details', 'AdminVideoController@getDetailsVideos')->name('videos.details');
 
-    Route::get('/view/video', 'AdminController@view_video')->name('view.video');
+    Route::post('/videos/save/tmdb', 'AdminVideoController@tmdbVideosSave')->name('videos.save.tmdb');
+
+    Route::get('/videos/edit/{id}', 'AdminVideoController@tmdbVideosEdit')->name('videos.edit');
+
+    Route::post('/videos/save', 'AdminVideoController@admin_videos_save')->name('videos.save');
+
+    Route::get('/view/video', 'AdminVideoController@view_video')->name('view.video');
 
     Route::get('/gif/generation', 'AdminController@gif_generator')->name('gif_generator');
 
@@ -334,6 +337,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     // User Payment details
     Route::get('user/payments' , 'AdminController@user_payments')->name('user.payments');
 
+    Route::post('credit-money/get-user-by-role' , 'CreditMoneyController@getUserByRole')->name('credit-money.user.role');
     Route::resource('credit-money', 'CreditMoneyController');
     Route::resource('prepaid-code', 'PrepaidCodeController');
     Route::resource('gift-card', 'GiftCardController');
@@ -471,6 +475,29 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/email/form','AdminController@create_mailcamp')->name('add.mailcamp');
 
     Route::post('/email/form/action','AdminController@email_send_process')->name('email.success');
+
+    //Sub-Category/Genre
+
+    // Get the add genre forms
+    Route::get('/genres/add','GenreController@genre_create')->name('add.genres');
+
+    // Get the edit genre forms
+    Route::get('/genres/edit/{id}','GenreController@genre_edit')->name('edit.genres');
+
+    // Save the genre details
+    Route::post('/genres/save','GenreController@genre_save')->name('save.genre');
+
+    // Get the list of genre details
+    Route::get('/genres/list','GenreController@genre_index')->name('genre.list');
+
+    //Get the particular genre details
+    Route::get('/genres/view/{id}','GenreController@genre_view')->name('genre.view');
+
+    // Delete the genre details
+    Route::get('/genres/delete/{id}','GenreController@genre_delete')->name('delete.genre');
+
+    //genre approve and decline status
+    Route::get('/genre/status','GenreController@genre_status_change')->name('genre.status');
 
     // Advertisement
 

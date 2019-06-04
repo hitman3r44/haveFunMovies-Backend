@@ -89,7 +89,6 @@ class AdvertisementController extends Controller
 
                 $advertisement->updated_at = Carbon::now();
                 $advertisement->uploaded_at = Carbon::now();
-                $advertisement->created_by = Auth::user()->id;
                 $advertisement->updated_by = Auth::user()->id;
 
                 $message = tr('advertisement_add_success');
@@ -108,6 +107,8 @@ class AdvertisementController extends Controller
             // Check Other Fields for null
             $advertisement->min_play_time = !empty($request->min_play_time) ? $request->min_play_time : 0;
             $advertisement->max_play_time = !empty($request->max_play_time) ? $request->max_play_time : 0;
+            $advertisement->custom_commission_rate = !empty($request->custom_commission_rate) ? $request->custom_commission_rate : 0;
+
             $advertisement->description = $request->description;
 
             $advertisement->video = '';

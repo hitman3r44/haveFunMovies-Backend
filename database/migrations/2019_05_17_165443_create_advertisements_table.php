@@ -24,11 +24,9 @@ class CreateAdvertisementsTable extends Migration
             $table->date('end_playing_date')->nullable();
             $table->date('uploaded_at');
 
-            $table->integer('created_by');
-            $table->integer('updated_by')->nullable();
-
             $table->float('total_amount');
             $table->float('per_view_cost');
+            $table->float('custom_commission_rate')->default(0);
 
             $table->boolean('is_published')->default(false);
             $table->boolean('is_deleted')->default(false);;
@@ -37,7 +35,10 @@ class CreateAdvertisementsTable extends Migration
             $table->integer('status');
             $table->string('video');
             $table->string('description')->nullable();
+
             $table->softDeletes();
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }

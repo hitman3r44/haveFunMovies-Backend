@@ -90,7 +90,7 @@
 
                                 <div class="form-group">
                                     <label for="name" required
-                                           class="col-sm-2 control-label">{{tr('username')}}</label>
+                                           class="col-sm-2 col-form-label">{{tr('username')}}</label>
 
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="name" name="name"
@@ -101,7 +101,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email" class="col-sm-2 control-label">{{tr('email')}}</label>
+                                    <label for="email" class="col-sm-2 col-form-label">{{tr('email')}}</label>
 
                                     <div class="col-sm-10">
                                         <input type="email" required
@@ -112,7 +112,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="mobile" class="col-sm-2 control-label">{{tr('mobile')}}</label>
+                                    <label for="mobile" class="col-sm-2 col-form-label">{{tr('mobile')}}</label>
 
                                     <div class="col-sm-10">
                                         <input type="text" value="{{Auth::user()->mobile}}"
@@ -124,7 +124,7 @@
 
                                 <div class="form-group">
                                     <label for="address"
-                                           class="col-sm-2 control-label">{{tr('address')}}</label>
+                                           class="col-sm-2 col-form-label">{{tr('address')}}</label>
 
                                     <div class="col-sm-10">
                                         <input type="text" value="{{Auth::user()->address}}"
@@ -168,13 +168,13 @@
 
                                 <div class="form-group">
                                     <label for="picture"
-                                           class="col-sm-2 control-label">{{tr('picture')}}</label>
+                                           class="col-sm-2 col-form-label">{{tr('picture')}}</label>
 
                                     <div class="col-sm-10">
 
                                         <input type="file" required accept="image/png,image/jpeg" name="picture"
                                                id="picture" onchange="loadFile(this,'image_preview')">
-                                        <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                                        <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
                                     </div>
                                 </div>
 
@@ -204,7 +204,7 @@
 
                                 <div class="form-group">
                                     <label for="old_password"
-                                           class="col-sm-3 control-label">{{tr('old_password')}}</label>
+                                           class="col-sm-3 col-form-label">{{tr('old_password')}}</label>
 
                                     <div class="col-sm-8">
                                         <input required type="password" class="form-control" name="old_password"
@@ -214,7 +214,7 @@
 
                                 <div class="form-group">
                                     <label for="password"
-                                           class="col-sm-3 control-label">{{tr('new_password')}}</label>
+                                           class="col-sm-3 col-form-label">{{tr('new_password')}}</label>
 
                                     <div class="col-sm-8">
                                         <input required type="password" class="form-control" name="password"
@@ -224,7 +224,7 @@
 
                                 <div class="form-group">
                                     <label for="confirm_password"
-                                           class="col-sm-3 control-label">{{tr('confirm_password')}}</label>
+                                           class="col-sm-3 col-form-label">{{tr('confirm_password')}}</label>
 
                                     <div class="col-sm-8">
                                         <input required type="password" class="form-control"

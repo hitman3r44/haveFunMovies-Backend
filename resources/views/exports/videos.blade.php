@@ -132,17 +132,17 @@
                         
                         @if($video_details->position > 0)
 
-                        <span class="label label-success">{{$video_details->position}}</span>
+                        <span class="badge badge-success">{{$video_details->position}}</span>
 
                         @else
 
-                        <span class="label label-danger">{{$video_details->position}}</span>
+                        <span class="badge badge-danger">{{$video_details->position}}</span>
 
                         @endif
 
                     @else
 
-                        <span class="label label-warning">{{tr('not_genre')}}</span>
+                        <span class="badge badge-warning">{{tr('not_genre')}}</span>
 
                     @endif
                 </td>
@@ -150,9 +150,9 @@
                 @if(Setting::get('is_payper_view'))
                     <td class="text-center">
                         @if($video_details->amount > 0)
-                            <span class="label label-success">{{tr('yes')}}</span>
+                            <span class="badge badge-success">{{tr('yes')}}</span>
                         @else
-                            <span class="label label-danger">{{tr('no')}}</span>
+                            <span class="badge badge-danger">{{tr('no')}}</span>
                         @endif
                     </td>
                 @endif
@@ -221,13 +221,13 @@
                 <td>
                     @if ($video_details->compress_status < OVERALL_COMPRESS_COMPLETED)
 
-                        <span class="label label-danger">{{tr('compress')}}</span>
+                        <span class="badge badge-danger">{{tr('compress')}}</span>
                         
                     @else
                         @if($video_details->is_approved)
-                            <span class="label label-success">{{tr('approved')}}</span>
+                            <span class="badge badge-success">{{tr('approved')}}</span>
                         @else
-                            <span class="label label-warning">{{tr('pending')}}</span>
+                            <span class="badge badge-warning">{{tr('pending')}}</span>
                         @endif
                     @endif
                 </td>

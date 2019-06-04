@@ -30,15 +30,15 @@ class CreditMoney extends Model
      *
      * @var array
      */
-    protected $fillable = ['retailer_id', 'amount', 'given_by', 'created_by'];
+    protected $fillable = ['user_id', 'amount', 'given_by', 'created_by'];
 
-    public function retailer()
+    public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
     public function givenBy()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'given_by', 'id');
     }
 
 

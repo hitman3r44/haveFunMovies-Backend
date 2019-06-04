@@ -24,7 +24,6 @@ class CreateGeneratedGiftCardsTable extends Migration
             $table->tinyInteger('is_deleted')->default(0);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
-
             $table->timestamps();
         });
     }

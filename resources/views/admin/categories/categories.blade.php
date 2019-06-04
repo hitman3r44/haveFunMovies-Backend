@@ -43,7 +43,6 @@
                                     <th>{{tr('id')}}</th>
                                     <th>{{tr('category')}}</th>
                                     <th>{{tr('picture')}}</th>
-                                    <th>{{tr('is_series')}}</th>
                                     <th>{{tr('status')}}</th>
                                     <th>{{tr('action')}}</th>
                                 </tr>
@@ -57,14 +56,6 @@
                                         <td>{{$category->name}}</td>
                                         <td>
                                             <img style="height: 30px;" src="{{$category->picture}}">
-                                        </td>
-
-                                        <td>
-                                            @if($category->is_series)
-                                                <span class="badge badge-success">{{tr('yes')}}</span>
-                                            @else
-                                                <span class="badge badge-warning">{{tr('no')}}</span>
-                                            @endif
                                         </td>
 
                                         <td>
@@ -109,7 +100,7 @@
                                                             @endif
                                                         </li>
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         @if($category->is_approved)
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -123,7 +114,7 @@
                                                             </li>
                                                         @endif
 
-                                                        <li class="divider" role="presentation"></li>
+                                                        <li class="dropdown-divider" role="presentation"></li>
 
                                                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                    href="{{route('admin.videos' , array('category_id' => $category->id))}}">{{tr('videos')}}</a>

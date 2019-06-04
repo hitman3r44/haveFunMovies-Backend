@@ -109,12 +109,12 @@
 
 									    <td>
 								      		@if ($video->compress_status < OVERALL_COMPRESS_COMPLETED)
-								      			<span class="label label-danger">{{tr('compress')}}</span>
+								      			<span class="badge badge-danger">{{tr('compress')}}</span>
 								      		@else
 									      		@if($video->is_approved)
-									      			<span class="label label-success">{{tr('approved')}}</span>
+									      			<span class="badge badge-success">{{tr('approved')}}</span>
 									       		@else
-									       			<span class="label label-warning">{{tr('pending')}}</span>
+									       			<span class="badge badge-warning">{{tr('pending')}}</span>
 									       		@endif
 									       	@endif
 								      	</td>
@@ -129,9 +129,9 @@
 								      	
 									      	<td class="text-center">
 									      		@if($video->amount > 0)
-									      			<span class="label label-success">{{tr('yes')}}</span>
+									      			<span class="badge badge-success">{{tr('yes')}}</span>
 									      		@else
-									      			<span class="label label-danger">{{tr('no')}}</span>
+									      			<span class="badge badge-danger">{{tr('no')}}</span>
 									      		@endif
 									      	</td>
 
