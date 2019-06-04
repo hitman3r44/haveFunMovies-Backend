@@ -174,7 +174,7 @@
                                     <label for="ratings" class="col-sm-3 col-form-label"> {{tr('price')}}</label>
                                     <div class="col-sm-7">
                                         <div class="input-group mb-3">
-                                            <input type="number" name="price" class="form-control"  id="price" placeholder="Movie Price">
+                                            <input type="number" step="0.01" required name="price" class="form-control"  id="price" placeholder="Movie Price">
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="basic-addon2"><i class="fa fa-dollar"></i></span>
                                             </div>
