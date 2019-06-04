@@ -156,6 +156,7 @@ class AdminVideoController extends Controller
 
                 $model = new AdminVideo();
             }
+
             $model->tmdb_video_id = $request->tmdb_video_id;
             $model->title = $request->title;
             $model->unique_id = seoUrl($request->title);
@@ -169,12 +170,26 @@ class AdminVideoController extends Controller
             $model->price = $request->price;
             $model->video_type = $request->video_type;
 
-            if ($request->video_type == 1) {
+            if ($request->video_type == VIDEO_TYPE_UPLOAD) {
                 $model->video = $request->video;
             }
 
-            if ($request->trailer_video_type == 1) {
+            // Check for Youtube Link for Movie
+            if ($request->video_type == VIDEO_TYPE_YOUTUBE) {
+
+                $video = get_api_youtube_link($request->video);
+                $model->video = $video;
+            }
+
+            if ($request->trailer_video_type == VIDEO_TYPE_UPLOAD) {
                 $model->trailer_video = $request->trailer_video;
+            }
+
+            // Check for Youtube Link for Trailer
+            if ($request->video_type == VIDEO_TYPE_YOUTUBE) {
+
+                $trailer_video = get_api_youtube_link($request->trailer_video);
+                $model->trailer_video = $trailer_video;
             }
 
 
@@ -192,9 +207,7 @@ class AdminVideoController extends Controller
             $model->trailer_subtitle = '';
             $model->video_subtitle = '';
 
-
             $model->genre_id = $request->sub_category_id;
-            $model->video = '';
 
             $model->status = 1;
             $model->is_approved = 1;
@@ -313,7 +326,6 @@ class AdminVideoController extends Controller
             return response()->json($response_array);
 
         }
-
     }
 
 

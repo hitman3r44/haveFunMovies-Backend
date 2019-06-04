@@ -543,6 +543,8 @@ return array(
 	's3' => 'Aws S3',
 	'direct' => 'Streaming Upload',
 	'youtube' => 'YouTube Link',
+    'file_upload' => 'File Upload',
+
 	'other_link' => 'Others',
 	'video_upload_link' => 'Upload Video',
 	'watch_main_video' => 'Watch Full Video',
