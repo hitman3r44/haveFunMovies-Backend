@@ -15,8 +15,14 @@ class CreateTmdbGenresTable extends Migration
     {
         Schema::create('tmdb_genres', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tmdb_genre_id');
+            $table->integer('tmdb_genre_id')->nullable();
             $table->string('name');
+            $table->string('description')->nullable();
+            $table->integer('status')->default(0);
+
+            $table->softDeletes();
+            $table->integer('created_by')->default(2);
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }
