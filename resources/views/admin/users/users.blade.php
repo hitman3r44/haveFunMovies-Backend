@@ -162,14 +162,14 @@
 
                                                         @if(!$user->is_verified)
 
-                                                            <li role="presentation" class="divider"></li>
+                                                            <li role="presentation" class="dropdown-divider"></li>
                                                             <li role="presentation">
                                                                 <a role="menuitem" tabindex="-1"
                                                                    href="{{route('admin.users.verify' , $user->id)}}">{{tr('verify')}}</a>
                                                             </li>
                                                         @endif
 
-                                                        <li role="presentation" class="divider"></li>
+                                                        <li role="presentation" class="dropdown-divider"></li>
 
                                                         {{--											                  	<li role="presentation">--}}
                                                         {{--											                  		<a role="menuitem" tabindex="-1" href="{{route('admin.users.subprofiles',  $user->id)}}">{{tr('sub_profiles')}}</a>--}}
@@ -195,7 +195,7 @@
                                                             @endif
 
                                                         </li>
-                                                        <li role="presentation" class="divider"></li>
+                                                        <li role="presentation" class="dropdown-divider"></li>
 
                                                         <?php /*<li role="presentation"><a role="menuitem" tabindex="-1" href="{{route('admin.user.history', $user->id)}}">{{tr('history')}}</a></li>
 

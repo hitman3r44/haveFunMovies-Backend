@@ -20,6 +20,7 @@ class CreateEmailTemplatesTable extends Migration
             $table->string('subject');
             $table->text('description');
             $table->boolean('status');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

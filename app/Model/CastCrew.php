@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class CastCrew extends Model
 {
@@ -34,6 +35,11 @@ class CastCrew extends Model
     {
         //execute the parent's boot method 
         parent::boot();
+
+        static::creating(function($post)
+        {
+            $post->created_by = Auth::check() ? Auth::user()->id : 0;
+        });
 
         //delete your related models here, for example
         static::deleting(function($video)

@@ -24,6 +24,7 @@ class CreateCastCrewsTable extends Migration
             $table->boolean('status');
             $table->boolean('cast_and_crew_type_id');
 
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

@@ -44,12 +44,13 @@
 
                 <div class="box-body">
                     <div class="table table-responsive">
-                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
-                               width="100%" style="width:100%">
-                            <thead>
+                        <table id="dataTable_credit_money" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+                        <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Retailer Id</th>
+                                <th>User</th>
+                                <th>User's Role</th>
                                 <th>Amount</th>
                                 <th>Given By</th>
                                 <th>Actions</th>
@@ -60,6 +61,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->receiver_name }}</td>
+                                    <td>{{ ucwords($item->receiver_role) }}</td>
                                     <td>{{ $item->amount }}</td>
                                     <td>{{ $item->giver_name }}</td>
                                     <td>
@@ -107,4 +109,34 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('scripts')
+
+    <script>
+        var d_table = $('#dataTable_credit_money').DataTable({
+            initComplete: function () {
+                this.api().columns([1,2,4]).every( function () {
+                    var column = this;
+                    var select = $('<select style="margin-left:5px;width:60%"><option value=""></option></select>')
+                        .appendTo( $(column.header()) )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
+        });
+
+    </script>
 @endsection

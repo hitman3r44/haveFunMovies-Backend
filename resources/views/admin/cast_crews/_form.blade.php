@@ -26,7 +26,7 @@
 
                     {{--                        Name--}}
                     <div class="form-group">
-                        <label for="name" class="col-sm-1 control-label">*{{tr('name')}}</label>
+                        <label for="name" class="col-sm-1 col-form-label">*{{tr('name')}}</label>
                         <div class="col-sm-10">
                             <input type="text" required class="form-control"
                                    pattern="[a-zA-Z0-9\s\-\.]{2,100}" title="{{tr('only_alphanumeric')}}" id="name"
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
 
-                        <label for="description" class="col-sm-1 control-label">*{{tr('description')}}</label>
+                        <label for="description" class="col-sm-1 col-form-label">*{{tr('description')}}</label>
 
                         <br>
 
@@ -65,11 +65,13 @@
                                       placeholder="{{tr('enter')}} {{tr('description')}}">{{$model->description}}</textarea>
 
                         </div>
+                        
                     </div>
+
                 </div>
 
                 <div class="box-footer">
-                    <a href="" class="btn btn-danger">{{tr('cancel')}}</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-danger">{{tr('cancel')}}</a>
                     @if(Setting::get('admin_delete_control'))
                         <a href="#" class="btn btn-success pull-right" disabled>{{tr('submit')}}</a>
                     @else

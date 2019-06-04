@@ -65,11 +65,11 @@
                                     <td>
                                         @if($data->status)
 
-                                            <span class="label label-success">{{tr('approve')}}</span>
+                                            <span class="badge badge-success">{{tr('approve')}}</span>
 
                                         @else
 
-                                            <span class="label label-warning">{{tr('pending')}}</span>
+                                            <span class="badge badge-warning">{{tr('pending')}}</span>
 
                                         @endif
 

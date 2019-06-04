@@ -61,9 +61,9 @@
                                         <td>{{$value->coupon_code}}</td>
                                         <td>
                                             @if($value->amount_type == 0)
-                                                <span class="label label-primary">{{tr('percentage')}}</span>
+                                                <span class="badge badge-primary">{{tr('percentage')}}</span>
                                             @else
-                                                <span class="label label-primary">{{tr('absoulte')}}</span>
+                                                <span class="badge badge-primary">{{tr('absoulte')}}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -80,9 +80,9 @@
                                         </td>
                                         <td>
                                             @if($value->status ==0)
-                                                <span class="label label-warning">{{tr('declined')}}</span>
+                                                <span class="badge badge-warning">{{tr('declined')}}</span>
                                             @else
-                                                <span class="label label-success">{{tr('approved')}}</span>
+                                                <span class="badge badge-success">{{tr('approved')}}</span>
                                             @endif
                                         </td>
                                         <td>

@@ -21,6 +21,7 @@ class CreateAdminVideosTable extends Migration
             $table->text('description');
             $table->string('age', 4);
             $table->text('details');
+            $table->decimal('price');
             $table->integer('category_id');
             $table->integer('sub_category_id');
             $table->integer('genre_id');
@@ -59,11 +60,12 @@ class CreateAdminVideosTable extends Migration
             $table->float('redeem_amount');
             $table->float('admin_amount');
             $table->float('user_amount');
-            $table->timestamps();
             $table->integer('video_type');
             $table->integer('video_upload_type');
             $table->smallInteger('position');
             $table->integer('tmdb_video_id')->nullable();
+            $table->integer('created_by');
+            $table->timestamps();
         });
     }
 

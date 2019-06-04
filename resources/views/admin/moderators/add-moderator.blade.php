@@ -33,7 +33,7 @@
                     <div class="mT-30">
 
                         <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">*{{tr('username')}}</label>
+                            <label for="username" class="col-sm-2 col-form-label">*{{tr('username')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required pattern="[a-zA-Z0-9\s\-\.]{2,100}"
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label">*{{tr('email')}}</label>
+                            <label for="email" class="col-sm-2 col-form-label">*{{tr('email')}}</label>
                             <div class="col-sm-10">
                                 <input type="email" maxlength="255"
                                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,10}$" required
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-2 control-label">*{{tr('mobile')}}</label>
+                            <label for="mobile" class="col-sm-2 col-form-label">*{{tr('mobile')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="mobile" class="form-control" id="mobile"
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-2 control-label">* {{tr('user_type')}}</label>
+                            <label for="mobile" class="col-sm-2 col-form-label">* {{tr('user_type')}}</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="user_type" id="user_type">
                                     <option value="2">Moderator</option>
@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-sm-2 control-label">*{{tr('password')}}</label>
+                            <label for="password" class="col-sm-2 col-form-label">*{{tr('password')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="password" required name="password" class="form-control" minlength="6"
@@ -85,7 +85,7 @@
 
                         <div class="form-group">
                             <label for="username"
-                                   class="col-sm-2  control-label">*{{tr('password_confirmation')}}</label>
+                                   class="col-sm-2  col-form-label">*{{tr('password_confirmation')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="password" minlength="6" required name="password_confirmation"
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description" class="col-sm-2 control-label">*{{tr('description')}}</label>
+                            <label for="description" class="col-sm-2 col-form-label">*{{tr('description')}}</label>
 
                             <div class="col-sm-10">
                                 <textarea class="form-control"  name="description" id="description" cols="5" rows="2"></textarea>
@@ -105,7 +105,7 @@
                     <input type="hidden" name="timezone" value="" id="userTimezone">
 
                     <div class="box-footer">
-                        <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
+                        <button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
                         @if(Setting::get('admin_delete_control'))
                             <a href="#" class="btn btn-success pull-right" disabled>{{tr('submit')}}</a>
                         @else

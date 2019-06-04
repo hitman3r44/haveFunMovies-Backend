@@ -28,7 +28,7 @@
                     <div class="box-body">
 
                         <div class="form-group row">
-                            <label for="from" class="col-sm-2 control-label">* {{tr('to')}}</label>
+                            <label for="from" class="col-sm-2 col-form-label">* {{tr('to')}}</label>
 
                             <div class="col-sm-6">
                                 <!-- Users -->
@@ -81,7 +81,7 @@
                             <!-- User -->
                             @if(count($users_list)>0)
                                 <div class="col-md-10 pull-right" id="select" style="display: none">
-                                    <label for="custom_user" class="control-label"><p class="help-block">{{tr('note')}}
+                                    <label for="custom_user" class="col-form-label"><p class="form-text">{{tr('note')}}
                                             : {{tr('select_users')}}</p></label>
 
                                     <select style="display: none" id="multi-select-user" name="select_user[]"
@@ -103,7 +103,7 @@
 
                                 <div class="col-md-10 pull-right" id="select_moderator" style="display: none">
 
-                                    <label for="custom_user" class="control-label"><p class="help-block">{{tr('note')}}
+                                    <label for="custom_user" class="col-form-label"><p class="form-text">{{tr('note')}}
                                             : {{tr('select_moderators_list')}}</p></label>
                                     <select style="display: none" id="multi-select-moderator" name="select_moderator[]"
                                             class="form-control" multiple>
@@ -118,7 +118,7 @@
                                 </div>
                             @endif
                             <div class="col-sm-10 pull-right" id="custom" style="display: none">
-                                <label for="custom_user" class="control-label"><p class="help-block">{{tr('note')}}
+                                <label for="custom_user" class="col-form-label"><p class="form-text">{{tr('note')}}
                                         : {{tr('custom_user_notes')}}</p></label>
                                 <input type="text" max="255" name="custom_user" class="form-control"
                                        placeholder="{{tr('custom_users')}}">
@@ -126,7 +126,7 @@
 
                         </div>
                         <div class="form-group row">
-                            <label for="subject" class="col-sm-2 control-label">* {{tr('subject')}}</label>
+                            <label for="subject" class="col-sm-2 col-form-label">* {{tr('subject')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" min="5" max="255" pattern=".{5,}" required name="subject"
@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="content" class="col-sm-2 control-label">*{{tr('content')}}</label>
+                            <label for="content" class="col-sm-2 col-form-label">*{{tr('content')}}</label>
 
                             <div class="col-sm-10">
 

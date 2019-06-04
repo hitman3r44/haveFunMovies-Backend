@@ -57,9 +57,9 @@
                             <a href="#">{{tr('status')}}
                                 <span class="pull-right">
 		                			@if($moderator->is_activated)
-                                        <span class="label label-success">{{tr('approved')}}</span>
+                                        <span class="badge badge-success">{{tr('approved')}}</span>
                                     @else
-                                        <span class="label label-warning">{{tr('pending')}}</span>
+                                        <span class="badge badge-warning">{{tr('pending')}}</span>
                                     @endif
 		                		</span>
                             </a>
@@ -70,16 +70,16 @@
 	                			@if($moderator->is_user)
                                     @if ($moderator->user)
                                         <a href="{{route('admin.users.view',$moderator->user->id)}}"><span
-                                                    class="label label-success" ">{{tr('yes')}}</span>
+                                                    class="badge badge-success" ">{{tr('yes')}}</span>
                             </a>
 
                             @else
 
-                                <span class="label label-success">{{tr('yes')}}</span>
+                                <span class="badge badge-success">{{tr('yes')}}</span>
 
                             @endif
                             @else
-                                <a href="#"><span class="label label-warning">{{tr('no')}}</span></a>
+                                <a href="#"><span class="badge badge-warning">{{tr('no')}}</span></a>
                                 @endif
                                 </span>
                         </li>

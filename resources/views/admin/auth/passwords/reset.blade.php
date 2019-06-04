@@ -23,7 +23,7 @@
                     <input type="email" class="form-control input-lg" name="email" value="{{ $email or old('email') }}" placeholder="{{tr('email_add')}}">
 
                     @if ($errors->has('email'))
-                        <span class="help-block">
+                        <span class="form-text">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     @endif
@@ -33,7 +33,7 @@
                     <input type="password" class="form-control input-lg" name="password" placeholder="{{tr('password')}}">
 
                     @if ($errors->has('password'))
-                        <span class="help-block">
+                        <span class="form-text">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif
@@ -43,7 +43,7 @@
                     <input type="password" class="form-control input-lg" name="password_confirmation" placeholder="{{tr('confirm_password')}}">
 
                     @if ($errors->has('password_confirmation'))
-                        <span class="help-block">
+                        <span class="form-text">
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
                         </span>
                     @endif

@@ -20,7 +20,7 @@
                     <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{tr('email_add')}}">
 
                     @if ($errors->has('email'))
-                        <span class="help-block">
+                        <span class="form-text">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     @endif
