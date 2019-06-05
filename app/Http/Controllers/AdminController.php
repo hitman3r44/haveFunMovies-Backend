@@ -394,6 +394,7 @@ class AdminController extends Controller
     public function users_edit(Request $request)
     {
 
+        $roles = Role::all();
         $user = User::find($request->id);
         $authUser = Auth::user();
 
