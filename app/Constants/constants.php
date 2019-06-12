@@ -147,8 +147,8 @@ if(!defined('DEFAULT_FALSE')) define('DEFAULT_FALSE', 0);
 if(!defined('ADMIN')) define('ADMIN', 'admin');
 if(!defined('MODERATOR')) define('MODERATOR', 'moderator');
 
-if(!defined('VIDEO_TYPE_UPLOAD')) define('VIDEO_TYPE_UPLOAD', 1);
-if(!defined('VIDEO_TYPE_YOUTUBE')) define('VIDEO_TYPE_YOUTUBE', 2);
+if(!defined('VIDEO_TYPE_UPLOAD')) define('VIDEO_TYPE_UPLOAD', 2);
+if(!defined('VIDEO_TYPE_YOUTUBE')) define('VIDEO_TYPE_YOUTUBE', 1);
 if(!defined('VIDEO_TYPE_OTHER')) define('VIDEO_TYPE_OTHER', 3);
 
 

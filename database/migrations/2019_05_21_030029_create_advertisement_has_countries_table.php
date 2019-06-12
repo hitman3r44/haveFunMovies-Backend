@@ -14,7 +14,7 @@ class CreateAdvertisementHasCountriesTable extends Migration
     public function up()
     {
         Schema::create('advertisement_has_countries', function (Blueprint $table) {
-//            $table->increments('id');  // multiple primary key does not support increment key
+
             $table->unsignedInteger('advertisement_id');
             $table->unsignedInteger('country_id');
 

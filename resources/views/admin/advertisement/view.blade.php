@@ -64,17 +64,17 @@
                     <hr>
                     <strong>{{tr('is_published')}}</strong>
                     @if($view_advertisement->is_published == 0)
-                        <span class="label label-warning pull-right">{{tr('declined')}}</span>
+                        <span class="badge badge-warning pull-right">{{tr('declined')}}</span>
                     @else
-                        <span class="label label-success pull-right">{{tr('approved')}}</span>
+                        <span class="badge badge-success pull-right">{{tr('approved')}}</span>
                     @endif
 
                     <hr>
                     <strong>{{tr('is_expired')}}</strong>
                     @if($view_advertisement->is_expired == 0)
-                        <span class="label label-warning pull-right">{{tr('declined')}}</span>
+                        <span class="badge badge-warning pull-right">{{tr('declined')}}</span>
                     @else
-                        <span class="label label-success pull-right">{{tr('approved')}}</span>
+                        <span class="badge badge-success pull-right">{{tr('approved')}}</span>
                     @endif
 
                     <hr>

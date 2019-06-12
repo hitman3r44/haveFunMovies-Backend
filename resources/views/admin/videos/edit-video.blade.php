@@ -186,7 +186,7 @@
                                 <div class="form-group">
                                     <label for="video" class="">{{tr('sub_title')}}</label>
                                     <input type="file" id="subtitle" name="subtitle" accept="text/plain">
-                                    <p class="help-block">{{tr('subtitle_validate')}}</p>
+                                    <p class="form-text">{{tr('subtitle_validate')}}</p>
                                 </div>
                             </div> -->
 
@@ -347,7 +347,7 @@
                                                                  onclick="$('#banner_image').click();return false;"
                                                                  id="banner_img"/>
                                                         </div>
-                                                        <p class="help-block">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
+                                                        <p class="form-text">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
                                                     </div>
                                                 </div>
                                             @endif
@@ -367,7 +367,7 @@
                                                              onclick="$('#default_image').click();return false;"
                                                              id="default_img"/>
                                                     </div>
-                                                    <p class="help-block">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
+                                                    <p class="form-text">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -383,7 +383,7 @@
                                                              onclick="$('#other_image1').click();return false;"
                                                              id="other_img1"/>
                                                     </div>
-                                                    <p class="help-block">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
+                                                    <p class="form-text">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
                                                 </div>
                                             </div>
 
@@ -399,7 +399,7 @@
                                                              onclick="$('#other_image2').click();return false;"
                                                              id="other_img2"/>
                                                     </div>
-                                                    <p class="help-block">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
+                                                    <p class="form-text">{{tr('image_validate')}} {{tr('rectangle_image')}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -487,7 +487,7 @@
                                                         <input type="file" id="video"
                                                                accept="video/mp4,video/x-matroska" name="video"
                                                                placeholder="{{tr('picture')}}">
-                                                        <p class="help-block">{{tr('video_validate')}}</p>
+                                                        <p class="form-text">{{tr('video_validate')}}</p>
                                                     </div>
                                                 </div>
 
@@ -496,7 +496,7 @@
                                                         <label for="video" class="">{{tr('sub_title')}}</label>
                                                         <input type="file" id="video_subtitle" name="video_subtitle"
                                                                onchange="checksrt(this, this.id)">
-                                                        <p class="help-block">{{tr('subtitle_validate')}}</p>
+                                                        <p class="form-text">{{tr('subtitle_validate')}}</p>
                                                     </div>
                                                 </div>
 
@@ -509,7 +509,7 @@
                                                         <input type="file" id="trailer_video"
                                                                accept="video/mp4,video/x-matroska" name="trailer_video"
                                                                placeholder="{{tr('trailer_video')}}">
-                                                        <p class="help-block">{{tr('video_validate')}}</p>
+                                                        <p class="form-text">{{tr('video_validate')}}</p>
                                                     </div>
                                                 </div>
 
@@ -518,7 +518,7 @@
                                                         <label for="video" class="">{{tr('sub_title')}}</label>
                                                         <input type="file" id="trailer_subtitle" name="trailer_subtitle"
                                                                onchange="checksrt(this, this.id)">
-                                                        <p class="help-block">{{tr('subtitle_validate')}}</p>
+                                                        <p class="form-text">{{tr('subtitle_validate')}}</p>
                                                     </div>
                                                 </div>
                                             </div>

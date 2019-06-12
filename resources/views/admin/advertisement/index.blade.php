@@ -34,20 +34,22 @@
 
                     <div class="table table-responsive">
 
-                        <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="dataTable_advertise" class="table table-striped table-bordered" cellspacing="0" width="100%">
 
                             <thead>
                             <tr>
                                 <th>{{tr('id')}}</th>
                                 <th>{{tr('title')}}</th>
-                                <th>{{tr('min_play_time')}}</th>
-                                <th>{{tr('max_play_time')}}</th>
+{{--                                <th>{{tr('min_play_time')}}</th>--}}
+{{--                                <th>{{tr('max_play_time')}}</th>--}}
                                 <th>{{tr('already_played_time')}}</th>
                                 <th>{{tr('start_playing_date_table_header')}}</th>
                                 <th>{{tr('end_playing_date_table_header')}}</th>
 
                                 <th>{{tr('amount')}}</th>
                                 <th>{{tr('per_view_cost')}}</th>
+                                <th>{{tr('custom_commission_rate')}}</th>
+
                                 <th>{{tr('is_published')}}</th>
                                 <th>{{tr('is_expired')}}</th>
 
@@ -63,21 +65,21 @@
                                         <a href="{{route('admin.advertisement.view',$value->id)}}">{{$value->title}}</a>
                                     </td>
 
-                                    <td>
-                                        @if($value->min_play_time == null)
-                                        {{0}}
-                                        @else
-                                            {{$value->min_play_time}}
-                                        @endif
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        @if($value->min_play_time == null)--}}
+{{--                                            {{0}}--}}
+{{--                                        @else--}}
+{{--                                            {{$value->min_play_time}}--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
 
-                                    <td>
-                                        @if($value->max_play_time == null)
-                                            {{0}}
-                                        @else
-                                            {{$value->max_play_time}}
-                                        @endif
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        @if($value->max_play_time == null)--}}
+{{--                                            {{0}}--}}
+{{--                                        @else--}}
+{{--                                            {{$value->max_play_time}}--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
 
                                     <td>
                                         @if($value->already_played_time == null)
@@ -105,20 +107,21 @@
 
                                     <td>{{Setting::get('currency')}} {{$value->total_amount}}</td>
                                     <td>{{$value->per_view_cost}}</td>
+                                    <td>{{$value->custom_commission_rate}}</td>
 
                                     <td>
                                         @if($value->is_published ==0)
-                                            <span class="label label-warning">{{tr('declined')}}</span>
+                                            <span class="badge badge-warning">{{tr('declined')}}</span>
                                         @else
-                                            <span class="label label-success">{{tr('approved')}}</span>
+                                            <span class="badge badge-success">{{tr('approved')}}</span>
                                         @endif
                                     </td>
 
                                     <td>
                                         @if($value->is_expired ==0)
-                                            <span class="label label-warning">{{tr('no')}}</span>
+                                            <span class="badge badge-warning">{{tr('no')}}</span>
                                         @else
-                                            <span class="label label-success">{{tr('yes')}}</span>
+                                            <span class="badge badge-success">{{tr('yes')}}</span>
                                         @endif
                                     </td>
 
@@ -188,7 +191,36 @@
             </div>
         </div>
     </div>
-    </div>
+
+@endsection
+
+
+@section('scripts')
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable_advertise').DataTable({
+                language: {
+                    // 'url' : 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/French.json'
+                    // More languages : http://www.datatables.net/plug-ins/i18n/
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print',
+                ],
+                aaSorting: []
+            });
+        });
+    </script>
+
 
 @endsection
 

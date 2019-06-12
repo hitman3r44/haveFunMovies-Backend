@@ -19,6 +19,7 @@ class CreateUserCouponsTable extends Migration
             $table->integer('user_id');
             $table->string('coupon_code');
             $table->boolean('no_of_times_used');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

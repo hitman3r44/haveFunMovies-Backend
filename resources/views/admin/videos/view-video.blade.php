@@ -621,22 +621,20 @@
                                             <?php $trailer_url = $video->trailer_video; ?>
                                             <div id="trailer-video-player"></div>
                                         @else
-
                                             @if(check_valid_url($video->trailer_video))
-
-                                                <?php $trailer_url = (Setting::get('streaming_url')) ? Setting::get('streaming_url') . get_video_end($video->trailer_video) : $video->trailer_video; ?>
-
-                                                <div id="trailer-video-player"></div>
-
+                                                <iframe width="420" height="315" src="{{$video->trailer_video}}"
+                                                        frameborder="0"
+                                                        allowfullscreen>
+                                                </iframe>
                                             @else
                                                 <div class="image">
                                                     <img src="{{asset('error.jpg')}}"
                                                          alt="{{Setting::get('site_name')}}" style="width: 100%">
                                                 </div>
                                             @endif
-
                                         @endif
                                     </div>
+
                                     <div class="embed-responsive embed-responsive-16by9"
                                          id="flash_error_display_trailer" style="display: none;">
                                         <div style="width: 100%;background: black; color:#fff;height:350px;">
@@ -668,12 +666,17 @@
                                     @else
                                         @if(check_valid_url($video->video))
 
-                                            <div class="title m-b-md">
-                                                <video width="420" height="315" frameborder="0" controls>
-                                                    <source src="{{$video->video}}" autobuffer autoloop loop controls type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                            </div>
+                                            <iframe width="420" height="315" src="{{$video->video}}"
+                                                    frameborder="0"
+                                                    allowfullscreen>
+                                            </iframe>
+
+{{--                                            <div class="title m-b-md">--}}
+{{--                                                <video width="420" height="315" frameborder="0" controls>--}}
+{{--                                                    <source src="{{$video->video}}" autobuffer autoloop loop controls type="video/mp4">--}}
+{{--                                                    Your browser does not support the video tag.--}}
+{{--                                                </video>--}}
+{{--                                            </div>--}}
 
                                             <div id="main-video-player"></div>
                                         @else
@@ -880,6 +883,7 @@
             for (var i = 0; i < splitVideo.length; i++) {
                 path.push({file: splitVideo[i], label: splitVideoPixel[i]});
             }
+
             playerInstance.setup({
                 sources: path,
                 image: "{{$video->default_image}}",
@@ -896,7 +900,8 @@
                     "enableMute": true,
                     "enableVolume": true
                 },
-                // autostart : true,
+                autostart : false,
+                autoplay : false,
                 "sharing": {
                     "sites": ["reddit", "facebook", "twitter"]
                 },
@@ -927,7 +932,8 @@
                     "enableMute": true,
                     "enableVolume": true
                 },
-                // autostart : true,
+                autostart : false,
+                autoplay : false,
                 "sharing": {
                     "sites": ["reddit", "facebook", "twitter"]
                 },

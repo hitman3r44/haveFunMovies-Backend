@@ -65,9 +65,9 @@
                                                 <td>
                                                     @if($video->is_home_slider == 0 && $video->is_approved && $video->status)
                                                         <a href="{{route('admin.slider.video' , $video->video_id)}}"><span
-                                                                    class="label label-danger">{{tr('set_slider')}}</span></a>
+                                                                    class="badge badge-danger">{{tr('set_slider')}}</span></a>
                                                     @elseif($video->is_home_slider)
-                                                        <span class="label label-success">{{tr('slider')}}</span>
+                                                        <span class="badge badge-success">{{tr('slider')}}</span>
                                                     @else
                                                         -
                                                     @endif
@@ -76,17 +76,17 @@
                                             @endif
                                             <td>
                                                 @if($video->is_approved)
-                                                    <span class="label label-success">{{tr('approved')}}</span>
+                                                    <span class="badge badge-success">{{tr('approved')}}</span>
                                                 @else
-                                                    <span class="label label-warning">{{tr('pending')}}</span>
+                                                    <span class="badge badge-warning">{{tr('pending')}}</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 @if(Setting::get('admin_delete_control') == 1)
-                                                    <button class="btn btn-primary btn-xs"
+                                                    <button class="btn btn-primary btn-sm"
                                                             disabled>{{tr('remove_banner')}}</button>
                                                 @else
-                                                    <a class="btn btn-primary btn-xs"
+                                                    <a class="btn btn-primary btn-sm"
                                                        href="{{route('admin.change.video' ,$video->video_id )}}">{{tr('remove_banner')}}</a>
                                                 @endif
                                             </td>
@@ -114,7 +114,7 @@
                                                                                        href="{{route('admin.view.video' , array('id' => $video->video_id))}}">{{tr('view')}}</a>
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             @if($video->is_approved)
                                                                 <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -126,7 +126,7 @@
                                                                 </li>
                                                             @endif
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             <li role="presentation">
                                                                 @if(Setting::get('admin_delete_control'))

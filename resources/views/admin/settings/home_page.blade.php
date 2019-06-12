@@ -86,7 +86,7 @@
 
                                                 <input type="file" id="home_browse_desktop_image"
                                                        name="home_browse_desktop_image" accept="image/png, image/jpeg">
-                                                <p class="help-block">{{tr('image_validate')}}</p>
+                                                <p class="form-text">{{tr('image_validate')}}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -103,7 +103,7 @@
                                                 @endif
                                                 <input type="file" id="home_browse_tv_image" name="home_browse_tv_image"
                                                        accept="image/png, image/jpeg">
-                                                <p class="help-block">{{tr('image_validate')}}</p>
+                                                <p class="form-text">{{tr('image_validate')}}</p>
                                             </div>
                                         </div>
 
@@ -124,7 +124,7 @@
 
                                                 <input type="file" id="home_browse_mobile_image"
                                                        name="home_browse_mobile_image" accept="image/png, image/jpeg">
-                                                <p class="help-block">{{tr('image_validate')}}</p>
+                                                <p class="form-text">{{tr('image_validate')}}</p>
                                             </div>
                                         </div>
 
@@ -140,7 +140,7 @@
                                                 @endif
                                                 <input type="file" id="home_cancel_image" name="home_cancel_image"
                                                        accept="image/png, image/jpeg">
-                                                <p class="help-block">{{tr('image_validate')}}</p>
+                                                <p class="form-text">{{tr('image_validate')}}</p>
                                             </div>
                                         </div>
 
@@ -161,7 +161,7 @@
 
                                                 <input type="file" id="home_page_bg_image" name="home_page_bg_image"
                                                        accept="image/png, image/jpeg">
-                                                <p class="help-block">{{tr('image_note_help')}}</p>
+                                                <p class="form-text">{{tr('image_note_help')}}</p>
                                             </div>
                                         </div>
 
@@ -177,7 +177,7 @@
                                                 @endif
                                                 <input type="file" id="common_bg_image" name="common_bg_image"
                                                        accept="image/png, image/jpeg">
-                                                <p class="help-block">{{tr('image_note_help')}}</p>
+                                                <p class="form-text">{{tr('image_note_help')}}</p>
                                             </div>
                                         </div>
 

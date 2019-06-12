@@ -29,7 +29,7 @@
                     <a href="{{Setting::get('ANGULAR_SITE_URL')}}" class="btn btn-default" target="_blank" style="color:black"> 
                         <i class="fa fa-external-link"></i>
                         <b> {{tr('visit_website')}}</b>
-                        <span class="label label-warning"></span>
+                        <span class="badge badge-warning"></span>
                     </a>
 
                 </li>

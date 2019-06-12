@@ -97,10 +97,10 @@
                             <a class="list-group-item list-group-item-action">
                                 {{tr('email_notification')}} <span class="pull-right">
 				                @if($user->email_notification)
-                                        <span class="label label-success">
+                                        <span class="badge badge-success">
 				                 	{{tr('yes')}}</span>
                                     @else
-                                        <span class="label label-warning">
+                                        <span class="badge badge-warning">
 				                 {{tr('no')}}</span>
                                     @endif </span>
                             </a>

@@ -64,9 +64,9 @@
                                     </td>
                                     <td>
                                         @if($value->status)
-                                            <span class="label label-success">{{tr('active')}}</span>
+                                            <span class="badge badge-success">{{tr('active')}}</span>
                                         @else
-                                            <span class="label label-warning">{{tr('inactive')}}</span>
+                                            <span class="badge badge-warning">{{tr('inactive')}}</span>
                                         @endif
                                     </td>
                                     <td>
