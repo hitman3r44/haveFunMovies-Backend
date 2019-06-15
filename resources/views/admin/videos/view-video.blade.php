@@ -661,15 +661,16 @@
 
                                 <div class="">
                                     @if($video->video_upload_type == 1)
+
                                         <?php $url = $video->video; ?>
-                                        <div id="main-video-player"></div>
-                                    @else
-                                        @if(check_valid_url($video->video))
 
                                             <iframe width="420" height="315" src="{{$video->video}}"
                                                     frameborder="0"
                                                     allowfullscreen>
                                             </iframe>
+                                    @else
+                                        @if(check_valid_url($video->video))
+
 
 {{--                                            <div class="title m-b-md">--}}
 {{--                                                <video width="420" height="315" frameborder="0" controls>--}}
@@ -859,14 +860,11 @@
 
             }
 
-            console.log("Video " + video);
 
-            console.log("Trailer " + trailer_video);
+            @if($video->video)
 
-                    @if($url)
 
             var playerInstance = jwplayer("main-video-player");
-
 
                     @if($videoPath)
 
@@ -980,7 +978,7 @@
 
                     @endif
 
-                    @if($trailer_url)
+            @if($video->trailer_video)
 
             var playerInstance = jwplayer("trailer-video-player");
 
