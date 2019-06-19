@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redis;
 */
 
 /***********************  UI Routes *********************/
+
 
 Route::get('/upload-video' , 'UIController@upload_video');
 
@@ -119,27 +120,26 @@ Route::get('/admin-control', 'ApplicationController@admin_control')->name('admin
 Route::post('save_admin_control', 'ApplicationController@save_admin_control')->name('save_admin_control');
 
 
-Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
+Route::get('/clear-cache', 'ArtisanCommandController@clearCache')->name('clear-cache');
 
-    Route::get('login', 'Auth\AdminAuthController@showLoginForm')->name('login');
+Route::get('login', function () {
+    return redirect()->route('admin.login');
+});
 
-    Route::post('login', 'Auth\AdminAuthController@login')->name('login.post');
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
-    Route::get('logout', 'Auth\AdminAuthController@logout')->name('logout');
+    Auth::routes();
 
-    // Registration Routes...
+    Route::get('register', function () {
+        return abort(404);
+    })->name('register');
 
-    Route::get('register', 'Auth\AdminAuthController@showRegistrationForm');
+    Route::post('register', function () {
+        return abort(404);
+    })->name('register');
+});
 
-    Route::post('register', 'Auth\AdminAuthController@register');
-
-
-    // Password Reset Routes...
-    Route::get('password/reset/{token?}', 'Auth\AdminPasswordController@showResetForm');
-
-    Route::post('password/email', 'Auth\AdminPasswordController@sendResetLinkEmail');
-
-    Route::post('password/reset', 'Auth\AdminPasswordController@reset');
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Route::get('/', 'AdminController@dashboard')->name('dashboard');
 
@@ -262,39 +262,63 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     // Genres
 
-    Route::get('/genres/{sub_category}', 'AdminController@genres')->name('genres');
+//    Route::get('/genres/{sub_category}', 'AdminController@genres')->name('genres');
+//
+//    Route::get('/add/genre/{sub_category}', 'AdminController@add_genre')->name('add.genre');
+//
+//    Route::get('/edit/genre/{sub_category_id}/{genre_id}', 'AdminController@genres_edit')->name('edit.edit_genre');
+//
+//
+//    Route::post('/save/genre' , 'AdminController@genres_save')->name('save.genre');
+//
+//    Route::get('/genre/approve', 'AdminController@approve_genre')->name('genre.approve');
+//
+//    Route::get('/delete/genre/{id}', 'AdminController@genres_delete')->name('delete.genre');
+//
+//    Route::get('/view/genre/{id}', 'AdminController@genres_view')->name('view.genre');
 
-    Route::get('/add/genre/{sub_category}', 'AdminController@add_genre')->name('add.genre');
+//    Route::post('genre/change/position', 'AdminController@genre_position')->name('save.genre.position');
 
-    Route::get('/edit/genre/{sub_category_id}/{genre_id}', 'AdminController@genres_edit')->name('edit.edit_genre');
-
-
-    Route::post('/save/genre' , 'AdminController@genres_save')->name('save.genre');
-
-    Route::get('/genre/approve', 'AdminController@approve_genre')->name('genre.approve');
-
-    Route::get('/delete/genre/{id}', 'AdminController@genres_delete')->name('delete.genre');
-
-    Route::get('/view/genre/{id}', 'AdminController@genres_view')->name('view.genre');
-
-    Route::post('genre/change/position', 'AdminController@genre_position')->name('save.genre.position');
-
-    // Videos
-
-    Route::get('/videos', 'AdminController@videos')->name('videos');
 
     Route::get('/moderator/videos/{id}','AdminController@moderator_videos')->name('moderator.videos.list');
 
+    // Slider Videos
+
+    Route::get('/slider/video/{id}', 'AdminController@slider_video')->name('slider.video');
+
+    // Banner Videos
+
+    Route::get('/banner/videos', 'AdminController@banner_videos')->name('banner.videos');
+
+    Route::get('/add/banner/video', 'AdminController@add_banner_video')->name('add.banner.video');
+
+    Route::get('/change/banner/video/{id}', 'AdminController@change_banner_video')->name('change.video');
 
     // New Video Upload Code
 
-    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
+//    Route::get('/videos/create', 'AdminController@admin_videos_create')->name('videos.create');
 
-    Route::get('/videos/edit/{id}', 'AdminController@admin_videos_edit')->name('videos.edit');
 
-    Route::post('/videos/save', 'AdminController@admin_videos_save')->name('videos.save');
+    // Videos
 
-    Route::get('/view/video', 'AdminController@view_video')->name('view.video');
+    Route::get('/videos', 'AdminVideoController@videos')->name('videos');
+
+    Route::get('/videos/search/tmdb', 'AdminVideoController@tmdbVideosSearch')->name('videos.search.tmdb');
+
+    Route::post('/videos/search', 'AdminVideoController@getSearchVideosResult')->name('videos.search');
+
+    Route::get('/videos/{videoId}/create/tmdb', 'AdminVideoController@tmdbVideosCreate')->name('videos.create.tmdb');
+    Route::get('/videos/create', 'AdminVideoController@tmdbVideosCreate')->name('videos.create');
+
+    Route::post('/videos/{videoId}/details', 'AdminVideoController@getDetailsVideos')->name('videos.details');
+
+    Route::post('/videos/save/tmdb', 'AdminVideoController@tmdbVideosSave')->name('videos.save.tmdb');
+
+    Route::get('/videos/edit/{id}', 'AdminVideoController@tmdbVideosEdit')->name('videos.edit');
+
+    Route::post('/videos/save', 'AdminVideoController@admin_videos_save')->name('videos.save');
+
+    Route::get('/view/video', 'AdminVideoController@view_video')->name('view.video');
 
     Route::get('/gif/generation', 'AdminController@gif_generator')->name('gif_generator');
 
@@ -310,20 +334,25 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::post('/video/change/position', 'AdminController@video_position')->name('save.video.position');
 
-    // Slider Videos
-
-    Route::get('/slider/video/{id}', 'AdminController@slider_video')->name('slider.video');
-
-    // Banner Videos
-
-    Route::get('/banner/videos', 'AdminController@banner_videos')->name('banner.videos');
-
-    Route::get('/add/banner/video', 'AdminController@add_banner_video')->name('add.banner.video');
-
-    Route::get('/change/banner/video/{id}', 'AdminController@change_banner_video')->name('change.video');
-
     // User Payment details
     Route::get('user/payments' , 'AdminController@user_payments')->name('user.payments');
+
+    Route::post('credit-money/get-user-by-role' , 'CreditMoneyController@getUserByRole')->name('credit-money.user.role');
+    Route::resource('credit-money', 'CreditMoneyController');
+    Route::resource('prepaid-code', 'PrepaidCodeController');
+
+    Route::resource('gift-card', 'GiftCardController');
+    Route::post('generate-prepaid-code/generate-uuid' , 'GeneratePrepaidCodeController@generateUuid')->name('generate-prepaid-code.uuid');
+
+    Route::resource('generate-prepaid-code', 'GeneratePrepaidCodeController');
+
+    Route::resource('generate-gift-card', 'GeneratedGiftCardController');
+    Route::post('generate-gift-card/generate-uuid' , 'GeneratedGiftCardController@generateUuid')->name('generate-gift-card.uuid');
+
+    Route::resource('cast_and_crew_type', 'CastAndCrewTypeController');
+    Route::get('/cast_and_crew_type/get-data','CastAndCrewTypeController@cast_and_crew_types_get_data')->name('cast-and-crew-type.data');
+
+    Route::resource('movie_has_cast_and_crew_type', 'MovieHasCastAndCrewTypeController');
 
     // Ajax User payments
 
@@ -455,6 +484,59 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::post('/email/form/action','AdminController@email_send_process')->name('email.success');
 
+    //Sub-Category/Genre
+
+    // Get the add genre forms
+    Route::get('/genres/add','GenreController@genre_create')->name('add.genres');
+
+    // Get the edit genre forms
+    Route::get('/genres/edit/{id}','GenreController@genre_edit')->name('edit.genres');
+
+    // Save the genre details
+    Route::post('/genres/save','GenreController@genre_save')->name('save.genre');
+
+    // Get the list of genre details
+    Route::get('/genres/list','GenreController@genre_index')->name('genre.list');
+
+    //Get the particular genre details
+    Route::get('/genres/view/{id}','GenreController@genre_view')->name('genre.view');
+
+    // Delete the genre details
+    Route::get('/genres/delete/{id}','GenreController@genre_delete')->name('delete.genre');
+
+    //genre approve and decline status
+    Route::get('/genre/status','GenreController@genre_status_change')->name('genre.status');
+
+    // Advertisement
+
+    // Get the add advertisement forms
+    Route::get('/advertisement/add','AdvertisementController@advertisement_create')->name('add.advertisement');
+
+    // Get the edit advertisement forms
+    Route::get('/advertisement/edit/{id}','AdvertisementController@advertisement_edit')->name('edit.advertisement');
+
+    // Get the list of advertisement details
+    Route::get('/advertisement/list','AdvertisementController@advertisement_index')->name('advertisement.list');
+
+    // Save the advertisement details
+    Route::post('/advertisement/save','AdvertisementController@advertisement_save')->name('save.advertisement');
+
+    //Get the particular advertisement details
+    Route::get('/advertisement/view/{id}','AdvertisementController@advertisement_view')->name('advertisement.view');
+
+    // Delete the advertisement details
+    Route::get('/advertisement/delete/{id}','AdvertisementController@advertisement_delete')->name('delete.advertisement');
+
+    //Advertisement approve and decline status
+    Route::get('/advertisement/status','AdvertisementController@advertisement_status_change')->name('advertisement.status');
+
+    //Advertisement additional data for form, url content Advertisement in ajax blocked by add-blocker
+    Route::get('/advrtise/get-data','AdvertisementController@advertisement_get_data')->name('advertisement.data');
+
+
+    //search countries, url should be countries/search?term=Bangladesh
+    Route::get('/countries/search','CountryController@searchCountries')->name('countries.search');
+
 
     // Email Templates,
 
@@ -512,6 +594,12 @@ Route::group(['prefix' => 'admin'  , 'as' => 'admin.'], function(){
 
     Route::get('videos/banner/remove', 'AdminController@videos_remove_banner')->name('banner.remove');
 
+    // to edit the permission of these role
+    Route::resource('role', 'RoleController');
+
+    //Log Route
+
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
 
 Route::get('/embed', 'UserController@embed_video')->name('embed_video');
@@ -550,11 +638,11 @@ Route::get('/user_session_language/{locale}', 'ApplicationController@set_session
 
 Route::group(['middleware' => 'cors'], function(){
 
-    Route::get('login', 'Auth\AuthController@showLoginForm')->name('user.login.form');
-
-    Route::post('login', 'Auth\AuthController@login')->name('user.login.post');
-
-    Route::get('logout', 'Auth\AuthController@logout')->name('user.logout');
+//    Route::get('login', 'Auth\AuthController@showLoginForm')->name('user.login.form');
+//
+//    Route::post('login', 'Auth\AuthController@login')->name('user.login.post');
+//
+//    Route::get('logout', 'Auth\AuthController@logout')->name('user.logout');
 
     // Registration Routes...
     Route::get('register', 'Auth\AuthController@showRegistrationForm')->name('user.register.form');
@@ -630,113 +718,3 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('/trending', 'UserController@trending')->name('user.trending');
 
 });
-
-
-Route::group(['prefix' => 'moderator'], function(){
-
-    Route::get('login', 'Auth\ModeratorAuthController@showLoginForm')->name('moderator.login');
-
-    Route::post('login', 'Auth\ModeratorAuthController@login')->name('moderator.login.post');
-
-    Route::get('logout', 'Auth\ModeratorAuthController@logout')->name('moderator.logout');
-
-    // Registration Routes...
-    Route::get('register', 'Auth\ModeratorAuthController@showRegistrationForm');
-
-    Route::post('register', 'Auth\ModeratorAuthController@register');
-
-    // Password Reset Routes...
-    Route::get('password/reset/{token?}', 'Auth\ModeratorPasswordController@showResetForm');
-
-    Route::post('password/email', 'Auth\ModeratorPasswordController@sendResetLinkEmail');
-
-    Route::post('password/reset', 'Auth\ModeratorPasswordController@reset');
-
-    Route::get('/', 'ModeratorController@dashboard')->name('moderator.dashboard');
-
-    Route::post('/save_video_payment/{id}', 'ModeratorController@save_video_payment')->name('moderator.save.video-payment');
-
-
-    Route::get('user/video-payments' , 'ModeratorController@video_payments')->name('moderator.user.video-payments');
-
-    Route::get('/remove_payper_view/{id}', 'ModeratorController@remove_payper_view')->name('moderator.remove_pay_per_view');
-
-    Route::get('revenues', 'ModeratorController@revenues')->name('moderator.revenues');
-
-    // Redeems
-
-    Route::get('redeems/', 'ModeratorController@redeems')->name('moderator.redeems');
-
-    Route::get('send/redeem', 'ModeratorController@send_redeem_request')->name('moderator.redeems.send.request');
-
-    Route::get('redeem/request/cancel/{id?}', 'ModeratorController@redeem_request_cancel')->name('moderator.redeems.request.cancel');
-
-
-
-    Route::get('/profile', 'ModeratorController@profile')->name('moderator.profile');
-
-    Route::post('/profile/save', 'ModeratorController@profile_process')->name('moderator.save.profile');
-
-    Route::post('/change/password', 'ModeratorController@change_password')->name('moderator.change.password');
-
-
-    // Categories
-
-    Route::get('/categories', 'ModeratorController@categories')->name('moderator.categories');
-
-    Route::get('/add/category', 'ModeratorController@add_category')->name('moderator.add.category');
-
-    Route::get('/edit/category/{id}', 'ModeratorController@edit_category')->name('moderator.edit.category');
-
-    Route::post('/add/category', 'ModeratorController@add_category_process')->name('moderator.save.category');
-
-    Route::get('/delete/category', 'ModeratorController@delete_category')->name('moderator.delete.category');
-
-    Route::get('/view/category/{id}', 'ModeratorController@view_category')->name('moderator.view.category');
-
-    // Admin Sub Categories
-
-    Route::get('/subCategories/{category}', 'ModeratorController@sub_categories')->name('moderator.sub_categories');
-
-    Route::get('/add/subCategory/{category}', 'ModeratorController@add_sub_category')->name('moderator.add.sub_category');
-
-    Route::get('/edit/subCategory/{category_id}/{sub_category_id}', 'ModeratorController@edit_sub_category')->name('moderator.edit.sub_category');
-
-    Route::post('/add/subCategory', 'ModeratorController@add_sub_category_process')->name('moderator.save.sub_category');
-
-    Route::get('/delete/subCategory/{id}', 'ModeratorController@delete_sub_category')->name('moderator.delete.sub_category');
-
-    // Genre
-
-    Route::post('/save/genre' , 'ModeratorController@save_genre')->name('moderator.save.genre');
-
-    Route::get('/delete/genre/{id}', 'ModeratorController@delete_genre')->name('moderator.delete.genre');
-
-
-    // New Video Upload Code
-
-    Route::get('/videos/create', 'ModeratorController@admin_videos_create')->name('moderator.videos.create');
-
-    Route::get('/videos/edit/{id}', 'ModeratorController@admin_videos_edit')->name('moderator.videos.edit');
-
-    Route::post('/videos/save', 'ModeratorController@admin_videos_save')->name('moderator.videos.save');
-
-    // Videos
-
-    Route::get('/videos', 'ModeratorController@videos')->name('moderator.videos');
-
-    Route::get('/add/video', 'ModeratorController@add_video')->name('moderator.add.video');
-
-    Route::get('/edit/video/{id}', 'ModeratorController@edit_video')->name('moderator.edit.video');
-
-    Route::post('/edit/video', 'ModeratorController@edit_video_process')->name('moderator.save.edit.video');
-
-    Route::get('/view/video', 'ModeratorController@view_video')->name('moderator.view.video');
-
-    Route::post('/add/video', 'ModeratorController@add_video_process')->name('moderator.save.video');
-
-    Route::get('/delete/video', 'ModeratorController@delete_video')->name('moderator.delete.video');
-
-});
-
-

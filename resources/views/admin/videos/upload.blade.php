@@ -169,8 +169,8 @@
                                                data-toggle="tab">{{tr('upload_video_image')}}</a>
                                         </li>
                                     </ul>
-                                    <form method="post" enctype="multipart/form-data" id="upload_video_form"
-                                          action="{{route('admin.videos.save')}}">
+                                    <form method="post" enctype="multipart/form-data" id="upload_video_form" action="{{route('admin.videos.save')}}">
+                                        @csrf
                                         <div class="tab-content">
                                             <!-- tab1 -->
                                             <div role="tabpanel" class="tab-pane fade in active" id="first">
@@ -743,7 +743,7 @@
                                             <!-- tab4 -->
                                         </div>
                                         <input type="hidden" name="timezone"
-                                               value="{{ Auth::guard('admin')->user()->timezone }}">
+                                               value="{{ Auth::user()->timezone }}">
                                     </form>
                                 </div>
                                 <!-- Example Wizard END -->

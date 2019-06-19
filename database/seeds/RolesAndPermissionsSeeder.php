@@ -13,29 +13,44 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // create permissions
+        // create Permission
         Permission::create(['name' => 'admin']);
         Permission::create(['name' => 'moderator']);
         Permission::create(['name' => 'director']);
         Permission::create(['name' => 'publisher']);
+        Permission::create(['name' => 'retailer']);
+        Permission::create(['name' => 'role']);
+        Permission::create(['name' => 'advertisement']);
+        Permission::create(['name' => 'video']);
+        Permission::create(['name' => 'customer']);
 
-        // create roles and assign created permissions
+        // create Role
 
-        // this can be done as separate statements
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo('admin');
+        Role::create(['name' => 'super-admin'])->givePermissionTo(Permission::all());
 
-        // or may be done by chaining
-        $role = Role::create(['name' => 'moderator'])
-            ->givePermissionTo(['moderator', 'director', 'publisher']);
 
-        $role = Role::create(['name' => 'director']);
-        $role->givePermissionTo('director');
+        Role::create(['name' => 'admin'])->givePermissionTo([
+            'admin', 'director', 'publisher', 'retailer', 'video', 'advertisement'
+        ]);
 
-        $role = Role::create(['name' => 'publisher']);
-        $role->givePermissionTo('publisher');
+        Role::create(['name' => 'moderator'])->givePermissionTo([
+            'admin', 'director', 'publisher', 'retailer', 'video', 'advertisement'
+        ]);
 
-        $role = Role::create(['name' => 'super-admin']);
-        $role->givePermissionTo(Permission::all());
+        Role::create(['name' => 'director'])->givePermissionTo([
+            'director', 'advertisement', 'video'
+        ]);
+
+        Role::create(['name' => 'publisher'])->givePermissionTo([
+            'publisher'
+        ]);
+        Role::create(['name' => 'retailer'])->givePermissionTo([
+            'retailer', 'advertisement'
+        ]);
+
+        Role::create(['name' => 'customer'])->givePermissionTo([
+            'customer'
+        ]);
+
     }
 }

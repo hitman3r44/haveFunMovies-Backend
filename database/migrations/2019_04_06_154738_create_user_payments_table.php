@@ -33,6 +33,7 @@ class CreateUserPaymentsTable extends Migration
             $table->text('coupon_reason');
             $table->text('reason');
             $table->text('cancel_reason');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

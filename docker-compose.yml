@@ -15,7 +15,7 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www
     volumes:
-      - ./:/var/www
+      - ./:/var/www:cached
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
@@ -51,6 +51,19 @@ services:
     volumes:
       - dbdata:/var/lib/mysql/
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+  #Adminer Service
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8081:8080"
+    environment:
+      SERVICE_NAME: adminer
     networks:
       - app-network
 

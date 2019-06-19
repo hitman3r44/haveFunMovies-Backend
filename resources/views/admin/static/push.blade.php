@@ -19,11 +19,12 @@
 
                 <form class="form-horizontal" action="{{route('admin.send.push')}}" method="POST"
                       enctype="multipart/form-data" role="form">
+                    @csrf
 
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="message" class="col-sm-1 control-label">{{tr('message')}}</label>
+                            <label for="message" class="col-sm-1 col-form-label">{{tr('message')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="message" class="form-control" id="message"
@@ -34,7 +35,7 @@
                     </div>
 
                     <div class="box-footer">
-                        <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
+                        <button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
                         <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
                     </div>
                 </form>

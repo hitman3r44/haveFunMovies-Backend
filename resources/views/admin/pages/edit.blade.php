@@ -19,7 +19,7 @@
         <div class="bgc-white p-20 bd">
 
             <form  action="{{route('admin.pages.save')}}" method="POST" enctype="multipart/form-data" role="form">
-
+                @csrf
                 <div class="box-body">
                     <input type="hidden" name="id" value="{{$data->id}}">
 
@@ -43,7 +43,7 @@
                 </div>
 
               <div class="box-footer">
-                    <a href="" class="btn btn-danger">{{tr('cancel')}}</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-danger">{{tr('cancel')}}</a>
                     <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
               </div>
 

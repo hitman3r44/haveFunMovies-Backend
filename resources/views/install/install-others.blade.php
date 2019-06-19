@@ -6,6 +6,7 @@
 
 	<div class="container">
 		<form action="{{route('install.settings')}}" method="POST" enctype="multipart/form-data" role="form">
+            @csrf
 			<div class="install-settings-inner">
 
 				<div class="row no-margin" style="margin-bottom:10px;">

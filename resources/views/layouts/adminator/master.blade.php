@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title') | {{ config('app.name', 'Have Fun Movies') }}</title>
 
-    <link rel="shortcut icon" href=" @if(Setting::get('site_icon')) {{ Setting::get('site_icon') }} @else {{asset('favicon.png') }} @endif">
+    <link rel="shortcut icon" href="{{ (Setting::get('site_icon')) ? url('/').Setting::get('site_icon') : asset('favicon.png') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('admin-css/plugins/select2/select2.min.css')}}">
+
     @yield('styles')
 </head>
 <body class="app">
@@ -51,35 +54,13 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-
-<script>
-    $(document).ready(function () {
-
-        $('#help-popover').popover({
-            html: true,
-            content: function () {
-                return $('#help-content').html();
-            }
-        });
-
-        // $('#datepicker').datepicker({
-        //     autoclose: true,
-        //     format: 'dd-mm-yyyy',
-        //     startDate: 'today',
-        // });
-    });
-
-    $("#{{$page}}").addClass("active");
-
-    @if(isset($sub_page)) $("#{{$sub_page}}").addClass("active"); @endif
-
-</script>
+<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+<script src="{{asset('admin-css/plugins/select2/select2.full.min.js')}}"></script>
 
 <script type="text/javascript">
 
     // $(function () {
-        // $(".select2").select2();
+        $(".select2").select2();
         //
         // $("#datemask").inputmask("dd:mm:yyyy", {"placeholder": "hh:mm:ss"});
         // $("[data-mask]").inputmask();

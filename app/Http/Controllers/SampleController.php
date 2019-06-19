@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Admin;
-use App\Model\Moderator;
-use App\Model\Settings;
-use App\Model\User;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Image;
 
 use File;
@@ -23,6 +21,7 @@ class SampleController extends Controller
 
     public function test(Request $request) {
 
+        dd(Auth::user());
 
         $setting = User::all();
 

@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 use Hash;
@@ -32,8 +35,6 @@ use App\Model\LikeDislikeVideo;
 
 use Exception;
 
-use Auth;
-
 use AWS;
 
 use App\Requests;
@@ -41,10 +42,6 @@ use App\Requests;
 use Mail;
 
 use File;
-
-use Log;
-
-use Storage;
 
 use Setting;
 
@@ -806,8 +803,7 @@ class Helper
             // Compress the video and save in original folder
             $FFmpeg = new \FFmpeg;
 
-            $FFmpeg
-                ->input($picture->getPathname())
+            $FFmpeg->input($picture->getPathname())
                 ->vcodec('h264')
                 ->constantRateFactor('28')
                 // ->forceFormat( 'mp4' )
@@ -1965,6 +1961,21 @@ class Helper
         ];
 
         return isset($userTypes[$userType]) ? $userTypes[$userType] : 'N/A' ;
+    }
+
+    public static function permissionCheck($permission){
+
+        if(Auth::user()->hasPermissionTo($permission))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getPermissionMsg(){
+
+        return 'Sorry ! Access Denied for Permission Issue';
     }
 }
 

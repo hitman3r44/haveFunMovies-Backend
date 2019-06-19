@@ -38,11 +38,10 @@
                             <tr>
                                 <th>{{tr('id')}}</th>
                                 <th>{{tr('title')}}</th>
-                                <th>{{tr('no_of_months')}}</th>
+                                <th>{{tr('no_of_days')}}</th>
                                 <th>{{tr('amount')}}</th>
                                 <th>{{tr('status')}}</th>
                                 <th>{{tr('popular')}}</th>
-                                <th>{{tr('no_of_account')}}</th>
                                 <th>{{tr('subscribers')}}</th>
                                 <th>{{tr('action')}}</th>
                             </tr>
@@ -63,9 +62,9 @@
                                     <td class="text-center">
 
                                         @if($value->status)
-                                            <span class="label label-success">{{tr('approved')}}</span>
+                                            <span class="badge badge-success">{{tr('approved')}}</span>
                                         @else
-                                            <span class="label label-warning">{{tr('pending')}}</span>
+                                            <span class="badge badge-warning">{{tr('pending')}}</span>
                                         @endif
                                     </td>
 
@@ -74,14 +73,14 @@
                                         @if($value->popular_status)
 
                                             <a href="{{route('admin.subscriptions.popular.status' , $value->unique_id)}}"
-                                               class="btn  btn-xs btn-danger">
+                                               class="btn  btn-sm btn-danger">
                                                 {{tr('remove_popular')}}
                                             </a>
 
                                         @else
 
                                             <a href="{{route('admin.subscriptions.popular.status' , $value->unique_id)}}"
-                                               class="btn  btn-xs btn-success">
+                                               class="btn  btn-sm btn-success">
 
                                                 {{tr('mark_popular')}}
 
@@ -90,8 +89,6 @@
                                         @endif
 
                                     </td>
-
-                                    <td>{{$value->no_of_account}}</td>
 
                                     <td>
                                         <a href="{{route('admin.subscriptions.users' , $value->id)}}"> {{$value->userSubscription()->where('subscription_id',$value->id)->where('status' , 1)->count()}}</a>
@@ -123,7 +120,7 @@
                                                     </li>
 
 
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation" class="dropdown-divider"></li>
 
                                                     <li role="presentation">
                                                         <a role="menuitem" tabindex="-1"
@@ -132,7 +129,7 @@
                                                         </a>
                                                     </li>
 
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation" class="dropdown-divider"></li>
 
                                                     @if($value->status)
 
@@ -155,7 +152,7 @@
                                                         </li>
 
                                                     @endif
-                                                    <li role="presentation" class="divider"></li>
+                                                    <li role="presentation" class="dropdown-divider"></li>
 
                                                     <li role="presentation">
 

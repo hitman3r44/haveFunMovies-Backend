@@ -22,8 +22,9 @@ class CreateRedeemRequestsTable extends Migration
             $table->string('payment_id');
             $table->float('admin_paid_amount')->comment('Temporary Column');
             $table->integer('status');
-            $table->timestamps();
             $table->string('payment_mode');
+            $table->integer('created_by');
+            $table->timestamps();
         });
     }
 

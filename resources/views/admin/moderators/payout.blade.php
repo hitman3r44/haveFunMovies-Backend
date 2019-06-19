@@ -37,9 +37,9 @@
                             <div class="col-sm-4 invoice-col">
                                 From
                                 <address>
-                                    <strong>{{Auth::guard('admin')->user()->name}}</strong><br>
-                                    {{Auth::guard('admin')->user()->address}}<br>
-                                    Email: {{Auth::guard('admin')->user()->email}}
+                                    <strong>{{Auth::user()->name}}</strong><br>
+                                    {{Auth::user()->address}}<br>
+                                    Email: {{Auth::user()->email}}
                                 </address>
                             </div>
                             <!-- /.col -->

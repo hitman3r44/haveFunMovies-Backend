@@ -4,7 +4,7 @@
 
 @section('content-header') 
 
-{{tr('revenues') }} {{Setting::get('currency')}} {{Auth::guard('moderator')->user()->moderatorRedeem ? Auth::guard('moderator')->user()->moderatorRedeem->total_moderator_amount : "0.00"}} 
+{{tr('revenues') }} {{Setting::get('currency')}} {{Auth::user()->moderatorRedeem ? Auth::user()->moderatorRedeem->total_moderator_amount : "0.00"}}
 
 <a href="#" id="help-popover" class="btn btn-danger" style="font-size: 14px;font-weight: 600;border-radius:50%" title="{{tr('any_help')}}"><i class="fa fa-question"></i></a>
 

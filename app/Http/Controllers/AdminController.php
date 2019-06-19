@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\AdminRepository as AdminRepo;
-
+use App\Model\TmdbGenre;
 use App\Repositories\VideoRepository as VideoRepo;
 
 use App\Repositories\PushNotificationRepository as PushRepo;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Requests;
@@ -27,8 +27,6 @@ use App\Model\Admin;
 use App\Model\Redeem;
 
 use App\Model\SubProfile;
-
-use App\Model\Notification;
 
 use App\Model\Category;
 
@@ -64,7 +62,8 @@ use App\Model\Flag;
 
 use App\Model\Coupon;
 
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use Validator;
 
 use Hash;
@@ -73,10 +72,6 @@ use Mail;
 
 use DB;
 
-use DateTime;
-
-use Auth;
-
 use Exception;
 
 use Redirect;
@@ -84,10 +79,6 @@ use Redirect;
 use Setting;
 
 use Log;
-
-use App\Jobs\StreamviewCompressVideo;
-
-use App\Jobs\SendVideoMail;
 
 use App\Model\EmailTemplate;
 
@@ -110,7 +101,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
     /**
@@ -150,9 +141,9 @@ class AdminController extends Controller
     public function dashboard()
     {
 
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::user()->id;
 
-        $admin = Admin::find($id);
+        $admin = User::find($id);
 
         $admin->token = Helper::generate_token();
 
@@ -215,9 +206,9 @@ class AdminController extends Controller
     public function profile()
     {
 
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::user()->id;
 
-        $admin = Admin::find($id);
+        $admin = User::find($id);
 
         return view('admin.account.profile')->with('admin', $admin)->withPage('profile')->with('sub_page', '');
     }
@@ -254,7 +245,7 @@ class AdminController extends Controller
             return back()->with('flash_error', $error_messages);
         } else {
 
-            $admin = Admin::find($request->id);
+            $admin = User::find($request->id);
 
             $admin->name = $request->has('name') ? $request->name : $admin->name;
 
@@ -317,7 +308,7 @@ class AdminController extends Controller
 
         } else {
 
-            $admin = Admin::find($request->id);
+            $admin = User::find($request->id);
 
             if (Hash::check($old_password, $admin->password)) {
                 $admin->password = Hash::make($new_password);
@@ -376,8 +367,14 @@ class AdminController extends Controller
 
     public function users_create()
     {
+        $roles = Role::all();
+        $authUser = Auth::user();
 
-        return view('admin.users.add-user')->with('page', 'users')->with('sub_page', 'add-user');
+        return view('admin.users.add-user')
+            ->with('roles', $roles)
+            ->with('authUser', $authUser)
+            ->with('page', 'users')
+            ->with('sub_page', 'add-user');
     }
 
     /**
@@ -397,14 +394,20 @@ class AdminController extends Controller
     public function users_edit(Request $request)
     {
 
+        $roles = Role::all();
         $user = User::find($request->id);
+        $authUser = Auth::user();
 
-        if (count($user) == 0) {
-
+        if (is_array($user) ? count($user) : 0) {
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
 
-        return view('admin.users.edit-user')->withUser($user)->with('sub_page', 'view-user')->with('page', 'users');
+        return view('admin.users.edit-user')
+            ->withUser($user)
+            ->with('authUser', $authUser)
+            ->with('roles', $roles)
+            ->with('sub_page', 'view-user')
+            ->with('page', 'users');
     }
 
     /**
@@ -429,7 +432,6 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
                     'email' => 'required|email|max:255|unique:users,email,' . $request->id,
-                    'mobile' => 'required|digits_between:4,16',
                 )
             );
 
@@ -437,7 +439,6 @@ class AdminController extends Controller
             $validator = Validator::make($request->all(), array(
                     'name' => 'required|regex:/^[a-z\d\-.\s]+$/i|min:2|max:100',
                     'email' => 'required|email|max:255|unique:users,email',
-                    'mobile' => 'required|digits_between:4,16',
                     'password' => 'required|min:6|confirmed',
                 )
             );
@@ -504,13 +505,19 @@ class AdminController extends Controller
                 $email_data['email'] = $user->email;
                 $email_data['template_type'] = ADMIN_USER_WELCOME;
 
-                // $subject = tr('user_welcome_title').' '.Setting::get('site_name');
+                $subject = tr('user_welcome_title').' '.Setting::get('site_name');
                 $page = "emails.admin_user_welcome";
                 $email = $user->email;
                 Helper::send_email($page, $subject = null, $email, $email_data);
             }
 
             $user->save();
+
+            if ($request->id != '') {
+                $user->assignRole($request->role);
+            } else {
+                $user->syncRoles($request->role);
+            }
 
             if ($new_user) {
 
@@ -559,19 +566,14 @@ class AdminController extends Controller
 
             }
 
-            if ($user) {
-
-                $moderator = Moderator::where('email', $user->email)->first();
-
-                // If the user already registered as moderator, atuomatically the status will update.
-                if ($moderator && $user) {
+            return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
 
                     $user->is_moderator = DEFAULT_TRUE;
                     $user->moderator_id = $moderator->id;
                     $user->save();
 
                     $moderator->is_activated = DEFAULT_TRUE;
-                    $moderator->is_user = DEFAULT_TRUE;
+//                    $moderator->is_user = DEFAULT_TRUE;
                     $moderator->save();
 
                 }
@@ -581,18 +583,13 @@ class AdminController extends Controller
                 if (Setting::get('track_user_mail')) {
 
                     user_track("Have Fun Movies - New User Created");
-
+                }
+                else {
+                    return back()->with('flash_error', tr('admin_not_error'));
                 }
 
                 return redirect()->route('admin.users.view', $user->id)->with('flash_success', $message);
-
-            } else {
-                return back()->with('flash_error', tr('admin_not_error'));
             }
-
-        }
-
-    }
 
     /**
      * Function: users_delete()
@@ -636,7 +633,7 @@ class AdminController extends Controller
 
                     if ($moderator) {
 
-                        $moderator->is_user = 0;
+//                        $moderator->is_user = 0;
 
                         $moderator->save();
                     }
@@ -674,7 +671,7 @@ class AdminController extends Controller
 
         $user_details = User::find($request->id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
         }
@@ -802,7 +799,7 @@ class AdminController extends Controller
                 $user->save();
 
                 $moderator->is_activated = 1;
-                $moderator->is_user = 1;
+//                $moderator->is_user = 1;
                 $moderator->save();
 
                 return back()->with('flash_success', tr('admin_user_upgrade'));
@@ -943,7 +940,7 @@ class AdminController extends Controller
     public function moderators()
     {
 
-        $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
+        $admins = User::orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.moderators.moderators')->with('admins', $admins)->withPage('moderators')->with('sub_page', 'view-moderator');
     }
@@ -956,7 +953,7 @@ class AdminController extends Controller
     public function edit_moderator($id)
     {
 
-        $admin = Admin::find($id);
+        $admin = User::find($id);
 
         return view('admin.moderators.edit-moderator')->with('admin', $admin)->with('page', 'moderators')->with('sub_page', 'edit-moderator');
     }
@@ -996,7 +993,7 @@ class AdminController extends Controller
                 $email = "";
 
                 if ($request->id != '') {
-                    $admin = Admin::find($request->id);
+                    $admin = User::find($request->id);
                     $message = tr('admin_not_moderator');
 
                     if ($admin->email != $request->email) {
@@ -1065,7 +1062,7 @@ class AdminController extends Controller
                         $user->save();
 
                         $admin->is_activated = DEFAULT_TRUE;
-                        $admin->is_user = DEFAULT_TRUE;
+//                        $admin->is_user = DEFAULT_TRUE;
                         $admin->save();
 
                     }
@@ -1109,7 +1106,7 @@ class AdminController extends Controller
     public function delete_moderator(Request $request)
     {
 
-        if ($moderator = Admin::find($request->id)) {
+        if ($moderator = User::find($request->id)) {
 
             if ($moderator->picture) {
 
@@ -1117,18 +1114,18 @@ class AdminController extends Controller
 
             }
 
-            if ($moderator->is_user) {
-
-                $user = User::where('email', $moderator->email)->first();
-
-                if ($user) {
-
-                    $user->is_moderator = 0;
-
-                    $user->save();
-                }
-
-            }
+//            if ($moderator->is_user) {
+//
+//                $user = User::where('email', $moderator->email)->first();
+//
+//                if ($user) {
+//
+//                    $user->is_moderator = 0;
+//
+//                    $user->save();
+//                }
+//
+//            }
 
             $moderator->delete();
 
@@ -1154,7 +1151,7 @@ class AdminController extends Controller
     public function moderator_approve(Request $request)
     {
 
-        $moderator = Admin::find($request->id);
+        $moderator = User::find($request->id);
 
         $moderator->is_activated = 1;
 
@@ -1175,7 +1172,7 @@ class AdminController extends Controller
     public function moderator_decline(Request $request)
     {
 
-        if ($moderator = Admin::find($request->id)) {
+        if ($moderator = User::find($request->id)) {
 
             $moderator->is_activated = 0;
 
@@ -1193,7 +1190,7 @@ class AdminController extends Controller
     public function moderator_view_details($id)
     {
 
-        if ($moderator = Admin::find($id)) {
+        if ($moderator = User::find($id)) {
 
             return view('admin.moderators.moderator-details')
                 ->with('moderator', $moderator)
@@ -1230,7 +1227,7 @@ class AdminController extends Controller
             'categories.status',
             'categories.is_approved',
             'categories.created_by',
-	    'categories.created_at'
+            'categories.created_at'
         )
             ->orderBy('categories.created_at', 'desc')
             ->distinct('categories.id')
@@ -1290,7 +1287,7 @@ class AdminController extends Controller
             }
 
             $category->name = $request->has('name') ? $request->name : '';
-            $category->is_series = $request->has('is_series') ? $request->is_series : 0;
+            $category->is_series = 0;
             $category->status = 1;
 
             if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
@@ -1491,7 +1488,7 @@ class AdminController extends Controller
                 $sub_category = new SubCategory;
 
                 $sub_category->is_approved = DEFAULT_TRUE;
-                $sub_category->created_by = 1; // ::TODO : handle this ADMIN constant
+                $sub_category->created_by = Auth::user()->id;
                 $sub_category->status = 1;
             }
 
@@ -1657,8 +1654,7 @@ class AdminController extends Controller
 
         } else {
 
-
-            $genre = $request->id ? Genre::find($request->id) : new Genre;
+            $genre = $request->id ? Genre::find($request->id) : new Genre();
 
             if ($genre->id) {
 
@@ -1682,7 +1678,8 @@ class AdminController extends Controller
             $genre->position = $position;
             $genre->status = DEFAULT_TRUE;
             $genre->is_approved = DEFAULT_TRUE;
-            $genre->created_by = ADMIN;
+            $genre->unique_id = uniqid();
+            $genre->created_by = Auth::user()->id;
 
 
             if ($request->hasFile('video')) {
@@ -1716,6 +1713,7 @@ class AdminController extends Controller
                 $genre->image = Helper::normal_upload_picture($request->file('image'), '/uploads/images/');
             }
 
+            $genre->subtitle = '';
 
             if ($request->hasFile('subtitle')) {
 
@@ -2068,112 +2066,6 @@ class AdminController extends Controller
 
     }
 
-    /**
-     * Function Name: videos()
-     *
-     * @uses: get the videos list
-     *
-     * @created vidhya R
-     *
-     * @edited Vidhya R
-     *
-     * @param Get the video list in table
-     *
-     * @return Videos list
-     */
-
-    public function videos(Request $request)
-    {
-
-        $query = AdminVideo::leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
-            ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-            ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
-            ->select('admin_videos.id as video_id', 'admin_videos.title',
-                'admin_videos.description', 'admin_videos.ratings',
-                'admin_videos.reviews', 'admin_videos.created_at as video_date',
-                'admin_videos.default_image',
-                'admin_videos.banner_image',
-                'admin_videos.amount',
-                'admin_videos.admin_amount',
-                'admin_videos.user_amount',
-                'admin_videos.unique_id',
-                'admin_videos.type_of_user',
-                'admin_videos.type_of_subscription',
-                'admin_videos.category_id as category_id',
-                'admin_videos.sub_category_id',
-                'admin_videos.genre_id',
-                'admin_videos.is_home_slider',
-                'admin_videos.watch_count',
-                'admin_videos.compress_status',
-                'admin_videos.trailer_compress_status',
-                'admin_videos.main_video_compress_status',
-                'admin_videos.status', 'admin_videos.uploaded_by',
-                'admin_videos.edited_by', 'admin_videos.is_approved',
-                'admin_videos.video_subtitle',
-                'admin_videos.trailer_subtitle',
-                'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                'genres.name as genre_name',
-                'admin_videos.is_banner',
-                'admin_videos.position')
-            ->orderBy('admin_videos.created_at', 'desc');
-
-        if ($request->banner == BANNER_VIDEO) {
-
-            $query->where('is_banner', BANNER_VIDEO);
-
-            $sub_page = 'view-banner-videos';
-
-        } else {
-
-            $sub_page = 'view-videos';
-
-        }
-
-        $category = $sub_category = $genre = $moderator_details = "";
-
-        if ($request->category_id) {
-
-            $query->where('admin_videos.category_id', $request->category_id);
-
-            $category = Category::find($request->category_id);
-
-        }
-
-        if ($request->sub_category_id) {
-
-            $query->where('admin_videos.sub_category_id', $request->sub_category_id);
-
-            $sub_category = SubCategory::find($request->sub_category_id);
-
-        }
-
-        if ($request->genre_id) {
-
-            $query->where('admin_videos.genre_id', $request->genre_id);
-
-            $genre = Genre::find($request->genre_id);
-
-        }
-
-        if ($request->moderator_id) {
-
-            $query->where('admin_videos.uploaded_by', $request->moderator_id);
-
-            $moderator_details = Moderator::find($request->moderator_id);
-
-        }
-
-        $videos = $query->paginate(10);
-
-        return view('admin.videos.videos')->with('videos', $videos)
-            ->withPage('videos')
-            ->with('sub_page', $sub_page)
-            ->with('category', $category)
-            ->with('sub_category', $sub_category)
-            ->with('genre', $genre)
-            ->with('moderator_details', $moderator_details);
-
-    }
 
     /**
      * Function Name : moderator_videos()
@@ -2227,164 +2119,6 @@ class AdminController extends Controller
 
     }
 
-    public function view_video(Request $request)
-    {
-
-        $validator = Validator::make($request->all(), [
-            'id' => 'required|exists:admin_videos,id'
-        ]);
-
-        if ($validator->fails()) {
-            $error_messages = implode(',', $validator->messages()->all());
-            return back()->with('flash_error', $error_messages);
-        } else {
-            $videos = AdminVideo::where('admin_videos.id', $request->id)
-                ->leftJoin('categories', 'admin_videos.category_id', '=', 'categories.id')
-                ->leftJoin('sub_categories', 'admin_videos.sub_category_id', '=', 'sub_categories.id')
-                ->leftJoin('genres', 'admin_videos.genre_id', '=', 'genres.id')
-                ->select('admin_videos.id as video_id', 'admin_videos.title',
-                    'admin_videos.description', 'admin_videos.ratings',
-                    'admin_videos.reviews', 'admin_videos.created_at as video_date',
-                    'admin_videos.video', 'admin_videos.trailer_video',
-                    'admin_videos.default_image', 'admin_videos.banner_image', 'admin_videos.is_banner', 'admin_videos.video_type',
-                    'admin_videos.video_upload_type',
-                    'admin_videos.amount',
-                    'admin_videos.type_of_user',
-                    'admin_videos.type_of_subscription',
-                    'admin_videos.category_id as category_id',
-                    'admin_videos.sub_category_id',
-                    'admin_videos.genre_id',
-                    'admin_videos.video_type',
-                    'admin_videos.uploaded_by',
-                    'admin_videos.ppv_created_by',
-                    'admin_videos.details',
-                    'admin_videos.watch_count',
-                    'admin_videos.admin_amount',
-                    'admin_videos.user_amount',
-                    'admin_videos.video_upload_type',
-                    'admin_videos.duration',
-                    'admin_videos.redeem_amount',
-                    'admin_videos.compress_status',
-                    'admin_videos.trailer_compress_status',
-                    'admin_videos.main_video_compress_status',
-                    'admin_videos.video_resolutions',
-                    'admin_videos.video_resize_path',
-                    'admin_videos.trailer_resize_path',
-                    'admin_videos.is_approved',
-                    'admin_videos.unique_id',
-                    'admin_videos.video_subtitle',
-                    'admin_videos.trailer_subtitle',
-                    'admin_videos.trailer_duration',
-                    'admin_videos.trailer_video_resolutions',
-                    'admin_videos.publish_time',
-                    'categories.name as category_name', 'sub_categories.name as sub_category_name',
-                    'genres.name as genre_name',
-                    'admin_videos.video_gif_image',
-                    'admin_videos.is_banner',
-                    'admin_videos.is_pay_per_view',
-                    'admin_videos.age',
-                    'admin_videos.status'
-                )
-                ->orderBy('admin_videos.created_at', 'desc')
-                ->first();
-
-            $videoPath = $video_pixels = $trailer_video_path = $trailer_pixels = $trailerstreamUrl = $videoStreamUrl = '';
-
-            $ios_trailer_video = $videos->trailer_video;
-
-            $ios_video = $videos->video;
-
-            if ($videos->video_type == VIDEO_TYPE_UPLOAD && $videos->video_upload_type == VIDEO_UPLOAD_TYPE_DIRECT) {
-
-                if (check_valid_url($videos->trailer_video)) {
-
-                    if (Setting::get('streaming_url'))
-                        $trailerstreamUrl = Setting::get('streaming_url') . get_video_end($videos->trailer_video);
-
-                    if (Setting::get('HLS_STREAMING_URL'))
-                        $ios_trailer_video = Setting::get('HLS_STREAMING_URL') . get_video_end($videos->trailer_video);
-                }
-
-                if (check_valid_url($videos->video)) {
-
-                    if (Setting::get('streaming_url'))
-                        $videoStreamUrl = Setting::get('streaming_url') . get_video_end($videos->video);
-
-                    if (Setting::get('HLS_STREAMING_URL'))
-                        $ios_video = Setting::get('HLS_STREAMING_URL') . get_video_end($videos->video);
-                }
-
-
-                if (\Setting::get('streaming_url')) {
-                    if ($videos->is_approved == 1) {
-                        if ($videos->trailer_video_resolutions) {
-                            $trailerstreamUrl = Helper::web_url() . '/uploads/smil/' . get_video_end_smil($videos->trailer_video) . '.smil';
-                        }
-                        if ($videos->video_resolutions) {
-                            $videoStreamUrl = Helper::web_url() . '/uploads/smil/' . get_video_end_smil($videos->video) . '.smil';
-                        }
-                    }
-                } else {
-
-                    $videoPath = $videos->video_resize_path ? $videos->video . ',' . $videos->video_resize_path : $videos->video;
-                    $video_pixels = $videos->video_resolutions ? 'original,' . $videos->video_resolutions : 'original';
-                    $trailer_video_path = $videos->trailer_resize_path ? $videos->trailer_video . ',' . $videos->trailer_resize_path : $videos->trailer_video;
-                    $trailer_pixels = $videos->trailer_video_resolutions ? 'original,' . $videos->trailer_video_resolutions : 'original';
-                }
-
-                $trailerstreamUrl = $trailerstreamUrl ? $trailerstreamUrl : "";
-                $videoStreamUrl = $videoStreamUrl ? $videoStreamUrl : "";
-            } else {
-
-                $trailerstreamUrl = $videos->trailer_video;
-
-                $videoStreamUrl = $videos->video;
-
-                if ($videos->video_type == VIDEO_TYPE_YOUTUBE) {
-
-                    $videoStreamUrl = $ios_video = get_youtube_embed_link($videos->video);
-
-                    $trailerstreamUrl = $ios_trailer_video = get_youtube_embed_link($videos->trailer_video);
-
-
-                }
-            }
-
-            $admin_video_images = AdminVideoImage::where('admin_video_id', $request->id)
-                ->orderBy('is_default', 'desc')
-                ->get();
-
-            $page = 'videos';
-
-            $sub_page = 'admin_videos_view';
-
-            if ($videos->is_banner == 1) {
-
-                $sub_page = 'view-banner-videos';
-            }
-
-            // Load Video Cast & crews
-
-            $video_cast_crews = VideoCastCrew::select('cast_crew_id', 'name')
-                ->where('admin_video_id', $request->id)
-                ->leftjoin('cast_crews', 'cast_crews.id', '=', 'video_cast_crews.cast_crew_id')
-                ->get()->pluck('name')->toArray();
-
-            return view('admin.videos.view-video')->with('video', $videos)
-                ->with('video_images', $admin_video_images)
-                ->withPage($page)
-                ->with('sub_page', $sub_page)
-                ->with('videoPath', $videoPath)
-                ->with('video_pixels', $video_pixels)
-                ->with('ios_trailer_video', $ios_trailer_video)
-                ->with('ios_video', $ios_video)
-                ->with('trailer_video_path', $trailer_video_path)
-                ->with('trailer_pixels', $trailer_pixels)
-                ->with('videoStreamUrl', $videoStreamUrl)
-                ->with('trailerstreamUrl', $trailerstreamUrl)
-                ->with('video_cast_crews', $video_cast_crews);
-        }
-    }
 
     public function approve_video($id)
     {
@@ -2828,11 +2562,11 @@ class AdminController extends Controller
     public function email_settings()
     {
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         $result = EnvEditorHelper::getEnvValues();
 
-        \Auth::guard('admin')->loginUsingId($admin_id);
+//        Auth::user()->loginUsingId($admin_id);
 
         return view('admin.email-settings')->with('result', $result)->withPage('email-settings')->with('sub_page', '');
     }
@@ -2843,7 +2577,7 @@ class AdminController extends Controller
 
         $email_settings = ['MAIL_DRIVER', 'MAIL_HOST', 'MAIL_PORT', 'MAIL_USERNAME', 'MAIL_PASSWORD', 'MAIL_ENCRYPTION', 'MAILGUN_DOMAIN', 'MAILGUN_SECRET'];
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         if ($email_settings) {
 
@@ -2886,7 +2620,7 @@ class AdminController extends Controller
 
         $mobile_settings = ['FCM_SENDER_ID', 'FCM_SERVER_KEY', 'FCM_PROTOCOL'];
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         if ($mobile_settings) {
 
@@ -3146,9 +2880,9 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key == "admin_commission") {
+                } else if ($setting->key == "subscription_commission") {
 
-                    $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
+                    $setting->value = $request->has('subscription_commission') ? ($request->subscription_commission < 100 ? $request->subscription_commission : 100) : $setting->value;
 
                     $user_commission = $setting->value < 100 ? 100 - $setting->value : 0;
 
@@ -3157,11 +2891,14 @@ class AdminController extends Controller
                     if ($user_commission_details) {
 
                         $user_commission_details->value = $user_commission;
-
-
                         $user_commission_details->save();
                     }
 
+                } else if ($setting->key === 'advertisement_commission'){
+                    $setting->value = $request->has('advertisement_commission') ? ($request->advertisement_commission < 100 ? $request->advertisement_commission : 100) : $setting->value;
+
+                } else if ($setting->key === 'coupon_code_commission'){
+                    $setting->value = $request->has('coupon_code_commission') ? ($request->coupon_code_commission < 100 ? $request->coupon_code_commission : 100) : $setting->value;
 
                 } else if ($setting->key == 'site_name') {
 
@@ -3675,7 +3412,7 @@ class AdminController extends Controller
     public function save_common_settings(Request $request)
     {
 
-        $admin_id = \Auth::guard('admin')->user()->id;
+        $admin_id = \Auth::user()->id;
 
         foreach ($request->all() as $key => $data) {
 
@@ -3759,22 +3496,25 @@ class AdminController extends Controller
 
                     $setting->value = $request->$key;
 
-                } else if ($setting->key == "admin_commission") {
+                } else if ($setting->key === 'subscription_commission') {
 
-                    $setting->value = $request->has('admin_commission') ? ($request->admin_commission < 100 ? $request->admin_commission : 100) : $setting->value;
+                    $setting->value = $request->has('subscription_commission') ? ($request->subscription_commission < 100 ? $request->subscription_commission : 100) : $setting->value;
 
                     $user_commission = $setting->value < 100 ? 100 - $setting->value : 0;
 
                     $user_commission_details = Settings::where('key', 'user_commission')->first();
 
-                    if (count($user_commission_details) > 0) {
+                    if (is_array($user_commission_details) ? count($user_commission_details) : 0) {
 
                         $user_commission_details->value = $user_commission;
-
-
                         $user_commission_details->save();
                     }
 
+                } else if ($setting->key === 'advertisement_commission'){
+                    $setting->value = $request->has('advertisement_commission') ? ($request->advertisement_commission < 100 ? $request->advertisement_commission : 100) : $setting->value;
+
+                } else if ($setting->key === 'coupon_code_commission'){
+                    $setting->value = $request->has('coupon_code_commission') ? ($request->coupon_code_commission < 100 ? $request->coupon_code_commission : 100) : $setting->value;
 
                 } else {
 
@@ -3864,10 +3604,6 @@ class AdminController extends Controller
     public function user_subscription_save($s_id, $u_id)
     {
 
-        // Load 
-
-        // $load = UserPayment::where('user_id', $u_id)->orderBy('created_at', 'desc')->first();
-
         $load = UserPayment::where('user_id', $u_id)->where('status', DEFAULT_TRUE)->orderBy('id', 'desc')->first();
 
         $payment = new UserPayment();
@@ -3949,9 +3685,8 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'plan' => 'required|numeric|min:1|max:12',
+            'plan' => 'required|numeric',
             'amount' => 'required|numeric',
-            'no_of_account' => 'required|numeric|min:1',
         ]);
 
         if ($validator->fails()) {
@@ -3975,22 +3710,22 @@ class AdminController extends Controller
 
             } else {
                 $model = new Subscription();
+
                 $model->title = $request->title;
                 $model->description = $request->description;
                 $model->plan = $request->plan;
-                $model->no_of_account = $request->no_of_account;
                 $model->amount = $request->amount;
                 $model->status = 1;
                 $model->popular_status = $request->popular_status ? 1 : 0;
                 $model->unique_id = $model->title;
-                $model->no_of_account = $request->no_of_account;
-                $model->subscription_type = 'month';
+                $model->subscription_type = 'days';
                 $model->total_subscription = 0;
+
                 $model->save();
             }
 
             if ($model) {
-                return redirect(route('admin.subscriptions.view', $model->unique_id))->with('flash_success', $request->id ? tr('subscription_update_success') : tr('subscription_create_success'));
+                return redirect(route('admin.subscriptions.index', $model->unique_id))->with('flash_success', $request->id ? tr('subscription_update_success') : tr('subscription_create_success'));
 
             } else {
                 return back()->with('flash_error', tr('admin_not_error'));
@@ -4142,7 +3877,7 @@ class AdminController extends Controller
 
         $user_details = User::find($id);
 
-        if (count($user_details) == 0) {
+        if (is_array($user_details) ? count($user_details) : 0) {
 
             return redirect()->route('admin.users')->with('flash_error', tr('user_not_found'));
 
@@ -4170,7 +3905,7 @@ class AdminController extends Controller
 
             $base_query = $base_query->where('moderator_id', $request->id);
 
-            $moderator = Admin::find($request->id);
+            $moderator = User::find($request->id);
         }
 
         $data = $base_query->get();
@@ -4766,12 +4501,10 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => 'exists:coupons,id',
             'title' => 'required',
-            'coupon_code' => $request->id ? 'required|max:10|min:1|unique:coupons,coupon_code,' . $request->id : 'required|unique:coupons,coupon_code|min:1|max:10',
+            'coupon_code' => $request->id ? 'required|max:50|min:1|unique:coupons,coupon_code,' . $request->id : 'required|unique:coupons,coupon_code|min:1|max:50',
             'amount' => 'required|numeric|min:1|max:5000',
             'amount_type' => 'required',
             'expiry_date' => 'required|date_format:d-m-Y|after:today',
-            'no_of_users_limit' => 'required|numeric|min:1|max:1000',
-            'per_users_limit' => 'required|numeric|min:1|max:100',
         ]);
 
         if ($validator->fails()) {
@@ -4782,8 +4515,9 @@ class AdminController extends Controller
         }
         if ($request->id != '') {
 
-
             $coupon_detail = Coupon::find($request->id);
+
+            $coupon_detail->updated_by = Auth::user()->id;
 
             $message = tr('coupon_update_success');
 
@@ -4792,6 +4526,8 @@ class AdminController extends Controller
             $coupon_detail = new Coupon;
 
             $coupon_detail->status = DEFAULT_TRUE;
+            $coupon_detail->created_by = Auth::user()->id;
+            $coupon_detail->updated_by = Auth::user()->id;
 
             $message = tr('coupon_add_success');
         }
@@ -4839,10 +4575,7 @@ class AdminController extends Controller
         $coupon_detail->expiry_date = date('Y-m-d', strtotime($request->expiry_date));
 
         $coupon_detail->description = $request->has('description') ? $request->description : '';
-        // Based no users limit need to apply coupons
-        $coupon_detail->no_of_users_limit = $request->no_of_users_limit;
 
-        $coupon_detail->per_users_limit = $request->per_users_limit;
 
         if ($coupon_detail) {
 
@@ -5036,6 +4769,7 @@ class AdminController extends Controller
         }
     }
 
+
     // Mail Camp
 
     /**
@@ -5054,7 +4788,7 @@ class AdminController extends Controller
 
         $users_list = User::select('users.id', 'users.name', 'users.email', 'users.is_activated', 'users.is_verified', 'users.amount_paid')->where('is_activated', 1)->where('email_notification', 1)->where('is_verified', 1)->get();
 
-        $moderator_list = Admin::select('admins.id', 'admins.name', 'admins.email', 'admins.is_activated')->where('is_activated', 1)->get();
+        $moderator_list = User::select('id', 'name', 'email', 'is_activated')->where('is_activated', 1)->get();
 
         return view('admin.mail_camp')
             ->with('users_list', $users_list)
@@ -5294,146 +5028,6 @@ class AdminController extends Controller
 
     }
 
-    /**
-     * Function Name : admin_videos_create()
-     *
-     * To display a upload video form
-     *
-     * @created_by - Shobana Chandrasekar
-     *
-     * @updated_by - -
-     *
-     * @param object $request - -
-     *
-     * @return response of html page with details
-     */
-    public function admin_videos_create(Request $request)
-    {
-
-        $categories = Category::where('categories.is_approved', DEFAULT_TRUE)
-            ->select('categories.id as id', 'categories.name', 'categories.picture',
-                'categories.is_series', 'categories.status', 'categories.is_approved')
-            ->leftJoin('sub_categories', 'categories.id', '=', 'sub_categories.category_id')
-//            ->where("sub_categories.is_approved", SUB_CATEGORY_APPROVED)
-//            ->havingRaw("COUNT(sub_categories.id) > 0")
-//            ->orderBy('categories.name', 'asc')
-//            ->groupBy('sub_categories.category_id')
-            ->get();
-
-        $model = new AdminVideo;
-
-        $model->trailer_video_resolutions = [];
-
-        $model->video_resolutions = [];
-
-        $videoimages = [];
-
-        $video_cast_crews = [];
-
-        $cast_crews = CastCrew::select('id', 'name')->get();
-
-        return view('admin.videos.upload')->with('page', 'videos')
-            ->with('categories', $categories)
-            ->with('sub_page', 'admin_videos_create')
-            ->with('model', $model)
-            ->with('videoimages', $videoimages)
-            ->with('cast_crews', $cast_crews)
-            ->with('video_cast_crews', $video_cast_crews);
-    }
-
-    /**
-     * Function Name : admin_videos_save()
-     *
-     * @uses To save a new video as well as updated video details
-     *
-     * @created: Shobana Chandrasekar
-     *
-     * @updated:
-     *
-     * @param object $request - -
-     *
-     * @return response of success/failure page
-     */
-    public function admin_videos_save(Request $request)
-    {
-
-        // Call video save method of common function video repo
-
-        $response = VideoRepo::video_save($request)->getData();
-
-        return ['response' => $response];
-    }
-
-
-    /**
-     * Function Name : admin_videos_edit()
-     *
-     * @uses To display a upload video form
-     *
-     * @created: Shobana Chandrasekar
-     *
-     * @updated: -
-     *
-     * @param object $request - -
-     *
-     * @return response of html page with details
-     */
-    public function admin_videos_edit(Request $request)
-    {
-
-        $model = AdminVideo::where('admin_videos.id', $request->id)->first();
-
-        if ($model) {
-
-            $categories = Category::where('categories.is_approved', DEFAULT_TRUE)
-                ->select('categories.id as id', 'categories.name', 'categories.picture',
-                    'categories.is_series', 'categories.status', 'categories.is_approved')
-                ->leftJoin('sub_categories', 'categories.id', '=', 'sub_categories.category_id')
-                ->groupBy('sub_categories.category_id')
-                ->where('sub_categories.is_approved', SUB_CATEGORY_APPROVED)
-                ->havingRaw("COUNT(sub_categories.id) > 0")
-                ->orderBy('categories.name', 'asc')
-                ->get();
-
-            $sub_categories = SubCategory::where('category_id', '=', $model->category_id)
-                ->leftJoin('sub_category_images', 'sub_categories.id', '=', 'sub_category_images.sub_category_id')
-                ->select('sub_category_images.picture', 'sub_categories.*')
-                ->where('sub_category_images.position', 1)
-                ->where('is_approved', SUB_CATEGORY_APPROVED)
-                ->orderBy('name', 'asc')
-                ->get();
-
-            $model->publish_time = $model->publish_time ? date('d-m-Y H:i:s', strtotime($model->publish_time)) : $model->publish_time;
-
-            $videoimages = get_video_image($model->id);
-
-            $model->video_resolutions = $model->video_resolutions ? explode(',', $model->video_resolutions) : [];
-
-            $model->trailer_video_resolutions = $model->trailer_video_resolutions ? explode(',', $model->trailer_video_resolutions) : [];
-
-            $video_cast_crews = VideoCastCrew::select('cast_crew_id')
-                ->where('admin_video_id', $request->id)
-                ->get()->pluck('cast_crew_id')->toArray();
-
-            $cast_crews = CastCrew::select('id', 'name')->get();
-
-            return view('admin.videos.upload')->with('page', 'videos')
-                ->with('categories', $categories)
-                ->with('model', $model)
-                ->with('sub_categories', $sub_categories)
-                ->with('sub_page', 'admin_videos_create')
-                ->with('videoimages', $videoimages)
-                ->with('cast_crews', $cast_crews)
-                ->with('video_cast_crews', $video_cast_crews);
-
-
-        } else {
-
-            return back()->with('flash_error', tr('something_error'));
-
-        }
-
-    }
 
     /**
      * Function Name : cast_crews_add()

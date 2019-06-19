@@ -74,10 +74,9 @@
 <!-- InputMask -->
 <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.js')}}"></script>
 <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
-
 <script src="{{asset('admin-css/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
 
-<script src="{{asset('admin-css/plugins/select2/select2.full.min.js')}}"></script>
+{{--<script src="{{asset('admin-css/plugins/select2/select2.full.min.js')}}"></script>--}}
 
 <!-- Datapicker -->
 <script src = "{{asset('admin-css/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
@@ -121,7 +120,7 @@
 
     $(function () {
         //Initialize Select2 Elements
-        $(".select2").select2();
+        // $(".select2").select2();
 
         //Datemask dd/mm/yyyy
         $("#datemask").inputmask("dd:mm:yyyy", {"placeholder": "hh:mm:ss"});

@@ -26,14 +26,14 @@
                            class="btn btn-default pull-right">{{tr('categories')}}</a>
                     </div>
                 </div>
-                <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
-                      enctype="multipart/form-data" role="form">
+                    <form class="form-horizontal" action="{{route('admin.save.category')}}" method="POST"
+                          enctype="multipart/form-data" role="form">
 
-                    @csrf
+                        @csrf
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="name" class="col-sm-1 control-label">*{{tr('name')}}</label>
+                            <label for="name" class="col-sm-1 col-form-label">*{{tr('name')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" required class="form-control"
                                        pattern="[a-zA-Z0-9\s\-\.]{2,100}" title="{{tr('only_alphanumeric')}}" id="name"
@@ -43,28 +43,22 @@
 
 
                         <div class="form-group">
-                            <label for="picture" class="col-sm-1 control-label">*{{tr('picture')}}</label>
+                            <label for="picture" class="col-sm-1 col-form-label">*{{tr('picture')}}</label>
                             <div class="col-sm-10">
 
                                 <img id="image_preview" style="width: 100px;height: 100px;display: none;">
 
                                 <input type="file" required accept="image/jpeg,image/png" id="picture" name="picture"
                                        placeholder="{{tr('picture')}}" onchange="loadFile(this,'image_preview')">
-                                <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                                <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
                             </div>
                         </div>
 
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" name="is_series" value="1"
-                                       class="form-check-input"> {{tr('is_series')}}
-                            </label>
-                        </div>
 
                     </div>
 
                     <div class="box-footer">
-                        <a href="" class="btn btn-danger">{{tr('cancel')}}</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-danger">{{tr('cancel')}}</a>
                         @if(Setting::get('admin_delete_control'))
                             <a href="#" class="btn btn-success pull-right" disabled>{{tr('submit')}}</a>
                         @else

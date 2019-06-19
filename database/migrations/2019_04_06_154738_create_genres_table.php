@@ -22,12 +22,12 @@ class CreateGenresTable extends Migration
             $table->string('name');
             $table->string('video');
             $table->string('subtitle');
+            $table->string('image');
             $table->integer('position');
             $table->integer('status');
             $table->integer('is_approved');
             $table->integer('created_by');
             $table->timestamps();
-            $table->string('image');
         });
     }
 

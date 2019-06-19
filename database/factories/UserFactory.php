@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -18,9 +19,46 @@ use Faker\Generator as Faker;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
+        'email' => $faker->firstName.'@havefunmovies.com',
+        'password' => '$2y$10$Mush1is5LbCNUtBfSd1N6OY1kY5DgcjnZfM6uEJEDYKQXc4qivOhG',
+        'picture' => 'http://adminview.streamhash.com/placeholder.png',
+        'token' => '2y103gI7f5tk4o1peCGWzx6Q604yx0xu8kPf1WdSgxZkCnMGAOSsmWaW',
+        'token_expiry' => '1550787727',
+        'device_token' => '123456',
+        'device_type' => 'web',
+        'login_by' => 'manual',
+        'social_unique_id' => '',
+        'fb_lg' => '',
+        'gl_lg' => '',
+        'description' => '',
+        'is_activated' => 1,
+        'status' => 1,
+        'email_notification' => 1,
+        'no_of_account' => 1,
+        'logged_in_account' => 1,
+        'card_id' => '',
+        'payment_mode' => '',
+        'verification_code' => '',
+        'verification_code_expiry' => '',
+        'is_verified' => '1',
+        'push_status' => 0,
+        'user_type' => 1,
+        'user_type_change_by' => '',
+        'is_moderator' => 0,
+        'moderator_id' => 0,
+        'gender' => 'male',
+        'mobile' => '',
+        'latitude' => 0,
+        'longitude' => 0,
+        'paypal_email' => '',
+        'address' => '',
+        'remember_token' => NULL,
+        'timezone' => '',
+        'amount_paid' => 0,
+        'expiry_date' => NULL,
+        'no_of_days' => 0,
+        'one_time_subscription' => 0,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
     ];
 });

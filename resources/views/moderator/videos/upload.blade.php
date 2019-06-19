@@ -145,6 +145,7 @@
                                 </li>
                             </ul>
                             <form method="post" enctype="multipart/form-data" id="upload_video_form" action="{{route('moderator.videos.save')}}">
+                                @csrf
                                 <div class="tab-content">
                                     <!-- tab1 -->
                                     <div role="tabpanel" class="tab-pane fade in active" id="first">
@@ -152,9 +153,9 @@
 
                                         <input type="hidden" name="admin_video_id" id="admin_video_id" value="{{$model->id}}">
 
-                                        <input type="hidden" name="edited_by" id="edited_by" value="{{Auth::guard('moderator')->user()->id}}">
+                                        <input type="hidden" name="edited_by" id="edited_by" value="{{Auth::user()->id}}">
 
-                                        <input type="hidden" name="uploaded_by" id="uploaded_by" value="{{Auth::guard('moderator')->user()->id}}">
+                                        <input type="hidden" name="uploaded_by" id="uploaded_by" value="{{Auth::user()->id}}">
 
                                            <!--  <a href="#" data-toggle="tooltip" title="Hooray!" data-placement="right">Note</a> -->
                                         </p>
@@ -523,7 +524,7 @@
                                     </div>  
                                     <!-- tab4 -->
                                 </div>
-                                <input type="hidden" name="timezone" value="{{ Auth::guard('moderator')->user()->timezone }}">
+                                <input type="hidden" name="timezone" value="{{ Auth::user()->timezone }}">
                             </form>
                         </div>
                         <!-- Example Wizard END -->

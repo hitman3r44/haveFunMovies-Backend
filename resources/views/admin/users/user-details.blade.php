@@ -97,10 +97,10 @@
                             <a class="list-group-item list-group-item-action">
                                 {{tr('email_notification')}} <span class="pull-right">
 				                @if($user->email_notification)
-                                        <span class="label label-success">
+                                        <span class="badge badge-success">
 				                 	{{tr('yes')}}</span>
                                     @else
-                                        <span class="label label-warning">
+                                        <span class="badge badge-warning">
 				                 {{tr('no')}}</span>
                                     @endif </span>
                             </a>
@@ -121,11 +121,11 @@
 
 
                             <a class="list-group-item list-group-item-action">{{tr('created_at')}} <span
-                                        class="pull-right">{{convertTimeToUSERzone($user->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
+                                        class="pull-right">{{convertTimeToUSERzone($user->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</span></a>
 
 
                             <a class="list-group-item list-group-item-action">{{tr('updated_at')}} <span
-                                        class="pull-right">{{convertTimeToUSERzone($user->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</span></a>
+                                        class="pull-right">{{convertTimeToUSERzone($user->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</span></a>
 
                         </div>
 

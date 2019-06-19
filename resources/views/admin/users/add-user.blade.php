@@ -7,7 +7,8 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>
+    <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}
+        </a></li>
     <li class="list-inline-item"><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> {{tr('users')}}</a></li>
     <li class="list-inline-item"><i class="fa fa-user"></i> {{tr('view_user')}}</li>
 @endsection
@@ -32,7 +33,7 @@
                     <div class="mT-30">
 
                         <div class="form-group row">
-                            <label for="username" class="col-sm-2 control-label">* {{tr('username')}}</label>
+                            <label for="username" class="col-sm-2 col-form-label">* {{tr('username')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="text" required name="name"
@@ -43,7 +44,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-2 control-label">* {{tr('email')}}</label>
+                            <label for="email" class="col-sm-2 col-form-label">* {{tr('email')}}</label>
                             <div class="col-sm-10">
                                 <input type="email" maxlength="255" required class="form-control" id="email"
                                        name="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,10}$"
@@ -52,20 +53,32 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="mobile" class="col-sm-2 control-label">* {{tr('mobile')}}</label>
+                            <label for="mobile" class="col-sm-2 col-form-label">{{tr('mobile')}}</label>
 
                             <div class="col-sm-10">
-                                <input type="text" required name="mobile" class="form-control" id="mobile"
+                                <input type="text" name="mobile" class="form-control" id="mobile"
                                        placeholder="{{tr('mobile')}}" minlength="4" maxlength="16" pattern="[0-9]{4,16}"
                                        value="{{old('mobile')}}">
                                 <small style="color:brown">{{tr('mobile_note')}}</small>
                             </div>
                         </div>
 
-
+                        @if ($authUser->hasRole('super-admin') || $authUser->hasRole('admin'))
+                            <div class="form-group row">
+                                <label for="mobile" class="col-sm-2 col-form-label">* {{tr('role')}}</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="role" id="role" required>
+                                        <option value="}">{{tr('select_role')}}</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->name}}">{{ucwords($role->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="form-group row">
-                            <label for="password" class="col-sm-2 control-label">* {{tr('password')}}</label>
+                            <label for="password" class="col-sm-2 col-form-label">* {{tr('password')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="password" required name="password" pattern=".{6,}"
@@ -76,7 +89,7 @@
 
                         <div class="form-group row">
                             <label for="username"
-                                   class="col-sm-2  control-label">* {{tr('password_confirmation')}}</label>
+                                   class="col-sm-2  col-form-label">* {{tr('password_confirmation')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="password" required pattern=".{6,}" title="{{tr('password_notes')}}"
@@ -88,7 +101,7 @@
 
                     </div>
 
-                    <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
+                    <button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
                     @if(Setting::get('admin_delete_control'))
                         <a href="#" class="btn btn-success pull-right" disabled>{{tr('submit')}}</a>
                     @else

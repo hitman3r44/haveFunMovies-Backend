@@ -20,7 +20,7 @@
                 <div class="row bgc-grey-600 p-10">
 
                     <div class="col-md-6 text-white">
-                        <h3>{{tr('add_moderator')}}</h3>
+                        <h3>{{tr('moderators')}}</h3>
                     </div>
 
                     <div class="col-md-6">
@@ -44,10 +44,10 @@
                                         </li>
 
                                         <li role="presentation">
-                                            <a role="menuitem" tabindex="-1"
-                                               href="{{route('admin.moderators.export' , ['format' => 'csv'])}}">
-                                                <span class="text-blue"><b>{{tr('csv')}}</b></span>
-                                            </a>
+                                            {{--<a role="menuitem" tabindex="-1"--}}
+                                               {{--href="{{route('admin.moderators.export' , ['format' => 'csv'])}}">--}}
+                                                {{--<span class="text-blue"><b>{{tr('csv')}}</b></span>--}}
+                                            {{--</a>--}}
                                         </li>
                                     </ul>
                                 </li>
@@ -128,7 +128,7 @@
                                                                                    href="{{route('admin.moderator.view',$moderator->id)}}">{{tr('view')}}</a>
                                                         </li>
 
-                                                        <li role="presentation" class="divider"></li>
+                                                        <li role="presentation" class="dropdown-divider"></li>
                                                         @if($moderator->is_activated)
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                        onclick="return confirm(&quot;{{tr('moderator_decline_confirmation' , $moderator->name)}}&quot;);"
@@ -158,7 +158,7 @@
 
                                                         </li>
 
-                                                        <li role="presentation" class="divider"></li>
+                                                        <li role="presentation" class="dropdown-divider"></li>
 
                                                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                    href="{{route('admin.moderators.redeems',['id'=>$moderator->id])}}">{{tr('redeems')}}</a>

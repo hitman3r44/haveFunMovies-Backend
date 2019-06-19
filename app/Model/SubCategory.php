@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
 
 class SubCategory extends Model
 {
@@ -30,6 +31,10 @@ class SubCategory extends Model
     {
         //execute the parent's boot method 
         parent::boot();
+
+        static::creating(function ($post) {
+            $post->created_by = Auth::check() ? Auth::user()->id : 1;
+        });
 
         //delete your related models here, for example
         static::deleting(function($sub_categories)

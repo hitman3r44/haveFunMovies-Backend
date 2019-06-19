@@ -65,7 +65,7 @@
                 <a href="javascript:void(0)">
                   <h4 class="control-sidebar-subheading">
                     Custom Template Design
-                    <span class="label label-danger pull-right">70%</span>
+                    <span class="badge badge-danger pull-right">70%</span>
                   </h4>
 
                   <div class="progress progress-xxs">
@@ -77,7 +77,7 @@
                 <a href="javascript:void(0)">
                   <h4 class="control-sidebar-subheading">
                     Update Resume
-                    <span class="label label-success pull-right">95%</span>
+                    <span class="badge badge-success pull-right">95%</span>
                   </h4>
 
                   <div class="progress progress-xxs">
@@ -89,7 +89,7 @@
                 <a href="javascript:void(0)">
                   <h4 class="control-sidebar-subheading">
                     Laravel Integration
-                    <span class="label label-warning pull-right">50%</span>
+                    <span class="badge badge-warning pull-right">50%</span>
                   </h4>
 
                   <div class="progress progress-xxs">
@@ -101,7 +101,7 @@
                 <a href="javascript:void(0)">
                   <h4 class="control-sidebar-subheading">
                     Back End Framework
-                    <span class="label label-primary pull-right">68%</span>
+                    <span class="badge badge-primary pull-right">68%</span>
                   </h4>
 
                   <div class="progress progress-xxs">
@@ -122,6 +122,7 @@
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
+                @csrf
               <h3 class="control-sidebar-heading">General Settings</h3>
 
               <div class="form-group">

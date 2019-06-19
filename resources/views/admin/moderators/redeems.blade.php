@@ -82,6 +82,7 @@
 							      		@if(in_array($value->status ,[REDEEM_REQUEST_SENT , REDEEM_REQUEST_PROCESSING]))
 
 								      		<form action="{{route('admin.moderators.payout.invoice')}}" method="get">
+                                                @csrf
 
 								      			<input type="hidden" name="redeem_request_id" value="{{$value->id}}">
 

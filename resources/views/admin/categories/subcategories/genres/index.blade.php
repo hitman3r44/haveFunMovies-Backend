@@ -71,11 +71,11 @@
 
                                                 @if($value->position > 0)
 
-                                                    <span class="label label-success">{{$value->position}}</span>
+                                                    <span class="badge badge-success">{{$value->position}}</span>
 
                                                 @else
 
-                                                    <span class="label label-danger">{{$value->position}}</span>
+                                                    <span class="badge badge-danger">{{$value->position}}</span>
 
                                                 @endif
                                             </td>
@@ -84,9 +84,9 @@
                                             </td>
                                             <td>
                                                 @if($value->is_approved)
-                                                    <span class="label label-success">{{tr('approved')}}</span>
+                                                    <span class="badge badge-success">{{tr('approved')}}</span>
                                                 @else
-                                                    <span class="label label-warning">{{tr('pending')}}</span>
+                                                    <span class="badge badge-warning">{{tr('pending')}}</span>
                                                 @endif
                                             </td>
 
@@ -126,7 +126,7 @@
 
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             @if($value->is_approved)
                                                                 <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -158,7 +158,7 @@
 
                                                             </li>
 
-                                                            <li class="divider" role="presentation"></li>
+                                                            <li class="dropdown-divider" role="presentation"></li>
 
                                                             <li role="presentation"><a role="menuitem" tabindex="-1"
                                                                                        href="{{route('admin.videos' , array('genre_id' => $value->genre_id))}}">{{tr('videos')}}</a>
@@ -171,8 +171,8 @@
                                         </tr>
                                         <div id="genre_{{$value->genre_id}}" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
-                                                <form action="{{route('admin.save.genre.position',['genre_id'=>$value->genre_id])}}"
-                                                      method="POST">
+                                                <form action="{{route('admin.save.genre.position',['genre_id'=>$value->genre_id])}}" method="POST">
+                                                @csrf
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">

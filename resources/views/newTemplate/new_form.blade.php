@@ -9,6 +9,7 @@
                 <h6 class="c-grey-900">Basic Form</h6>
                 <div class="mT-30">
                     <form>
+                        @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -34,6 +35,7 @@
                 <h6 class="c-grey-900">Complex Form Layout</h6>
                 <div class="mT-30">
                     <form>
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
@@ -100,6 +102,7 @@
                 <h6 class="c-grey-900">Horizontal Form</h6>
                 <div class="mT-30">
                     <form>
+                        @csrf
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
@@ -161,6 +164,7 @@
                 <h6 class="c-grey-900">Disabled Forms</h6>
                 <div class="mT-30">
                     <form>
+                        @csrf
                         <fieldset disabled>
                             <div class="form-group">
                                 <label for="disabledTextInput">Disabled input</label>
@@ -188,6 +192,7 @@
                 <h6 class="c-grey-900">Validation</h6>
                 <div class="mT-30">
                     <form class="container" id="needs-validation" novalidate>
+                        @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">First name</label>

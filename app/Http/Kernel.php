@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+        \Barryvdh\Cors\HandleCors::class,
     ];
 
     /**
@@ -40,6 +41,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \Barryvdh\Cors\HandleCors::class,
         ],
     ];
 
@@ -59,14 +61,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'admin' => \App\Http\Middleware\AuthenticateAdmin::class,
-        'moderator' => \App\Http\Middleware\AuthenticateModerator::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'guestadmin' => \App\Http\Middleware\RedirectIfAuthenticatedAdmin::class,
-        'guestmoderator' => \App\Http\Middleware\RedirectIfAuthenticatedModerator::class,
         'UserApiVal' => \App\Http\Middleware\UserApiValidation::class,
-        'cors' => \App\Http\Middleware\CORS::class,
-        'PaypalCheck' => \App\Http\Middleware\PaypalCheckMiddleware::class,
+//        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+//        'PaypalCheck' => \App\Http\Middleware\PaypalCheckMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,

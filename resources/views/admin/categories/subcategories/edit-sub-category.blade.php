@@ -33,16 +33,15 @@
                     </div>
                 </div>
 
-                <form class="form-horizontal" action="{{route('admin.save.sub_category')}}" method="POST"
-                      enctype="multipart/form-data" role="form">
-
+                <form class="form-horizontal" action="{{route('admin.save.sub_category')}}" method="POST" enctype="multipart/form-data" role="form">
+                    @csrf
                     <div class="box-body">
 
                         <input type="hidden" name="category_id" value="{{$category->id}}">
                         <input type="hidden" name="id" value="{{$sub_category->id}}">
 
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">*{{tr('name')}}</label>
+                            <label for="name" class="col-sm-2 col-form-label">*{{tr('name')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" required pattern="[a-zA-Z0-9\s\-\.]{2,100}"
                                        title="{{tr('only_alphanumeric')}}" class="form-control"
@@ -52,7 +51,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description" class="col-sm-2 control-label">*{{tr('description')}}</label>
+                            <label for="description" class="col-sm-2 col-form-label">*{{tr('description')}}</label>
                             <div class="col-sm-10">
                                 <input type="text" required class="form-control" value="{{$sub_category->description}}"
                                        id="description" name="description" placeholder="{{tr('description')}}">
@@ -62,7 +61,7 @@
                         @if($sub_category_images[0]->picture)
 
                             <div class="col-sm-12">
-                                <label for="picture1" class="col-sm-2 control-label"></label>
+                                <label for="picture1" class="col-sm-2 col-form-label"></label>
                                 <img style="height: 90px;margin-bottom: 15px; border-radius:2em;"
                                      src="{{$sub_category_images[0]->picture}}" id="image_preview">
                             </div>
@@ -70,37 +69,37 @@
 
                         <div class="form-group">
 
-                            <label for="picture1" class="col-sm-2 control-label">{{tr('image')}}</label>
+                            <label for="picture1" class="col-sm-2 col-form-label">{{tr('image')}}</label>
 
                             <div class="col-sm-10">
 
                                 <input type="file" accept="image/png, image/jpeg" id="picture1" name="picture1"
                                        placeholder="{{tr('picture1')}}" onchange="loadFile(this,'image_preview')">
-                                <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                                <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
                             </div>
 
                         </div>
 
                         <?php /*@if($sub_category_images[1]->picture)
                             <div class="col-sm-12">
-                                <label for="picture1" class="col-sm-2 control-label"></label>
+                                <label for="picture1" class="col-sm-2 col-form-label"></label>
                                 <img style="height: 90px;margin-bottom: 15px; border-radius:2em;" src="{{$sub_category_images[1]->picture}}">
                             </div>
                         @endif
 
                         <div class="form-group">
 
-                            <label for="picture2" class="col-sm-2 control-label">{{tr('picture2')}}</label>
+                            <label for="picture2" class="col-sm-2 col-form-label">{{tr('picture2')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="file" accept="image/png, image/jpeg" id="picture2" name="picture2" placeholder="{{tr('picture2')}}">
-                                <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                                <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
                             </div>
                         </div>
 
                         @if($sub_category_images[2]->picture)
                             <div class="col-sm-12">
-                                <label for="picture1" class="col-sm-2 control-label"></label>
+                                <label for="picture1" class="col-sm-2 col-form-label"></label>
                                 <img style="height: 90px;margin-bottom: 15px; border-radius:2em;" src="{{$sub_category_images[2]->picture}}">
                             </div>
                         
@@ -108,18 +107,18 @@
 
                         <div class="form-group">
 
-                            <label for="picture3" class="col-sm-2 control-label">{{tr('picture3')}}</label>
+                            <label for="picture3" class="col-sm-2 col-form-label">{{tr('picture3')}}</label>
 
                             <div class="col-sm-10">
                                 <input type="file" accept="image/png, image/jpeg" id="picture3" name="picture3" placeholder="{{tr('picture3')}}">
-                                <p class="help-block">{{tr('image_validate')}} {{tr('image_square')}}</p>
+                                <p class="form-text">{{tr('image_validate')}} {{tr('image_square')}}</p>
                             </div>
                         </div> */?>
 
                     </div>
 
                     <div class="box-footer">
-                        <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
+                        <button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
                         @if(Setting::get('admin_delete_control'))
                             <a href="#" class="btn btn-success pull-right" disabled>{{tr('submit')}}</a>
                         @else
@@ -158,7 +157,7 @@
         </div>
 
         <div class="box-footer">
-        <button type="reset" class="btn btn-danger">{{tr('cancel')}}</button>
+        <button type="reset" class="btn btn-danger">{{tr('reset')}}</button>
         <button type="submit" class="btn btn-success pull-right">{{tr('submit')}}</button>
         </div>
         </form>

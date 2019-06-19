@@ -39,21 +39,21 @@
                     <hr>
 
                     <strong>{{tr('coupon_code')}}</strong>
-                    <h4 class="pull-right" style="border: 2px solid #20bd99">{{$view_coupon->coupon_code}}</h4>
+                    <h4 class="pull-right" >{{$view_coupon->coupon_code}}</h4>
                     <hr>
 
                     <strong>{{tr('amount_type')}}</strong>
                     @if($view_coupon->amount_type == 0)
-                        <span class="label label-primary pull-right">{{tr('percentage')}}</span>
+                        <span class="badge badge-primary pull-right">{{tr('percentage')}}</span>
                     @else
-                        <span class="label label-primary pull-right">{{tr('absoulte')}}</span>
+                        <span class="badge badge-primary pull-right">{{tr('absoulte')}}</span>
                     @endif
                     <hr>
                     <strong>{{tr('amount')}}</strong>
                     @if($view_coupon->amount_type == 0)
-                        <span class="label label-primary pull-right">{{$view_coupon->amount}} % </span>
+                        <span class="badge badge-primary pull-right">{{$view_coupon->amount}} % </span>
                     @else
-                        <span class="label label-primary pull-right">{{Setting::get('currency')}}{{$view_coupon->amount}}</span>
+                        <span class="badge badge-primary pull-right">{{Setting::get('currency')}}{{$view_coupon->amount}}</span>
                     @endif
                     <hr>
                     <strong>{{tr('expiry_date')}}</strong>
@@ -65,21 +65,6 @@
                     </h5>
                     <hr>
 
-                    <strong>{{tr('no_of_users_limit')}}</strong>
-
-                    <h5 class="pull-right">
-
-                        {{$view_coupon->no_of_users_limit}}
-
-                    </h5>
-                    <hr>
-                    <strong>{{tr('per_users_limit')}}</strong>
-
-                    <h5 class="pull-right">
-
-                        {{$view_coupon->per_users_limit}}
-
-                    </h5>
                     <hr>
 
                     <strong>{{tr('no_of_used_coupon')}}</strong>
@@ -93,18 +78,18 @@
 
                     <strong>{{tr('status')}}</strong>
                     @if($view_coupon->status == 0)
-                        <span class="label label-warning pull-right">{{tr('declined')}}</span>
+                        <span class="badge badge-warning pull-right">{{tr('declined')}}</span>
                     @else
-                        <span class="label label-success pull-right">{{tr('approved')}}</span>
+                        <span class="badge badge-success pull-right">{{tr('approved')}}</span>
                     @endif
 
                     <hr>
                     <strong>{{tr('created_at')}}</strong>
-                    <h5 class="pull-right"> {{convertTimeToUSERzone($view_coupon->created_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}} </h5>
+                    <h5 class="pull-right"> {{convertTimeToUSERzone($view_coupon->created_at, Auth::user()->timezone, 'd-m-Y H:i a')}} </h5>
 
                     <hr>
                     <strong>{{tr('updated_at')}}</strong>
-                    <h5 class="pull-right">{{convertTimeToUSERzone($view_coupon->updated_at, Auth::guard('admin')->user()->timezone, 'd-m-Y H:i a')}}</h5>
+                    <h5 class="pull-right">{{convertTimeToUSERzone($view_coupon->updated_at, Auth::user()->timezone, 'd-m-Y H:i a')}}</h5>
 
                     @if($view_coupon->description == '')
 

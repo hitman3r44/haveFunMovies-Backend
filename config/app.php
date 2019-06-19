@@ -1,5 +1,7 @@
 <?php
 
+use Kryptonit3\TMDBLaravel\TMDBServiceProvider;
+
 return [
 
     /*
@@ -171,7 +173,6 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -181,11 +182,15 @@ return [
         App\Providers\RouteServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-
+        TMDBServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
+        vidhyar2612\Enveditor\EnveditorServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -242,7 +247,9 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
-
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Enveditor' => 'vidhyar2612\Enveditor\Facade',
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
     ],
-
 ];
