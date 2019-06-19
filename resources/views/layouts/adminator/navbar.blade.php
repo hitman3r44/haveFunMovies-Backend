@@ -108,6 +108,40 @@
             </li>
             @endcan
 
+            {{--            Genre--}}
+            @can('retailer')
+                <li class="nav-item dropdown" id="genres">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                                <span class="icon-holder">
+                                    <i class="c-indigo-500 fa fa-file-o"></i>
+                                </span>
+                        <span class="title">{{tr('genres')}}</span> <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li id="create" class="nav-item">
+                            <a class="sidebar-link" href="{{route('admin.add.genres')}}">
+                                        <span class="icon-holder">
+                                            <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                        </span>
+                                <span class="title">{{tr('add_genre')}}</span>
+                            </a>
+                        </li>
+
+                        <li id=view_coupons" class="nav-item">
+                            <a class="sidebar-link" href="{{route('admin.genre.list')}}">
+                                        <span class="icon-holder">
+                                            <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                        </span>
+                                <span class="title">{{tr('view_genre')}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+
+            {{--Video Menu Items--}}
                             {{--Video Menu Items--}}
             @can('video')
             <li class="nav-item dropdown" id="videos">

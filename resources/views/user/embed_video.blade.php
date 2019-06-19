@@ -52,7 +52,7 @@ playerInstance.setup({
     width: "100%",
     height: "100%",
     primary: "flash",
-    autostart : true,
+    // autostart : true,
     tracks : [{
       file : "{{($v_t == 1) ? $model->trailer_subtitle :  $model->video_subtitle}}",
       kind : "captions",

@@ -262,22 +262,22 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
 
     // Genres
 
-    Route::get('/genres/{sub_category}', 'AdminController@genres')->name('genres');
+//    Route::get('/genres/{sub_category}', 'AdminController@genres')->name('genres');
+//
+//    Route::get('/add/genre/{sub_category}', 'AdminController@add_genre')->name('add.genre');
+//
+//    Route::get('/edit/genre/{sub_category_id}/{genre_id}', 'AdminController@genres_edit')->name('edit.edit_genre');
+//
+//
+//    Route::post('/save/genre' , 'AdminController@genres_save')->name('save.genre');
+//
+//    Route::get('/genre/approve', 'AdminController@approve_genre')->name('genre.approve');
+//
+//    Route::get('/delete/genre/{id}', 'AdminController@genres_delete')->name('delete.genre');
+//
+//    Route::get('/view/genre/{id}', 'AdminController@genres_view')->name('view.genre');
 
-    Route::get('/add/genre/{sub_category}', 'AdminController@add_genre')->name('add.genre');
-
-    Route::get('/edit/genre/{sub_category_id}/{genre_id}', 'AdminController@genres_edit')->name('edit.edit_genre');
-
-
-    Route::post('/save/genre' , 'AdminController@genres_save')->name('save.genre');
-
-    Route::get('/genre/approve', 'AdminController@approve_genre')->name('genre.approve');
-
-    Route::get('/delete/genre/{id}', 'AdminController@genres_delete')->name('delete.genre');
-
-    Route::get('/view/genre/{id}', 'AdminController@genres_view')->name('view.genre');
-
-    Route::post('genre/change/position', 'AdminController@genre_position')->name('save.genre.position');
+//    Route::post('genre/change/position', 'AdminController@genre_position')->name('save.genre.position');
 
 
     Route::get('/moderator/videos/{id}','AdminController@moderator_videos')->name('moderator.videos.list');
@@ -483,6 +483,29 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/email/form','AdminController@create_mailcamp')->name('add.mailcamp');
 
     Route::post('/email/form/action','AdminController@email_send_process')->name('email.success');
+
+    //Sub-Category/Genre
+
+    // Get the add genre forms
+    Route::get('/genres/add','GenreController@genre_create')->name('add.genres');
+
+    // Get the edit genre forms
+    Route::get('/genres/edit/{id}','GenreController@genre_edit')->name('edit.genres');
+
+    // Save the genre details
+    Route::post('/genres/save','GenreController@genre_save')->name('save.genre');
+
+    // Get the list of genre details
+    Route::get('/genres/list','GenreController@genre_index')->name('genre.list');
+
+    //Get the particular genre details
+    Route::get('/genres/view/{id}','GenreController@genre_view')->name('genre.view');
+
+    // Delete the genre details
+    Route::get('/genres/delete/{id}','GenreController@genre_delete')->name('delete.genre');
+
+    //genre approve and decline status
+    Route::get('/genre/status','GenreController@genre_status_change')->name('genre.status');
 
     // Advertisement
 

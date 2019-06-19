@@ -198,12 +198,12 @@
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="video_type"
                                                            {{ ($model->video_type == 1) ? 'checked' : ''  }}  id="video_type_link" value="1">
-                                                    <label class="form-check-label" for="video_type_link">Youtube Link </label>
+                                                    <label class="form-check-label" for="video_type_link">{{tr('youtube')}}</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="video_type"
                                                          @if(!isset($model->video_type)) checked @else {{ ($model->video_type == 2) ? 'checked' : ''  }} @endif id="video_type_file" value="2">
-                                                    <label class="form-check-label" for="video_type_file">File Upload </label>
+                                                    <label class="form-check-label" for="video_type_file">{{tr('file_upload')}}</label>
                                                 </div>
                                             </div>
                                         <hr/>
@@ -248,14 +248,11 @@
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="trailer_video_type"
                                                            @if(isset($model->trailer_video)) checked @endif id="trailer_video_type_link" value="1">
-                                                    <label class="form-check-label" for="trailer_video_type_link">Youtube
-                                                        Link </label>
+                                                    <label class="form-check-label" for="trailer_video_type_link">{{tr('youtube')}}</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="trailer_video_type"
-                                                           id="trailer_video_type_file" value="2">
-                                                    <label class="form-check-label" for="trailer_video_type_file">File
-                                                        Upload </label>
+                                                    <input class="form-check-input" type="radio" name="trailer_video_type" id="trailer_video_type_file" value="2">
+                                                    <label class="form-check-label" for="trailer_video_type_file">{{tr('file_upload')}}</label>
                                                 </div>
                                             </div>
                                             <hr/>

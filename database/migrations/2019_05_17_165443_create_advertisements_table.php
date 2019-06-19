@@ -26,6 +26,7 @@ class CreateAdvertisementsTable extends Migration
 
             $table->float('total_amount');
             $table->float('per_view_cost');
+            $table->float('custom_commission_rate')->default(0);
 
             $table->boolean('is_published')->default(false);
             $table->boolean('is_deleted')->default(false);;

@@ -99,6 +99,18 @@
                             </div>
                         </div>
 
+                        {{--                        custom_commission_rate--}}
+                        <div class="form-group row">
+                            <label for="custom_commission_rate" class="col-sm-2 col-form-label">{{tr('custom_commission_rate')}}</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="custom_commission_rate" max="5000" step="any" class="form-control"
+                                       placeholder="{{tr('custom_commission_rate')}}"
+                                       value="{{$edit_advertisement->custom_commission_rate ? $edit_advertisement->custom_commission_rate :
+                                       old('custom_commission_rate') }}"
+                                       title="{{tr('only_number')}}">
+                            </div>
+                        </div>
+
                         {{--                        start_playing_date--}}
                         <div class="form-group row">
                             <label for="start_playing_date"

@@ -499,11 +499,10 @@ return array(
 
 	// Admin genre
 
-	'genre' => 'Genre',
-	'genres' => 'Genres',
-	'add_genre' => 'Add Genre',
-	'view_genres' => 'View Genres',
-	'view_genre'=>'View Genre',
+	'genres' => 'Sub-Category/Genres',
+	'add_genre' => 'Add Sub-Category/Genres',
+	'view_genres' => 'View Sub-Category/Genres',
+	'view_genre'=>'View Sub-Category/Genres',
 	'view_images' => 'View Images',
 	'no_genre' => 'No genres Available right Now!!!',
 
@@ -543,6 +542,8 @@ return array(
 	's3' => 'Aws S3',
 	'direct' => 'Streaming Upload',
 	'youtube' => 'YouTube Link',
+    'file_upload' => 'File Upload',
+
 	'other_link' => 'Others',
 	'video_upload_link' => 'Upload Video',
 	'watch_main_video' => 'Watch Full Video',
@@ -1165,7 +1166,6 @@ return array(
 	'coupon_inactive_status'=>'Coupon is inactive status',
 	'subscription_inactive_status'=>'Subscription is inactive status',
 	'subscription_amount_should_be_grater'=>'Subscription amount should be greater than coupon amount',
-	'video_not_found'=>'Video not exists for given id',
 	'video_amount_should_be_grater'=>'Pay per view amount should be greater than coupon amount',
 	'failed'=>'Failed',
 	'automatic_renewal_notification'=>'Automatic Renewal Notification',
@@ -1520,11 +1520,28 @@ return array(
 
     'gift_card_plan' => 'Gift Card Plan',
     'generate_gift_card' => 'Sold Gift Card',
-    'add_generate_gift_card' => 'Sold Gift Card',
     'sell_gift_card' => 'Sell Gift Card',
-    'add_generate_gift_card' => 'Sell Gift Card',
     'edit_generate_gift_card' => 'Edit Gift Card',
     'sold_gift_card' => 'Sold Gift Card',
+    'custom_commission_rate' => 'Custom Commission Rate (%)',
+
+    // Genre/Sub-Category
+
+    'enter_genre_title'=>'Enter genre Title',
+    'genre_update_success'=>'genre Updated Successfully',
+    'genre_add_success'=>'genre Added Successfully',
+    'genre_delete_success'=>'genre Deleted Successfully',
+    'genre_approve_success'=>'genre Approved Successfully',
+    'genre_decline_success'=>'genre Declined Successfully',
+    'genre_not_found_error'=>'genre Details  Not Found',
+    'genre_id_not_found_error'=>'genre Id doesn’t Exists',
+    'genre_amount_lessthan_100'=>'Amount type is % so amount should be lessthan or equal 100 only',
+    'genre_amount_lessthan_5000'=>'Amount Should be lessthan or equal 5000 only',
+    'genre_result_not_found_error'=>'Oops ! Seems you haven’t created genre.',
+    'genre_code_not_found_error'=>'Promo Code Not Found',
+    'genre_date_expired_error'=>'genre Date Is Expired',
+    'genre_amount_zero_error'=>'genre amount zero it is invalid',
+
     'view_cast_crew_types' => 'Cast and Crew Type',
 
 

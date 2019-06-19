@@ -11,6 +11,7 @@
         "php": ">=7.1.23",
         "ext-curl": "^7.2",
         "anlutro/l4-settings": "^0.8.1",
+        "barryvdh/laravel-cors": "^0.11.3",
         "brozot/laravel-fcm": "^1.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
