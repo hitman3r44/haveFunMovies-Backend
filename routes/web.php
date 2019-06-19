@@ -340,11 +340,19 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::post('credit-money/get-user-by-role' , 'CreditMoneyController@getUserByRole')->name('credit-money.user.role');
     Route::resource('credit-money', 'CreditMoneyController');
     Route::resource('prepaid-code', 'PrepaidCodeController');
+
     Route::resource('gift-card', 'GiftCardController');
     Route::post('generate-prepaid-code/generate-uuid' , 'GeneratePrepaidCodeController@generateUuid')->name('generate-prepaid-code.uuid');
+
     Route::resource('generate-prepaid-code', 'GeneratePrepaidCodeController');
+
     Route::resource('generate-gift-card', 'GeneratedGiftCardController');
     Route::post('generate-gift-card/generate-uuid' , 'GeneratedGiftCardController@generateUuid')->name('generate-gift-card.uuid');
+
+    Route::resource('cast_and_crew_type', 'CastAndCrewTypeController');
+    Route::get('/cast_and_crew_type/get-data','CastAndCrewTypeController@cast_and_crew_types_get_data')->name('cast-and-crew-type.data');
+
+    Route::resource('movie_has_cast_and_crew_type', 'MovieHasCastAndCrewTypeController');
 
     // Ajax User payments
 

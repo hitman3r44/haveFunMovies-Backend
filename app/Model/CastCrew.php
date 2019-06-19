@@ -3,24 +3,26 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
 class CastCrew extends Model
 {
-    //
-    public function videoCastCrews() {
-        return $this->hasMany('App\Model\VideoCastCrew', 'cast_crew_id', 'id');
+
+    public function videoCastCrews(): HasMany
+    {
+        return $this->hasMany(VideoCastCrew::class, 'cast_crew_id', 'id');
     }
 
     /**
-	 * Save the unique ID 
-	 *
-	 *
-	 */
-    public function setUniqueIdAttribute($value){
+     * Save the unique ID
+     *
+     * @param $value
+     */
+    public function setUniqueIdAttribute($value): void
+    {
 
-		$this->attributes['unique_id'] = uniqid(str_replace(' ', '-', $value));
-
+		$this->attributes['unique_id'] = uniqid(str_replace(' ', '-', $value), true);
 	}
 
 
@@ -47,11 +49,8 @@ class CastCrew extends Model
                 foreach($video->videoCastCrews as $value)
                 {
                     $value->delete();
-                } 
-
+                }
             }
-
         });
-
     }
 }

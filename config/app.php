@@ -189,10 +189,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
-        vidhyar2612\Enveditor\EnveditorServiceProvider::class
-
-
-
+        vidhyar2612\Enveditor\EnveditorServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -250,7 +248,8 @@ return [
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
         'Enveditor' => 'vidhyar2612\Enveditor\Facade',
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
     ],
 ];

@@ -1373,7 +1373,8 @@ return array(
 	'home_browse_mobile_image'=>'Browse Mobile IMG',
 	'home_cancel_image'=>'Cancel IMG',
 	'cast_crew_not_found'=>'Cast and crews Details not found..!',
-	'cast_crew_delete_success'=>'Cast & Crew has been deleted successfully',
+    'crew_type'=>'Crew Type',
+    'cast_crew_delete_success'=>'Cast & Crew has been deleted successfully',
 	'cast_crew_update_success'=>'Cast & Crew has been updated successfully',
 	'cast_crew_create_success'=>'Cast & Crew has been created successfully',
 	'cast_crew_not_saving'=>'Cast & Crew unable to saving, try again later',
@@ -1540,6 +1541,12 @@ return array(
     'genre_code_not_found_error'=>'Promo Code Not Found',
     'genre_date_expired_error'=>'genre Date Is Expired',
     'genre_amount_zero_error'=>'genre amount zero it is invalid',
+
+    'view_cast_crew_types' => 'Cast and Crew Type',
+
+
+    // Need to remove
+    'instruction' => '- Add a field "New Type", when it seleted, we can use it as a textfield and new button appear on the right site',
 
 );
 

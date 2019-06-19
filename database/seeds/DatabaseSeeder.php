@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+
             SettingsTableSeeder::class,
             RolesAndPermissionsSeeder::class,
             CountriesTableSeeder::class,
@@ -66,7 +67,8 @@ class DatabaseSeeder extends Seeder
             CouponsTableSeeder::class,
             AdminVideosTableSeeder::class,
             GiftCardsTableSeeder::class,
-            PrepaidCodesTableSeeder::class
+            PrepaidCodesTableSeeder::class,
+            CastAndCrewTypesTableSeeder::class
         ]);
 
         $userSuperAdmin->assignRole(Role::findByName('super-admin'));
@@ -80,11 +82,6 @@ class DatabaseSeeder extends Seeder
         factory(App\Model\Advertisement::class, 4)->create()->each(function ($advertisement)  {
             $advertisement->countries()->attach(Country::whereIn('id', [1,2,3])->get());
             $advertisement->movies()->attach(AdminVideo::whereIn('id', [1,2,3])->get());
-
-        });
-
-//        $customers = factory(App\User::class, 4)->create()->each(function ($advertisement){
-//
-//        });
+    });
     }
 }

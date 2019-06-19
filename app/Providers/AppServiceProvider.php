@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Sven\ArtisanView\ServiceProvider::class);
+            $this->app->register('Appzcoder\CrudGenerator\CrudGeneratorServiceProvider');
         }
     }
 
