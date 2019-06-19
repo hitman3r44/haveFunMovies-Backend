@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\GeneratedGiftCard;
 use App\Libraries\Utility;
+use App\Model\GeneratedGiftCard;
 use App\Model\GiftCard;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,8 +19,7 @@ class GeneratedGiftCardController extends Controller
      */
     public function index()
     {
-        $generateGiftCard = GeneratedGiftCard::
-        leftJoin('gift_cards', 'generated_gift_cards.gift_card_id', '=', 'gift_cards.id')
+        $generateGiftCard = GeneratedGiftCard::leftJoin('gift_cards', 'generated_gift_cards.gift_card_id', '=', 'gift_cards.id')
             ->leftJoin('users as receiver', 'generated_gift_cards.customer_id', '=', 'receiver.id')
             ->leftJoin('users as giver', 'giver.id', '=', 'generated_gift_cards.created_by')
             ->get([

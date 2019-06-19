@@ -142,6 +142,7 @@
             @endcan
 
             {{--Video Menu Items--}}
+                            {{--Video Menu Items--}}
             @can('video')
             <li class="nav-item dropdown" id="videos">
                 <a class="dropdown-toggle" href="javascript:void(0);">
@@ -180,27 +181,49 @@
                             <span class="title">{{tr('view_videos')}}</span>
                         </a>
                     </li>
+                </ul>
+            </li>
+            @endcan
 
-{{--                    @if(Setting::get('is_spam'))--}}
-{{--                        <li id="spam_videos" class="nav-item">--}}
-{{--                            <a class="sidebar-link" href="{{route('admin.spam-videos')}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                                <span class="title">{{tr('spam_videos')}}</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    @endif--}}
+            {{--            Cast_And_Crew--}}
+            @can('admin')
+            <li class="nav-item dropdown" id="cast-crews">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-indigo-500 fa fa-male"></i>
+                    </span>
+                    <span class="title">{{tr('cast_crews')}}</span> <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
 
-{{--                    <li id="view-banner-videos" class="nav-item">--}}
-{{--                        <a class="sidebar-link" href="{{route('admin.videos',['banner'=>BANNER_VIDEO])}}">--}}
-{{--                            <span class="icon-holder">--}}
-{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-{{--                            </span>--}}
-{{--                            <span class="title">{{tr('banner_videos')}}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('view_cast_crew_types')}}</span>
+                        </a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.cast_crews.add')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('add_cast_crew')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.cast_crews.index')}}">
+                            <span class="icon-holder">
+                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                            </span>
+                            <span class="title">{{tr('cast_crews')}}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             @endcan
@@ -272,7 +295,6 @@
             @endcan
 
             {{--            Advertisement--}}
-
             @can('advertisement')
             <li class="nav-item dropdown" id="advertisements">
                 <a class="dropdown-toggle" href="javascript:void(0);">

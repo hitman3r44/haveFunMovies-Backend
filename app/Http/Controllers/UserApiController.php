@@ -754,7 +754,6 @@ class UserApiController extends Controller
                                 'social_unique_id' => $user->social_unique_id,
                                 // 'push_status' => $user->push_status,
                                 'one_time_subscription'=>$user->one_time_subscription,
-                                'sub_profile_id'=>$sub_profile_id,
                                 'email_notification'=>$user->email_notification,
                                 'payment_subscription' => Setting::get('ios_payment_subscription_status'),
                                 'message'=>tr('login_success')

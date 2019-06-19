@@ -80,6 +80,9 @@ php artisan view:clear
 
 php artisan controller:make ControllerName
 
+php artisan make:controller [MODEL_NAME]Controller --resource --model=[MODEL_NAME]
+php artisan make:migration create_[TABLE_NAME]_table
+
 php artisan list
 php artisan routes
 php artisan down
