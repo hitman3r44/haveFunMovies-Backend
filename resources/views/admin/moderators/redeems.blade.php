@@ -2,9 +2,9 @@
 
 @section('title', tr('redeems'))
 
-@section('content-header')
-	<h4 class="c-grey-900 mT-10 mB-30"> {{ tr('redeems') . ' - '. isset($moderator->name) ? $moderator->name : '' }}</h4>
-@endsection
+{{--@section('content-header')--}}
+{{--	<h4 class="c-grey-900 mT-10 mB-30"> {{ tr('redeems') . ' - '. isset($moderator->name) ? $moderator->name : '' }}</h4>--}}
+{{--@endsection--}}
 
 @section('breadcrumb')
     <li class="list-inline-item"><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i>{{tr('home')}}</a></li>

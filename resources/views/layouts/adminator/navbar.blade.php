@@ -198,14 +198,14 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li class="nav-item">
-                        <a class="sidebar-link" href="#">
-                            <span class="icon-holder">
-                                <i class="c-light-blue-500 fa fa-circle-o"></i>
-                            </span>
-                            <span class="title">{{tr('view_cast_crew_types')}}</span>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="sidebar-link" href="#">--}}
+{{--                            <span class="icon-holder">--}}
+{{--                                <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="title">{{tr('view_cast_crew_types')}}</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="nav-item">
                         <a class="sidebar-link" href="{{route('admin.cast_crews.add')}}">
@@ -528,17 +528,18 @@
             </li>
             @endcan
 
-            {{--            Redeems --}}
-            {{--            @if(Setting::get('redeem_control'))--}}
-            {{--                <li id="redeems" class="nav-item">--}}
-            {{--                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">--}}
-            {{--                                <span class="icon-holder">--}}
-            {{--                                    <i class="c-indigo-500 fa fa-trophy"></i>--}}
-            {{--                                </span>--}}
-            {{--                        <span class="title">{{tr('redeems')}}</span>--}}
-            {{--                    </a>--}}
-            {{--                </li>--}}
-            {{--            @endif--}}
+            @can('admin')
+            {{--            Redeems--}}
+            @if(Setting::get('redeem_control'))
+                <li id="redeems" class="nav-item">
+                    <a class="sidebar-link" href="{{ route('admin.moderators.redeems') }}">
+                                            <span class="icon-holder">
+                                                <i class="c-indigo-500 fa fa-trophy"></i>
+                                            </span>
+                        <span class="title">{{tr('redeems')}}</span>
+                    </a>
+                </li>
+            @endif
 
             {{--            Language --}}
             @if(Setting::get('admin_language_control') == 0)
@@ -551,6 +552,7 @@
                     </a>
                 </li>
             @endif
+            @endcan
 
             {{--            Settings --}}
             @can('admin')
@@ -575,14 +577,14 @@
                         </a>
                     </li>
 
-                    {{--                    <li id=home_page_settings" class="nav-item">--}}
-                    {{--                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">--}}
-                    {{--                                        <span class="icon-holder">--}}
-                    {{--                                            <i class="c-light-blue-500 fa fa-circle-o"></i>--}}
-                    {{--                                        </span>--}}
-                    {{--                            <span class="title">{{tr('home_page_settings')}}</span>--}}
-                    {{--                        </a>--}}
-                    {{--                    </li>--}}
+                    <li id=home_page_settings" class="nav-item">
+                        <a class="sidebar-link" href="{{route('admin.homepage.settings')}}">
+                                                            <span class="icon-holder">
+                                                                <i class="c-light-blue-500 fa fa-circle-o"></i>
+                                                            </span>
+                            <span class="title">{{tr('home_page_settings')}}</span>
+                        </a>
+                    </li>
 
                 </ul>
             </li>

@@ -16,13 +16,13 @@
                 @csrf
                 <div class="box-body">
 
-                    {{--                        CrewTypeList--}}
-                    <div class="form-group ">
-                        <label for="cast-and-crews-types" class="col-sm-9 control-label">*{{tr('crew_type')}} {{tr('instruction')}}</label>
-                        <div class="col-sm-10">
-                            <select id="cast-and-crews-types" name="cast-and-crews-types[]" class="form-control select2"  required multiple="multiple"></select>
-                        </div>
-                    </div>
+{{--                    --}}{{--                        CrewTypeList--}}
+{{--                    <div class="form-group ">--}}
+{{--                        <label for="cast-and-crews-types" class="col-sm-9 control-label">*{{tr('crew_type')}} {{tr('instruction')}}</label>--}}
+{{--                        <div class="col-sm-10">--}}
+{{--                            <select id="cast-and-crews-types" name="cast-and-crews-types[]" class="form-control select2"  required multiple="multiple"></select>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                     {{--                        Name--}}
                     <div class="form-group">
