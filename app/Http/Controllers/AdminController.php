@@ -5243,7 +5243,7 @@ class AdminController extends Controller
         try {
 
             $validator = Validator::make($request->all(), [
-                'id' => 'exists:cast_crews,id',
+//                'id' => 'exists:cast_crews,id',
                 'name' => 'required|min:2|max:128',
                 'image' => $request->id ? 'mimes:jpeg,jpg,png' : 'required|mimes:jpeg,png,jpg',
                 'description' => 'required'
@@ -5291,7 +5291,8 @@ class AdminController extends Controller
 
             }
 
-            return redirect(route('admin.cast_crews.view', ['id' => $model->unique_id]))->with('flash_success', $request->id ? tr('cast_crew_update_success') : tr('cast_crew_create_success'));
+//            return redirect(route('admin.cast_crews.view', ['id' => $model->unique_id]))->with('flash_success', $request->id ? tr('cast_crew_update_success') : tr('cast_crew_create_success'));
+            return redirect(route('admin.cast_crews.index'))->with('flash_success', $model->status ? tr('cast_crew_update_success') : tr('cast_crew_create_success'));
 
         } catch (Exception $e) {
 
