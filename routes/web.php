@@ -349,8 +349,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('generate-gift-card', 'GeneratedGiftCardController');
     Route::post('generate-gift-card/generate-uuid' , 'GeneratedGiftCardController@generateUuid')->name('generate-gift-card.uuid');
 
+    Route::get('cast_and_crew_type/get-data','CastAndCrewTypeController@cast_and_crew_types_get_data')->name('cast-and-crew-type.data');
     Route::resource('cast_and_crew_type', 'CastAndCrewTypeController');
-    Route::get('/cast_and_crew_type/get-data','CastAndCrewTypeController@cast_and_crew_types_get_data')->name('cast-and-crew-type.data');
 
     Route::resource('movie_has_cast_and_crew_type', 'MovieHasCastAndCrewTypeController');
 
@@ -567,6 +567,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('/cast-crews/delete', 'AdminController@cast_crews_delete')->name('cast_crews.delete');
 
     Route::get('/cast-crews/index', 'AdminController@cast_crews_index')->name('cast_crews.index');
+
+    Route::get('/cast-crews/json/index', 'AdminController@cast_crews_json_index')->name('cast_crews.json.index');
 
     Route::get('/cast-crews/view', 'AdminController@cast_crews_view')->name('cast_crews.view');
 

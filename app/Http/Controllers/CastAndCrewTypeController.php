@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\CastAndCrewType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PHPUnit\Util\Json;
 
 class CastAndCrewTypeController extends Controller
@@ -36,7 +37,31 @@ class CastAndCrewTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
+
+        try{
+
+            $castAndCrewType = new CastAndCrewType();
+            $castAndCrewType->title = $request->title;
+            $castAndCrewType->description = !empty($request->description) ? $request->description : $request->title;
+            $castAndCrewType->is_deleted = 0;
+            $castAndCrewType->created_by = Auth::user()->id;
+            $castAndCrewType->updated_by = Auth::user()->id;
+
+            $castAndCrewType->save();
+
+            return response()->json([
+                'statusCode' => 1
+            ]);
+
+        }catch (\Exception $e){
+            return response()->json([
+                'statusCode' => 0,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

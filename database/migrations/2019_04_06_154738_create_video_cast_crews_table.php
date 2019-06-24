@@ -15,10 +15,8 @@ class CreateVideoCastCrewsTable extends Migration
     public function up()
     {
         Schema::create('video_cast_crews', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('admin_video_id');
-            $table->integer('cast_crew_id');
-            $table->integer('created_by');
+            $table->unsignedInteger('admin_video_id');
+            $table->unsignedInteger('cast_crew_id');
             $table->timestamps();
         });
     }

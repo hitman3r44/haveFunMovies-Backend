@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\CastAndCrewType;
 use App\Model\TmdbGenre;
 use App\Repositories\VideoRepository as VideoRepo;
 
@@ -5046,9 +5047,13 @@ class AdminController extends Controller
     {
 
         $model = new CastCrew;
+        $castCrewTypes = CastAndCrewType::all();
 
-        return view('admin.cast_crews.create')->with('page', 'cast-crews')
-            ->with('sub_page', 'cast-crew-add')->with('model', $model);
+        return view('admin.cast_crews.create')
+            ->with('page', 'cast-crews')
+            ->with('sub_page', 'cast-crew-add')
+            ->with('model', $model)
+            ->with('castCrewTypes', $castCrewTypes);
 
     }
 
@@ -5133,6 +5138,28 @@ class AdminController extends Controller
         return view('admin.cast_crews.index')->with('page', 'cast-crews')
             ->with('sub_page', 'cast-crews-index')->with('model', $model);
 
+    }
+
+    /**
+     * Function Name : cast_crews_json_index()
+     *
+     * @uses To list out details of cast and crews
+     *
+     * @updated:
+     *
+     * @param  - -
+     *
+     * @return response of html page with details
+     */
+    public function cast_crews_json_index()
+    {
+
+        $model = CastCrew::orderBy('name', 'asc')->pluck('name', 'id');
+
+        return response()->json([
+           'statusCode' => 1,
+           'data' => $model
+        ]);
     }
 
     /**
@@ -5243,7 +5270,6 @@ class AdminController extends Controller
         try {
 
             $validator = Validator::make($request->all(), [
-//                'id' => 'exists:cast_crews,id',
                 'name' => 'required|min:2|max:128',
                 'image' => $request->id ? 'mimes:jpeg,jpg,png' : 'required|mimes:jpeg,png,jpg',
                 'description' => 'required'
@@ -5276,6 +5302,7 @@ class AdminController extends Controller
                 }
 
                 $model->description = $request->description;
+                $model->cast_and_crew_type_id = $request->cast_and_crews_types_id;
 
                 $model->status = DEFAULT_TRUE; // By default it will be 1, future it may vary
 

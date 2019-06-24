@@ -116,6 +116,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                {{--                        Cast And Crew--}}
+                                <div class="form-group">
+                                    <label for="sub_category_id" class="col-form-label">
+                                        * {{tr('add_cast_crew')}}</label>
+                                    <div class="col-sm-12">
+                                        <select name="cast_crew[]" class="form-control select2"
+                                                id="cast_crew" multiple="multiple" required>
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 {{--                        description--}}
                                 <div class="form-group">
@@ -434,9 +445,12 @@
         var bar = $('.progress-bar');
         var percent = $('#percentage_digit');
 
+        var castCrewArr = [ {!! implode(',', $model->videoCastCrew()->pluck('id')->toArray()) !!}];
         var error = false;
 
         $(document).ready(function () {
+
+            populateCastAndCrewData('#cast_crew', castCrewArr);
 
             $("[data-mask]").inputmask();
 
@@ -615,6 +629,38 @@
             });
 
         });
+
+
+        function populateCastAndCrewData(viewField, alreadyExistArr){
+            $.ajax({
+                type: "GET",
+                url: "{{ route('admin.cast_crews.json.index') }}",
+                data: {},
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': "{{csrf_token()}}"
+                },
+                success: function (response) {
+                    var option = '';
+                    if (response.statusCode == 1) {
+                        $.each(response.data, function (id, value) {
+                            if (alreadyExistArr.indexOf(parseInt(id)) != -1) {
+                                option += '<option selected value="' + id + '" >' + value + '</option>';
+                            } else {
+                                option += '<option value="' + id + '" >' + value + '</option>';
+                            }
+                        });
+
+                        $(viewField).html(option);
+                        $(viewField).trigger('change.select2');
+
+                    }else{
+                        alert(response.message);
+                    }
+
+                }
+            });
+        }
 
 
         function loadFile(event, id) {
