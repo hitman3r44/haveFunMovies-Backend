@@ -15,14 +15,18 @@
                   enctype="multipart/form-data" role="form">
                 @csrf
                 <div class="box-body">
+                    {{--                    CrewTypeList--}}
+                    <div class="form-group ">
+                        <label for="cast-and-crews-types" class="col-sm-9 control-label">*{{tr('crew_type')}}</label>
+                        <label class="col-sm-1 control-label">
+                            <button type="button" id="add_cast_type" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#add_cast_type_modal">Add</button>
+                        </label>
 
-{{--                    --}}{{--                        CrewTypeList--}}
-{{--                    <div class="form-group ">--}}
-{{--                        <label for="cast-and-crews-types" class="col-sm-9 control-label">*{{tr('crew_type')}} {{tr('instruction')}}</label>--}}
-{{--                        <div class="col-sm-10">--}}
-{{--                            <select id="cast-and-crews-types" name="cast-and-crews-types[]" class="form-control select2"  required multiple="multiple"></select>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                        <div class="col-sm-10">
+                            <select id="cast-and-crews-types" name="cast_and_crews_types_id" class="form-control select2"
+                                    required></select>
+                        </div>
+                    </div>
 
                     {{--                        Name--}}
                     <div class="form-group">
@@ -65,7 +69,7 @@
                                       placeholder="{{tr('enter')}} {{tr('description')}}">{{$model->description}}</textarea>
 
                         </div>
-                        
+
                     </div>
 
                 </div>

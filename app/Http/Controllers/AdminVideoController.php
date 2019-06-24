@@ -233,6 +233,7 @@ class AdminVideoController extends Controller
             $model->video_upload_type = VIDEO_UPLOAD_TYPE_DIRECT;
             $model->position = 1;
 
+
             if ($tmdbVideo->hasData()) {
 
                 $imageUrl = $this->tmdbApi->getImageURL('w300');
@@ -275,6 +276,15 @@ class AdminVideoController extends Controller
             }
 
             $model->save();
+
+            $requestedCastCrew = array_map('intval', $request->cast_crew);
+            $castCrew = CastCrew::whereIn('id', $requestedCastCrew)->get();
+            if ($request->admin_video_id != '') {
+
+                if($castCrew->isNotEmpty()) $model->videoCastCrew()->sync($castCrew);
+            }else{
+                if($castCrew->isNotEmpty()) $model->videoCastCrew()->attach($castCrew);
+            }
 
             if ($tmdbVideo->hasData()) {
 

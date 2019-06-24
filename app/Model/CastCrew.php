@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class CastCrew extends Model
 {
 
-    public function videoCastCrews(): HasMany
-    {
-        return $this->hasMany(VideoCastCrew::class, 'cast_crew_id', 'id');
+    public function videoCastCrews(){
+
+        return $this->belongsToMany('App\Model\AdminVideo', 'video_cast_crews', 'cast_crew_id', 'admin_video_id');
     }
 
     /**

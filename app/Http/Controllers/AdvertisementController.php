@@ -65,6 +65,9 @@ class AdvertisementController extends Controller
             $requestedMovies = array_map('intval', $request->movies);
             $movies = AdminVideo::whereIn('id', $requestedMovies)->get();
 
+//            $requestedMoviesTrailer = array_map('intval', $request->movies-trailer);
+//            $moviesTrailer = AdminVideo::whereIn('id', $requestedMoviesTrailer)->get();
+
             DB::beginTransaction();
 
             if ($request->application_id != '') {
@@ -129,11 +132,15 @@ class AdvertisementController extends Controller
 
                     if($movies->isNotEmpty()) $advertisement->movies()->sync($movies);
 
+//                    if($moviesTrailer->isNotEmpty()) $advertisement->movies-trailer()->sync($moviesTrailer);
+
                 }else{
 
                     if($countries->isNotEmpty()) $advertisement->countries()->attach($countries);
 
                     if($movies->isNotEmpty()) $advertisement->movies()->attach($movies);
+
+//                    if($moviesTrailer->isNotEmpty()) $advertisement->movies-trailer()->sync($moviesTrailer);
 
                 }
 
@@ -376,6 +383,14 @@ class AdvertisementController extends Controller
                     $data = $countries->pluck('name', 'id');
                 }
             } else if ($contentType == 'movies') {
+
+                $movies = AdminVideo::all();
+
+                if ($movies) {
+
+                    $data = $movies->pluck('title', 'id');
+                }
+            } else if ($contentType == 'movies-trailer') {
 
                 $movies = AdminVideo::all();
 

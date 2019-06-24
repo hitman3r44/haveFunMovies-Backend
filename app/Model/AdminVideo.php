@@ -98,6 +98,12 @@ class AdminVideo extends Model
     }
 
 
+    public function videoCastCrew()
+    {
+        return $this->belongsToMany('App\Model\CastCrew', 'video_cast_crews', 'admin_video_id', 'cast_crew_id');
+    }
+
+
     /**
      * Save the unique ID 
      *

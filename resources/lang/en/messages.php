@@ -1495,6 +1495,7 @@ return array(
 
     'movies' => 'Movies',
     'add_movies' => 'Add Movies',
+    'add_movies_trailer' => 'Add Movies Trailer',
 
     'add_generate_prepaid_code' => 'Sell Prepaid Code',
     'add_generate_gift_card' => 'Sell Gift Card',

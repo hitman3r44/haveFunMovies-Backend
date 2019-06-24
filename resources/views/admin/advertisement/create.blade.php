@@ -131,6 +131,14 @@
 								<input type="file" name="video" accept="video/mp4,video/x-matroska" id="video"/>
 							</div>
 						</div>
+
+                        {{--                        movie trailer list--}}
+                        <div class="form-group row">
+                            <label for="movies-trailer" class="col-sm-2 col-form-label">{{tr('add_movies_trailer')}}</label>
+                            <div class="col-sm-10">
+                                <select id="movies-trailer" name="movies-trailer[]" class="form-control select2" multiple="multiple"></select>
+                            </div>
+                        </div>
 					</div>
 
 					<div class="box-footer">
@@ -183,6 +191,7 @@
 
             populateSelectOptionData('countries', '#countries');
             populateSelectOptionData('movies', '#movies');
+            populateSelectOptionData('movies-trailer', '#movies-trailer');
 
         });
 
