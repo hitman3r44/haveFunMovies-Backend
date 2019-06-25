@@ -105,6 +105,10 @@
 							<label for="countries" class="col-sm-2 col-form-label">{{tr('add_country')}}</label>
 							<div class="col-sm-10">
 								<select id="countries" name="countries[]" class="form-control select2"  required multiple="multiple"></select>
+								<div class="custom-control custom-checkbox mt-1">
+									<input type="checkbox" name="select_all_countries" class="custom-control-input" id="select_all_countries">
+									<label class="custom-control-label" for="select_all_countries">Select All Countries</label>
+								</div>
 							</div>
 						</div>
 
@@ -113,6 +117,10 @@
 							<label for="movies" class="col-sm-2 col-form-label">{{tr('add_movies')}}</label>
 							<div class="col-sm-10">
 								<select id="movies" name="movies[]" class="form-control select2" required multiple="multiple"></select>
+                                <div class="custom-control custom-checkbox mt-1">
+                                    <input type="checkbox" name="select_all_movies" class="custom-control-input" id="select_all_movies">
+                                    <label class="custom-control-label" for="select_all_movies">Select All Movies</label>
+                                </div>
 							</div>
 						</div>
 
@@ -121,6 +129,19 @@
 							<label for = "description" class="col-sm-2 col-form-label">{{tr('description')}}</label>
 							<div class="col-sm-10">
 								<textarea name="description" class="form-control" max="255" style="resize: none;"></textarea>
+							</div>
+						</div>
+
+                        {{--                        radio--}}
+						<div class="form-group row">
+							<label for = "description" class="col-sm-2 col-form-label">{{tr('description')}}</label>
+							<div class="col-sm-10">								
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio" checked>Option 1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">Option 2
+                                </label>
 							</div>
 						</div>
 
@@ -184,6 +205,22 @@
             populateSelectOptionData('countries', '#countries');
             populateSelectOptionData('movies', '#movies');
 
+
+
+            $('input#select_all_countries').on('change', function (event) {
+                if(this.checked) {
+                    $('select#countries').select2('destroy').find('option').prop('selected', 'selected').end().select2()
+                }else{
+                    $('select#countries').select2('destroy').find('option').prop('selected', false).end().select2()
+                }
+            })
+            $('input#select_all_movies').on('change', function (event) {
+                if(this.checked) {
+                    $('select#movies').select2('destroy').find('option').prop('selected', 'selected').end().select2()
+                }else{
+                    $('select#movies').select2('destroy').find('option').prop('selected', false).end().select2()
+                }
+            })
         });
 
     </script>
